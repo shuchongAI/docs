@@ -1,0 +1,51 @@
+---
+title: "Wan2.5 图像编辑"
+description: "使用 Wan2.5-Image 模型进行图像编辑"
+api: "POST /v1/images/edits"
+---
+
+# Wan2.5 图像编辑
+
+使用 Wan2.5-Image 模型进行图像编辑和修改。
+
+## 功能特点
+
+- **智能编辑**：基于文本描述进行图像编辑
+- **保持一致性**：编辑后保持原图风格
+- **高质量输出**：生成高质量的编辑结果
+
+## 请求示例
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.evolink.ai/v1/images/edits \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "wan2.5-image",
+    "image": "https://example.com/original.png",
+    "prompt": "将背景改为夕阳下的海滩",
+    "size": "1024x1024"
+  }'
+```
+
+</RequestExample>
+
+## 参数说明
+
+<ParamField query="model" type="string" required>
+  模型名称，固定为 "wan2.5-image"
+</ParamField>
+
+<ParamField query="image" type="string" required>
+  原始图像URL
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  编辑指令的文本描述
+</ParamField>
+
+<ParamField query="size" type="string">
+  输出图像的尺寸
+</ParamField>
