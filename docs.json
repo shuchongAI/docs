@@ -1,5 +1,5 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
+  "$schema": "https://apicore.mintlify.app/docs",
   "theme": "mint",
   "name": "ApiCore",
   "colors": {
