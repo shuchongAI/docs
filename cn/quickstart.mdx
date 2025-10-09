@@ -35,7 +35,7 @@ description: "快速开始使用我们的API服务"
 ### 图像生成示例
 
 ```bash
-curl -X POST https://api.evolink.ai/v1/images/generations \
+curl -X POST https://apimart.ai/v1/images/generations \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -49,7 +49,7 @@ curl -X POST https://api.evolink.ai/v1/images/generations \
 ### 视频生成示例
 
 ```bash
-curl -X POST https://api.evolink.ai/v1/videos/generations \
+curl -X POST https://apimart.ai/v1/videos/generations \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -65,7 +65,7 @@ curl -X POST https://api.evolink.ai/v1/videos/generations \
 由于我们使用异步处理模式，您需要查询任务状态来获取结果：
 
 ```bash
-curl -X GET https://api.evolink.ai/v1/tasks/YOUR_TASK_ID \
+curl -X GET https://apimart.ai/v1/tasks/YOUR_TASK_ID \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 

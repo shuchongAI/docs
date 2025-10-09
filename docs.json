@@ -30,8 +30,85 @@
             "tab": "API Manual",
             "groups": [
               {
-                "group": "API documentation",
-                "pages": ["en/api-reference/introduction"]
+                "group": "Text Series",
+                "icon": "text",
+                "pages": [
+                  "en/api-reference/texts/general/chat-completions"
+                ]
+              },
+              {
+                "group": "Image Series",
+                "icon": "image",
+                "pages": [
+                  {
+                    "group": "GPT-4o",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/gpt-4o/generation"
+                    ]
+                  },
+                  {
+                    "group": "Seedream-4.0",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/seedream-4/generation"
+                    ]
+                  },
+                  {
+                    "group": "Nano-Banana",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/nano-banana/generation"
+                    ]
+                  },
+                  {
+                    "group": "Qwen",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/qwen/generation"
+                    ]
+                  },
+                  {
+                    "group": "Wan2.5-Image",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/wan2-5-image/generation",
+                      "en/api-reference/images/wan2-5-image/editing"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Video Series",
+                "icon": "video",
+                "pages": [
+                  {
+                    "group": "VEO3",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/veo3/generation"
+                    ]
+                  },
+                  {
+                    "group": "Sora2",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/sora2/generation"
+                    ]
+                  },
+                  {
+                    "group": "Wan2.5-Video",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/wan2-5-video/generation",
+                      "en/api-reference/videos/wan2-5-video/image-to-video"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Task Management",
+                "pages": ["en/api-reference/tasks/status"]
               }
             ]
           },
@@ -48,7 +125,7 @@
               }
             ]
           }
-         
+
         ]
       },
       {
@@ -57,6 +134,13 @@
           {
             "tab": "API 手册",
             "groups": [
+              {
+                "group": "文字系列",
+                "icon": "text",
+                "pages": [
+                  "cn/api-reference/texts/general/chat-completions"
+                ]
+              },
               {
                 "group": "图像系列",
                 "icon": "image",
