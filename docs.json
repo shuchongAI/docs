@@ -1,14 +1,25 @@
 {
   "$schema": "https://apicore.mintlify.app/docs",
   "theme": "mint",
-  "name": "ApiCore",
-  "title": "ApiCore",
+  "name": "APIMart",
+  "title": "APIMart",
+
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
   "favicon": "/favicon.svg",
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://apimart.ai"
+  },
+  "topbarLinks": [
+    {
+      "name": "Dashboard",
+      "url": "https://apimart.ai"
+    }
+  ],
   "contextual": {
     "options": [
       "copy",
@@ -29,6 +40,12 @@
           {
             "tab": "API Manual",
             "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "en/index"
+                ]
+              },
               {
                 "group": "Text Series",
                 "icon": "text",
@@ -117,7 +134,7 @@
             "groups": [
               {
                 "group": "Getting started",
-                "pages": ["en/index", "en/quickstart", "en/development"]
+                "pages": ["en/quickstart", "en/development"]
               },
               {
                 "group": "Customization",
@@ -134,6 +151,12 @@
           {
             "tab": "API 手册",
             "groups": [
+              {
+                "group": "概览",
+                "pages": [
+                  "cn/index"
+                ]
+              },
               {
                 "group": "文字系列",
                 "icon": "text",
@@ -222,7 +245,6 @@
             "groups": [
               {
                 "group": "开始使用",
-                "collapsed": true,
                 "pages": ["cn/quickstart", "cn/development"]
               }
             ]
@@ -231,7 +253,13 @@
         ]
       }
     ]
- 
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://apimart.ai"
+    }
   }
  
 }
