@@ -50,7 +50,9 @@
                 "group": "Text Series",
                 "icon": "text",
                 "pages": [
-                  "en/api-reference/texts/general/chat-completions"
+                  "en/api-reference/texts/general/chat-completions",
+                  "en/api-reference/texts/general/claude-messages",
+                  "en/api-reference/texts/openai/responses"
                 ]
               },
               {
@@ -161,7 +163,9 @@
                 "group": "文字系列",
                 "icon": "text",
                 "pages": [
-                  "cn/api-reference/texts/general/chat-completions"
+                  "cn/api-reference/texts/general/chat-completions",
+                  "cn/api-reference/texts/general/claude-messages",
+                  "cn/api-reference/texts/openai/responses"
                 ]
               },
               {
