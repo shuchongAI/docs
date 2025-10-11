@@ -9,7 +9,7 @@
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "./logo/logo.png",
   "topbarCtaButton": {
     "name": "Dashboard",
     "url": "https://apimart.ai"
@@ -136,11 +136,10 @@
             "groups": [
               {
                 "group": "Getting started",
-                "pages": ["en/quickstart", "en/development"]
-              },
-              {
-                "group": "Customization",
-                "pages": ["en/essentials/settings", "en/essentials/navigation"]
+                "pages": [
+                  "en/quickstart",
+                  "en/development"
+                ]
               }
             ]
           }
@@ -249,7 +248,10 @@
             "groups": [
               {
                 "group": "开始使用",
-                "pages": ["cn/quickstart", "cn/development"]
+                "pages": [
+                  "cn/quickstart",
+                  "cn/development"
+                ]
               }
             ]
           }
@@ -259,11 +261,24 @@
     ]
   },
   "navbar": {
+    "links": [
+      {
+        "label": "Discord",
+        "href": "https://discord.gg/c67Qq5K7"
+      }
+    ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
       "href": "https://apimart.ai"
     }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/ismaque_",
+      "website": "https://apimart.ai"
+
+    }
   }
- 
+
 }
