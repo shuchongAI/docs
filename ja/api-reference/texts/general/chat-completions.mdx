@@ -1,11 +1,11 @@
 ---
-title: "General Chat API"
+title: "汎用チャットAPI"
 description: "
-- Unified chat API interface supporting all text generation models
+- すべてのテキスト生成モデルをサポートする統合チャットAPIインターフェース
 
-- Select different AI models via the model parameter
+- modelパラメータで異なるAIモデルを選択可能
 
-- Compatible with OpenAI Chat Completions API format
+- OpenAI Chat Completions API形式と互換性あり
 "
 api: "POST https://apimart.ai/v1/chat/completions"
 ---
@@ -22,11 +22,11 @@ curl --request POST \
     "messages": [
       {
         "role": "system",
-        "content": "You are a professional AI assistant."
+        "content": "あなたはプロフェッショナルなAIアシスタントです。"
       },
       {
         "role": "user",
-        "content": "Tell me about the history of artificial intelligence."
+        "content": "人工知能の歴史について教えてください。"
       }
     ],
     "temperature": 0.7,
@@ -44,11 +44,11 @@ payload = {
     "messages": [
         {
             "role": "system",
-            "content": "You are a professional AI assistant."
+            "content": "あなたはプロフェッショナルなAIアシスタントです。"
         },
         {
             "role": "user",
-            "content": "Tell me about the history of artificial intelligence."
+            "content": "人工知能の歴史について教えてください。"
         }
     ],
     "temperature": 0.7,
@@ -73,11 +73,11 @@ const payload = {
   messages: [
     {
       role: "system",
-      content: "You are a professional AI assistant."
+      content: "あなたはプロフェッショナルなAIアシスタントです。"
     },
     {
       role: "user",
-      content: "Tell me about the history of artificial intelligence."
+      content: "人工知能の歴史について教えてください。"
     }
   ],
   temperature: 0.7,
@@ -118,11 +118,11 @@ func main() {
         "messages": []map[string]string{
             {
                 "role":    "system",
-                "content": "You are a professional AI assistant.",
+                "content": "あなたはプロフェッショナルなAIアシスタントです。",
             },
             {
                 "role":    "user",
-                "content": "Tell me about the history of artificial intelligence.",
+                "content": "人工知能の歴史について教えてください。",
             },
         },
         "temperature": 0.7,
@@ -240,11 +240,11 @@ payload = {
   messages: [
     {
       role: "system",
-      content: "You are a professional AI assistant."
+      content: "あなたはプロフェッショナルなAIアシスタントです。"
     },
     {
       role: "user",
-      content: "Tell me about the history of artificial intelligence."
+      content: "人工知能の歴史について教えてください。"
     }
   ],
   temperature: 0.7,
@@ -400,11 +400,11 @@ int main(int argc, const char * argv[]) {
             @"messages": @[
                 @{
                     @"role": @"system",
-                    @"content": @"You are a professional AI assistant."
+                    @"content": @"あなたはプロフェッショナルなAIアシスタントです。"
                 },
                 @{
                     @"role": @"user",
-                    @"content": @"Tell me about the history of artificial intelligence."
+                    @"content": @"人工知能の歴史について教えてください。"
                 }
             ],
             @"temperature": @0.7,
@@ -491,11 +491,11 @@ void main() async {
     'messages': [
       {
         'role': 'system',
-        'content': 'You are a professional AI assistant.'
+        'content': 'あなたはプロフェッショナルなAIアシスタントです。'
       },
       {
         'role': 'user',
-        'content': 'Tell me about the history of artificial intelligence.'
+        'content': '人工知能の歴史について教えてください。'
       }
     ],
     'temperature': 0.7,
@@ -565,7 +565,7 @@ cat(content(response, "text"))
       "index": 0,
       "message": {
         "role": "assistant",
-        "content": "The history of artificial intelligence (AI) dates back to the 1950s...\n\n1. **Early Period (1950s-1960s)**: The proposal of the Turing Test marked the beginning of AI research...\n\n2. **Expert Systems Era (1970s-1980s)**: Rule-based systems began to be applied in medical diagnosis, financial analysis, and other fields...\n\n3. **Rise of Machine Learning (1990s-2000s)**: Statistical learning methods gradually became mainstream...\n\n4. **Deep Learning Revolution (2010s-Present)**: Breakthroughs in neural network technology brought explosive growth to AI..."
+        "content": "人工知能（AI）の歴史は1950年代に遡ります...\n\n1. **初期（1950年代～1960年代）**：チューリングテストの提案がAI研究の始まりを示しました...\n\n2. **エキスパートシステム時代（1970年代～1980年代）**：ルールベースのシステムが医療診断や財務分析などの分野で応用され始めました...\n\n3. **機械学習の台頭（1990年代～2000年代）**：統計的学習手法が徐々に主流となりました...\n\n4. **ディープラーニング革命（2010年代～現在）**：ニューラルネットワーク技術のブレークスルーがAIの爆発的な成長をもたらしました..."
       },
       "finish_reason": "stop"
     }
@@ -582,7 +582,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 400,
-    "message": "Invalid request parameters",
+    "message": "リクエストパラメータが無効です",
     "type": "invalid_request_error"
   }
 }
@@ -592,7 +592,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 401,
-    "message": "Authentication failed, please check your API key",
+    "message": "認証に失敗しました。APIキーを確認してください",
     "type": "authentication_error"
   }
 }
@@ -602,7 +602,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 402,
-    "message": "Insufficient account balance, please recharge",
+    "message": "アカウント残高が不足しています。チャージしてください",
     "type": "payment_required"
   }
 }
@@ -612,7 +612,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 403,
-    "message": "Access forbidden, you don't have permission to access this resource",
+    "message": "アクセスが禁止されています。このリソースへのアクセス権限がありません",
     "type": "permission_error"
   }
 }
@@ -622,7 +622,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 429,
-    "message": "Too many requests, please try again later",
+    "message": "リクエストが多すぎます。後でもう一度お試しください",
     "type": "rate_limit_error"
   }
 }
@@ -632,7 +632,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 500,
-    "message": "Internal server error, please try again later",
+    "message": "サーバー内部エラー。後でもう一度お試しください",
     "type": "server_error"
   }
 }
@@ -642,7 +642,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 502,
-    "message": "Bad gateway, service temporarily unavailable",
+    "message": "ゲートウェイエラー。サービスが一時的に利用できません",
     "type": "bad_gateway"
   }
 }
@@ -650,243 +650,243 @@ cat(content(response, "text"))
 
 </ResponseExample>
 
-## Authorizations
+## 認証
 
 <ParamField header="Authorization" type="string" required>
-  All API endpoints require Bearer Token authentication
+  すべてのAPIエンドポイントはBearer Token認証が必要です
 
-  Get your API Key:
+  APIキーの取得方法：
 
-  Visit the [API Key Management Page](https://evolink.ai/dashboard/keys) to get your API Key
+  [APIキー管理ページ](https://evolink.ai/dashboard/keys)にアクセスしてAPIキーを取得してください
 
-  Add it to the request header:
+  リクエストヘッダーに追加：
 
   ```
   Authorization: Bearer YOUR_API_KEY
   ```
 </ParamField>
 
-## Body
+## リクエストボディ
 
 <ParamField body="model" type="string" required>
-  Model name
+  モデル名
 
-  Supported models include:
+  サポートされているモデル：
   - **OpenAI**: `gpt-4o`, `gpt-4o-mini`, `o1`, `o1-mini`
   - **Anthropic**: `claude-3-5-sonnet`, `claude-3-5-haiku`, `claude-3-opus`
   - **Google**: `gemini-2.0-flash`, `gemini-1.5-pro`, `gemini-1.5-flash`
   - **Meta**: `llama-3.3-70b`, `llama-3.1-405b`, `llama-3.1-70b`
   - **Mistral**: `mistral-large`, `mistral-small`, `mistral-nemo`
-  - More models being added continuously...
+  - 随時新しいモデルを追加中...
 </ParamField>
 
 <ParamField body="messages" type="array" required>
-  List of conversation messages
+  会話メッセージのリスト
 
-  Each message contains:
-  - `role`: Role type (`system`, `user`, `assistant`)
-  - `content`: Message content (string or multimodal content array)
+  各メッセージには以下が含まれます：
+  - `role`: ロールタイプ（`system`, `user`, `assistant`）
+  - `content`: メッセージ内容（文字列またはマルチモーダルコンテンツ配列）
 </ParamField>
 
 <ParamField body="temperature" type="number">
-  Controls output randomness, range 0-2
+  出力のランダム性を制御、範囲は0～2
 
-  - Lower values (e.g., 0.2) make output more deterministic
-  - Higher values (e.g., 1.8) make output more random
-  
-  Default: 1.0
+  - 低い値（例：0.2）は出力をより決定的にします
+  - 高い値（例：1.8）は出力をよりランダムにします
+
+  デフォルト：1.0
 </ParamField>
 
 <ParamField body="max_tokens" type="integer">
-  Maximum number of tokens to generate
+  生成する最大トークン数
 
-  Different models have different maximum limits, please refer to specific model documentation
+  モデルによって最大制限が異なります。詳細は各モデルのドキュメントを参照してください
 </ParamField>
 
 <ParamField body="stream" type="boolean">
-  Whether to use streaming output
+  ストリーミング出力を使用するかどうか
 
-  - `true`: Streaming response (SSE format)
-  - `false`: Complete response at once
-  
-  Default: false
+  - `true`: ストリーミングレスポンス（SSE形式）
+  - `false`: 一度に完全なレスポンス
+
+  デフォルト：false
 </ParamField>
 
 <ParamField body="top_p" type="number">
-  Nucleus sampling parameter, range 0-1
+  ニュークレアスサンプリングパラメータ、範囲は0～1
 
-  Controls diversity of generated text, recommend using either this or temperature
-  
-  Default: 1.0
+  生成されるテキストの多様性を制御します。temperatureとの併用は推奨されません
+
+  デフォルト：1.0
 </ParamField>
 
 <ParamField body="frequency_penalty" type="number">
-  Frequency penalty, range -2.0 to 2.0
+  頻度ペナルティ、範囲は-2.0～2.0
 
-  Positive values reduce the likelihood of repeating the same words
-  
-  Default: 0
+  正の値は同じ単語を繰り返す可能性を減らします
+
+  デフォルト：0
 </ParamField>
 
 <ParamField body="presence_penalty" type="number">
-  Presence penalty, range -2.0 to 2.0
+  存在ペナルティ、範囲は-2.0～2.0
 
-  Positive values increase the likelihood of talking about new topics
-  
-  Default: 0
+  正の値は新しいトピックについて話す可能性を増やします
+
+  デフォルト：0
 </ParamField>
 
 <ParamField body="stop" type="string or array">
-  Stop sequences
+  停止シーケンス
 
-  Up to 4 sequences where generation will stop when encountered
+  最大4つのシーケンスを指定でき、遭遇すると生成が停止します
 </ParamField>
 
 <ParamField body="n" type="integer">
-  Number of completions to generate
+  生成する完了の数
 
-  Default: 1
+  デフォルト：1
 </ParamField>
 
-## Response
+## レスポンス
 
 <ResponseField name="id" type="string">
-  Unique identifier for the response
+  レスポンスの一意の識別子
 </ResponseField>
 
 <ResponseField name="object" type="string">
-  Object type, fixed as `chat.completion`
+  オブジェクトタイプ、`chat.completion`に固定
 </ResponseField>
 
 <ResponseField name="created" type="integer">
-  Creation timestamp
+  作成タイムスタンプ
 </ResponseField>
 
 <ResponseField name="model" type="string">
-  The actual model name used
+  実際に使用されたモデル名
 </ResponseField>
 
 <ResponseField name="choices" type="array">
-  List of generated responses
+  生成されたレスポンスのリスト
 
-  <Expandable title="Properties">
+  <Expandable title="プロパティ">
     <ResponseField name="index" type="integer">
-      Choice index
+      選択肢のインデックス
     </ResponseField>
 
     <ResponseField name="message" type="object">
-      Message content
-      
-      <Expandable title="Properties">
+      メッセージ内容
+
+      <Expandable title="プロパティ">
         <ResponseField name="role" type="string">
-          Role type (assistant)
+          ロールタイプ（assistant）
         </ResponseField>
-        
+
         <ResponseField name="content" type="string">
-          Generated text content
+          生成されたテキスト内容
         </ResponseField>
       </Expandable>
     </ResponseField>
 
     <ResponseField name="finish_reason" type="string">
-      Reason for completion
-      
-      Possible values:
-      - `stop` - Natural completion
-      - `length` - Maximum length reached
-      - `content_filter` - Content filtered
-      - `function_call` - Function call
+      完了理由
+
+      可能な値：
+      - `stop` - 自然な完了
+      - `length` - 最大長に達した
+      - `content_filter` - コンテンツがフィルタされた
+      - `function_call` - 関数呼び出し
     </ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="usage" type="object">
-  Token usage statistics
+  トークン使用統計
 
-  <Expandable title="Properties">
+  <Expandable title="プロパティ">
     <ResponseField name="prompt_tokens" type="integer">
-      Number of tokens in the input messages
+      入力メッセージのトークン数
     </ResponseField>
 
     <ResponseField name="completion_tokens" type="integer">
-      Number of tokens in the generated content
+      生成されたコンテンツのトークン数
     </ResponseField>
 
     <ResponseField name="total_tokens" type="integer">
-      Total number of tokens
+      合計トークン数
     </ResponseField>
   </Expandable>
 </ResponseField>
 
-## Supported Models
+## サポートされているモデル
 
-### OpenAI Series
-- `gpt-4o` - Latest multimodal flagship model
-- `gpt-4o-mini` - Lightweight version, cost-effective
-- `o1` - Reasoning-optimized model
-- `o1-mini` - Lightweight version of reasoning model
+### OpenAIシリーズ
+- `gpt-4o` - 最新のマルチモーダルフラッグシップモデル
+- `gpt-4o-mini` - 軽量版、コストパフォーマンスに優れる
+- `o1` - 推論最適化モデル
+- `o1-mini` - 推論モデルの軽量版
 
-### Anthropic Series
-- `claude-3-5-sonnet` - Latest Claude 3.5 model
-- `claude-3-5-haiku` - Fast response version
-- `claude-3-opus` - Most powerful Claude 3 model
+### Anthropicシリーズ
+- `claude-3-5-sonnet` - 最新のClaude 3.5モデル
+- `claude-3-5-haiku` - 高速レスポンス版
+- `claude-3-opus` - 最も強力なClaude 3モデル
 
-### Google Series
-- `gemini-2.0-flash` - Latest Gemini 2.0 fast version
-- `gemini-1.5-pro` - Gemini 1.5 professional version
-- `gemini-1.5-flash` - Gemini 1.5 fast version
+### Googleシリーズ
+- `gemini-2.0-flash` - 最新のGemini 2.0高速版
+- `gemini-1.5-pro` - Gemini 1.5プロフェッショナル版
+- `gemini-1.5-flash` - Gemini 1.5高速版
 
-### Meta Series
-- `llama-3.3-70b` - Llama 3.3 70B parameter model
-- `llama-3.1-405b` - Llama 3.1 ultra-large model
-- `llama-3.1-70b` - Llama 3.1 70B model
+### Metaシリーズ
+- `llama-3.3-70b` - Llama 3.3 70Bパラメータモデル
+- `llama-3.1-405b` - Llama 3.1超大規模モデル
+- `llama-3.1-70b` - Llama 3.1 70Bモデル
 
-### Mistral Series
-- `mistral-large` - Mistral's most powerful model
-- `mistral-small` - Lightweight and efficient version
-- `mistral-nemo` - Purpose-optimized model
+### Mistralシリーズ
+- `mistral-large` - Mistralの最強モデル
+- `mistral-small` - 軽量で効率的なバージョン
+- `mistral-nemo` - 目的最適化モデル
 
-## Usage Examples
+## 使用例
 
-### Basic Conversation
+### 基本的な会話
 ```json
 {
   "model": "gpt-4o",
   "messages": [
-    {"role": "user", "content": "Hello"}
+    {"role": "user", "content": "こんにちは"}
   ]
 }
 ```
 
-### System Prompt
+### システムプロンプト
 ```json
 {
   "model": "claude-3-5-sonnet",
   "messages": [
-    {"role": "system", "content": "You are a professional Python programming tutor"},
-    {"role": "user", "content": "How to use list comprehensions?"}
+    {"role": "system", "content": "あなたはプロフェッショナルなPythonプログラミング講師です"},
+    {"role": "user", "content": "リスト内包表記の使い方を教えてください"}
   ]
 }
 ```
 
-### Multi-turn Conversation
+### 複数ターンの会話
 ```json
 {
   "model": "gemini-2.0-flash",
   "messages": [
-    {"role": "user", "content": "What is machine learning?"},
-    {"role": "assistant", "content": "Machine learning is a branch of artificial intelligence..."},
-    {"role": "user", "content": "Can you give me an example?"}
+    {"role": "user", "content": "機械学習とは何ですか？"},
+    {"role": "assistant", "content": "機械学習は人工知能の一分野です..."},
+    {"role": "user", "content": "例を挙げていただけますか？"}
   ]
 }
 ```
 
-### Streaming Output
+### ストリーミング出力
 ```json
 {
   "model": "llama-3.3-70b",
   "messages": [
-    {"role": "user", "content": "Write a poem about spring"}
+    {"role": "user", "content": "春についての詩を書いてください"}
   ],
   "stream": true
 }

@@ -1,11 +1,11 @@
 ---
-title: "GPT-4o Image Generation"
+title: "GPT-4o 画像生成"
 description: "
-- Asynchronous processing mode, returns task ID for subsequent queries
+- 非同期処理モード、タスクIDを返して後続のクエリに使用
 
-- Supports multiple generation modes including text-to-image, image-to-image, and image editing
+- テキストから画像、画像から画像、画像編集を含む複数の生成モードをサポート
 
-- Generated image links are valid for 24 hours, please save them promptly
+- 生成された画像リンクは24時間有効、速やかに保存してください
 "
 api: "POST https://apimart.ai/v1/images/generations"
 
@@ -24,7 +24,7 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "model": "gpt-4o-image",
-    "prompt": "A beautiful sunset with vibrant colors over the ocean",
+    "prompt": "海の上の鮮やかな色彩の美しい夕焼け",
     "size": "1024x1024",
     "n": 1,
     "image_urls": [
@@ -42,7 +42,7 @@ url = "https://apimart.ai/v1/images/generations"
 
 payload = {
     "model": "gpt-4o-image",
-    "prompt": "A beautiful sunset with vibrant colors over the ocean",
+    "prompt": "海の上の鮮やかな色彩の美しい夕焼け",
     "size": "1024x1024",
     "n": 1,
     "image_urls": [
@@ -67,7 +67,7 @@ const url = "https://apimart.ai/v1/images/generations";
 
 const payload = {
   model: "gpt-4o-image",
-  prompt: "A beautiful sunset with vibrant colors over the ocean",
+  prompt: "海の上の鮮やかな色彩の美しい夕焼け",
   size: "1024x1024",
   n: 1,
   image_urls: [
@@ -108,7 +108,7 @@ func main() {
 
     payload := map[string]interface{}{
         "model":  "gpt-4o-image",
-        "prompt": "A beautiful sunset with vibrant colors over the ocean",
+        "prompt": "海の上の鮮やかな色彩の美しい夕焼け",
         "size":   "1024x1024",
         "n":      1,
         "image_urls": []string{
@@ -149,7 +149,7 @@ public class Main {
         String payload = """
         {
           "model": "gpt-4o-image",
-          "prompt": "A beautiful sunset with vibrant colors over the ocean",
+          "prompt": "海の上の鮮やかな色彩の美しい夕焼け",
           "size": "1024x1024",
           "n": 1,
           "image_urls": [
@@ -218,7 +218,7 @@ url = URI("https://apimart.ai/v1/images/generations")
 
 payload = {
   model: "gpt-4o-image",
-  prompt: "A beautiful sunset with vibrant colors over the ocean",
+  prompt: "海の上の鮮やかな色彩の美しい夕焼け",
   size: "1024x1024",
   n: 1,
   image_urls: [
@@ -247,7 +247,7 @@ let url = URL(string: "https://apimart.ai/v1/images/generations")!
 
 let payload: [String: Any] = [
     "model": "gpt-4o-image",
-    "prompt": "A beautiful sunset with vibrant colors over the ocean",
+    "prompt": "海の上の鮮やかな色彩の美しい夕焼け",
     "size": "1024x1024",
     "n": 1,
     "image_urls": [
@@ -529,7 +529,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 400,
-    "message": "Invalid request parameters",
+    "message": "リクエストパラメータが無効です",
     "type": "invalid_request_error"
   }
 }
@@ -539,7 +539,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 401,
-    "message": "Invalid authentication credentials",
+    "message": "無効な認証資格情報",
     "type": "authentication_error"
   }
 }
@@ -549,7 +549,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 402,
-    "message": "Insufficient balance. Please top up your account",
+    "message": "残高不足。アカウントにチャージしてください",
     "type": "payment_required"
   }
 }
@@ -559,7 +559,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 403,
-    "message": "Access forbidden. You don't have permission to access this resource",
+    "message": "アクセスが禁止されています。このリソースへのアクセス権限がありません",
     "type": "permission_error"
   }
 }
@@ -569,7 +569,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 429,
-    "message": "Rate limit exceeded. Please try again later",
+    "message": "レート制限を超過しました。後でもう一度お試しください",
     "type": "rate_limit_error"
   }
 }
@@ -579,7 +579,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 500,
-    "message": "Internal server error. Please try again later",
+    "message": "サーバー内部エラー。後でもう一度お試しください",
     "type": "server_error"
   }
 }
@@ -589,7 +589,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 502,
-    "message": "Bad gateway. The server is temporarily unavailable",
+    "message": "ゲートウェイエラー。サーバーが一時的に利用できません",
     "type": "bad_gateway"
   }
 }
@@ -597,120 +597,120 @@ cat(content(response, "text"))
 
 </ResponseExample>
 
-## Authorizations
+## 認証
 
 <ParamField header="Authorization" type="string" required>
-  All API endpoints require Bearer Token authentication
+  すべてのAPIエンドポイントはBearer Token認証が必要です
 
-  Get your API Key:
+  APIキーの取得方法：
 
-  Visit the [API Key Management Page](https://evolink.ai/dashboard/keys) to get your API Key
+  [APIキー管理ページ](https://evolink.ai/dashboard/keys)にアクセスしてAPIキーを取得してください
 
-  Add it to the request header:
+  リクエストヘッダーに追加：
 
   ```
   Authorization: Bearer YOUR_API_KEY
   ```
 </ParamField>
 
-## Body
+## リクエストボディ
 
 <ParamField body="model" type="string" required>
-  Model name, must be `gpt-4o-image`
+  モデル名、`gpt-4o-image`である必要があります
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
-  Text description for image generation
+  画像生成のためのテキスト説明
 
-  Maximum 1000 characters
+  最大1000文字
 </ParamField>
 
 <ParamField body="size" type="string">
-  Image generation size
+  画像生成サイズ
 
-  Supported formats:
-  - Ratios: `1:1`, `2:3`, `3:2`
-  - Pixels: `1024x1024`, `1024x1536`, `1536x1024`
+  サポートされている形式：
+  - 比率：`1:1`, `2:3`, `3:2`
+  - ピクセル：`1024x1024`, `1024x1536`, `1536x1024`
 </ParamField>
 
 <ParamField body="n" type="integer">
-  Number of images to generate
+  生成する画像の数
 
-  Supports 1, 2, 4. Charges will be pre-deducted based on the number
+  1、2、4をサポート。数量に基づいて料金が事前に差し引かれます
 </ParamField>
 
 <ParamField body="image_urls" type="array">
-  Reference image URL list for image-to-image or image editing
+  画像から画像または画像編集のための参照画像URLリスト
 
-  - Maximum 5 images
-  - Each image should not exceed 10MB
-  - Supported formats: .jpeg, .jpg, .png, .webp
+  - 最大5枚の画像
+  - 各画像は10MBを超えないこと
+  - サポート形式：.jpeg, .jpg, .png, .webp
 </ParamField>
 
 <ParamField body="mask_url" type="string">
-  Mask image URL
+  マスク画像URL
 
-  - Must be PNG format
-  - Size must match the reference image
-  - Maximum 4MB
+  - PNG形式である必要があります
+  - サイズは参照画像と一致する必要があります
+  - 最大4MB
 </ParamField>
 
-## Response
+## レスポンス
 
 <ResponseField name="created" type="integer">
-  Task creation timestamp
+  タスク作成タイムスタンプ
 </ResponseField>
 
 <ResponseField name="id" type="string">
-  Unique task identifier
+  一意のタスク識別子
 </ResponseField>
 
 <ResponseField name="model" type="string">
-  The actual model name used
+  実際に使用されたモデル名
 </ResponseField>
 
 <ResponseField name="object" type="string">
-  Object type, fixed as `image.generation.task`
+  オブジェクトタイプ、`image.generation.task`に固定
 </ResponseField>
 
 <ResponseField name="progress" type="integer">
-  Task completion progress percentage (0-100)
+  タスク完了進捗率（0-100）
 </ResponseField>
 
 <ResponseField name="status" type="string">
-  Task status
+  タスクステータス
 
-  Possible values:
-  - `pending` - Waiting for processing
-  - `processing` - In progress
-  - `completed` - Completed
-  - `failed` - Failed
+  可能な値：
+  - `pending` - 処理待ち
+  - `processing` - 進行中
+  - `completed` - 完了
+  - `failed` - 失敗
 </ResponseField>
 
 <ResponseField name="task_info" type="object">
-  Task details
+  タスク詳細
 
-  <Expandable title="Properties">
+  <Expandable title="プロパティ">
     <ResponseField name="can_cancel" type="boolean">
-      Whether the task can be cancelled
+      タスクがキャンセル可能かどうか
     </ResponseField>
 
     <ResponseField name="estimated_time" type="integer">
-      Estimated completion time (seconds)
+      推定完了時間（秒）
     </ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="type" type="string">
-  Output type, fixed as `image`
+  出力タイプ、`image`に固定
 </ResponseField>
 
 <ResponseField name="usage" type="object">
-  Billing information
+  課金情報
 
-  <Expandable title="Properties">
+  <Expandable title="プロパティ">
     <ResponseField name="total_tokens" type="integer">
-      Total tokens consumed
+      消費された合計トークン数
     </ResponseField>
   </Expandable>
 </ResponseField>

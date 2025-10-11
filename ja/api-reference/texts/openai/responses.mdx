@@ -1,11 +1,11 @@
 ---
-title: "OpenAI Multimodal Responses API"
+title: "OpenAI マルチモーダル Responses API"
 description: "
-- Fully compatible with OpenAI Responses API format
+- OpenAI Responses API形式と完全互換
 
-- Supports multimodal input with text and images
+- テキストと画像を使用したマルチモーダル入力をサポート
 
-- Supports tool extensions: web search, file search, function calling, remote MCP
+- ツール拡張をサポート：Web検索、ファイル検索、関数呼び出し、リモートMCP
 "
 api: "POST https://apimart.ai/v1/responses"
 ---
@@ -24,7 +24,7 @@ curl https://apimart.ai/v1/responses \
         "content": [
           {
             "type": "input_text",
-            "text": "What is in this image?"
+            "text": "この画像には何が写っていますか？"
           },
           {
             "type": "input_image",
@@ -50,7 +50,7 @@ payload = {
             "content": [
                 {
                     "type": "input_text",
-                    "text": "What is in this image?"
+                    "text": "この画像には何が写っていますか？"
                 },
                 {
                     "type": "input_image",
@@ -82,7 +82,7 @@ const payload = {
       content: [
         {
           type: "input_text",
-          text: "What is in this image?"
+          text: "この画像には何が写っていますか？"
         },
         {
           type: "input_image",
@@ -131,7 +131,7 @@ func main() {
                 "content": []map[string]string{
                     {
                         "type": "input_text",
-                        "text": "What is in this image?",
+                        "text": "この画像には何が写っていますか？",
                     },
                     {
                         "type":      "input_image",
@@ -180,7 +180,7 @@ public class Main {
               "content": [
                 {
                   "type": "input_text",
-                  "text": "What is in this image?"
+                  "text": "この画像には何が写っていますか？"
                 },
                 {
                   "type": "input_image",
@@ -265,7 +265,7 @@ payload = {
       content: [
         {
           type: "input_text",
-          text: "What is in this image?"
+          text: "この画像には何が写っていますか？"
         },
         {
           type: "input_image",
@@ -302,7 +302,7 @@ let payload: [String: Any] = [
             "content": [
                 [
                     "type": "input_text",
-                    "text": "What is in this image?"
+                    "text": "この画像には何が写っていますか？"
                 ],
                 [
                     "type": "input_image",
@@ -619,7 +619,7 @@ cat(content(response, "text"))
       "index": 0,
       "message": {
         "role": "assistant",
-        "content": "This image shows a cat and an otter. They appear to be interacting with each other in a very cute and heartwarming scene. The cat and otter seem to be getting along well."
+        "content": "この画像には猫とカワウソが写っています。とても可愛らしく心温まるシーンで、お互いに交流しているように見えます。猫とカワウソは仲良くしているようです。"
       },
       "finish_reason": "stop"
     }
@@ -636,7 +636,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 400,
-    "message": "Invalid request parameters",
+    "message": "リクエストパラメータが無効です",
     "type": "invalid_request_error"
   }
 }
@@ -646,7 +646,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 401,
-    "message": "Authentication failed, please check your API key",
+    "message": "認証に失敗しました。APIキーを確認してください",
     "type": "authentication_error"
   }
 }
@@ -656,7 +656,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 402,
-    "message": "Insufficient account balance, please top up and try again",
+    "message": "アカウント残高が不足しています。チャージして再度お試しください",
     "type": "payment_required"
   }
 }
@@ -666,7 +666,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 403,
-    "message": "Access forbidden, you do not have permission to access this resource",
+    "message": "アクセスが禁止されています。このリソースへのアクセス権限がありません",
     "type": "permission_error"
   }
 }
@@ -676,7 +676,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 429,
-    "message": "Too many requests, please try again later",
+    "message": "リクエストが多すぎます。後でもう一度お試しください",
     "type": "rate_limit_error"
   }
 }
@@ -686,7 +686,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 500,
-    "message": "Internal server error, please try again later",
+    "message": "サーバー内部エラー。後でもう一度お試しください",
     "type": "server_error"
   }
 }
@@ -696,7 +696,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 502,
-    "message": "Gateway error, server temporarily unavailable",
+    "message": "ゲートウェイエラー。サーバーが一時的に利用できません",
     "type": "bad_gateway"
   }
 }

@@ -1,11 +1,11 @@
 ---
-title: "General Chat API"
+title: "범용 채팅 API"
 description: "
-- Unified chat API interface supporting all text generation models
+- 모든 텍스트 생성 모델을 지원하는 통합 채팅 API 인터페이스
 
-- Select different AI models via the model parameter
+- model 매개변수를 통해 다양한 AI 모델 선택 가능
 
-- Compatible with OpenAI Chat Completions API format
+- OpenAI Chat Completions API 형식과 호환
 "
 api: "POST https://apimart.ai/v1/chat/completions"
 ---
@@ -44,11 +44,11 @@ payload = {
     "messages": [
         {
             "role": "system",
-            "content": "You are a professional AI assistant."
+            "content": "당신은 전문 AI 어시스턴트입니다."
         },
         {
             "role": "user",
-            "content": "Tell me about the history of artificial intelligence."
+            "content": "인공지능의 역사에 대해 알려주세요."
         }
     ],
     "temperature": 0.7,
@@ -118,11 +118,11 @@ func main() {
         "messages": []map[string]string{
             {
                 "role":    "system",
-                "content": "You are a professional AI assistant.",
+                "content": "당신은 전문 AI 어시스턴트입니다.",
             },
             {
                 "role":    "user",
-                "content": "Tell me about the history of artificial intelligence.",
+                "content": "인공지능의 역사에 대해 알려주세요.",
             },
         },
         "temperature": 0.7,
@@ -163,11 +163,11 @@ public class Main {
           "messages": [
             {
               "role": "system",
-              "content": "You are a professional AI assistant."
+              "content": "당신은 전문 AI 어시스턴트입니다."
             },
             {
               "role": "user",
-              "content": "Tell me about the history of artificial intelligence."
+              "content": "인공지능의 역사에 대해 알려주세요."
             }
           ],
           "temperature": 0.7,
@@ -273,11 +273,11 @@ let payload: [String: Any] = [
     "messages": [
         [
             "role": "system",
-            "content": "You are a professional AI assistant."
+            "content": "당신은 전문 AI 어시스턴트입니다."
         ],
         [
             "role": "user",
-            "content": "Tell me about the history of artificial intelligence."
+            "content": "인공지능의 역사에 대해 알려주세요."
         ]
     ],
     "temperature": 0.7,
@@ -565,7 +565,7 @@ cat(content(response, "text"))
       "index": 0,
       "message": {
         "role": "assistant",
-        "content": "The history of artificial intelligence (AI) dates back to the 1950s...\n\n1. **Early Period (1950s-1960s)**: The proposal of the Turing Test marked the beginning of AI research...\n\n2. **Expert Systems Era (1970s-1980s)**: Rule-based systems began to be applied in medical diagnosis, financial analysis, and other fields...\n\n3. **Rise of Machine Learning (1990s-2000s)**: Statistical learning methods gradually became mainstream...\n\n4. **Deep Learning Revolution (2010s-Present)**: Breakthroughs in neural network technology brought explosive growth to AI..."
+        "content": "인공지능(AI)의 역사는 1950년대로 거슬러 올라갑니다...\n\n1. **초기 시대 (1950s-1960s)**: 튜링 테스트의 제안이 AI 연구의 시작을 알렸습니다...\n\n2. **전문가 시스템 시대 (1970s-1980s)**: 규칙 기반 시스템이 의료 진단, 금융 분석 등의 분야에 적용되기 시작했습니다...\n\n3. **머신러닝의 부상 (1990s-2000s)**: 통계적 학습 방법이 점차 주류가 되었습니다...\n\n4. **딥러닝 혁명 (2010s-현재)**: 신경망 기술의 돌파구가 AI의 폭발적인 성장을 가져왔습니다..."
       },
       "finish_reason": "stop"
     }
@@ -582,7 +582,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 400,
-    "message": "Invalid request parameters",
+    "message": "잘못된 요청 매개변수",
     "type": "invalid_request_error"
   }
 }
@@ -592,7 +592,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 401,
-    "message": "Authentication failed, please check your API key",
+    "message": "인증 실패, API 키를 확인해주세요",
     "type": "authentication_error"
   }
 }
@@ -602,7 +602,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 402,
-    "message": "Insufficient account balance, please recharge",
+    "message": "계정 잔액 부족, 충전이 필요합니다",
     "type": "payment_required"
   }
 }
@@ -612,7 +612,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 403,
-    "message": "Access forbidden, you don't have permission to access this resource",
+    "message": "접근 금지, 이 리소스에 접근할 권한이 없습니다",
     "type": "permission_error"
   }
 }
@@ -622,7 +622,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 429,
-    "message": "Too many requests, please try again later",
+    "message": "요청이 너무 많습니다, 나중에 다시 시도해주세요",
     "type": "rate_limit_error"
   }
 }
@@ -632,7 +632,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 500,
-    "message": "Internal server error, please try again later",
+    "message": "내부 서버 오류, 나중에 다시 시도해주세요",
     "type": "server_error"
   }
 }
@@ -642,7 +642,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 502,
-    "message": "Bad gateway, service temporarily unavailable",
+    "message": "잘못된 게이트웨이, 서비스 일시적으로 사용 불가",
     "type": "bad_gateway"
   }
 }
@@ -650,243 +650,243 @@ cat(content(response, "text"))
 
 </ResponseExample>
 
-## Authorizations
+## 인증
 
 <ParamField header="Authorization" type="string" required>
-  All API endpoints require Bearer Token authentication
+  모든 API 엔드포인트는 Bearer Token 인증이 필요합니다
 
-  Get your API Key:
+  API 키 받기:
 
-  Visit the [API Key Management Page](https://evolink.ai/dashboard/keys) to get your API Key
+  [API 키 관리 페이지](https://evolink.ai/dashboard/keys)를 방문하여 API 키를 받으세요
 
-  Add it to the request header:
+  요청 헤더에 추가:
 
   ```
   Authorization: Bearer YOUR_API_KEY
   ```
 </ParamField>
 
-## Body
+## 요청 본문
 
 <ParamField body="model" type="string" required>
-  Model name
+  모델 이름
 
-  Supported models include:
+  지원되는 모델:
   - **OpenAI**: `gpt-4o`, `gpt-4o-mini`, `o1`, `o1-mini`
   - **Anthropic**: `claude-3-5-sonnet`, `claude-3-5-haiku`, `claude-3-opus`
   - **Google**: `gemini-2.0-flash`, `gemini-1.5-pro`, `gemini-1.5-flash`
   - **Meta**: `llama-3.3-70b`, `llama-3.1-405b`, `llama-3.1-70b`
   - **Mistral**: `mistral-large`, `mistral-small`, `mistral-nemo`
-  - More models being added continuously...
+  - 더 많은 모델이 계속 추가되고 있습니다...
 </ParamField>
 
 <ParamField body="messages" type="array" required>
-  List of conversation messages
+  대화 메시지 목록
 
-  Each message contains:
-  - `role`: Role type (`system`, `user`, `assistant`)
-  - `content`: Message content (string or multimodal content array)
+  각 메시지는 다음을 포함합니다:
+  - `role`: 역할 유형 (`system`, `user`, `assistant`)
+  - `content`: 메시지 내용 (문자열 또는 멀티모달 콘텐츠 배열)
 </ParamField>
 
 <ParamField body="temperature" type="number">
-  Controls output randomness, range 0-2
+  출력 무작위성 제어, 범위 0-2
 
-  - Lower values (e.g., 0.2) make output more deterministic
-  - Higher values (e.g., 1.8) make output more random
-  
-  Default: 1.0
+  - 낮은 값 (예: 0.2)은 출력을 더 결정적으로 만듭니다
+  - 높은 값 (예: 1.8)은 출력을 더 무작위로 만듭니다
+
+  기본값: 1.0
 </ParamField>
 
 <ParamField body="max_tokens" type="integer">
-  Maximum number of tokens to generate
+  생성할 최대 토큰 수
 
-  Different models have different maximum limits, please refer to specific model documentation
+  모델마다 최대 제한이 다르므로 특정 모델 문서를 참조하세요
 </ParamField>
 
 <ParamField body="stream" type="boolean">
-  Whether to use streaming output
+  스트리밍 출력 사용 여부
 
-  - `true`: Streaming response (SSE format)
-  - `false`: Complete response at once
-  
-  Default: false
+  - `true`: 스트리밍 응답 (SSE 형식)
+  - `false`: 한번에 완전한 응답
+
+  기본값: false
 </ParamField>
 
 <ParamField body="top_p" type="number">
-  Nucleus sampling parameter, range 0-1
+  핵 샘플링 매개변수, 범위 0-1
 
-  Controls diversity of generated text, recommend using either this or temperature
-  
-  Default: 1.0
+  생성된 텍스트의 다양성을 제어, temperature와 함께 사용하는 것을 권장합니다
+
+  기본값: 1.0
 </ParamField>
 
 <ParamField body="frequency_penalty" type="number">
-  Frequency penalty, range -2.0 to 2.0
+  빈도 페널티, 범위 -2.0 ~ 2.0
 
-  Positive values reduce the likelihood of repeating the same words
-  
-  Default: 0
+  양수 값은 같은 단어를 반복할 가능성을 줄입니다
+
+  기본값: 0
 </ParamField>
 
 <ParamField body="presence_penalty" type="number">
-  Presence penalty, range -2.0 to 2.0
+  존재 페널티, 범위 -2.0 ~ 2.0
 
-  Positive values increase the likelihood of talking about new topics
-  
-  Default: 0
+  양수 값은 새로운 주제에 대해 말할 가능성을 높입니다
+
+  기본값: 0
 </ParamField>
 
 <ParamField body="stop" type="string or array">
-  Stop sequences
+  중지 시퀀스
 
-  Up to 4 sequences where generation will stop when encountered
+  최대 4개의 시퀀스, 해당 시퀀스를 만나면 생성이 중지됩니다
 </ParamField>
 
 <ParamField body="n" type="integer">
-  Number of completions to generate
+  생성할 완료 개수
 
-  Default: 1
+  기본값: 1
 </ParamField>
 
-## Response
+## 응답
 
 <ResponseField name="id" type="string">
-  Unique identifier for the response
+  응답의 고유 식별자
 </ResponseField>
 
 <ResponseField name="object" type="string">
-  Object type, fixed as `chat.completion`
+  객체 유형, `chat.completion`으로 고정
 </ResponseField>
 
 <ResponseField name="created" type="integer">
-  Creation timestamp
+  생성 타임스탬프
 </ResponseField>
 
 <ResponseField name="model" type="string">
-  The actual model name used
+  실제 사용된 모델 이름
 </ResponseField>
 
 <ResponseField name="choices" type="array">
-  List of generated responses
+  생성된 응답 목록
 
-  <Expandable title="Properties">
+  <Expandable title="속성">
     <ResponseField name="index" type="integer">
-      Choice index
+      선택 인덱스
     </ResponseField>
 
     <ResponseField name="message" type="object">
-      Message content
-      
-      <Expandable title="Properties">
+      메시지 내용
+
+      <Expandable title="속성">
         <ResponseField name="role" type="string">
-          Role type (assistant)
+          역할 유형 (assistant)
         </ResponseField>
-        
+
         <ResponseField name="content" type="string">
-          Generated text content
+          생성된 텍스트 내용
         </ResponseField>
       </Expandable>
     </ResponseField>
 
     <ResponseField name="finish_reason" type="string">
-      Reason for completion
-      
-      Possible values:
-      - `stop` - Natural completion
-      - `length` - Maximum length reached
-      - `content_filter` - Content filtered
-      - `function_call` - Function call
+      완료 이유
+
+      가능한 값:
+      - `stop` - 자연스러운 완료
+      - `length` - 최대 길이 도달
+      - `content_filter` - 콘텐츠 필터링됨
+      - `function_call` - 함수 호출
     </ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="usage" type="object">
-  Token usage statistics
+  토큰 사용량 통계
 
-  <Expandable title="Properties">
+  <Expandable title="속성">
     <ResponseField name="prompt_tokens" type="integer">
-      Number of tokens in the input messages
+      입력 메시지의 토큰 수
     </ResponseField>
 
     <ResponseField name="completion_tokens" type="integer">
-      Number of tokens in the generated content
+      생성된 콘텐츠의 토큰 수
     </ResponseField>
 
     <ResponseField name="total_tokens" type="integer">
-      Total number of tokens
+      총 토큰 수
     </ResponseField>
   </Expandable>
 </ResponseField>
 
-## Supported Models
+## 지원되는 모델
 
-### OpenAI Series
-- `gpt-4o` - Latest multimodal flagship model
-- `gpt-4o-mini` - Lightweight version, cost-effective
-- `o1` - Reasoning-optimized model
-- `o1-mini` - Lightweight version of reasoning model
+### OpenAI 시리즈
+- `gpt-4o` - 최신 멀티모달 플래그십 모델
+- `gpt-4o-mini` - 경량 버전, 비용 효율적
+- `o1` - 추론 최적화 모델
+- `o1-mini` - 추론 모델의 경량 버전
 
-### Anthropic Series
-- `claude-3-5-sonnet` - Latest Claude 3.5 model
-- `claude-3-5-haiku` - Fast response version
-- `claude-3-opus` - Most powerful Claude 3 model
+### Anthropic 시리즈
+- `claude-3-5-sonnet` - 최신 Claude 3.5 모델
+- `claude-3-5-haiku` - 빠른 응답 버전
+- `claude-3-opus` - 가장 강력한 Claude 3 모델
 
-### Google Series
-- `gemini-2.0-flash` - Latest Gemini 2.0 fast version
-- `gemini-1.5-pro` - Gemini 1.5 professional version
-- `gemini-1.5-flash` - Gemini 1.5 fast version
+### Google 시리즈
+- `gemini-2.0-flash` - 최신 Gemini 2.0 고속 버전
+- `gemini-1.5-pro` - Gemini 1.5 프로페셔널 버전
+- `gemini-1.5-flash` - Gemini 1.5 고속 버전
 
-### Meta Series
-- `llama-3.3-70b` - Llama 3.3 70B parameter model
-- `llama-3.1-405b` - Llama 3.1 ultra-large model
-- `llama-3.1-70b` - Llama 3.1 70B model
+### Meta 시리즈
+- `llama-3.3-70b` - Llama 3.3 70B 파라미터 모델
+- `llama-3.1-405b` - Llama 3.1 초대형 모델
+- `llama-3.1-70b` - Llama 3.1 70B 모델
 
-### Mistral Series
-- `mistral-large` - Mistral's most powerful model
-- `mistral-small` - Lightweight and efficient version
-- `mistral-nemo` - Purpose-optimized model
+### Mistral 시리즈
+- `mistral-large` - Mistral의 가장 강력한 모델
+- `mistral-small` - 경량이고 효율적인 버전
+- `mistral-nemo` - 목적 최적화 모델
 
-## Usage Examples
+## 사용 예제
 
-### Basic Conversation
+### 기본 대화
 ```json
 {
   "model": "gpt-4o",
   "messages": [
-    {"role": "user", "content": "Hello"}
+    {"role": "user", "content": "안녕하세요"}
   ]
 }
 ```
 
-### System Prompt
+### 시스템 프롬프트
 ```json
 {
   "model": "claude-3-5-sonnet",
   "messages": [
-    {"role": "system", "content": "You are a professional Python programming tutor"},
-    {"role": "user", "content": "How to use list comprehensions?"}
+    {"role": "system", "content": "당신은 전문 Python 프로그래밍 튜터입니다"},
+    {"role": "user", "content": "리스트 컴프리헨션을 어떻게 사용하나요?"}
   ]
 }
 ```
 
-### Multi-turn Conversation
+### 다중 턴 대화
 ```json
 {
   "model": "gemini-2.0-flash",
   "messages": [
-    {"role": "user", "content": "What is machine learning?"},
-    {"role": "assistant", "content": "Machine learning is a branch of artificial intelligence..."},
-    {"role": "user", "content": "Can you give me an example?"}
+    {"role": "user", "content": "머신러닝이 무엇인가요?"},
+    {"role": "assistant", "content": "머신러닝은 인공지능의 한 분야입니다..."},
+    {"role": "user", "content": "예를 들어 설명해주시겠어요?"}
   ]
 }
 ```
 
-### Streaming Output
+### 스트리밍 출력
 ```json
 {
   "model": "llama-3.3-70b",
   "messages": [
-    {"role": "user", "content": "Write a poem about spring"}
+    {"role": "user", "content": "봄에 관한 시를 써주세요"}
   ],
   "stream": true
 }

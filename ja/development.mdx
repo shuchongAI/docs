@@ -1,15 +1,15 @@
 ---
-title: "Development Guide"
-description: "Integrate the API into your application"
+title: "開発ガイド"
+description: "アプリケーションにAPIを統合する"
 ---
 
-# Development Guide
+# 開発ガイド
 
-This guide helps you integrate our API services into your application.
+このガイドでは、APIサービスをアプリケーションに統合する方法を説明します。
 
-## SDK Support
+## SDKサポート
 
-We provide SDKs for multiple programming languages.
+複数のプログラミング言語向けのSDKを提供しています。
 
 ### Python SDK
 
@@ -61,15 +61,15 @@ const result = await client.tasks.get(response.id);
 console.log(`Status: ${result.status}`);
 ```
 
-## Asynchronous Processing
+## 非同期処理
 
-Our API uses an asynchronous processing model:
+APIは非同期処理モデルを使用しています：
 
-1. Submit a task: send a generation request and receive a task ID
-2. Poll status: periodically check task status
-3. Get results: fetch generation results when the task completes
+1. タスクを送信：生成リクエストを送信してタスクIDを受け取る
+2. ステータスをポーリング：定期的にタスクのステータスを確認する
+3. 結果を取得：タスクが完了したら生成結果を取得する
 
-### Polling example
+### ポーリングの例
 
 ```python
 import time
@@ -77,33 +77,33 @@ import time
 def wait_for_completion(client, task_id, max_wait=300):
     """Wait for the task to complete"""
     start_time = time.time()
-    
+
     while time.time() - start_time < max_wait:
         result = client.tasks.get(task_id)
-        
+
         if result.status == "completed":
             return result
         elif result.status == "failed":
             raise Exception(f"Task failed: {result.error}")
-        
+
         time.sleep(2)  # wait 2 seconds before querying again
-    
+
     raise Exception("Task timeout")
 ```
 
-## Error Handling
+## エラー処理
 
-### Common errors
+### よくあるエラー
 
-| Status | Description | Resolution |
+| ステータス | 説明 | 解決方法 |
 |--------|-------------|------------|
-| 400 | Invalid request parameters | Check request parameters and format |
-| 401 | Authentication failed | Verify your API key |
-| 402 | Insufficient balance | Top up your account balance |
-| 429 | Rate limit exceeded | Reduce request frequency |
-| 500 | Server error | Retry later |
+| 400 | 無効なリクエストパラメータ | リクエストパラメータとフォーマットを確認する |
+| 401 | 認証失敗 | APIキーを確認する |
+| 402 | 残高不足 | アカウント残高をチャージする |
+| 429 | レート制限超過 | リクエストの頻度を減らす |
+| 500 | サーバーエラー | 後で再試行する |
 
-### Example
+### 例
 
 ```python
 try:
@@ -117,18 +117,18 @@ except EvolinkError as e:
         print(f"Error: {e.message}")
 ```
 
-## Best Practices
+## ベストプラクティス
 
-1. Caching: generated image/video links are valid for 24 hours
-2. Retries: implement exponential backoff on transient errors
-3. Monitoring: regularly check API usage and quotas
-4. Security: keep your API key secure
+1. キャッシング：生成された画像/動画のリンクは24時間有効です
+2. リトライ：一時的なエラーには指数バックオフを実装する
+3. モニタリング：API使用状況とクォータを定期的に確認する
+4. セキュリティ：APIキーを安全に保管する
 
-## Support
+## サポート
 
-If you run into issues during development, you can get help via:
+開発中に問題が発生した場合は、以下の方法でサポートを受けられます：
 
-- Email: support@evolink.ai
-- Live chat: visit our website
-- Docs: browse the full API documentation
+- メール：support@evolink.ai
+- ライブチャット：ウェブサイトにアクセス
+- ドキュメント：完全なAPIドキュメントを参照
 

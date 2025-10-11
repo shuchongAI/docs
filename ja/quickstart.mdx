@@ -1,38 +1,38 @@
 ---
-title: "Quick Start"
-description: "Quickly start using our API services"
+title: "クイックスタート"
+description: "APIサービスを素早く始める"
 ---
 
-# Quick Start
+# クイックスタート
 
-Welcome to our API services! This guide helps you quickly get started with image and video generation.
+APIサービスへようこそ！このガイドでは、画像と動画生成を素早く始める方法を説明します。
 
-## Step 1: Get an API Key
+## ステップ1：APIキーを取得する
 
-1. Visit the API Key Management page: https://your-domain.com/api-keys
-2. Sign in to your account
-3. Create a new API key
-4. Save your key securely (it is shown only once)
+1. APIキー管理ページにアクセス：https://your-domain.com/api-keys
+2. アカウントにサインインする
+3. 新しいAPIキーを作成する
+4. キーを安全に保存する（一度だけ表示されます）
 
-## Step 2: Choose a Model
+## ステップ2：モデルを選択する
 
-We provide multiple AI models to choose from.
+複数のAIモデルから選択できます。
 
-### Image Generation Models
-- GPT-4o: High‑quality image generation
-- Seedream-4.0: Professional image generation
-- Nano-Banana: Fast image generation
-- Qwen: Chinese‑optimized image generation
-- Wan2.5-Image: Latest image generation technology
+### 画像生成モデル
+- GPT-4o：高品質な画像生成
+- Seedream-4.0：プロフェッショナルな画像生成
+- Nano-Banana：高速な画像生成
+- Qwen：中国語に最適化された画像生成
+- Wan2.5-Image：最新の画像生成技術
 
-### Video Generation Models
-- VEO3: High‑quality video generation
-- Sora2: Professional video generation
-- Wan2.5-Video: Latest video generation technology
+### 動画生成モデル
+- VEO3：高品質な動画生成
+- Sora2：プロフェッショナルな動画生成
+- Wan2.5-Video：最新の動画生成技術
 
-## Step 3: Send a Request
+## ステップ3：リクエストを送信する
 
-### Image generation example
+### 画像生成の例
 
 ```bash
 curl -X POST https://apimart.ai/v1/images/generations \
@@ -46,7 +46,7 @@ curl -X POST https://apimart.ai/v1/images/generations \
   }'
 ```
 
-### Video generation example
+### 動画生成の例
 
 ```bash
 curl -X POST https://apimart.ai/v1/videos/generations \
@@ -60,22 +60,22 @@ curl -X POST https://apimart.ai/v1/videos/generations \
   }'
 ```
 
-## Step 4: Check Task Status
+## ステップ4：タスクのステータスを確認する
 
-Because we use asynchronous processing, you need to query task status to obtain results.
+非同期処理を使用しているため、タスクのステータスを照会して結果を取得する必要があります。
 
 ```bash
 curl -X GET https://apimart.ai/v1/tasks/YOUR_TASK_ID \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-## What’s Next
+## 次のステップ
 
-<Card title="View API docs" icon="book" href="/en/api-reference/introduction">
-  Learn more about all available API endpoints.
+<Card title="APIドキュメントを見る" icon="book" href="/ja/api-reference/introduction">
+  利用可能なすべてのAPIエンドポイントについて詳しく学ぶ。
   </Card>
 
-<Card title="Development Guide" icon="code" href="/en/development">
-  Learn how to integrate the API into your application.
+<Card title="開発ガイド" icon="code" href="/ja/development">
+  アプリケーションにAPIを統合する方法を学ぶ。
 </Card>
 
