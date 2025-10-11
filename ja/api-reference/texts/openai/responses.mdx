@@ -707,13 +707,13 @@ cat(content(response, "text"))
 ## Authorizations
 
 <ParamField header="Authorization" type="string" required>
-  ##All APIs require Bearer Token authentication##
+  ##すべてのAPIはBearer Token認証が必要です##
 
-  Get API Key:
+  APIキーの取得:
 
-  Visit [API Key Management](https://apimart.ai/dashboard/keys) to get your API Key
+  [APIキー管理](https://apimart.ai/dashboard/keys)にアクセスしてAPIキーを取得してください
 
-  Add to request header:
+  リクエストヘッダーに追加:
 
   ```
   Authorization: Bearer YOUR_API_KEY
@@ -723,141 +723,141 @@ cat(content(response, "text"))
 ## Body
 
 <ParamField body="model" type="string" required>
-  Model name
+  モデル名
 
-  Supported models include:
-  - `gpt-5` - OpenAI latest multimodal model
-  - `gpt-4o` - GPT-4 optimized multimodal model
-  - `gpt-4-vision` - GPT-4 vision understanding model
-  - More models coming soon...
+  サポートされるモデル:
+  - `gpt-5` - OpenAI最新マルチモーダルモデル
+  - `gpt-4o` - GPT-4最適化マルチモーダルモデル
+  - `gpt-4-vision` - GPT-4ビジョン理解モデル
+  - さらに多くのモデルが近日公開予定...
 </ParamField>
 
 <ParamField body="input" type="array" required>
-  Input content list
+  入力コンテンツリスト
 
-  Each input item contains:
-  - `role`: Role type (`user`, `assistant`, `system`)
-  - `content`: Content array, supports multiple types:
-    - `input_text`: Text input
-    - `input_image`: Image input
+  各入力項目には以下が含まれます:
+  - `role`: ロールタイプ (`user`, `assistant`, `system`)
+  - `content`: コンテンツ配列、複数のタイプをサポート:
+    - `input_text`: テキスト入力
+    - `input_image`: 画像入力
 </ParamField>
 
 <ParamField body="temperature" type="number">
-  Controls output randomness, range 0-2
+  出力のランダム性を制御、範囲は0-2
 
-  - Lower values (e.g. 0.2) make output more deterministic
-  - Higher values (e.g. 1.8) make output more random
-  
-  Default: 1.0
+  - 低い値 (例: 0.2) は出力をより決定的にします
+  - 高い値 (例: 1.8) は出力をよりランダムにします
+
+  デフォルト: 1.0
 </ParamField>
 
 <ParamField body="max_tokens" type="integer">
-  Maximum number of tokens to generate
+  生成する最大トークン数
 
-  Different models have different maximum limits, please refer to specific model documentation
+  モデルによって最大制限が異なりますので、特定のモデルのドキュメントを参照してください
 </ParamField>
 
 <ParamField body="stream" type="boolean">
-  Whether to use streaming output
+  ストリーミング出力を使用するかどうか
 
-  - `true`: Stream response (SSE format)
-  - `false`: Return complete response at once
-  
-  Default: false
+  - `true`: ストリームレスポンス (SSE形式)
+  - `false`: 完全なレスポンスを一度に返す
+
+  デフォルト: false
 </ParamField>
 
 <ParamField body="top_p" type="number">
-  Nucleus sampling parameter, range 0-1
+  Nucleusサンプリングパラメータ、範囲は0-1
 
-  Controls diversity of generated text, recommended to use with temperature alternatively
-  
-  Default: 1.0
+  生成されるテキストの多様性を制御します。temperatureと交互に使用することをお勧めします
+
+  デフォルト: 1.0
 </ParamField>
 
 <ParamField body="tools" type="array">
-  Tools list for extending model capabilities
+  モデル機能を拡張するためのツールリスト
 
-  Supported tool types:
-  - **Web Search** (`web_search`): Real-time internet information search
-  - **File Search** (`file_search`): Search uploaded file content
-  - **Function Calling** (`function`): Call custom functions
-  - **Remote MCP** (`remote_mcp`): Connect to remote Model Context Protocol services
+  サポートされるツールタイプ:
+  - **Web検索** (`web_search`): リアルタイムインターネット情報検索
+  - **ファイル検索** (`file_search`): アップロードされたファイルコンテンツの検索
+  - **関数呼び出し** (`function`): カスタム関数の呼び出し
+  - **リモートMCP** (`remote_mcp`): リモートModel Context Protocolサービスへの接続
 
-  Example: `[{"type": "web_search"}]`
+  例: `[{"type": "web_search"}]`
 </ParamField>
 
 ## Response
 
 <ResponseField name="id" type="string">
-  Unique identifier for the response
+  レスポンスの一意の識別子
 </ResponseField>
 
 <ResponseField name="object" type="string">
-  Object type, fixed as `response`
+  オブジェクトタイプ、`response`に固定
 </ResponseField>
 
 <ResponseField name="created" type="integer">
-  Creation timestamp
+  作成タイムスタンプ
 </ResponseField>
 
 <ResponseField name="model" type="string">
-  Actual model name used
+  使用された実際のモデル名
 </ResponseField>
 
 <ResponseField name="choices" type="array">
-  List of generated replies
+  生成されたレスポンスリスト
 
   <Expandable title="Properties">
     <ResponseField name="index" type="integer">
-      Choice index
+      選択肢のインデックス
     </ResponseField>
 
     <ResponseField name="message" type="object">
-      Message content
-      
+      メッセージ内容
+
       <Expandable title="Properties">
         <ResponseField name="role" type="string">
-          Role type (assistant)
+          ロールタイプ (assistant)
         </ResponseField>
-        
+
         <ResponseField name="content" type="string">
-          Generated text content
+          生成されたテキストコンテンツ
         </ResponseField>
       </Expandable>
     </ResponseField>
 
     <ResponseField name="finish_reason" type="string">
-      Finish reason
-      
-      Possible values:
-      - `stop` - Natural completion
-      - `length` - Max length reached
-      - `content_filter` - Content filtering
+      終了理由
+
+      可能な値:
+      - `stop` - 自然な完了
+      - `length` - 最大長に到達
+      - `content_filter` - コンテンツフィルタリング
     </ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="usage" type="object">
-  Token usage statistics
+  トークン使用統計
 
   <Expandable title="Properties">
     <ResponseField name="prompt_tokens" type="integer">
-      Number of tokens in input
+      入力のトークン数
     </ResponseField>
 
     <ResponseField name="completion_tokens" type="integer">
-      Number of tokens in output
+      出力のトークン数
     </ResponseField>
 
     <ResponseField name="total_tokens" type="integer">
-      Total number of tokens
+      総トークン数
     </ResponseField>
   </Expandable>
 </ResponseField>
 
-## Usage Examples
+## 使用例
 
-### Text-Only Input
+### テキストのみの入力
 ```json
 {
   "model": "gpt-5",
@@ -867,7 +867,7 @@ cat(content(response, "text"))
       "content": [
         {
           "type": "input_text",
-          "text": "Hello, introduce artificial intelligence"
+          "text": "こんにちは、人工知能について紹介してください"
         }
       ]
     }
@@ -875,27 +875,27 @@ cat(content(response, "text"))
 }
 ```
 
-### Using Web Search Tool
+### Web検索ツールの使用
 ```json
 {
   "model": "gpt-5",
   "tools": [{"type": "web_search"}],
-  "input": "What positive news is there today?"
+  "input": "今日はどんなポジティブなニュースがありますか？"
 }
 ```
 
-```bash cURL Example
+```bash cURL例
 curl "https://apimart.ai/v1/responses" \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $OPENAI_API_KEY" \
     -d '{
         "model": "gpt-5",
         "tools": [{"type": "web_search"}],
-        "input": "What positive news is there today?"
+        "input": "今日はどんなポジティブなニュースがありますか？"
     }'
 ```
 
-### Image Understanding
+### 画像理解
 ```json
 {
   "model": "gpt-5",
@@ -905,7 +905,7 @@ curl "https://apimart.ai/v1/responses" \
       "content": [
         {
           "type": "input_text",
-          "text": "Describe this image"
+          "text": "この画像を説明してください"
         },
         {
           "type": "input_image",
@@ -917,7 +917,7 @@ curl "https://apimart.ai/v1/responses" \
 }
 ```
 
-### Multi-Image Analysis
+### 複数画像分析
 ```json
 {
   "model": "gpt-5",
@@ -927,7 +927,7 @@ curl "https://apimart.ai/v1/responses" \
       "content": [
         {
           "type": "input_text",
-          "text": "Compare the similarities and differences of these two images"
+          "text": "これら2つの画像の類似点と相違点を比較してください"
         },
         {
           "type": "input_image",
@@ -943,7 +943,7 @@ curl "https://apimart.ai/v1/responses" \
 }
 ```
 
-### Base64 Encoded Image
+### Base64エンコード画像
 ```json
 {
   "model": "gpt-5",
@@ -953,7 +953,7 @@ curl "https://apimart.ai/v1/responses" \
       "content": [
         {
           "type": "input_text",
-          "text": "Analyze this image"
+          "text": "この画像を分析してください"
         },
         {
           "type": "input_image",
@@ -965,16 +965,16 @@ curl "https://apimart.ai/v1/responses" \
 }
 ```
 
-### Using File Search Tool
+### ファイル検索ツールの使用
 ```json
 {
   "model": "gpt-5",
   "tools": [{"type": "file_search"}],
-  "input": "Based on uploaded documents, summarize the company's quarterly performance"
+  "input": "アップロードされたドキュメントに基づいて、会社の四半期業績を要約してください"
 }
 ```
 
-### Using Function Calling
+### 関数呼び出しの使用
 ```json
 {
   "model": "gpt-5",
@@ -983,18 +983,18 @@ curl "https://apimart.ai/v1/responses" \
       "type": "function",
       "function": {
         "name": "get_weather",
-        "description": "Get weather information for a specified city",
+        "description": "指定された都市の天気情報を取得",
         "parameters": {
           "type": "object",
           "properties": {
             "city": {
               "type": "string",
-              "description": "City name, e.g.: Beijing"
+              "description": "都市名、例: 東京"
             },
             "unit": {
               "type": "string",
               "enum": ["celsius", "fahrenheit"],
-              "description": "Temperature unit"
+              "description": "温度単位"
             }
           },
           "required": ["city"]
@@ -1002,11 +1002,11 @@ curl "https://apimart.ai/v1/responses" \
       }
     }
   ],
-  "input": "What's the weather like in Beijing today?"
+  "input": "今日の東京の天気はどうですか？"
 }
 ```
 
-### Using Remote MCP
+### リモートMCPの使用
 ```json
 {
   "model": "gpt-5",
@@ -1019,11 +1019,11 @@ curl "https://apimart.ai/v1/responses" \
       }
     }
   ],
-  "input": "Query user information in the database"
+  "input": "データベースのユーザー情報を照会してください"
 }
 ```
 
-### Combining Multiple Tools
+### 複数ツールの組み合わせ
 ```json
 {
   "model": "gpt-5",
@@ -1034,13 +1034,13 @@ curl "https://apimart.ai/v1/responses" \
       "type": "function",
       "function": {
         "name": "calculate",
-        "description": "Perform mathematical calculations",
+        "description": "数学計算を実行",
         "parameters": {
           "type": "object",
           "properties": {
             "expression": {
               "type": "string",
-              "description": "Mathematical expression"
+              "description": "数式"
             }
           },
           "required": ["expression"]
@@ -1048,77 +1048,77 @@ curl "https://apimart.ai/v1/responses" \
       }
     }
   ],
-  "input": "Search for the latest Bitcoin price and calculate the total value of 100 Bitcoins"
+  "input": "最新のビットコイン価格を検索し、ビットコイン100個の総価値を計算してください"
 }
 ```
 
-## Content Type Specifications
+## コンテンツタイプ仕様
 
 ### input_text
-Text input type
+テキスト入力タイプ
 
-**Properties:**
-- `type`: Fixed as `"input_text"`
-- `text`: Text content (string)
+**プロパティ:**
+- `type`: `"input_text"`に固定
+- `text`: テキストコンテンツ (文字列)
 
 ### input_image
-Image input type
+画像入力タイプ
 
-**Properties:**
-- `type`: Fixed as `"input_image"`
-- `image_url`: Image URL or Base64 encoded data URI
+**プロパティ:**
+- `type`: `"input_image"`に固定
+- `image_url`: 画像URLまたはBase64エンコードされたデータURI
 
-**Supported image formats:**
+**サポートされる画像形式:**
 - JPEG
 - PNG
 - GIF
 - WebP
 
-**Image size limits:**
-- Maximum file size: 20MB
-- Recommended resolution: No more than 2048x2048 pixels
+**画像サイズ制限:**
+- 最大ファイルサイズ: 20MB
+- 推奨解像度: 2048x2048ピクセル以下
 
-## Tool Usage Details
+## ツール使用の詳細
 
-### Web Search
+### Web検索
 
-The web search tool allows the model to access real-time internet information.
+Web検索ツールを使用すると、モデルがリアルタイムのインターネット情報にアクセスできます。
 
-**Configuration example:**
+**設定例:**
 ```json
 {
   "tools": [{"type": "web_search"}]
 }
 ```
 
-**Use cases:**
-- Query latest news and current events
-- Get real-time data (stocks, weather, exchange rates, etc.)
-- Search for latest technical documentation
-- Verify factual information
+**使用例:**
+- 最新ニュースと時事問題の照会
+- リアルタイムデータの取得 (株価、天気、為替レートなど)
+- 最新の技術文書の検索
+- 事実情報の確認
 
-### File Search
+### ファイル検索
 
-The file search tool allows the model to search for relevant information in uploaded documents.
+ファイル検索ツールを使用すると、モデルがアップロードされたドキュメント内の関連情報を検索できます。
 
-**Configuration example:**
+**設定例:**
 ```json
 {
   "tools": [{"type": "file_search"}]
 }
 ```
 
-**Use cases:**
-- Analyze internal corporate documents
-- Search technical specifications and manuals
-- Query contracts and legal documents
-- Knowledge base Q&A systems
+**使用例:**
+- 社内文書の分析
+- 技術仕様とマニュアルの検索
+- 契約書と法的文書の照会
+- ナレッジベースQ&Aシステム
 
-### Function Calling
+### 関数呼び出し
 
-Define custom functions to enable the model to call external APIs or perform specific operations.
+カスタム関数を定義して、モデルが外部APIを呼び出したり特定の操作を実行したりできるようにします。
 
-**Complete configuration example:**
+**完全な設定例:**
 ```json
 {
   "tools": [
@@ -1126,18 +1126,18 @@ Define custom functions to enable the model to call external APIs or perform spe
       "type": "function",
       "function": {
         "name": "get_stock_price",
-        "description": "Get real-time stock price",
+        "description": "リアルタイム株価を取得",
         "parameters": {
           "type": "object",
           "properties": {
             "symbol": {
               "type": "string",
-              "description": "Stock symbol, e.g.: AAPL"
+              "description": "株式銘柄コード、例: AAPL"
             },
             "currency": {
               "type": "string",
               "enum": ["USD", "CNY"],
-              "description": "Currency unit",
+              "description": "通貨単位",
               "default": "USD"
             }
           },
@@ -1149,25 +1149,25 @@ Define custom functions to enable the model to call external APIs or perform spe
 }
 ```
 
-**Parameter descriptions:**
-- `name`: Function name (required)
-- `description`: Function description (required)
-- `parameters`: Parameter definition using JSON Schema format
-  - `type`: Parameter type
-  - `properties`: Parameter property definitions
-  - `required`: List of required parameters
+**パラメータの説明:**
+- `name`: 関数名 (必須)
+- `description`: 関数の説明 (必須)
+- `parameters`: JSON Schema形式を使用したパラメータ定義
+  - `type`: パラメータタイプ
+  - `properties`: パラメータプロパティ定義
+  - `required`: 必須パラメータリスト
 
-**Use cases:**
-- Call third-party APIs
-- Execute database queries
-- Trigger business processes
-- Integrate with internal systems
+**使用例:**
+- サードパーティAPIの呼び出し
+- データベースクエリの実行
+- ビジネスプロセスのトリガー
+- 内部システムとの統合
 
-### Remote MCP
+### リモートMCP
 
-Connect to remote Model Context Protocol (MCP) services to extend model capabilities.
+リモートModel Context Protocol (MCP) サービスに接続してモデル機能を拡張します。
 
-**Configuration example:**
+**設定例:**
 ```json
 {
   "tools": [
@@ -1183,20 +1183,20 @@ Connect to remote Model Context Protocol (MCP) services to extend model capabili
 }
 ```
 
-**Parameter descriptions:**
-- `url`: MCP server address (required)
-- `auth_token`: Authentication token (optional)
-- `timeout`: Timeout in seconds, default 30 seconds
+**パラメータの説明:**
+- `url`: MCPサーバーアドレス (必須)
+- `auth_token`: 認証トークン (オプション)
+- `timeout`: タイムアウト(秒)、デフォルトは30秒
 
-**Use cases:**
-- Connect to enterprise-level AI services
-- Use domain-specific models
-- Access protected data sources
-- Distributed AI system integration
+**使用例:**
+- エンタープライズレベルのAIサービスへの接続
+- ドメイン固有モデルの使用
+- 保護されたデータソースへのアクセス
+- 分散AIシステム統合
 
-## Tool Response Format
+## ツールレスポンス形式
 
-When the model uses tools, the response format will include tool call information:
+モデルがツールを使用すると、レスポンス形式にツール呼び出し情報が含まれます:
 
 ```json
 {
@@ -1216,7 +1216,7 @@ When the model uses tools, the response format will include tool call informatio
             "type": "function",
             "function": {
               "name": "get_weather",
-              "arguments": "{\"city\": \"Beijing\"}"
+              "arguments": "{\"city\": \"東京\"}"
             }
           }
         ]
@@ -1227,40 +1227,40 @@ When the model uses tools, the response format will include tool call informatio
 }
 ```
 
-**Tool call workflow:**
-1. Model receives user input
-2. Analyzes whether tools are needed
-3. If needed, returns tool call request
-4. Client executes tool call
-5. Returns tool results to model
-6. Model generates final response
+**ツール呼び出しワークフロー:**
+1. モデルがユーザー入力を受信
+2. ツールが必要かどうかを分析
+3. 必要な場合、ツール呼び出しリクエストを返す
+4. クライアントがツール呼び出しを実行
+5. ツール結果をモデルに返す
+6. モデルが最終レスポンスを生成
 
-## Important Notes
+## 重要な注意事項
 
-1. **Image URL requirements**:
-   - Must be a publicly accessible URL
-   - Or use Base64 encoded Data URI format
+1. **画像URL要件**:
+   - 公開的にアクセス可能なURLである必要があります
+   - またはBase64エンコードされたData URI形式を使用
 
-2. **Token billing**:
-   - Images consume tokens based on their resolution
-   - High-resolution images are automatically resized to optimize costs
-   - Tool calls also consume additional tokens
+2. **トークン課金**:
+   - 画像は解像度に応じてトークンを消費します
+   - 高解像度画像はコスト最適化のために自動的にサイズ調整されます
+   - ツール呼び出しも追加トークンを消費します
 
-3. **Content order**:
-   - Order of elements in content array affects model understanding
-   - Recommended to place text instructions first, then images
+3. **コンテンツの順序**:
+   - コンテンツ配列内の要素の順序がモデルの理解に影響します
+   - テキスト指示を最初に、次に画像を配置することをお勧めします
 
-4. **Multimodal combinations**:
-   - Can mix multiple texts and images in one request
-   - Supports multi-turn conversations with context coherence
+4. **マルチモーダルの組み合わせ**:
+   - 1つのリクエストで複数のテキストと画像を混在させることができます
+   - コンテキストの一貫性を保つマルチターン会話をサポートします
 
-5. **Tool usage limitations**:
-   - When using multiple tools simultaneously, the model intelligently selects the most appropriate tool
-   - Function calling requires clear function definitions and parameter descriptions
-   - Web search results may be limited by region and time
+5. **ツール使用の制限**:
+   - 複数のツールを同時に使用する場合、モデルが最も適切なツールをインテリジェントに選択します
+   - 関数呼び出しには明確な関数定義とパラメータの説明が必要です
+   - Web検索結果は地域と時間によって制限される場合があります
 
-6. **API compatibility**:
-   - Fully compatible with OpenAI Responses API format
-   - Seamlessly migrate existing OpenAI code
-   - Supports all OpenAI tool extension features
+6. **API互換性**:
+   - OpenAI Responses API形式と完全に互換性があります
+   - 既存のOpenAIコードをシームレスに移行できます
+   - すべてのOpenAIツール拡張機能をサポートします
 

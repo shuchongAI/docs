@@ -1,20 +1,20 @@
 ---
 title: "Wan2.5-Video"
-description: "Use the Wan2.5-Video model for video generation"
+description: "Wan2.5-Videoモデルを動画生成に使用する"
 icon: "video"
 ---
 
-# Wan2.5-Video Generation
+# Wan2.5-Video 生成
 
-Use the Wan2.5-Video model for high‑quality video generation.
+高品質な動画生成にWan2.5-Videoモデルを使用します。
 
-## Highlights
+## ハイライト
 
-- Asynchronous processing: returns a task ID for subsequent queries
-- Multiple modes: text-to-video, image-to-video
-- Expiring links: generated video links are valid for 24 hours
+- 非同期処理: 後続のクエリのためのタスクIDを返します
+- 複数モード: テキストから動画、画像から動画
+- 有効期限付きリンク: 生成された動画リンクは24時間有効です
 
-## Request example
+## リクエスト例
 
 <RequestExample>
 
@@ -24,7 +24,7 @@ curl -X POST https://apimart.ai/v1/videos/generations \
   -H "Content-Type: application/json" \
   -d '{
     "model": "wan2.5-video",
-    "prompt": "City traffic at night",
+    "prompt": "夜の都市交通",
     "duration": 12,
     "resolution": "1920x1080"
   }'
@@ -32,21 +32,21 @@ curl -X POST https://apimart.ai/v1/videos/generations \
 
 </RequestExample>
 
-## Parameters
+## パラメータ
 
 <ParamField query="model" type="string" required>
-  Model name. Use "wan2.5-video".
+  モデル名。"wan2.5-video"を使用します。
 </ParamField>
 
 <ParamField query="prompt" type="string" required>
-  Text description for video generation.
+  動画生成のためのテキスト説明。
 </ParamField>
 
 <ParamField query="duration" type="integer">
-  Video duration (seconds). Default: 12.
+  動画の長さ（秒）。デフォルト: 12。
 </ParamField>
 
 <ParamField query="resolution" type="string">
-  Video resolution. Supported: "1920x1080", "1280x720".
+  動画の解像度。対応: "1920x1080"、"1280x720"。
 </ParamField>
 

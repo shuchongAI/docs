@@ -1,11 +1,11 @@
 ---
-title: "Wan2.5 Video Generation"
+title: "Wan2.5 비디오 생성"
 description: "
-- Asynchronous processing mode, returns task ID for subsequent queries
+- 비동기 처리 모드로 후속 쿼리를 위한 작업 ID를 반환합니다
 
-- Supports multiple generation modes including text-to-video and image-to-video
+- 텍스트에서 비디오, 이미지에서 비디오 등 다양한 생성 모드를 지원합니다
 
-- Generated video links are valid for 24 hours, please save them promptly
+- 생성된 비디오 링크는 24시간 동안 유효하니 신속하게 저장하세요
 "
 api: "POST https://apimart.ai/v1/videos/generations"
 
@@ -24,7 +24,7 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "model": "wan2.5-video",
-    "prompt": "City traffic at night",
+    "prompt": "밤의 도시 교통",
     "duration": 12,
     "resolution": "1920x1080",
     "image_url": "https://example.com/image.png"
@@ -38,7 +38,7 @@ url = "https://apimart.ai/v1/videos/generations"
 
 payload = {
     "model": "wan2.5-video",
-    "prompt": "City traffic at night",
+    "prompt": "밤의 도시 교통",
     "duration": 12,
     "resolution": "1920x1080",
     "image_url": "https://example.com/image.png"
@@ -59,7 +59,7 @@ const url = "https://apimart.ai/v1/videos/generations";
 
 const payload = {
   model: "wan2.5-video",
-  prompt: "City traffic at night",
+  prompt: "밤의 도시 교통",
   duration: 12,
   resolution: "1920x1080",
   image_url: "https://example.com/image.png"
@@ -96,7 +96,7 @@ func main() {
 
     payload := map[string]interface{}{
         "model":      "wan2.5-video",
-        "prompt":     "City traffic at night",
+        "prompt":     "밤의 도시 교통",
         "duration":   12,
         "resolution": "1920x1080",
         "image_url":  "https://example.com/image.png",
@@ -133,7 +133,7 @@ public class Main {
         String payload = """
         {
           "model": "wan2.5-video",
-          "prompt": "City traffic at night",
+          "prompt": "밤의 도시 교통",
           "duration": 12,
           "resolution": "1920x1080",
           "image_url": "https://example.com/image.png"
@@ -163,7 +163,7 @@ $url = "https://apimart.ai/v1/videos/generations";
 
 $payload = [
     "model" => "wan2.5-video",
-    "prompt" => "City traffic at night",
+    "prompt" => "밤의 도시 교통",
     "duration" => 12,
     "resolution" => "1920x1080",
     "image_url" => "https://example.com/image.png"
@@ -194,7 +194,7 @@ url = URI("https://apimart.ai/v1/videos/generations")
 
 payload = {
   model: "wan2.5-video",
-  prompt: "City traffic at night",
+  prompt: "밤의 도시 교통",
   duration: 12,
   resolution: "1920x1080",
   image_url: "https://example.com/image.png"
@@ -219,7 +219,7 @@ let url = URL(string: "https://apimart.ai/v1/videos/generations")!
 
 let payload: [String: Any] = [
     "model": "wan2.5-video",
-    "prompt": "City traffic at night",
+    "prompt": "밤의 도시 교통",
     "duration": 12,
     "resolution": "1920x1080",
     "image_url": "https://example.com/image.png"
@@ -259,7 +259,7 @@ class Program
 
         var payload = @"{
             ""model"": ""wan2.5-video"",
-            ""prompt"": ""City traffic at night"",
+            ""prompt"": ""밤의 도시 교통"",
             ""duration"": 12,
             ""resolution"": ""1920x1080"",
             ""image_url"": ""https://example.com/image.png""
@@ -292,7 +292,7 @@ int main(void) {
         const char *url = "https://apimart.ai/v1/videos/generations";
         const char *payload = "{"
             "\"model\":\"wan2.5-video\","
-            "\"prompt\":\"City traffic at night\","
+            "\"prompt\":\"밤의 도시 교통\","
             "\"duration\":12,"
             "\"resolution\":\"1920x1080\","
             "\"image_url\":\"https://example.com/image.png\""
@@ -331,7 +331,7 @@ int main(int argc, const char * argv[]) {
         
         NSDictionary *payload = @{
             @"model": @"wan2.5-video",
-            @"prompt": @"City traffic at night",
+            @"prompt": @"밤의 도시 교통",
             @"duration": @12,
             @"resolution": @"1920x1080",
             @"image_url": @"https://example.com/image.png"
@@ -377,7 +377,7 @@ let url = "https://apimart.ai/v1/videos/generations"
 
 let payload = {|{
   "model": "wan2.5-video",
-  "prompt": "City traffic at night",
+  "prompt": "밤의 도시 교통",
   "duration": 12,
   "resolution": "1920x1080",
   "image_url": "https://example.com/image.png"
@@ -406,7 +406,7 @@ void main() async {
   
   final payload = {
     'model': 'wan2.5-video',
-    'prompt': 'City traffic at night',
+    'prompt': '밤의 도시 교통',
     'duration': 12,
     'resolution': '1920x1080',
     'image_url': 'https://example.com/image.png'
@@ -433,7 +433,7 @@ url <- "https://apimart.ai/v1/videos/generations"
 
 payload <- list(
   model = "wan2.5-video",
-  prompt = "City traffic at night",
+  prompt = "밤의 도시 교통",
   duration = 12,
   resolution = "1920x1080",
   image_url = "https://example.com/image.png"
@@ -476,7 +476,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 400,
-    "message": "Invalid request parameters",
+    "message": "잘못된 요청 매개변수입니다",
     "type": "invalid_request_error"
   }
 }
@@ -486,7 +486,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 401,
-    "message": "Invalid authentication credentials",
+    "message": "인증 정보가 유효하지 않습니다",
     "type": "authentication_error"
   }
 }
@@ -496,7 +496,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 402,
-    "message": "Insufficient balance. Please top up your account",
+    "message": "잔액이 부족합니다. 계정에 충전해주세요",
     "type": "payment_required"
   }
 }
@@ -506,7 +506,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 403,
-    "message": "Access forbidden. You don't have permission to access this resource",
+    "message": "접근이 금지되었습니다. 이 리소스에 대한 권한이 없습니다",
     "type": "permission_error"
   }
 }
@@ -516,7 +516,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 429,
-    "message": "Rate limit exceeded. Please try again later",
+    "message": "요청 한도를 초과했습니다. 나중에 다시 시도해주세요",
     "type": "rate_limit_error"
   }
 }
@@ -526,7 +526,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 500,
-    "message": "Internal server error. Please try again later",
+    "message": "내부 서버 오류가 발생했습니다. 나중에 다시 시도해주세요",
     "type": "server_error"
   }
 }
@@ -536,7 +536,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 502,
-    "message": "Bad gateway. The server is temporarily unavailable",
+    "message": "불량 게이트웨이입니다. 서버가 일시적으로 사용할 수 없습니다",
     "type": "bad_gateway"
   }
 }
@@ -547,13 +547,13 @@ cat(content(response, "text"))
 ## Authorizations
 
 <ParamField header="Authorization" type="string" required>
-  All API endpoints require Bearer Token authentication
+  모든 API 엔드포인트에는 Bearer Token 인증이 필요합니다
 
-  Get your API Key:
+  API 키 받기:
 
-  Visit the [API Key Management Page](https://evolink.ai/dashboard/keys) to get your API Key
+  [API 키 관리 페이지](https://evolink.ai/dashboard/keys)를 방문하여 API 키를 받으세요
 
-  Add it to the request header:
+  요청 헤더에 추가:
 
   ```
   Authorization: Bearer YOUR_API_KEY
@@ -563,93 +563,93 @@ cat(content(response, "text"))
 ## Body
 
 <ParamField body="model" type="string" required>
-  Model name, must be `wan2.5-video`
+  모델 이름은 `wan2.5-video`이어야 합니다
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
-  Text description for video generation
+  비디오 생성을 위한 텍스트 설명
 
-  Maximum 1000 characters
+  최대 1000자
 </ParamField>
 
 <ParamField body="duration" type="integer">
-  Video duration in seconds
+  비디오 길이 (초)
 
-  Range: 5-30 seconds
+  범위: 5-30초
 </ParamField>
 
 <ParamField body="resolution" type="string">
-  Video resolution
+  비디오 해상도
 
-  Supported formats:
+  지원되는 형식:
   - `1920x1080` (Full HD)
   - `1280x720` (HD)
 </ParamField>
 
 <ParamField body="image_url" type="string">
-  Reference image URL for image-to-video generation
+  이미지에서 비디오로의 생성을 위한 참조 이미지 URL
 
-  - Must be a valid image URL
-  - Supported formats: .jpeg, .jpg, .png, .webp
-  - Maximum file size: 10MB
+  - 유효한 이미지 URL이어야 합니다
+  - 지원되는 형식: .jpeg, .jpg, .png, .webp
+  - 최대 파일 크기: 10MB
 </ParamField>
 
 ## Response
 
 <ResponseField name="created" type="integer">
-  Task creation timestamp
+  작업 생성 타임스탬프
 </ResponseField>
 
 <ResponseField name="id" type="string">
-  Unique task identifier
+  고유한 작업 식별자
 </ResponseField>
 
 <ResponseField name="model" type="string">
-  The actual model name used
+  실제로 사용된 모델 이름
 </ResponseField>
 
 <ResponseField name="object" type="string">
-  Object type, fixed as `video.generation.task`
+  객체 유형, `video.generation.task`로 고정
 </ResponseField>
 
 <ResponseField name="progress" type="integer">
-  Task completion progress percentage (0-100)
+  작업 완료 진행률 (0-100)
 </ResponseField>
 
 <ResponseField name="status" type="string">
-  Task status
+  작업 상태
 
-  Possible values:
-  - `pending` - Waiting for processing
-  - `processing` - In progress
-  - `completed` - Completed
-  - `failed` - Failed
+  가능한 값:
+  - `pending` - 처리 대기 중
+  - `processing` - 진행 중
+  - `completed` - 완료됨
+  - `failed` - 실패
 </ResponseField>
 
 <ResponseField name="task_info" type="object">
-  Task details
+  작업 세부 정보
 
   <Expandable title="Properties">
     <ResponseField name="can_cancel" type="boolean">
-      Whether the task can be cancelled
+      작업을 취소할 수 있는지 여부
     </ResponseField>
 
     <ResponseField name="estimated_time" type="integer">
-      Estimated completion time (seconds)
+      예상 완료 시간 (초)
     </ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="type" type="string">
-  Output type, fixed as `video`
+  출력 유형, `video`로 고정
 </ResponseField>
 
 <ResponseField name="usage" type="object">
-  Billing information
+  청구 정보
 
   <Expandable title="Properties">
     <ResponseField name="total_tokens" type="integer">
-      Total tokens consumed
+      소비된 총 토큰 수
     </ResponseField>
   </Expandable>
 </ResponseField>

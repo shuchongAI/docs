@@ -1,11 +1,11 @@
 ---
-title: "OpenAI Multimodal Responses API"
+title: "OpenAI 멀티모달 Responses API"
 description: "
-- Fully compatible with OpenAI Responses API format
+- OpenAI Responses API 형식과 완전 호환
 
-- Supports multimodal input with text and images
+- 텍스트 및 이미지를 사용한 멀티모달 입력 지원
 
-- Supports tool extensions: web search, file search, function calling, remote MCP
+- 도구 확장 지원: 웹 검색, 파일 검색, 함수 호출, 원격 MCP
 "
 api: "POST https://apimart.ai/v1/responses"
 ---
@@ -24,7 +24,7 @@ curl https://apimart.ai/v1/responses \
         "content": [
           {
             "type": "input_text",
-            "text": "What is in this image?"
+            "text": "이 이미지에는 무엇이 있습니까?"
           },
           {
             "type": "input_image",
@@ -50,7 +50,7 @@ payload = {
             "content": [
                 {
                     "type": "input_text",
-                    "text": "What is in this image?"
+                    "text": "이 이미지에는 무엇이 있습니까?"
                 },
                 {
                     "type": "input_image",
@@ -82,7 +82,7 @@ const payload = {
       content: [
         {
           type: "input_text",
-          text: "What is in this image?"
+          text: "이 이미지에는 무엇이 있습니까?"
         },
         {
           type: "input_image",
@@ -131,7 +131,7 @@ func main() {
                 "content": []map[string]string{
                     {
                         "type": "input_text",
-                        "text": "What is in this image?",
+                        "text": "이 이미지에는 무엇이 있습니까?",
                     },
                     {
                         "type":      "input_image",
@@ -180,7 +180,7 @@ public class Main {
               "content": [
                 {
                   "type": "input_text",
-                  "text": "What is in this image?"
+                  "text": "이 이미지에는 무엇이 있습니까?"
                 },
                 {
                   "type": "input_image",
@@ -222,7 +222,7 @@ $payload = [
             "content" => [
                 [
                     "type" => "input_text",
-                    "text" => "What is in this image?"
+                    "text" => "이 이미지에는 무엇이 있습니까?"
                 ],
                 [
                     "type" => "input_image",
@@ -265,7 +265,7 @@ payload = {
       content: [
         {
           type: "input_text",
-          text: "What is in this image?"
+          text: "이 이미지에는 무엇이 있습니까?"
         },
         {
           type: "input_image",
@@ -302,7 +302,7 @@ let payload: [String: Any] = [
             "content": [
                 [
                     "type": "input_text",
-                    "text": "What is in this image?"
+                    "text": "이 이미지에는 무엇이 있습니까?"
                 ],
                 [
                     "type": "input_image",
@@ -354,7 +354,7 @@ class Program
                     ""content"": [
                         {
                             ""type"": ""input_text"",
-                            ""text"": ""What is in this image?""
+                            ""text"": ""이 이미지에는 무엇이 있습니까?""
                         },
                         {
                             ""type"": ""input_image"",
@@ -394,7 +394,7 @@ int main(void) {
         const char *url = "https://apimart.ai/v1/responses";
         const char *payload = "{"
             "\"model\":\"gpt-5\","
-            "\"input\":[{\"role\":\"user\",\"content\":[{\"type\":\"input_text\",\"text\":\"What is in this image?\"},{\"type\":\"input_image\",\"image_url\":\"https://openai-documentation.vercel.app/images/cat_and_otter.png\"}]}]"
+            "\"input\":[{\"role\":\"user\",\"content\":[{\"type\":\"input_text\",\"text\":\"이 이미지에는 무엇이 있습니까?\"},{\"type\":\"input_image\",\"image_url\":\"https://openai-documentation.vercel.app/images/cat_and_otter.png\"}]}]"
         "}";
 
         char auth_header[256];
@@ -440,7 +440,7 @@ int main(int argc, const char * argv[]) {
                     @"content": @[
                         @{
                             @"type": @"input_text",
-                            @"text": @"What is in this image?"
+                            @"text": @"이 이미지에는 무엇이 있습니까?"
                         },
                         @{
                             @"type": @"input_image",
@@ -499,7 +499,7 @@ let payload = {|{
       "content": [
         {
           "type": "input_text",
-          "text": "What is in this image?"
+          "text": "이 이미지에는 무엇이 있습니까?"
         },
         {
           "type": "input_image",
@@ -541,7 +541,7 @@ void main() async {
         'content': [
           {
             'type': 'input_text',
-            'text': 'What is in this image?'
+            'text': '이 이미지에는 무엇이 있습니까?'
           },
           {
             'type': 'input_image',
@@ -580,7 +580,7 @@ payload <- list(
       content = list(
         list(
           type = "input_text",
-          text = "What is in this image?"
+          text = "이 이미지에는 무엇이 있습니까?"
         ),
         list(
           type = "input_image",
@@ -619,7 +619,7 @@ cat(content(response, "text"))
       "index": 0,
       "message": {
         "role": "assistant",
-        "content": "This image shows a cat and an otter. They appear to be interacting with each other in a very cute and heartwarming scene. The cat and otter seem to be getting along well."
+        "content": "이 이미지에는 고양이와 수달이 있습니다. 매우 귀엽고 훈훈한 장면으로 서로 교감하고 있는 것처럼 보입니다. 고양이와 수달이 사이좋게 지내고 있는 것 같습니다."
       },
       "finish_reason": "stop"
     }
@@ -636,7 +636,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 400,
-    "message": "Invalid request parameters",
+    "message": "요청 매개변수가 유효하지 않습니다",
     "type": "invalid_request_error"
   }
 }
@@ -646,7 +646,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 401,
-    "message": "Authentication failed, please check your API key",
+    "message": "인증에 실패했습니다. API 키를 확인하세요",
     "type": "authentication_error"
   }
 }
@@ -656,7 +656,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 402,
-    "message": "Insufficient account balance, please top up and try again",
+    "message": "계정 잔액이 부족합니다. 충전 후 다시 시도하세요",
     "type": "payment_required"
   }
 }
@@ -666,7 +666,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 403,
-    "message": "Access forbidden, you do not have permission to access this resource",
+    "message": "접근이 금지되었습니다. 이 리소스에 접근할 권한이 없습니다",
     "type": "permission_error"
   }
 }
@@ -676,7 +676,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 429,
-    "message": "Too many requests, please try again later",
+    "message": "요청이 너무 많습니다. 나중에 다시 시도하세요",
     "type": "rate_limit_error"
   }
 }
@@ -686,7 +686,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 500,
-    "message": "Internal server error, please try again later",
+    "message": "서버 내부 오류입니다. 나중에 다시 시도하세요",
     "type": "server_error"
   }
 }
@@ -696,7 +696,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 502,
-    "message": "Gateway error, server temporarily unavailable",
+    "message": "게이트웨이 오류입니다. 서버를 일시적으로 사용할 수 없습니다",
     "type": "bad_gateway"
   }
 }
@@ -707,13 +707,13 @@ cat(content(response, "text"))
 ## Authorizations
 
 <ParamField header="Authorization" type="string" required>
-  ##All APIs require Bearer Token authentication##
+  ##모든 API는 Bearer Token 인증이 필요합니다##
 
-  Get API Key:
+  API 키 가져오기:
 
-  Visit [API Key Management](https://apimart.ai/dashboard/keys) to get your API Key
+  [API 키 관리](https://apimart.ai/dashboard/keys)를 방문하여 API 키를 받으세요
 
-  Add to request header:
+  요청 헤더에 추가:
 
   ```
   Authorization: Bearer YOUR_API_KEY
@@ -723,141 +723,141 @@ cat(content(response, "text"))
 ## Body
 
 <ParamField body="model" type="string" required>
-  Model name
+  모델 이름
 
-  Supported models include:
-  - `gpt-5` - OpenAI latest multimodal model
-  - `gpt-4o` - GPT-4 optimized multimodal model
-  - `gpt-4-vision` - GPT-4 vision understanding model
-  - More models coming soon...
+  지원되는 모델:
+  - `gpt-5` - OpenAI 최신 멀티모달 모델
+  - `gpt-4o` - GPT-4 최적화 멀티모달 모델
+  - `gpt-4-vision` - GPT-4 비전 이해 모델
+  - 더 많은 모델이 곧 출시될 예정입니다...
 </ParamField>
 
 <ParamField body="input" type="array" required>
-  Input content list
+  입력 콘텐츠 목록
 
-  Each input item contains:
-  - `role`: Role type (`user`, `assistant`, `system`)
-  - `content`: Content array, supports multiple types:
-    - `input_text`: Text input
-    - `input_image`: Image input
+  각 입력 항목에는 다음이 포함됩니다:
+  - `role`: 역할 유형 (`user`, `assistant`, `system`)
+  - `content`: 콘텐츠 배열, 여러 유형 지원:
+    - `input_text`: 텍스트 입력
+    - `input_image`: 이미지 입력
 </ParamField>
 
 <ParamField body="temperature" type="number">
-  Controls output randomness, range 0-2
+  출력 무작위성 제어, 범위 0-2
 
-  - Lower values (e.g. 0.2) make output more deterministic
-  - Higher values (e.g. 1.8) make output more random
-  
-  Default: 1.0
+  - 낮은 값 (예: 0.2)은 출력을 더 결정적으로 만듭니다
+  - 높은 값 (예: 1.8)은 출력을 더 무작위로 만듭니다
+
+  기본값: 1.0
 </ParamField>
 
 <ParamField body="max_tokens" type="integer">
-  Maximum number of tokens to generate
+  생성할 최대 토큰 수
 
-  Different models have different maximum limits, please refer to specific model documentation
+  모델마다 최대 제한이 다르므로 특정 모델 문서를 참조하세요
 </ParamField>
 
 <ParamField body="stream" type="boolean">
-  Whether to use streaming output
+  스트리밍 출력 사용 여부
 
-  - `true`: Stream response (SSE format)
-  - `false`: Return complete response at once
-  
-  Default: false
+  - `true`: 스트림 응답 (SSE 형식)
+  - `false`: 전체 응답을 한 번에 반환
+
+  기본값: false
 </ParamField>
 
 <ParamField body="top_p" type="number">
-  Nucleus sampling parameter, range 0-1
+  Nucleus 샘플링 매개변수, 범위 0-1
 
-  Controls diversity of generated text, recommended to use with temperature alternatively
-  
-  Default: 1.0
+  생성된 텍스트의 다양성을 제어하며, temperature와 번갈아 사용하는 것을 권장합니다
+
+  기본값: 1.0
 </ParamField>
 
 <ParamField body="tools" type="array">
-  Tools list for extending model capabilities
+  모델 기능을 확장하기 위한 도구 목록
 
-  Supported tool types:
-  - **Web Search** (`web_search`): Real-time internet information search
-  - **File Search** (`file_search`): Search uploaded file content
-  - **Function Calling** (`function`): Call custom functions
-  - **Remote MCP** (`remote_mcp`): Connect to remote Model Context Protocol services
+  지원되는 도구 유형:
+  - **웹 검색** (`web_search`): 실시간 인터넷 정보 검색
+  - **파일 검색** (`file_search`): 업로드된 파일 콘텐츠 검색
+  - **함수 호출** (`function`): 사용자 정의 함수 호출
+  - **원격 MCP** (`remote_mcp`): 원격 Model Context Protocol 서비스에 연결
 
-  Example: `[{"type": "web_search"}]`
+  예시: `[{"type": "web_search"}]`
 </ParamField>
 
 ## Response
 
 <ResponseField name="id" type="string">
-  Unique identifier for the response
+  응답의 고유 식별자
 </ResponseField>
 
 <ResponseField name="object" type="string">
-  Object type, fixed as `response`
+  객체 유형, `response`로 고정
 </ResponseField>
 
 <ResponseField name="created" type="integer">
-  Creation timestamp
+  생성 타임스탬프
 </ResponseField>
 
 <ResponseField name="model" type="string">
-  Actual model name used
+  사용된 실제 모델 이름
 </ResponseField>
 
 <ResponseField name="choices" type="array">
-  List of generated replies
+  생성된 응답 목록
 
   <Expandable title="Properties">
     <ResponseField name="index" type="integer">
-      Choice index
+      선택 인덱스
     </ResponseField>
 
     <ResponseField name="message" type="object">
-      Message content
-      
+      메시지 내용
+
       <Expandable title="Properties">
         <ResponseField name="role" type="string">
-          Role type (assistant)
+          역할 유형 (assistant)
         </ResponseField>
-        
+
         <ResponseField name="content" type="string">
-          Generated text content
+          생성된 텍스트 내용
         </ResponseField>
       </Expandable>
     </ResponseField>
 
     <ResponseField name="finish_reason" type="string">
-      Finish reason
-      
-      Possible values:
-      - `stop` - Natural completion
-      - `length` - Max length reached
-      - `content_filter` - Content filtering
+      종료 이유
+
+      가능한 값:
+      - `stop` - 자연스러운 완료
+      - `length` - 최대 길이 도달
+      - `content_filter` - 콘텐츠 필터링
     </ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="usage" type="object">
-  Token usage statistics
+  토큰 사용 통계
 
   <Expandable title="Properties">
     <ResponseField name="prompt_tokens" type="integer">
-      Number of tokens in input
+      입력의 토큰 수
     </ResponseField>
 
     <ResponseField name="completion_tokens" type="integer">
-      Number of tokens in output
+      출력의 토큰 수
     </ResponseField>
 
     <ResponseField name="total_tokens" type="integer">
-      Total number of tokens
+      총 토큰 수
     </ResponseField>
   </Expandable>
 </ResponseField>
 
-## Usage Examples
+## 사용 예시
 
-### Text-Only Input
+### 텍스트 전용 입력
 ```json
 {
   "model": "gpt-5",
@@ -867,7 +867,7 @@ cat(content(response, "text"))
       "content": [
         {
           "type": "input_text",
-          "text": "Hello, introduce artificial intelligence"
+          "text": "안녕하세요, 인공지능을 소개해주세요"
         }
       ]
     }
@@ -875,27 +875,27 @@ cat(content(response, "text"))
 }
 ```
 
-### Using Web Search Tool
+### 웹 검색 도구 사용
 ```json
 {
   "model": "gpt-5",
   "tools": [{"type": "web_search"}],
-  "input": "What positive news is there today?"
+  "input": "오늘 어떤 긍정적인 뉴스가 있나요?"
 }
 ```
 
-```bash cURL Example
+```bash cURL 예시
 curl "https://apimart.ai/v1/responses" \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $OPENAI_API_KEY" \
     -d '{
         "model": "gpt-5",
         "tools": [{"type": "web_search"}],
-        "input": "What positive news is there today?"
+        "input": "오늘 어떤 긍정적인 뉴스가 있나요?"
     }'
 ```
 
-### Image Understanding
+### 이미지 이해
 ```json
 {
   "model": "gpt-5",
@@ -905,7 +905,7 @@ curl "https://apimart.ai/v1/responses" \
       "content": [
         {
           "type": "input_text",
-          "text": "Describe this image"
+          "text": "이 이미지를 설명해주세요"
         },
         {
           "type": "input_image",
@@ -917,7 +917,7 @@ curl "https://apimart.ai/v1/responses" \
 }
 ```
 
-### Multi-Image Analysis
+### 다중 이미지 분석
 ```json
 {
   "model": "gpt-5",
@@ -927,7 +927,7 @@ curl "https://apimart.ai/v1/responses" \
       "content": [
         {
           "type": "input_text",
-          "text": "Compare the similarities and differences of these two images"
+          "text": "이 두 이미지의 유사점과 차이점을 비교해주세요"
         },
         {
           "type": "input_image",
@@ -943,7 +943,7 @@ curl "https://apimart.ai/v1/responses" \
 }
 ```
 
-### Base64 Encoded Image
+### Base64 인코딩 이미지
 ```json
 {
   "model": "gpt-5",
@@ -953,7 +953,7 @@ curl "https://apimart.ai/v1/responses" \
       "content": [
         {
           "type": "input_text",
-          "text": "Analyze this image"
+          "text": "이 이미지를 분석해주세요"
         },
         {
           "type": "input_image",
@@ -965,16 +965,16 @@ curl "https://apimart.ai/v1/responses" \
 }
 ```
 
-### Using File Search Tool
+### 파일 검색 도구 사용
 ```json
 {
   "model": "gpt-5",
   "tools": [{"type": "file_search"}],
-  "input": "Based on uploaded documents, summarize the company's quarterly performance"
+  "input": "업로드된 문서를 기반으로 회사의 분기별 실적을 요약해주세요"
 }
 ```
 
-### Using Function Calling
+### 함수 호출 사용
 ```json
 {
   "model": "gpt-5",
@@ -983,18 +983,18 @@ curl "https://apimart.ai/v1/responses" \
       "type": "function",
       "function": {
         "name": "get_weather",
-        "description": "Get weather information for a specified city",
+        "description": "지정된 도시의 날씨 정보 가져오기",
         "parameters": {
           "type": "object",
           "properties": {
             "city": {
               "type": "string",
-              "description": "City name, e.g.: Beijing"
+              "description": "도시 이름, 예: 서울"
             },
             "unit": {
               "type": "string",
               "enum": ["celsius", "fahrenheit"],
-              "description": "Temperature unit"
+              "description": "온도 단위"
             }
           },
           "required": ["city"]
@@ -1002,11 +1002,11 @@ curl "https://apimart.ai/v1/responses" \
       }
     }
   ],
-  "input": "What's the weather like in Beijing today?"
+  "input": "오늘 서울의 날씨는 어떤가요?"
 }
 ```
 
-### Using Remote MCP
+### 원격 MCP 사용
 ```json
 {
   "model": "gpt-5",
@@ -1019,11 +1019,11 @@ curl "https://apimart.ai/v1/responses" \
       }
     }
   ],
-  "input": "Query user information in the database"
+  "input": "데이터베이스에서 사용자 정보를 조회해주세요"
 }
 ```
 
-### Combining Multiple Tools
+### 여러 도구 결합
 ```json
 {
   "model": "gpt-5",
@@ -1034,13 +1034,13 @@ curl "https://apimart.ai/v1/responses" \
       "type": "function",
       "function": {
         "name": "calculate",
-        "description": "Perform mathematical calculations",
+        "description": "수학 계산 수행",
         "parameters": {
           "type": "object",
           "properties": {
             "expression": {
               "type": "string",
-              "description": "Mathematical expression"
+              "description": "수학 표현식"
             }
           },
           "required": ["expression"]
@@ -1048,77 +1048,77 @@ curl "https://apimart.ai/v1/responses" \
       }
     }
   ],
-  "input": "Search for the latest Bitcoin price and calculate the total value of 100 Bitcoins"
+  "input": "최신 비트코인 가격을 검색하고 비트코인 100개의 총 가치를 계산해주세요"
 }
 ```
 
-## Content Type Specifications
+## 콘텐츠 유형 사양
 
 ### input_text
-Text input type
+텍스트 입력 유형
 
-**Properties:**
-- `type`: Fixed as `"input_text"`
-- `text`: Text content (string)
+**속성:**
+- `type`: `"input_text"`로 고정
+- `text`: 텍스트 내용 (문자열)
 
 ### input_image
-Image input type
+이미지 입력 유형
 
-**Properties:**
-- `type`: Fixed as `"input_image"`
-- `image_url`: Image URL or Base64 encoded data URI
+**속성:**
+- `type`: `"input_image"`로 고정
+- `image_url`: 이미지 URL 또는 Base64 인코딩된 데이터 URI
 
-**Supported image formats:**
+**지원되는 이미지 형식:**
 - JPEG
 - PNG
 - GIF
 - WebP
 
-**Image size limits:**
-- Maximum file size: 20MB
-- Recommended resolution: No more than 2048x2048 pixels
+**이미지 크기 제한:**
+- 최대 파일 크기: 20MB
+- 권장 해상도: 2048x2048 픽셀 이하
 
-## Tool Usage Details
+## 도구 사용 세부 정보
 
-### Web Search
+### 웹 검색
 
-The web search tool allows the model to access real-time internet information.
+웹 검색 도구를 사용하면 모델이 실시간 인터넷 정보에 접근할 수 있습니다.
 
-**Configuration example:**
+**구성 예시:**
 ```json
 {
   "tools": [{"type": "web_search"}]
 }
 ```
 
-**Use cases:**
-- Query latest news and current events
-- Get real-time data (stocks, weather, exchange rates, etc.)
-- Search for latest technical documentation
-- Verify factual information
+**사용 사례:**
+- 최신 뉴스 및 시사 조회
+- 실시간 데이터 가져오기 (주식, 날씨, 환율 등)
+- 최신 기술 문서 검색
+- 사실 정보 확인
 
-### File Search
+### 파일 검색
 
-The file search tool allows the model to search for relevant information in uploaded documents.
+파일 검색 도구를 사용하면 모델이 업로드된 문서에서 관련 정보를 검색할 수 있습니다.
 
-**Configuration example:**
+**구성 예시:**
 ```json
 {
   "tools": [{"type": "file_search"}]
 }
 ```
 
-**Use cases:**
-- Analyze internal corporate documents
-- Search technical specifications and manuals
-- Query contracts and legal documents
-- Knowledge base Q&A systems
+**사용 사례:**
+- 회사 내부 문서 분석
+- 기술 사양 및 매뉴얼 검색
+- 계약서 및 법률 문서 조회
+- 지식 베이스 Q&A 시스템
 
-### Function Calling
+### 함수 호출
 
-Define custom functions to enable the model to call external APIs or perform specific operations.
+사용자 정의 함수를 정의하여 모델이 외부 API를 호출하거나 특정 작업을 수행할 수 있게 합니다.
 
-**Complete configuration example:**
+**전체 구성 예시:**
 ```json
 {
   "tools": [
@@ -1126,18 +1126,18 @@ Define custom functions to enable the model to call external APIs or perform spe
       "type": "function",
       "function": {
         "name": "get_stock_price",
-        "description": "Get real-time stock price",
+        "description": "실시간 주가 가져오기",
         "parameters": {
           "type": "object",
           "properties": {
             "symbol": {
               "type": "string",
-              "description": "Stock symbol, e.g.: AAPL"
+              "description": "주식 기호, 예: AAPL"
             },
             "currency": {
               "type": "string",
               "enum": ["USD", "CNY"],
-              "description": "Currency unit",
+              "description": "통화 단위",
               "default": "USD"
             }
           },
@@ -1149,25 +1149,25 @@ Define custom functions to enable the model to call external APIs or perform spe
 }
 ```
 
-**Parameter descriptions:**
-- `name`: Function name (required)
-- `description`: Function description (required)
-- `parameters`: Parameter definition using JSON Schema format
-  - `type`: Parameter type
-  - `properties`: Parameter property definitions
-  - `required`: List of required parameters
+**매개변수 설명:**
+- `name`: 함수 이름 (필수)
+- `description`: 함수 설명 (필수)
+- `parameters`: JSON Schema 형식을 사용한 매개변수 정의
+  - `type`: 매개변수 유형
+  - `properties`: 매개변수 속성 정의
+  - `required`: 필수 매개변수 목록
 
-**Use cases:**
-- Call third-party APIs
-- Execute database queries
-- Trigger business processes
-- Integrate with internal systems
+**사용 사례:**
+- 타사 API 호출
+- 데이터베이스 쿼리 실행
+- 비즈니스 프로세스 트리거
+- 내부 시스템과 통합
 
-### Remote MCP
+### 원격 MCP
 
-Connect to remote Model Context Protocol (MCP) services to extend model capabilities.
+원격 Model Context Protocol (MCP) 서비스에 연결하여 모델 기능을 확장합니다.
 
-**Configuration example:**
+**구성 예시:**
 ```json
 {
   "tools": [
@@ -1183,20 +1183,20 @@ Connect to remote Model Context Protocol (MCP) services to extend model capabili
 }
 ```
 
-**Parameter descriptions:**
-- `url`: MCP server address (required)
-- `auth_token`: Authentication token (optional)
-- `timeout`: Timeout in seconds, default 30 seconds
+**매개변수 설명:**
+- `url`: MCP 서버 주소 (필수)
+- `auth_token`: 인증 토큰 (선택)
+- `timeout`: 타임아웃(초), 기본값 30초
 
-**Use cases:**
-- Connect to enterprise-level AI services
-- Use domain-specific models
-- Access protected data sources
-- Distributed AI system integration
+**사용 사례:**
+- 기업급 AI 서비스에 연결
+- 도메인별 모델 사용
+- 보호된 데이터 소스에 접근
+- 분산 AI 시스템 통합
 
-## Tool Response Format
+## 도구 응답 형식
 
-When the model uses tools, the response format will include tool call information:
+모델이 도구를 사용하면 응답 형식에 도구 호출 정보가 포함됩니다:
 
 ```json
 {
@@ -1216,7 +1216,7 @@ When the model uses tools, the response format will include tool call informatio
             "type": "function",
             "function": {
               "name": "get_weather",
-              "arguments": "{\"city\": \"Beijing\"}"
+              "arguments": "{\"city\": \"서울\"}"
             }
           }
         ]
@@ -1227,40 +1227,40 @@ When the model uses tools, the response format will include tool call informatio
 }
 ```
 
-**Tool call workflow:**
-1. Model receives user input
-2. Analyzes whether tools are needed
-3. If needed, returns tool call request
-4. Client executes tool call
-5. Returns tool results to model
-6. Model generates final response
+**도구 호출 워크플로:**
+1. 모델이 사용자 입력을 수신
+2. 도구가 필요한지 분석
+3. 필요한 경우 도구 호출 요청 반환
+4. 클라이언트가 도구 호출 실행
+5. 도구 결과를 모델에 반환
+6. 모델이 최종 응답 생성
 
-## Important Notes
+## 중요 참고 사항
 
-1. **Image URL requirements**:
-   - Must be a publicly accessible URL
-   - Or use Base64 encoded Data URI format
+1. **이미지 URL 요구 사항**:
+   - 공개적으로 접근 가능한 URL이어야 합니다
+   - 또는 Base64 인코딩된 Data URI 형식 사용
 
-2. **Token billing**:
-   - Images consume tokens based on their resolution
-   - High-resolution images are automatically resized to optimize costs
-   - Tool calls also consume additional tokens
+2. **토큰 청구**:
+   - 이미지는 해상도에 따라 토큰을 소비합니다
+   - 고해상도 이미지는 비용 최적화를 위해 자동으로 크기가 조정됩니다
+   - 도구 호출도 추가 토큰을 소비합니다
 
-3. **Content order**:
-   - Order of elements in content array affects model understanding
-   - Recommended to place text instructions first, then images
+3. **콘텐츠 순서**:
+   - 콘텐츠 배열의 요소 순서가 모델 이해에 영향을 줍니다
+   - 텍스트 지시사항을 먼저, 그다음 이미지를 배치하는 것을 권장합니다
 
-4. **Multimodal combinations**:
-   - Can mix multiple texts and images in one request
-   - Supports multi-turn conversations with context coherence
+4. **멀티모달 조합**:
+   - 하나의 요청에서 여러 텍스트와 이미지를 혼합할 수 있습니다
+   - 컨텍스트 일관성을 유지하는 다중 턴 대화를 지원합니다
 
-5. **Tool usage limitations**:
-   - When using multiple tools simultaneously, the model intelligently selects the most appropriate tool
-   - Function calling requires clear function definitions and parameter descriptions
-   - Web search results may be limited by region and time
+5. **도구 사용 제한 사항**:
+   - 여러 도구를 동시에 사용할 때 모델이 가장 적절한 도구를 지능적으로 선택합니다
+   - 함수 호출에는 명확한 함수 정의와 매개변수 설명이 필요합니다
+   - 웹 검색 결과는 지역 및 시간에 따라 제한될 수 있습니다
 
-6. **API compatibility**:
-   - Fully compatible with OpenAI Responses API format
-   - Seamlessly migrate existing OpenAI code
-   - Supports all OpenAI tool extension features
+6. **API 호환성**:
+   - OpenAI Responses API 형식과 완전히 호환됩니다
+   - 기존 OpenAI 코드를 원활하게 마이그레이션할 수 있습니다
+   - 모든 OpenAI 도구 확장 기능을 지원합니다
 

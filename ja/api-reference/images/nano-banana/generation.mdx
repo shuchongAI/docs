@@ -1,11 +1,11 @@
 ---
-title: "Nano-Banana Image Generation"
+title: "Nano-Banana 画像生成"
 description: "
-- Asynchronous processing mode, returns task ID for subsequent queries
+- 非同期処理モードで、後続のクエリ用にタスクIDを返します
 
-- Fast generation speed, optimized for quick image creation
+- 高速な生成速度、迅速な画像作成に最適化されています
 
-- Generated image links are valid for 24 hours, please save them promptly
+- 生成された画像のリンクは24時間有効です。速やかに保存してください
 "
 api: "POST https://apimart.ai/v1/images/generations"
 
@@ -24,7 +24,7 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "model": "nano-banana",
-    "prompt": "Modern city night scene with neon lights",
+    "prompt": "ネオンライトのある現代都市の夜景",
     "size": "1024x1024",
     "n": 1
   }'
@@ -37,7 +37,7 @@ url = "https://apimart.ai/v1/images/generations"
 
 payload = {
     "model": "nano-banana",
-    "prompt": "Modern city night scene with neon lights",
+    "prompt": "ネオンライトのある現代都市の夜景",
     "size": "1024x1024",
     "n": 1
 }
@@ -93,7 +93,7 @@ func main() {
 
     payload := map[string]interface{}{
         "model":  "nano-banana",
-        "prompt": "Modern city night scene with neon lights",
+        "prompt": "ネオンライトのある現代都市の夜景",
         "size":   "1024x1024",
         "n":      1,
     }
@@ -129,7 +129,7 @@ public class Main {
         String payload = """
         {
           "model": "nano-banana",
-          "prompt": "Modern city night scene with neon lights",
+          "prompt": "ネオンライトのある現代都市の夜景",
           "size": "1024x1024",
           "n": 1
         }
@@ -212,7 +212,7 @@ let url = URL(string: "https://apimart.ai/v1/images/generations")!
 
 let payload: [String: Any] = [
     "model": "nano-banana",
-    "prompt": "Modern city night scene with neon lights",
+    "prompt": "ネオンライトのある現代都市の夜景",
     "size": "1024x1024",
     "n": 1
 ]
@@ -462,7 +462,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 400,
-    "message": "Invalid request parameters",
+    "message": "無効なリクエストパラメータです",
     "type": "invalid_request_error"
   }
 }
@@ -472,7 +472,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 401,
-    "message": "Invalid authentication credentials",
+    "message": "認証情報が無効です",
     "type": "authentication_error"
   }
 }
@@ -482,7 +482,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 402,
-    "message": "Insufficient balance. Please top up your account",
+    "message": "残高が不足しています。アカウントにチャージしてください",
     "type": "payment_required"
   }
 }
@@ -492,7 +492,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 403,
-    "message": "Access forbidden. You don't have permission to access this resource",
+    "message": "アクセスが禁止されています。このリソースへのアクセス権限がありません",
     "type": "permission_error"
   }
 }
@@ -502,7 +502,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 429,
-    "message": "Rate limit exceeded. Please try again later",
+    "message": "レート制限を超過しました。後でもう一度お試しください",
     "type": "rate_limit_error"
   }
 }
@@ -512,7 +512,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 500,
-    "message": "Internal server error. Please try again later",
+    "message": "内部サーバーエラーが発生しました。後でもう一度お試しください",
     "type": "server_error"
   }
 }
@@ -522,7 +522,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 502,
-    "message": "Bad gateway. The server is temporarily unavailable",
+    "message": "不正なゲートウェイです。サーバーが一時的に利用できません",
     "type": "bad_gateway"
   }
 }

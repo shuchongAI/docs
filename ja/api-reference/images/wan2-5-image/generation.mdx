@@ -1,16 +1,15 @@
 ---
-title: "Wan2.5 Image Generation"
+title: "Wan2.5 画像生成"
 description: "
-- Asynchronous processing mode, returns task ID for subsequent queries
+- 非同期処理モードで、後続のクエリ用にタスクIDを返します
 
-- Supports multiple generation modes including text-to-image, image-to-image, and image editing
+- テキストから画像、画像から画像、画像編集などの複数の生成モードをサポートしています
 
-- Generated image links are valid for 24 hours, please save them promptly
+- 生成された画像のリンクは24時間有効です。速やかに保存してください
 "
 api: "POST https://apimart.ai/v1/images/generations"
 
 ---
-
 
 
 
@@ -24,7 +23,7 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "model": "wan2.5-image",
-    "prompt": "A futuristic city in sci-fi style",
+    "prompt": "SF スタイルの未来都市",
     "size": "1024x1024",
     "n": 1,
     "image_urls": [
@@ -40,7 +39,7 @@ url = "https://apimart.ai/v1/images/generations"
 
 payload = {
     "model": "wan2.5-image",
-    "prompt": "A futuristic city in sci-fi style",
+    "prompt": "SF スタイルの未来都市",
     "size": "1024x1024",
     "n": 1,
     "image_urls": [
@@ -63,7 +62,7 @@ const url = "https://apimart.ai/v1/images/generations";
 
 const payload = {
   model: "wan2.5-image",
-  prompt: "A futuristic city in sci-fi style",
+  prompt: "SF スタイルの未来都市",
   size: "1024x1024",
   n: 1,
   image_urls: [
@@ -102,7 +101,7 @@ func main() {
 
     payload := map[string]interface{}{
         "model":  "wan2.5-image",
-        "prompt": "A futuristic city in sci-fi style",
+        "prompt": "SF スタイルの未来都市",
         "size":   "1024x1024",
         "n":      1,
         "image_urls": []string{
@@ -141,7 +140,7 @@ public class Main {
         String payload = """
         {
           "model": "wan2.5-image",
-          "prompt": "A futuristic city in sci-fi style",
+          "prompt": "SF スタイルの未来都市",
           "size": "1024x1024",
           "n": 1,
           "image_urls": [
@@ -173,7 +172,7 @@ $url = "https://apimart.ai/v1/images/generations";
 
 $payload = [
     "model" => "wan2.5-image",
-    "prompt" => "A futuristic city in sci-fi style",
+    "prompt" => "SF スタイルの未来都市",
     "size" => "1024x1024",
     "n" => 1,
     "image_urls" => [
@@ -206,7 +205,7 @@ url = URI("https://apimart.ai/v1/images/generations")
 
 payload = {
   model: "wan2.5-image",
-  prompt: "A futuristic city in sci-fi style",
+  prompt: "SF スタイルの未来都市",
   size: "1024x1024",
   n: 1,
   image_urls: [
@@ -233,7 +232,7 @@ let url = URL(string: "https://apimart.ai/v1/images/generations")!
 
 let payload: [String: Any] = [
     "model": "wan2.5-image",
-    "prompt": "A futuristic city in sci-fi style",
+    "prompt": "SF スタイルの未来都市",
     "size": "1024x1024",
     "n": 1,
     "image_urls": [
@@ -252,7 +251,7 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
         print("Error: \(error)")
         return
     }
-    
+
     if let data = data, let responseString = String(data: data, encoding: .utf8) {
         print(responseString)
     }
@@ -275,7 +274,7 @@ class Program
 
         var payload = @"{
             ""model"": ""wan2.5-image"",
-            ""prompt"": ""A futuristic city in sci-fi style"",
+            ""prompt"": ""SF スタイルの未来都市"",
             ""size"": ""1024x1024"",
             ""n"": 1,
             ""image_urls"": [
@@ -310,7 +309,7 @@ int main(void) {
         const char *url = "https://apimart.ai/v1/images/generations";
         const char *payload = "{"
             "\"model\":\"wan2.5-image\","
-            "\"prompt\":\"A futuristic city in sci-fi style\","
+            "\"prompt\":\"SF スタイルの未来都市\","
             "\"size\":\"1024x1024\","
             "\"n\":1,"
             "\"image_urls\":[\"https://example.com/image1.png\"]"
@@ -346,40 +345,40 @@ int main(void) {
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         NSURL *url = [NSURL URLWithString:@"https://apimart.ai/v1/images/generations"];
-        
+
         NSDictionary *payload = @{
             @"model": @"wan2.5-image",
-            @"prompt": @"A futuristic city in sci-fi style",
+            @"prompt": @"SF スタイルの未来都市",
             @"size": @"1024x1024",
             @"n": @1,
             @"image_urls": @[
                 @"https://example.com/image1.png"
             ]
         };
-        
+
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload
                                                           options:0
                                                             error:&error];
-        
+
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod:@"POST"];
         [request setValue:@"Bearer <token>" forHTTPHeaderField:@"Authorization"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         [request setHTTPBody:jsonData];
-        
-        NSURLSessionDataTask *task = [[NSURLSession sharedSession] 
+
+        NSURLSessionDataTask *task = [[NSURLSession sharedSession]
             dataTaskWithRequest:request
             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 if (error) {
                     NSLog(@"Error: %@", error);
                     return;
                 }
-                NSString *result = [[NSString alloc] initWithData:data 
+                NSString *result = [[NSString alloc] initWithData:data
                                                         encoding:NSUTF8StringEncoding];
                 NSLog(@"%@", result);
             }];
-        
+
         [task resume];
         [[NSRunLoop mainRunLoop] run];
     }
@@ -397,7 +396,7 @@ let url = "https://apimart.ai/v1/images/generations"
 
 let payload = {|{
   "model": "wan2.5-image",
-  "prompt": "A futuristic city in sci-fi style",
+  "prompt": "SF スタイルの未来都市",
   "size": "1024x1024",
   "n": 1,
   "image_urls": [
@@ -411,7 +410,7 @@ let () =
     |> fun h -> Header.add h "Content-Type" "application/json"
   in
   let body = Cohttp_lwt.Body.of_string payload in
-  
+
   let response = Client.post ~headers ~body (Uri.of_string url) >>= fun (resp, body) ->
     body |> Cohttp_lwt.Body.to_string >|= fun body_str ->
     print_endline body_str
@@ -425,17 +424,17 @@ import 'package:http/http.dart' as http;
 
 void main() async {
   final url = Uri.parse('https://apimart.ai/v1/images/generations');
-  
+
   final payload = {
     'model': 'wan2.5-image',
-    'prompt': 'A futuristic city in sci-fi style',
+    'prompt': 'SF スタイルの未来都市',
     'size': '1024x1024',
     'n': 1,
     'image_urls': [
       'https://example.com/image1.png'
     ]
   };
-  
+
   final response = await http.post(
     url,
     headers: {
@@ -444,7 +443,7 @@ void main() async {
     },
     body: jsonEncode(payload),
   );
-  
+
   print(response.body);
 }
 ```
@@ -457,7 +456,7 @@ url <- "https://apimart.ai/v1/images/generations"
 
 payload <- list(
   model = "wan2.5-image",
-  prompt = "A futuristic city in sci-fi style",
+  prompt = "SF スタイルの未来都市",
   size = "1024x1024",
   n = 1,
   image_urls = list(
@@ -502,7 +501,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 400,
-    "message": "Invalid request parameters",
+    "message": "無効なリクエストパラメータです",
     "type": "invalid_request_error"
   }
 }
@@ -512,7 +511,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 401,
-    "message": "Invalid authentication credentials",
+    "message": "認証情報が無効です",
     "type": "authentication_error"
   }
 }
@@ -522,7 +521,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 402,
-    "message": "Insufficient balance. Please top up your account",
+    "message": "残高が不足しています。アカウントにチャージしてください",
     "type": "payment_required"
   }
 }
@@ -532,7 +531,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 403,
-    "message": "Access forbidden. You don't have permission to access this resource",
+    "message": "アクセスが禁止されています。このリソースへのアクセス権限がありません",
     "type": "permission_error"
   }
 }
@@ -542,7 +541,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 429,
-    "message": "Rate limit exceeded. Please try again later",
+    "message": "レート制限を超過しました。後でもう一度お試しください",
     "type": "rate_limit_error"
   }
 }
@@ -552,7 +551,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 500,
-    "message": "Internal server error. Please try again later",
+    "message": "内部サーバーエラーが発生しました。後でもう一度お試しください",
     "type": "server_error"
   }
 }
@@ -562,7 +561,7 @@ cat(content(response, "text"))
 {
   "error": {
     "code": 502,
-    "message": "Bad gateway. The server is temporarily unavailable",
+    "message": "不正なゲートウェイです。サーバーが一時的に利用できません",
     "type": "bad_gateway"
   }
 }
@@ -570,16 +569,16 @@ cat(content(response, "text"))
 
 </ResponseExample>
 
-## Authorizations
+## 認証
 
 <ParamField header="Authorization" type="string" required>
-  All API endpoints require Bearer Token authentication
+  全てのAPIエンドポイントでBearer Token認証が必要です
 
-  Get your API Key:
+  APIキーの取得方法:
 
-  Visit the [API Key Management Page](https://evolink.ai/dashboard/keys) to get your API Key
+  [APIキー管理ページ](https://evolink.ai/dashboard/keys) にアクセスしてAPIキーを取得してください
 
-  Add it to the request header:
+  リクエストヘッダーに追加:
 
   ```
   Authorization: Bearer YOUR_API_KEY
@@ -589,93 +588,93 @@ cat(content(response, "text"))
 ## Body
 
 <ParamField body="model" type="string" required>
-  Model name, must be `wan2.5-image`
+  モデル名、`wan2.5-image`である必要があります
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
-  Text description for image generation
+  画像生成のためのテキスト説明
 
-  Maximum 1000 characters
+  最大1000文字
 </ParamField>
 
 <ParamField body="size" type="string">
-  Image generation size
+  画像生成サイズ
 
-  Supported formats:
-  - Ratios: `1:1`, `2:3`, `3:2`
-  - Pixels: `1024x1024`, `1024x1536`, `1536x1024`
+  サポートされている形式:
+  - 比率: `1:1`, `2:3`, `3:2`
+  - ピクセル: `1024x1024`, `1024x1536`, `1536x1024`
 </ParamField>
 
 <ParamField body="n" type="integer">
-  Number of images to generate
+  生成する画像の数
 
-  Supports 1, 2, 4. Charges will be pre-deducted based on the number
+  1、2、4をサポート。枚数に基づいて料金が事前に差し引かれます
 </ParamField>
 
 <ParamField body="image_urls" type="array">
-  Reference image URL list for image-to-image or image editing
+  画像から画像への変換または画像編集のための参照画像URLリスト
 
-  - Maximum 5 images
-  - Each image should not exceed 10MB
-  - Supported formats: .jpeg, .jpg, .png, .webp
+  - 最大5枚の画像
+  - 各画像は10MBを超えないようにしてください
+  - サポートされている形式: .jpeg, .jpg, .png, .webp
 </ParamField>
 
 ## Response
 
 <ResponseField name="created" type="integer">
-  Task creation timestamp
+  タスク作成タイムスタンプ
 </ResponseField>
 
 <ResponseField name="id" type="string">
-  Unique task identifier
+  一意のタスク識別子
 </ResponseField>
 
 <ResponseField name="model" type="string">
-  The actual model name used
+  実際に使用されたモデル名
 </ResponseField>
 
 <ResponseField name="object" type="string">
-  Object type, fixed as `image.generation.task`
+  オブジェクトタイプ、`image.generation.task`で固定
 </ResponseField>
 
 <ResponseField name="progress" type="integer">
-  Task completion progress percentage (0-100)
+  タスク完了進捗率 (0-100)
 </ResponseField>
 
 <ResponseField name="status" type="string">
-  Task status
+  タスクステータス
 
-  Possible values:
-  - `pending` - Waiting for processing
-  - `processing` - In progress
-  - `completed` - Completed
-  - `failed` - Failed
+  可能な値:
+  - `pending` - 処理待ち
+  - `processing` - 処理中
+  - `completed` - 完了
+  - `failed` - 失敗
 </ResponseField>
 
 <ResponseField name="task_info" type="object">
-  Task details
+  タスク詳細
 
   <Expandable title="Properties">
     <ResponseField name="can_cancel" type="boolean">
-      Whether the task can be cancelled
+      タスクがキャンセル可能かどうか
     </ResponseField>
 
     <ResponseField name="estimated_time" type="integer">
-      Estimated completion time (seconds)
+      推定完了時間 (秒)
     </ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseField name="type" type="string">
-  Output type, fixed as `image`
+  出力タイプ、`image`で固定
 </ResponseField>
 
 <ResponseField name="usage" type="object">
-  Billing information
+  課金情報
 
   <Expandable title="Properties">
     <ResponseField name="total_tokens" type="integer">
-      Total tokens consumed
+      消費された合計トークン数
     </ResponseField>
   </Expandable>
 </ResponseField>
