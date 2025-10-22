@@ -1,0 +1,643 @@
+---
+title: "Gemini ネイティブ形式"
+description: "
+- Google ネイティブ API 形式で Gemini モデルを呼び出す
+
+- 同期処理モードでリアルタイムレスポンス
+
+- 最小限のパラメータで素早く開始
+"
+api: "POST https://api.apimart.ai/v1beta/models/{model}:{method}"
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "こんにちは、自己紹介してください"
+        }
+      ]
+    }
+  ]
+}'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent"
+
+payload = {
+    "contents": [
+        {
+            "role": "user",
+            "parts": [
+                {
+                    "text": "こんにちは、自己紹介してください"
+                }
+            ]
+        }
+    ]
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent";
+
+const payload = {
+  contents: [
+    {
+      role: "user",
+      parts: [
+        {
+          text: "こんにちは、自己紹介してください"
+        }
+      ]
+    }
+  ]
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent"
+
+    payload := map[string]interface{}{
+        "contents": []map[string]interface{}{
+            {
+                "role": "user",
+                "parts": []map[string]interface{}{
+                    {
+                        "text": "こんにちは、自己紹介してください",
+                    },
+                },
+            },
+        },
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent";
+
+        String payload = """
+        {
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "こんにちは、自己紹介してください"
+                }
+              ]
+            }
+          ]
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent";
+
+$payload = [
+    "contents" => [
+        [
+            "role" => "user",
+            "parts" => [
+                [
+                    "text" => "こんにちは、自己紹介してください"
+                ]
+            ]
+        ]
+    ]
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent")
+
+payload = {
+  contents: [
+    {
+      role: "user",
+      parts: [
+        {
+          text: "こんにちは、自己紹介してください"
+        }
+      ]
+    }
+  ]
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": {
+    "candidates": [
+      {
+        "content": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "こんにちは！自己紹介させていただきます。\n\n私は Google によってトレーニングされ、開発された大規模言語モデルです..."
+            }
+          ]
+        },
+        "finishReason": "STOP",
+        "index": 0,
+        "safetyRatings": [
+          {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "probability": "NEGLIGIBLE"
+          }
+        ]
+      }
+    ],
+    "promptFeedback": {
+      "safetyRatings": [
+        {
+          "category": "HARM_CATEGORY_HATE_SPEECH",
+          "probability": "NEGLIGIBLE"
+        }
+      ]
+    ]
+  },
+  "usageMetadata": {
+    "promptTokenCount": 4,
+    "candidatesTokenCount": 611,
+    "totalTokenCount": 2422,
+    "thoughtsTokenCount": 1807,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4
+      }
+    ]
+  }
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "無効なリクエストパラメータです",
+    "status": "INVALID_ARGUMENT"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "認証に失敗しました。APIキーを確認してください",
+    "status": "UNAUTHENTICATED"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "残高が不足しています。チャージしてください",
+    "status": "PAYMENT_REQUIRED"
+  }
+}
+```
+
+```json 403
+{
+  "error": {
+    "code": 403,
+    "message": "アクセスが拒否されました",
+    "status": "PERMISSION_DENIED"
+  }
+}
+```
+
+```json 404
+{
+  "error": {
+    "code": 404,
+    "message": "指定されたモデルが見つかりません",
+    "status": "NOT_FOUND"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "リクエストが頻繁すぎます。後でもう一度お試しください",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "サーバー内部エラー",
+    "status": "INTERNAL"
+  }
+}
+```
+
+```json 502
+{
+  "error": {
+    "code": 502,
+    "message": "ゲートウェイエラー、サービスが一時的に利用できません",
+    "status": "BAD_GATEWAY"
+  }
+}
+```
+
+```json 503
+{
+  "error": {
+    "code": 503,
+    "message": "サービスが一時的に利用できません",
+    "status": "UNAVAILABLE"
+  }
+}
+```
+
+</ResponseExample>
+
+## 認証
+
+<ParamField header="Authorization" type="string" required>
+  すべてのAPIエンドポイントにはBearer Token認証が必要です
+
+  APIキーの取得:
+
+  [APIキー管理ページ](https://api.apimart.ai/console/token)にアクセスしてAPIキーを取得してください
+
+  リクエストヘッダーに追加:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## パスパラメータ
+
+<ParamField path="model" type="string" required>
+  モデル名
+
+  例では `gemini-2.5-pro` を使用していますが、他のサポートされている Gemini モデルに置き換えることができます：
+
+  - `gemini-2.5-flash` - Gemini 2.5 高速版
+  - `gemini-2.5-pro` - Gemini 2.5 専門版
+  - `gemini-2.5-flash-lite` - Gemini 2.5 超軽量版
+  - `gemini-2.5-pro-thinking` - Gemini 2.5 Pro 深層思考版
+</ParamField>
+
+<ParamField path="method" type="enum<string>" required>
+  生成方法（クイックスタートには `generateContent` を推奨）:
+
+  - `generateContent`: 完全なレスポンスを待って一度に返す
+  - `streamGenerateContent`: ストリーム形式で段階的にコンテンツを返す
+
+  利用可能なオプション: `generateContent`, `streamGenerateContent`
+</ParamField>
+
+## ボディ
+
+<ParamField body="contents" type="array" required>
+  会話内容のリスト
+
+  最低1つのメッセージが必要
+
+  <Expandable title="contents オブジェクト構造">
+    <ParamField body="role" type="string" required>
+      ロールタイプ:
+      - `user`: ユーザーメッセージ
+      - `model`: モデルレスポンス（会話履歴で使用）
+    </ParamField>
+
+    <ParamField body="parts" type="array" required>
+      メッセージ内容の部分
+
+      <Expandable title="parts オブジェクト構造">
+        <ParamField body="text" type="string">
+          テキスト内容
+        </ParamField>
+
+        <ParamField body="inlineData" type="object">
+          インラインデータ（マルチモーダル入力用）
+
+          <Expandable title="inlineData プロパティ">
+            <ParamField body="mimeType" type="string">
+              MIME タイプ、例: `image/jpeg`, `image/png`
+            </ParamField>
+
+            <ParamField body="data" type="string">
+              Base64 エンコードされたデータ
+            </ParamField>
+          </Expandable>
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+
+  例:
+  ```json
+  [
+    {
+      "role": "user",
+      "parts": [{ "text": "こんにちは、自己紹介してください" }]
+    }
+  ]
+  ```
+</ParamField>
+
+<ParamField body="generationConfig" type="object">
+  生成設定（オプション）
+
+  <Expandable title="generationConfig プロパティ">
+    <ParamField body="temperature" type="number">
+      出力のランダム性を制御、範囲 0.0-2.0
+
+      - 低い値は出力をより決定的にします
+      - 高い値は出力をよりランダムにします
+
+      デフォルト: 1.0
+    </ParamField>
+
+    <ParamField body="maxOutputTokens" type="integer">
+      生成する最大トークン数
+
+      モデルによって最大制限が異なります
+    </ParamField>
+
+    <ParamField body="topP" type="number">
+      ニュークリアスサンプリングパラメータ、範囲 0.0-1.0
+
+      サンプリング時に考慮する確率質量を制御
+    </ParamField>
+
+    <ParamField body="topK" type="integer">
+      Top-K サンプリングパラメータ
+
+      各ステップで最も確率の高い K トークンからのみサンプリング
+    </ParamField>
+
+    <ParamField body="stopSequences" type="array">
+      停止シーケンスのリスト
+
+      これらのシーケンスに遭遇したら生成を停止
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="safetySettings" type="array">
+  安全設定（オプション）
+
+  <Expandable title="safetySettings オブジェクト構造">
+    <ParamField body="category" type="string">
+      安全カテゴリ:
+      - `HARM_CATEGORY_HATE_SPEECH`: ヘイトスピーチ
+      - `HARM_CATEGORY_DANGEROUS_CONTENT`: 危険なコンテンツ
+      - `HARM_CATEGORY_HARASSMENT`: ハラスメント
+      - `HARM_CATEGORY_SEXUALLY_EXPLICIT`: 性的に露骨なコンテンツ
+    </ParamField>
+
+    <ParamField body="threshold" type="string">
+      しきい値レベル:
+      - `BLOCK_NONE`: ブロックしない
+      - `BLOCK_ONLY_HIGH`: 高リスクのみブロック
+      - `BLOCK_MEDIUM_AND_ABOVE`: 中リスク以上をブロック
+      - `BLOCK_LOW_AND_ABOVE`: 低リスク以上をブロック
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## レスポンス
+
+<ResponseField name="candidates" type="array">
+  候補レスポンスのリスト
+
+  <Expandable title="candidates オブジェクト構造">
+    <ResponseField name="content" type="object">
+      生成されたコンテンツ
+
+      <Expandable title="content プロパティ">
+        <ResponseField name="role" type="string">
+          ロール、通常は `model`
+        </ResponseField>
+
+        <ResponseField name="parts" type="array">
+          コンテンツ部分のリスト
+
+          <Expandable title="parts オブジェクト">
+            <ResponseField name="text" type="string">
+              生成されたテキストコンテンツ
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="finishReason" type="string">
+      完了理由:
+      - `STOP`: 正常完了
+      - `MAX_TOKENS`: 最大トークン制限に達した
+      - `SAFETY`: 安全上の理由で停止
+      - `RECITATION`: 繰り返しのため停止
+      - `OTHER`: その他の理由
+    </ResponseField>
+
+    <ResponseField name="index" type="integer">
+      候補レスポンスのインデックス
+    </ResponseField>
+
+    <ResponseField name="safetyRatings" type="array">
+      安全評価のリスト
+
+      <Expandable title="safetyRatings オブジェクト">
+        <ResponseField name="category" type="string">
+          安全カテゴリ
+        </ResponseField>
+
+        <ResponseField name="probability" type="string">
+          確率レベル: `NEGLIGIBLE`, `LOW`, `MEDIUM`, `HIGH`
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="promptFeedback" type="object">
+  プロンプトフィードバック情報
+
+  <Expandable title="promptFeedback プロパティ">
+    <ResponseField name="safetyRatings" type="array">
+      プロンプトの安全評価
+    </ResponseField>
+
+    <ResponseField name="blockReason" type="string">
+      ブロック理由（プロンプトがブロックされた場合）
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="usageMetadata" type="object">
+  使用量統計
+
+  <Expandable title="usageMetadata プロパティ">
+    <ResponseField name="promptTokenCount" type="integer">
+      プロンプトのトークン数
+    </ResponseField>
+
+    <ResponseField name="candidatesTokenCount" type="integer">
+      候補レスポンスのトークン数
+    </ResponseField>
+
+    <ResponseField name="totalTokenCount" type="integer">
+      消費された総トークン数
+    </ResponseField>
+
+    <ResponseField name="thoughtsTokenCount" type="integer">
+      思考に使用されたトークン数（該当する場合）
+    </ResponseField>
+
+    <ResponseField name="promptTokensDetails" type="array">
+      プロンプトトークンの詳細
+
+      <Expandable title="promptTokensDetails オブジェクト">
+        <ResponseField name="modality" type="string">
+          モダリティタイプ: `TEXT`, `IMAGE`, など
+        </ResponseField>
+
+        <ResponseField name="tokenCount" type="integer">
+          このモダリティのトークン数
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
