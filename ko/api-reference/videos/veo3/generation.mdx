@@ -23,7 +23,7 @@ curl --request POST \
   --header 'Authorization: Bearer <token>' \
   --header 'Content-Type: application/json' \
   --data '{
-    "model": "veo3",
+    "model": "veo3.1",
     "prompt": "정원에서 노는 고양이",
     "duration": 8,
     "resolution": "1920x1080",
@@ -37,7 +37,7 @@ import requests
 url = "https://api.apimart.ai/v1/videos/generations"
 
 payload = {
-    "model": "veo3",
+    "model": "veo3.1",
     "prompt": "정원에서 노는 고양이",
     "duration": 8,
     "resolution": "1920x1080",
@@ -58,7 +58,7 @@ print(response.json())
 const url = "https://api.apimart.ai/v1/videos/generations";
 
 const payload = {
-  model: "veo3",
+  model: "veo3.1",
   prompt: "정원에서 노는 고양이",
   duration: 8,
   resolution: "1920x1080",
@@ -95,7 +95,7 @@ func main() {
     url := "https://api.apimart.ai/v1/videos/generations"
 
     payload := map[string]interface{}{
-        "model":      "veo3",
+        "model":      "veo3.1",
         "prompt":     "정원에서 노는 고양이",
         "duration":   5,
         "resolution": "1920x1080",
@@ -132,7 +132,7 @@ public class Main {
 
         String payload = """
         {
-          "model": "veo3",
+          "model": "veo3.1",
           "prompt": "정원에서 노는 고양이",
           "duration": 8,
           "resolution": "1920x1080",
@@ -162,7 +162,7 @@ public class Main {
 $url = "https://api.apimart.ai/v1/videos/generations";
 
 $payload = [
-    "model" => "veo3",
+    "model" => "veo3.1",
     "prompt" => "푸른 바다에서 뛰어오르는 돌고래",
     "duration" => 8,
     "resolution" => "1920x1080",
@@ -193,7 +193,7 @@ require 'uri'
 url = URI("https://api.apimart.ai/v1/videos/generations")
 
 payload = {
-  model: "veo3",
+  model: "veo3.1",
   prompt: "정원에서 노는 고양이",
   duration: 8,
   resolution: "1920x1080",
@@ -218,7 +218,7 @@ import Foundation
 let url = URL(string: "https://api.apimart.ai/v1/videos/generations")!
 
 let payload: [String: Any] = [
-    "model": "veo3",
+    "model": "veo3.1",
     "prompt": "정원에서 노는 고양이",
     "duration": 8,
     "resolution": "1920x1080",
@@ -258,7 +258,7 @@ class Program
         var url = "https://api.apimart.ai/v1/videos/generations";
 
         var payload = @"{
-            ""model"": ""veo3"",
+            ""model"": ""veo3.1"",
             ""prompt"": ""정원에서 노는 고양이"",
             ""duration"": 8,
             ""resolution"": ""1920x1080"",
@@ -291,7 +291,7 @@ int main(void) {
     if(curl) {
         const char *url = "https://api.apimart.ai/v1/videos/generations";
         const char *payload = "{"
-            "\"model\":\"veo3\","
+            "\"model\":\"veo3.1\","
             "\"prompt\":\"정원에서 노는 고양이\","
             "\"duration\":10,"
             "\"resolution\":\"1920x1080\","
@@ -330,7 +330,7 @@ int main(int argc, const char * argv[]) {
         NSURL *url = [NSURL URLWithString:@"https://api.apimart.ai/v1/videos/generations"];
         
         NSDictionary *payload = @{
-            @"model": @"veo3",
+            @"model": @"veo3.1",
             @"prompt": @"정원에서 노는 고양이",
             @"duration": @5,
             @"resolution": @"1920x1080",
@@ -376,7 +376,7 @@ open Cohttp_lwt_unix
 let url = "https://api.apimart.ai/v1/videos/generations"
 
 let payload = {|{
-  "model": "veo3",
+  "model": "veo3.1",
           "prompt": "정원에서 노는 고양이",
   "duration": 5,
   "resolution": "1920x1080",
@@ -405,7 +405,7 @@ void main() async {
   final url = Uri.parse('https://api.apimart.ai/v1/videos/generations');
   
   final payload = {
-    'model': 'veo3',
+    'model': 'veo3.1',
     'prompt': '정원에서 노는 고양이',
     'duration': 8,
     'resolution': '1920x1080',
@@ -432,7 +432,7 @@ library(jsonlite)
 url <- "https://api.apimart.ai/v1/videos/generations"
 
 payload <- list(
-  model = "veo3",
+  model = "veo3.1",
   prompt = "정원에서 노는 고양이",
   duration = 8,
   resolution = "1920x1080",
@@ -462,7 +462,7 @@ cat(content(response, "text"))
   "data": {
     "created": 1757156493,
     "id": "task_01J9HA7JPQ9A0Z6JZ3V8M9W6PZ",
-    "model": "veo3",
+    "model": "veo3.1",
     "object": "video.generation.task",
     "progress": 0,
     "status": "pending",
@@ -565,10 +565,10 @@ cat(content(response, "text"))
 
 ## 본문
 
-<ParamField body="model" type="string" default="veo3" required>
+<ParamField body="model" type="string" default="veo3.1" required>
   비디오 생성 모델 이름
 
-  Example: `"veo3"`
+  Example: `"veo3.1"`
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
