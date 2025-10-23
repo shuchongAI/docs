@@ -1,0 +1,642 @@
+---
+title: "TTS Text-to-Speech"
+description: "
+- Support multiple voice models and voice selections
+
+- Output high-quality audio formats: mp3, opus, aac, flac, wav, pcm
+
+- Maximum input text of 4096 characters
+"
+api: "POST https://api.apimart.ai/v1/audio/speech"
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/audio/speech \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "gpt-4o-mini-tts",
+    "input": "The quick brown fox jumps over the lazy dog.",
+    "voice": "alloy",
+    "response_format": "opus",
+    "speed": 1.0
+  }' \
+  --output speech.opus
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/audio/speech"
+
+payload = {
+    "model": "gpt-4o-mini-tts",
+    "input": "The quick brown fox jumps over the lazy dog.",
+    "voice": "alloy",
+    "response_format": "opus",
+    "speed": 1.0
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+with open("speech.opus", "wb") as f:
+    f.write(response.content)
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/audio/speech";
+
+const payload = {
+  model: "gpt-4o-mini-tts",
+  input: "The quick brown fox jumps over the lazy dog.",
+  voice: "alloy",
+  response_format: "opus",
+  speed: 1.0
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.blob())
+  .then(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'speech.opus';
+    a.click();
+  })
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io"
+    "net/http"
+    "os"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/audio/speech"
+
+    payload := map[string]interface{}{
+        "model":           "tts-1",
+        "input":           "The quick brown fox jumps over the lazy dog.",
+        "voice":           "alloy",
+        "response_format": "opus",
+        "speed":           1.0,
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    out, _ := os.Create("speech.opus")
+    defer out.Close()
+
+    io.Copy(out, resp.Body)
+    fmt.Println("Audio saved to speech.opus")
+}
+```
+
+```java Java
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/audio/speech";
+
+        String json = """
+        {
+            "model": "gpt-4o-mini-tts",
+            "input": "The quick brown fox jumps over the lazy dog.",
+            "voice": "alloy",
+            "response_format": "opus",
+            "speed": 1.0
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(json))
+            .build();
+
+        HttpResponse<InputStream> response = client.send(request,
+            HttpResponse.BodyHandlers.ofInputStream());
+
+        try (FileOutputStream fos = new FileOutputStream("speech.opus")) {
+            response.body().transferTo(fos);
+        }
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/audio/speech";
+
+$data = [
+    "model" => "tts-1",
+    "input" => "The quick brown fox jumps over the lazy dog.",
+    "voice" => "alloy",
+    "response_format" => "opus",
+    "speed" => 1.0
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+file_put_contents("speech.opus", $response);
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'uri'
+require 'json'
+
+url = URI("https://api.apimart.ai/v1/audio/speech")
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request["Content-Type"] = "application/json"
+
+request.body = {
+  model: "gpt-4o-mini-tts",
+  input: "The quick brown fox jumps over the lazy dog.",
+  voice: "alloy",
+  response_format: "opus",
+  speed: 1.0
+}.to_json
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+response = http.request(request)
+
+File.open("speech.opus", "wb") do |file|
+  file.write(response.body)
+end
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/audio/speech")!
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+let payload: [String: Any] = [
+    "model": "gpt-4o-mini-tts",
+    "input": "The quick brown fox jumps over the lazy dog.",
+    "voice": "alloy",
+    "response_format": "opus",
+    "speed": 1.0
+]
+
+request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+
+    if let data = data {
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("speech.opus")
+        try? data.write(to: fileURL)
+        print("Audio saved to \(fileURL)")
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.IO;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/audio/speech";
+
+        var payload = new
+        {
+            model = "gpt-4o-mini-tts",
+            input = "The quick brown fox jumps over the lazy dog.",
+            voice = "alloy",
+            response_format = "opus",
+            speed = 1.0
+        };
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
+
+        var json = JsonSerializer.Serialize(payload);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await client.PostAsync(url, content);
+        var audioBytes = await response.Content.ReadAsByteArrayAsync();
+
+        await File.WriteAllBytesAsync("speech.opus", audioBytes);
+        Console.WriteLine("Audio saved to speech.opus");
+    }
+}
+```
+
+```c C
+#include <stdio.h>
+#include <curl/curl.h>
+
+size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream) {
+    return fwrite(ptr, size, nmemb, stream);
+}
+
+int main(void) {
+    CURL *curl;
+    CURLcode res;
+    struct curl_slist *headers = NULL;
+
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();
+
+    if(curl) {
+        FILE *fp = fopen("speech.opus", "wb");
+
+        headers = curl_slist_append(headers, "Authorization: Bearer <token>");
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+
+        const char *json_data = "{\"model\":\"gpt-4o-mini-tts\",\"input\":\"The quick brown fox jumps over the lazy dog.\",\"voice\":\"alloy\",\"response_format\":\"opus\",\"speed\":1.0}";
+
+        curl_easy_setopt(curl, CURLOPT_URL, "https://api.apimart.ai/v1/audio/speech");
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+
+        res = curl_easy_perform(curl);
+
+        if(res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+        }
+
+        fclose(fp);
+        curl_easy_cleanup(curl);
+        curl_slist_free_all(headers);
+    }
+
+    curl_global_cleanup();
+    return 0;
+}
+```
+
+```objectivec Objective-C
+#import <Foundation/Foundation.h>
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        NSURL *url = [NSURL URLWithString:@"https://api.apimart.ai/v1/audio/speech"];
+
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:@"Bearer <token>" forHTTPHeaderField:@"Authorization"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+        NSDictionary *payload = @{
+            @"model": @"gpt-4o-mini-tts",
+            @"input": @"The quick brown fox jumps over the lazy dog.",
+            @"voice": @"alloy",
+            @"response_format": @"opus",
+            @"speed": @1.0
+        };
+
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload options:0 error:nil];
+        [request setHTTPBody:jsonData];
+
+        NSURLSessionDataTask *task = [[NSURLSession sharedSession]
+            dataTaskWithRequest:request
+            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                if (error) {
+                    NSLog(@"Error: %@", error);
+                    return;
+                }
+
+                NSString *filePath = [NSHomeDirectory() stringByAppendingPathComponent:@"speech.opus"];
+                [data writeToFile:filePath atomically:YES];
+                NSLog(@"Audio saved to %@", filePath);
+            }];
+
+        [task resume];
+        [[NSRunLoop mainRunLoop] run];
+    }
+    return 0;
+}
+```
+
+```ocaml OCaml
+(* Requires cohttp and yojson libraries *)
+open Lwt
+open Cohttp
+open Cohttp_lwt_unix
+
+let url = "https://api.apimart.ai/v1/audio/speech"
+
+let json_body = `Assoc [
+  ("model", `String "tts-1");
+  ("input", `String "The quick brown fox jumps over the lazy dog.");
+  ("voice", `String "alloy");
+  ("response_format", `String "mp3");
+  ("speed", `Float 1.0)
+]
+
+let () =
+  let body = Cohttp_lwt.Body.of_string (Yojson.Safe.to_string json_body) in
+  let headers = Header.init ()
+    |> fun h -> Header.add h "Authorization" "Bearer <token>"
+    |> fun h -> Header.add h "Content-Type" "application/json"
+  in
+
+  Lwt_main.run (
+    Client.post ~headers ~body (Uri.of_string url) >>= fun (resp, body) ->
+    body |> Cohttp_lwt.Body.to_string >|= fun body_str ->
+    let oc = open_out_bin "speech.opus" in
+    output_string oc body_str;
+    close_out oc;
+    print_endline "Audio saved to speech.opus"
+  )
+```
+
+```dart Dart
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+void main() async {
+  final url = Uri.parse('https://api.apimart.ai/v1/audio/speech');
+
+  final payload = {
+    'model': 'gpt-4o-mini-tts',
+    'input': 'The quick brown fox jumps over the lazy dog.',
+    'voice': 'alloy',
+    'response_format': 'opus',
+    'speed': 1.0
+  };
+
+  final response = await http.post(
+    url,
+    headers: {
+      'Authorization': 'Bearer <token>',
+      'Content-Type': 'application/json'
+    },
+    body: jsonEncode(payload)
+  );
+
+  await File('speech.opus').writeAsBytes(response.bodyBytes);
+  print('Audio saved to speech.opus');
+}
+```
+
+```r R
+library(httr)
+
+url <- "https://api.apimart.ai/v1/audio/speech"
+
+payload <- list(
+  model = "gpt-4o-mini-tts",
+  input = "The quick brown fox jumps over the lazy dog.",
+  voice = "alloy",
+  response_format = "opus",
+  speed = 1.0
+)
+
+response <- POST(
+  url,
+  add_headers(
+    Authorization = "Bearer <token>",
+    `Content-Type` = "application/json"
+  ),
+  body = payload,
+  encode = "json"
+)
+
+writeBin(content(response, "raw"), "speech.opus")
+cat("Audio saved to speech.opus\n")
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```binary 200
+Binary audio data stream
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "Invalid request parameters",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "Authentication failed, please check your API key",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "Insufficient account balance, please recharge and try again",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 413
+{
+  "error": {
+    "code": 413,
+    "message": "Input text exceeds limit (maximum 4096 characters)",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "Too many requests, please try again later",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "Internal server error, please try again later",
+    "type": "server_error"
+  }
+}
+```
+
+```json 502
+{
+  "error": {
+    "code": 502,
+    "message": "Bad gateway, server temporarily unavailable",
+    "type": "bad_gateway"
+  }
+}
+```
+
+</ResponseExample>
+
+## Authorizations
+
+<ParamField header="Authorization" type="string" required>
+  All APIs require Bearer Token authentication
+
+  Get API Key:
+
+  Visit [API Key Management Page](https://api.apimart.ai/console/token) to get your API Key
+
+  Add to request header:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Body
+
+<ParamField body="model" type="string" required>
+  TTS model name
+
+  Available models:
+  - `gpt-4o-mini-tts` - GPT-4o Mini TTS model (mp3 format not supported yet)
+
+  Example: `"gpt-4o-mini-tts"`
+</ParamField>
+
+<ParamField body="input" type="string" required>
+  The text to convert to speech
+
+  Maximum length: 4096 characters
+
+  Example: `"The quick brown fox jumps over the lazy dog."`
+</ParamField>
+
+<ParamField body="voice" type="string" required>
+  Voice selection
+
+  Available voices:
+  - `alloy` - Neutral, balanced voice
+  - `echo` - Male, calm voice
+  - `fable` - British, narrative voice
+  - `onyx` - Male, deep voice
+  - `nova` - Female, energetic voice
+  - `shimmer` - Female, gentle voice
+
+  Example: `"alloy"`
+</ParamField>
+
+<ParamField body="response_format" type="string" default="mp3">
+  Audio output format
+
+  Supported formats:
+  - `mp3` - MP3 format (default)
+  - `opus` - Opus format, for internet streaming
+  - `aac` - AAC format
+  - `flac` - FLAC format, lossless compression
+  - `wav` - WAV format, uncompressed
+  - `pcm` - PCM format, raw audio data
+
+  Example: `"mp3"`
+</ParamField>
+
+<ParamField body="speed" type="number" default="1.0">
+  Speech playback speed
+
+  Range: 0.25 to 4.0
+
+  - `0.25` - Slowest speed (1/4x)
+  - `1.0` - Normal speed (default)
+  - `4.0` - Fastest speed (4x)
+
+  Example: `1.0`
+</ParamField>
+
+## Response
+
+Returns binary audio data stream on success, which can be saved as an audio file or played directly.
+
+Returns JSON formatted error information on error, including error code, message, and type.

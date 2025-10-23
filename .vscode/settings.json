@@ -1,0 +1,5 @@
+{
+    "claudeCodeChat.permissions.yoloMode": true,
+    "chatgpt.commentCodeLensEnabled": false,
+    "chatgpt.openOnStartup": true
+}

@@ -1,0 +1,682 @@
+---
+title: "Whisper-1 오디오 변환"
+description: "
+- 99개 언어의 음성 인식 지원
+
+- 다양한 출력 형식: json, text, srt, vtt 등
+
+- 최대 파일 크기 25 MB
+"
+api: "POST https://api.apimart.ai/v1/audio/transcriptions"
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/audio/transcriptions \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: multipart/form-data' \
+  --form 'file=@/path/to/audio.mp3' \
+  --form 'model=whisper-1' \
+  --form 'language=ko' \
+  --form 'response_format=json'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/audio/transcriptions"
+
+files = {
+    "file": open("/path/to/audio.mp3", "rb")
+}
+
+data = {
+    "model": "whisper-1",
+    "language": "ko",
+    "response_format": "json"
+}
+
+headers = {
+    "Authorization": "Bearer <token>"
+}
+
+response = requests.post(url, files=files, data=data, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/audio/transcriptions";
+
+const formData = new FormData();
+formData.append("file", audioFile);
+formData.append("model", "whisper-1");
+formData.append("language", "ko");
+formData.append("response_format", "json");
+
+const headers = {
+  "Authorization": "Bearer <token>"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: formData
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "fmt"
+    "io"
+    "mime/multipart"
+    "net/http"
+    "os"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/audio/transcriptions"
+
+    file, _ := os.Open("/path/to/audio.mp3")
+    defer file.Close()
+
+    body := &bytes.Buffer{}
+    writer := multipart.NewWriter(body)
+    
+    part, _ := writer.CreateFormFile("file", "audio.mp3")
+    io.Copy(part, file)
+    
+    writer.WriteField("model", "whisper-1")
+    writer.WriteField("language", "ko")
+    writer.WriteField("response_format", "json")
+    writer.Close()
+
+    req, _ := http.NewRequest("POST", url, body)
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", writer.FormDataContentType())
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    responseBody, _ := io.ReadAll(resp.Body)
+    fmt.Println(string(responseBody))
+}
+```
+
+```java Java
+import java.io.File;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/audio/transcriptions";
+        
+        File audioFile = new File("/path/to/audio.mp3");
+        
+        // multipart/form-data 요청에는 Apache HttpClient 또는 OkHttp 라이브러리를 사용하세요
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/audio/transcriptions";
+
+$file = new CURLFile('/path/to/audio.mp3', 'audio/mpeg', 'audio.mp3');
+
+$data = [
+    "file" => $file,
+    "model" => "whisper-1",
+    "language" => "ko",
+    "response_format" => "json"
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1/audio/transcriptions")
+
+File.open('/path/to/audio.mp3', 'rb') do |file|
+  request = Net::HTTP::Post.new(url)
+  request["Authorization"] = "Bearer <token>"
+  
+  form_data = [
+    ['file', file, { filename: 'audio.mp3', content_type: 'audio/mpeg' }],
+    ['model', 'whisper-1'],
+    ['language', 'ko'],
+    ['response_format', 'json']
+  ]
+  
+  request.set_form form_data, 'multipart/form-data'
+  
+  http = Net::HTTP.new(url.host, url.port)
+  http.use_ssl = true
+  
+  response = http.request(request)
+  puts response.body
+end
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/audio/transcriptions")!
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+
+let boundary = "Boundary-\(UUID().uuidString)"
+request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+var body = Data()
+
+// Add file
+let fileURL = URL(fileURLWithPath: "/path/to/audio.mp3")
+if let fileData = try? Data(contentsOf: fileURL) {
+    body.append("--\(boundary)\r\n".data(using: .utf8)!)
+    body.append("Content-Disposition: form-data; name=\"file\"; filename=\"audio.mp3\"\r\n".data(using: .utf8)!)
+    body.append("Content-Type: audio/mpeg\r\n\r\n".data(using: .utf8)!)
+    body.append(fileData)
+    body.append("\r\n".data(using: .utf8)!)
+}
+
+// Add other fields
+let fields = ["model": "whisper-1", "language": "ko", "response_format": "json"]
+for (key, value) in fields {
+    body.append("--\(boundary)\r\n".data(using: .utf8)!)
+    body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
+    body.append("\(value)\r\n".data(using: .utf8)!)
+}
+
+body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+
+request.httpBody = body
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+    
+    if let data = data, let responseString = String(data: data, encoding: .utf8) {
+        print(responseString)
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/audio/transcriptions";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
+
+        using var form = new MultipartFormDataContent();
+        
+        var fileStream = File.OpenRead("/path/to/audio.mp3");
+        form.Add(new StreamContent(fileStream), "file", "audio.mp3");
+        form.Add(new StringContent("whisper-1"), "model");
+        form.Add(new StringContent("ko"), "language");
+        form.Add(new StringContent("json"), "response_format");
+
+        var response = await client.PostAsync(url, form);
+        var result = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(result);
+    }
+}
+```
+
+```c C
+#include <stdio.h>
+#include <curl/curl.h>
+
+int main(void) {
+    CURL *curl;
+    CURLcode res;
+    struct curl_httppost *formpost = NULL;
+    struct curl_httppost *lastptr = NULL;
+    struct curl_slist *headers = NULL;
+
+    curl_global_init(CURL_GLOBAL_ALL);
+
+    curl_formadd(&formpost, &lastptr,
+                 CURLFORM_COPYNAME, "file",
+                 CURLFORM_FILE, "/path/to/audio.mp3",
+                 CURLFORM_END);
+
+    curl_formadd(&formpost, &lastptr,
+                 CURLFORM_COPYNAME, "model",
+                 CURLFORM_COPYCONTENTS, "whisper-1",
+                 CURLFORM_END);
+
+    curl_formadd(&formpost, &lastptr,
+                 CURLFORM_COPYNAME, "language",
+                 CURLFORM_COPYCONTENTS, "ko",
+                 CURLFORM_END);
+
+    curl_formadd(&formpost, &lastptr,
+                 CURLFORM_COPYNAME, "response_format",
+                 CURLFORM_COPYCONTENTS, "json",
+                 CURLFORM_END);
+
+    curl = curl_easy_init();
+    headers = curl_slist_append(headers, "Authorization: Bearer <token>");
+
+    if(curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, "https://api.apimart.ai/v1/audio/transcriptions");
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+        curl_easy_setopt(curl, CURLOPT_HTTPPOST, formpost);
+
+        res = curl_easy_perform(curl);
+
+        if(res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+        }
+
+        curl_easy_cleanup(curl);
+        curl_formfree(formpost);
+        curl_slist_free_all(headers);
+    }
+
+    curl_global_cleanup();
+    return 0;
+}
+```
+
+```objectivec Objective-C
+#import <Foundation/Foundation.h>
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        NSURL *url = [NSURL URLWithString:@"https://api.apimart.ai/v1/audio/transcriptions"];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:@"Bearer <token>" forHTTPHeaderField:@"Authorization"];
+        
+        NSString *boundary = @"Boundary-12345";
+        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+        [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
+        
+        NSMutableData *body = [NSMutableData data];
+        
+        // Add file
+        NSData *fileData = [NSData dataWithContentsOfFile:@"/path/to/audio.mp3"];
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Disposition: form-data; name=\"file\"; filename=\"audio.mp3\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type: audio/mpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:fileData];
+        [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        // Add other fields
+        NSDictionary *fields = @{@"model": @"whisper-1", @"language": @"ko", @"response_format": @"json"};
+        for (NSString *key in fields) {
+            [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"%@\r\n", fields[key]] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [request setHTTPBody:body];
+        
+        NSURLSessionDataTask *task = [[NSURLSession sharedSession] 
+            dataTaskWithRequest:request
+            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                if (error) {
+                    NSLog(@"Error: %@", error);
+                    return;
+                }
+                NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"%@", result);
+            }];
+        
+        [task resume];
+        [[NSRunLoop mainRunLoop] run];
+    }
+    return 0;
+}
+```
+
+```ocaml OCaml
+(* Requires cohttp and yojson libraries *)
+open Lwt
+open Cohttp
+open Cohttp_lwt_unix
+
+let url = "https://api.apimart.ai/v1/audio/transcriptions"
+
+(* Note: Multipart form data handling in OCaml requires additional libraries *)
+let () =
+  print_endline "파일 업로드에는 multipart_form 라이브러리를 사용하세요"
+```
+
+```dart Dart
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
+void main() async {
+  final url = Uri.parse('https://api.apimart.ai/v1/audio/transcriptions');
+  
+  var request = http.MultipartRequest('POST', url);
+  request.headers['Authorization'] = 'Bearer <token>';
+  
+  request.files.add(await http.MultipartFile.fromPath('file', '/path/to/audio.mp3'));
+  request.fields['model'] = 'whisper-1';
+  request.fields['language'] = 'ko';
+  request.fields['response_format'] = 'json';
+  
+  var response = await request.send();
+  var responseData = await response.stream.bytesToString();
+  
+  print(responseData);
+}
+```
+
+```r R
+library(httr)
+
+url <- "https://api.apimart.ai/v1/audio/transcriptions"
+
+response <- POST(
+  url,
+  add_headers(Authorization = "Bearer <token>"),
+  body = list(
+    file = upload_file("/path/to/audio.mp3"),
+    model = "whisper-1",
+    language = "ko",
+    response_format = "json"
+  ),
+  encode = "multipart"
+)
+
+cat(content(response, "text"))
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "text": "이것은 테스트 오디오의 변환된 텍스트입니다."
+}
+```
+
+```json 200 (상세 형식)
+{
+  "task": "transcribe",
+  "language": "ko",
+  "duration": 8.5,
+  "text": "이것은 테스트 오디오의 변환된 텍스트입니다.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 3.5,
+      "text": "이것은 테스트 오디오",
+      "tokens": [50364, 1234, 5678],
+      "temperature": 0.0,
+      "avg_logprob": -0.3,
+      "compression_ratio": 1.2,
+      "no_speech_prob": 0.01
+    }
+  ]
+}
+```
+
+```srt 200 (SRT 자막 형식)
+1
+00:00:00,000 --> 00:00:03,500
+이것은 테스트 오디오
+
+2
+00:00:03,500 --> 00:00:08,500
+의 변환된 텍스트입니다.
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "요청 매개변수가 잘못되었습니다",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "인증에 실패했습니다. API 키를 확인하세요",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "계정 잔액이 부족합니다. 충전 후 다시 시도하세요",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 413
+{
+  "error": {
+    "code": 413,
+    "message": "파일 크기가 제한을 초과했습니다 (최대 25MB)",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "요청이 너무 많습니다. 나중에 다시 시도하세요",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "서버 내부 오류. 나중에 다시 시도하세요",
+    "type": "server_error"
+  }
+}
+```
+
+```json 502
+{
+  "error": {
+    "code": 502,
+    "message": "게이트웨이 오류. 서버를 일시적으로 사용할 수 없습니다",
+    "type": "bad_gateway"
+  }
+}
+```
+
+</ResponseExample>
+
+## Authorizations
+
+<ParamField header="Authorization" type="string" required>
+  모든 인터페이스에 Bearer Token 인증이 필요합니다
+
+  API Key 받기:
+
+  [API Key 관리 페이지](https://api.apimart.ai/console/token)를 방문하여 API Key를 받으세요
+
+  요청 헤더에 추가:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Body
+
+<ParamField body="file" type="file" required>
+  변환할 오디오 파일
+
+  지원 형식: mp3, mp4, mpeg, mpga, m4a, wav, webm
+  
+  최대 파일 크기: 25 MB
+</ParamField>
+
+<ParamField body="model" type="string" default="whisper-1" required>
+  음성 인식 모델 이름
+
+  예: `"whisper-1"`
+</ParamField>
+
+<ParamField body="language" type="string">
+  오디오의 언어 코드 (ISO-639-1 형식)
+
+  언어를 지정하면 정확도와 속도가 향상됩니다
+  
+  지원 언어: zh (중국어), en (영어), ja (일본어), ko (한국어) 등 99개 언어
+  
+  예: `"ko"`
+</ParamField>
+
+<ParamField body="prompt" type="string">
+  변환 스타일을 안내하기 위한 선택적 텍스트 프롬프트
+
+  최대 224 토큰
+</ParamField>
+
+<ParamField body="response_format" type="string" default="json">
+  출력 형식
+
+  지원 형식:
+  - `json` - JSON 형식 (텍스트만)
+  - `text` - 일반 텍스트
+  - `srt` - SRT 자막 형식
+  - `verbose_json` - 상세 JSON 형식 (타임스탬프 및 메타데이터 포함)
+  - `vtt` - WebVTT 자막 형식
+</ParamField>
+
+<ParamField body="temperature" type="number" default="0">
+  샘플링 온도, 범위 0~1
+
+  높은 값 (0.8 등)은 출력을 더 무작위로 만들고, 낮은 값 (0.2 등)은 더 확정적이고 일관되게 만듭니다
+</ParamField>
+
+## Response
+
+<ResponseField name="text" type="string">
+  변환된 텍스트 내용
+</ResponseField>
+
+<ResponseField name="task" type="string">
+  작업 유형, `transcribe`로 고정
+  
+  verbose_json 형식에서만 반환됩니다
+</ResponseField>
+
+<ResponseField name="language" type="string">
+  감지되거나 지정된 언어 코드
+  
+  verbose_json 형식에서만 반환됩니다
+</ResponseField>
+
+<ResponseField name="duration" type="number">
+  오디오 길이 (초)
+  
+  verbose_json 형식에서만 반환됩니다
+</ResponseField>
+
+<ResponseField name="segments" type="array">
+  텍스트 세그먼트 배열
+  
+  verbose_json 형식에서만 반환됩니다
+
+  <Expandable title="속성">
+    <ResponseField name="id" type="integer">
+      세그먼트 ID
+    </ResponseField>
+
+    <ResponseField name="start" type="number">
+      세그먼트 시작 시간 (초)
+    </ResponseField>
+
+    <ResponseField name="end" type="number">
+      세그먼트 종료 시간 (초)
+    </ResponseField>
+
+    <ResponseField name="text" type="string">
+      세그먼트 텍스트 내용
+    </ResponseField>
+
+    <ResponseField name="temperature" type="number">
+      사용된 샘플링 온도
+    </ResponseField>
+
+    <ResponseField name="avg_logprob" type="number">
+      평균 로그 확률
+    </ResponseField>
+
+    <ResponseField name="compression_ratio" type="number">
+      압축률
+    </ResponseField>
+
+    <ResponseField name="no_speech_prob" type="number">
+      무음성 확률
+    </ResponseField>
+  </Expandable>
+</ResponseField>

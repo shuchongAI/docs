@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find . -name \"generation.mdx\" -path \"*/videos/*\" -exec sed -i 's/Example: 5/Example: `5`/g' {} ;)",
+      "Bash(git add cn/api-reference/videos/sora2/generation.mdx en/api-reference/videos/sora2/generation.mdx ja/api-reference/videos/sora2/generation.mdx ko/api-reference/videos/sora2/generation.mdx cn/api-reference/videos/veo3/generation.mdx en/api-reference/videos/veo3/generation.mdx ja/api-reference/videos/veo3/generation.mdx ko/api-reference/videos/veo3/generation.mdx)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nUpdate API documentation models and parameters\n\n- Update chat-completions models to GPT-5, Claude 4.5/4.1, Gemini 2.5, DeepSeek V3.1, and Doubao Seed 1.6 series across all languages\n- Add (Nano banana) label to Gemini-2.5-Flash-Image-Preview in navigation and page titles\n- Change video duration parameter from range format to example format (Example: \\`5\\`) for Sora2 and VEO3\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push)",
+      "Bash(git log -1 --format='%H')",
+      "Bash(find . -path \"*/sora2/generation.mdx\" -exec sed -i 's/\"\"sora2\"\"/\"\"sora2\"\"/g' {} ;)",
+      "Bash(find . -path \"*/sora2/generation.mdx\" -exec sed -i 's/default=\"\"sora2\"\"/default=\"\"sora2\"\"/g' {} ;)",
+      "Bash(find . -path \"*/sora2/generation.mdx\" -exec sed -i 's/\"\"duration\"\": 15/\"\"duration\"\": 5/g' {} ;)",
+      "Bash(find . -path \"*/veo3/generation.mdx\" -exec sed -i 's/\"\"duration\"\": 15/\"\"duration\"\": 5/g' {} ;)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nUpdate video generation model names and duration values\n\n- Change Sora2 model name from \"sora2\" to \"sora-2\" in all examples and parameters\n- Standardize duration values to 5 seconds for both Sora2 and VEO3 across all language versions\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit -m \"$(cat <<''EOF''\nRemove Qwen and Wan2.5 from feature cards\n\n- Remove Qwen from image generation model list\n- Remove Wan2.5 from video generation model list\n- Update all language versions (CN, EN, JA, KO)\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(find:*)",
+      "Bash(for lang in cn en ja ko)",
+      "Bash(do echo \"=== $lang ===\")",
+      "Bash(ls:*)",
+      "Bash(done)",
+      "Bash(git add:*)",
+      "Bash(do echo \"=== $lang TTS models ===\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

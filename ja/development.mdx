@@ -1,0 +1,80 @@
+---
+title: "開発ガイド"
+description: "アプリケーションにAPIを統合する"
+---
+
+# 開発ガイド
+
+このガイドでは、APIサービスをアプリケーションに統合する方法を説明します。
+
+## 非同期処理
+
+APIは非同期処理モデルを使用しています：
+
+1. タスクを送信：生成リクエストを送信してタスクIDを受け取る
+2. ステータスをポーリング：定期的にタスクのステータスを確認する
+3. 結果を取得：タスクが完了したら生成結果を取得する
+
+### ポーリングの例
+
+```python
+import time
+
+def wait_for_completion(client, task_id, max_wait=300):
+    """Wait for the task to complete"""
+    start_time = time.time()
+
+    while time.time() - start_time < max_wait:
+        result = client.tasks.get(task_id)
+
+        if result.status == "completed":
+            return result
+        elif result.status == "failed":
+            raise Exception(f"Task failed: {result.error}")
+
+        time.sleep(2)  # wait 2 seconds before querying again
+
+    raise Exception("Task timeout")
+```
+
+## エラー処理
+
+### よくあるエラー
+
+| ステータス | 説明 | 解決方法 |
+|--------|-------------|------------|
+| 400 | 無効なリクエストパラメータ | リクエストパラメータとフォーマットを確認する |
+| 401 | 認証失敗 | APIキーを確認する |
+| 402 | 残高不足 | アカウント残高をチャージする |
+| 429 | レート制限超過 | リクエストの頻度を減らす |
+| 500 | サーバーエラー | 後で再試行する |
+
+### 例
+
+```python
+try:
+    response = client.images.generate(...)
+except EvolinkError as e:
+    if e.status_code == 401:
+        print("Invalid API key")
+    elif e.status_code == 402:
+        print("Insufficient account balance")
+    else:
+        print(f"Error: {e.message}")
+```
+
+## ベストプラクティス
+
+1. キャッシング：生成された画像/動画のリンクは24時間有効です
+2. リトライ：一時的なエラーには指数バックオフを実装する
+3. モニタリング：API使用状況とクォータを定期的に確認する
+4. セキュリティ：APIキーを安全に保管する
+
+## サポート
+
+開発中に問題が発生した場合は、以下の方法でサポートを受けられます：
+
+- メール：zhihong@apimart.ai
+- ライブチャット：ウェブサイトにアクセス
+- ドキュメント：完全なAPIドキュメントを参照
+
