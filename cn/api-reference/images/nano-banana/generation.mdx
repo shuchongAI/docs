@@ -27,11 +27,6 @@ curl --request POST \
     "prompt": "月光下的竹林小径",
     "size": "1:1",
     "n": 1,
-    "image_urls": [
-      "https://example.com/image1.png",
-      "https://example.com/image2.png"
-    ],
-    "mask_url": "https://example.com/mask.png"
   }'
 ```
 
@@ -45,11 +40,6 @@ payload = {
     "prompt": "月光下的竹林小径",
     "size": "1:1",
     "n": 1,
-    "image_urls": [
-        "https://example.com/image1.png",
-        "https://example.com/image2.png"
-    ],
-    "mask_url": "https://example.com/mask.png"
 }
 
 headers = {
@@ -70,11 +60,6 @@ const payload = {
   prompt: "月光下的竹林小径",
   size: "1024x1024",
   n: 1,
-  image_urls: [
-    "https://example.com/image1.png",
-    "https://example.com/image2.png"
-  ],
-  mask_url: "https://example.com/mask.png"
 };
 
 const headers = {
@@ -111,11 +96,11 @@ func main() {
         "prompt": "月光下的竹林小径",
         "size":   "1:1",
         "n":      1,
-        "image_urls": []string{
+        "DELETE_IMAGE_URLS": []string{
             "https://example.com/image1.png",
             "https://example.com/image2.png",
         },
-        "mask_url": "https://example.com/mask.png",
+        "DELETE_MASK": "https://example.com/mask.png",
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -152,11 +137,11 @@ public class Main {
           "prompt": "月光下的竹林小径",
           "size": "1:1",
           "n": 1,
-          "image_urls": [
+          "DELETE_IMAGE_URLS": [
             "https://example.com/image1.png",
             "https://example.com/image2.png"
           ],
-          "mask_url": "https://example.com/mask.png"
+          "DELETE_MASK": "https://example.com/mask.png"
         }
         """;
 
@@ -185,12 +170,7 @@ $payload = [
     "model" => "gemini-2.5-flash-image-preview",
     "prompt" => "月光下的竹林小径",
     "size" => "1024x1024",
-    "n" => 1,
-    "image_urls" => [
-        "https://example.com/image1.png",
-        "https://example.com/image2.png"
-    ],
-    "mask_url" => "https://example.com/mask.png"
+    "n" => 1
 ];
 
 $ch = curl_init($url);
@@ -221,11 +201,6 @@ payload = {
   prompt: "月光下的竹林小径",
   size: "1024x1024",
   n: 1,
-  image_urls: [
-    "https://example.com/image1.png",
-    "https://example.com/image2.png"
-  ],
-  mask_url: "https://example.com/mask.png"
 }
 
 http = Net::HTTP.new(url.host, url.port)
@@ -250,11 +225,6 @@ let payload: [String: Any] = [
     "prompt": "月光下的竹林小径",
     "size": "1:1",
     "n": 1,
-    "image_urls": [
-        "https://example.com/image1.png",
-        "https://example.com/image2.png"
-    ],
-    "mask_url": "https://example.com/mask.png"
 ]
 
 var request = URLRequest(url: url)
@@ -293,12 +263,7 @@ class Program
             ""model"": ""gemini-2.5-flash-image-preview"",
             ""prompt"": ""月光下的竹林小径"",
             ""size"": ""1024x1024"",
-            ""n"": 1,
-            ""image_urls"": [
-                ""https://example.com/image1.png"",
-                ""https://example.com/image2.png""
-            ],
-            ""mask_url"": ""https://example.com/mask.png""
+            ""n"": 1
         }";
 
         using var client = new HttpClient();
@@ -331,8 +296,7 @@ int main(void) {
             "\"prompt\":\"月光下的竹林小径\","
             "\"size\":\"1024x1024\","
             "\"n\":1,"
-            "\"image_urls\":[\"https://example.com/image1.png\",\"https://example.com/image2.png\"],"
-            "\"mask_url\":\"https://example.com/mask.png\""
+            ""
         "}";
 
         struct curl_slist *headers = NULL;
@@ -371,11 +335,11 @@ int main(int argc, const char * argv[]) {
             @"prompt": @"月光下的竹林小径",
             @"size": @"1024x1024",
             @"n": @1,
-            @"image_urls": @[
+            @"DELETE_IMAGE_URLS": @[
                 @"https://example.com/image1.png",
                 @"https://example.com/image2.png"
             ],
-            @"mask_url": @"https://example.com/mask.png"
+            @"DELETE_MASK": @"https://example.com/mask.png"
         };
         
         NSError *error;
@@ -421,11 +385,11 @@ let payload = {|{
   "prompt": "月光下的竹林小径",
   "size": "1:1",
   "n": 1,
-  "image_urls": [
+  "DELETE_IMAGE_URLS": [
     "https://example.com/image1.png",
     "https://example.com/image2.png"
   ],
-  "mask_url": "https://example.com/mask.png"
+  "DELETE_MASK": "https://example.com/mask.png"
 }|}
 
 let () =
@@ -453,12 +417,7 @@ void main() async {
     'model': 'gemini-2.5-flash-image-preview',
     'prompt': '月光下的竹林小径',
     'size': '1024x1024',
-    'n': 1,
-    'image_urls': [
-      'https://example.com/image1.png',
-      'https://example.com/image2.png'
-    ],
-    'mask_url': 'https://example.com/mask.png'
+    'n': 1
   };
   
   final response = await http.post(
@@ -484,12 +443,7 @@ payload <- list(
   model = "gemini-2.5-flash-image-preview",
   prompt = "月光下的竹林小径",
   size = "1024x1024",
-  n = 1,
-  image_urls = list(
-    "https://example.com/image1.png",
-    "https://example.com/image2.png"
-  ),
-  mask_url = "https://example.com/mask.png"
+  n = 1
 )
 
 response <- POST(
