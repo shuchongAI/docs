@@ -25,7 +25,7 @@ curl --request POST \
   --data '{
     "model": "gpt-4o-image",
     "prompt": "An ancient castle under the starry sky",
-    "size": "1024x1024",
+    "size": "1:1",
     "n": 1,
     "image_urls": [
       "https://example.com/image1.png",
@@ -43,7 +43,7 @@ url = "https://api.apimart.ai/v1/images/generations"
 payload = {
     "model": "gpt-4o-image",
     "prompt": "An ancient castle under the starry sky",
-    "size": "1024x1024",
+    "size": "1:1",
     "n": 1,
     "image_urls": [
         "https://example.com/image1.png",
@@ -150,7 +150,7 @@ public class Main {
         {
           "model": "gpt-4o-image",
           "prompt": "An ancient castle under the starry sky",
-          "size": "1024x1024",
+          "size": "1:1",
           "n": 1,
           "image_urls": [
             "https://example.com/image1.png",
@@ -248,7 +248,7 @@ let url = URL(string: "https://api.apimart.ai/v1/images/generations")!
 let payload: [String: Any] = [
     "model": "gpt-4o-image",
     "prompt": "An ancient castle under the starry sky",
-    "size": "1024x1024",
+    "size": "1:1",
     "n": 1,
     "image_urls": [
         "https://example.com/image1.png",
@@ -419,7 +419,7 @@ let url = "https://api.apimart.ai/v1/images/generations"
 let payload = {|{
   "model": "gpt-4o-image",
   "prompt": "An ancient castle under the starry sky",
-  "size": "1024x1024",
+  "size": "1:1",
   "n": 1,
   "image_urls": [
     "https://example.com/image1.png",
