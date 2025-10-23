@@ -100,9 +100,8 @@ func main() {
         "size":   "1:1",
         "n":      1,
         "image_urls": []string{
-            "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png",
-            "DELETE_THIS",
-        }    }
+            "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"
+  }    }
 
     jsonData, _ := json.Marshal(payload)
 
@@ -139,8 +138,7 @@ public class Main {
           "size": "1:1",
           "n": 1,
           "image_urls": [
-            "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png",
-            "DELETE_THIS"
+            "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"
           ]        }
         """;
 
@@ -268,7 +266,7 @@ class Program
             ""n"": 1,
             ""image_urls"": [
                 ""https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"",
-                ""DELETE_THIS""
+                ""
             ]        }";
 
         using var client = new HttpClient();
@@ -342,7 +340,7 @@ int main(int argc, const char * argv[]) {
             @"n": @1,
             @"image_urls": @[
                 @"https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png",
-                @"DELETE_THIS"
+                @
             ]        };
         
         NSError *error;
@@ -418,16 +416,15 @@ void main() async {
     'size': '1024x1024',
     'n': 1,
     'image_urls': [
-      'https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png',
-      'DELETE_THIS'
+      'https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png'
     ]  };
   
   final response = await http.post(
     url,
     headers: {
       'Authorization': 'Bearer <token>',
-      'Content-Type': 'application/json',
-    },
+      'Content-Type': 'application/json'
+  },
     body: jsonEncode(payload),
   );
   
