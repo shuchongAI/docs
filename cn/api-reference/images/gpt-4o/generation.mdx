@@ -29,11 +29,7 @@ curl --request POST \
     "size": "1:1",
     "n": 1,
     "image_urls": [
-      "https://example.com/image1.png",
-      "https://example.com/image2.png"
-    ],
-    "mask_url": "https://example.com/mask.png"
-  }'
+      "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"    ]  }'
 ```
 
 ```python Python
@@ -47,11 +43,7 @@ payload = {
     "size": "1:1",
     "n": 1,
     "image_urls": [
-        "https://example.com/image1.png",
-        "https://example.com/image2.png"
-    ],
-    "mask_url": "https://example.com/mask.png"
-}
+        "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"    ]}
 
 headers = {
     "Authorization": "Bearer <token>",
@@ -72,11 +64,7 @@ const payload = {
   size: "1024x1024",
   n: 1,
   image_urls: [
-    "https://example.com/image1.png",
-    "https://example.com/image2.png"
-  ],
-  mask_url: "https://example.com/mask.png"
-};
+    "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"  ]};
 
 const headers = {
   "Authorization": "Bearer <token>",
@@ -113,11 +101,9 @@ func main() {
         "size":   "1:1",
         "n":      1,
         "image_urls": []string{
-            "https://example.com/image1.png",
-            "https://example.com/image2.png",
-        },
-        "mask_url": "https://example.com/mask.png",
-    }
+            "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png",
+            "DELETE_THIS_LINE",
+        }    }
 
     jsonData, _ := json.Marshal(payload)
 
@@ -154,11 +140,9 @@ public class Main {
           "size": "1:1",
           "n": 1,
           "image_urls": [
-            "https://example.com/image1.png",
-            "https://example.com/image2.png"
-          ],
-          "mask_url": "https://example.com/mask.png"
-        }
+            "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png",
+            "DELETE_THIS_LINE"
+          ]        }
         """;
 
         HttpClient client = HttpClient.newHttpClient();
@@ -188,11 +172,7 @@ $payload = [
     "size" => "1024x1024",
     "n" => 1,
     "image_urls" => [
-        "https://example.com/image1.png",
-        "https://example.com/image2.png"
-    ],
-    "mask_url" => "https://example.com/mask.png"
-];
+        "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"    ]];
 
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -223,11 +203,7 @@ payload = {
   size: "1024x1024",
   n: 1,
   image_urls: [
-    "https://example.com/image1.png",
-    "https://example.com/image2.png"
-  ],
-  mask_url: "https://example.com/mask.png"
-}
+    "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"  ]}
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
@@ -252,11 +228,7 @@ let payload: [String: Any] = [
     "size": "1:1",
     "n": 1,
     "image_urls": [
-        "https://example.com/image1.png",
-        "https://example.com/image2.png"
-    ],
-    "mask_url": "https://example.com/mask.png"
-]
+        "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"    ]]
 
 var request = URLRequest(url: url)
 request.httpMethod = "POST"
@@ -296,11 +268,9 @@ class Program
             ""size"": ""1024x1024"",
             ""n"": 1,
             ""image_urls"": [
-                ""https://example.com/image1.png"",
-                ""https://example.com/image2.png""
-            ],
-            ""mask_url"": ""https://example.com/mask.png""
-        }";
+                ""https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"",
+                ""DELETE_THIS_LINE""
+            ]        }";
 
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
@@ -332,8 +302,7 @@ int main(void) {
             "\"prompt\":\"星空下的古老城堡\","
             "\"size\":\"1024x1024\","
             "\"n\":1,"
-            "\"image_urls\":[\"https://example.com/image1.png\",\"https://example.com/image2.png\"],"
-            "\"mask_url\":\"https://example.com/mask.png\""
+            "\"image_urls\":[\"https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png\"]"
         "}";
 
         struct curl_slist *headers = NULL;
@@ -373,11 +342,9 @@ int main(int argc, const char * argv[]) {
             @"size": @"1024x1024",
             @"n": @1,
             @"image_urls": @[
-                @"https://example.com/image1.png",
-                @"https://example.com/image2.png"
-            ],
-            @"mask_url": @"https://example.com/mask.png"
-        };
+                @"https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png",
+                @"DELETE_THIS_LINE"
+            ]        };
         
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload
@@ -423,11 +390,7 @@ let payload = {|{
   "size": "1:1",
   "n": 1,
   "image_urls": [
-    "https://example.com/image1.png",
-    "https://example.com/image2.png"
-  ],
-  "mask_url": "https://example.com/mask.png"
-}|}
+    "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"  ]}|}
 
 let () =
   let headers = Header.init ()
@@ -456,11 +419,7 @@ void main() async {
     'size': '1024x1024',
     'n': 1,
     'image_urls': [
-      'https://example.com/image1.png',
-      'https://example.com/image2.png'
-    ],
-    'mask_url': 'https://example.com/mask.png'
-  };
+      'https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png'    ]  };
   
   final response = await http.post(
     url,
@@ -487,11 +446,7 @@ payload <- list(
   size = "1024x1024",
   n = 1,
   image_urls = list(
-    "https://example.com/image1.png",
-    "https://example.com/image2.png"
-  ),
-  mask_url = "https://example.com/mask.png"
-)
+    "https://cdn.apimart.ai/doc/9998238784524590-549804af-14bc-4fbc-bae5-9d8469d35de3-image_task_01K889V97T2YF8RHQW21XMVMS1_0.png"  ))
 
 response <- POST(
   url,
