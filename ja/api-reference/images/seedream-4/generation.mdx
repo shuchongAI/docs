@@ -25,10 +25,10 @@ curl --request POST \
   --data '{
     "model": "doubao-seedream-4-0-250828",
     "prompt": "竹林で遊ぶかわいいパンダ",
-    "size": "1024x1024",
+    "size": "1:1",
     "n": 1,
     "image_urls": [
-      "https://example.com/image1.png"
+      "https://cdn.apimart.ai/doc/1761215838466614297_9852.png"
     ]
   }'
 ```
@@ -41,10 +41,10 @@ url = "https://api.apimart.ai/v1/images/generations"
 payload = {
     "model": "doubao-seedream-4-0-250828",
     "prompt": "竹林で遊ぶかわいいパンダ",
-    "size": "1024x1024",
+    "size": "1:1",
     "n": 1,
     "image_urls": [
-        "https://example.com/image1.png"
+        "https://cdn.apimart.ai/doc/1761215838466614297_9852.png"
     ]
 }
 
@@ -67,7 +67,7 @@ const payload = {
   size: "1024x1024",
   n: 1,
   image_urls: [
-    "https://example.com/image1.png"
+    "https://cdn.apimart.ai/doc/1761215838466614297_9852.png"
   ]
 };
 
@@ -103,10 +103,10 @@ func main() {
     payload := map[string]interface{}{
         "model":  "doubao-seedream-4-0-250828",
         "prompt": "竹林で遊ぶかわいいパンダ",
-        "size":   "1024x1024",
+        "size":   "1:1",
         "n":      1,
         "image_urls": []string{
-            "https://example.com/image1.png",
+            "https://cdn.apimart.ai/doc/1761215838466614297_9852.png",
         },
     }
 
@@ -142,10 +142,10 @@ public class Main {
         {
           "model": "doubao-seedream-4-0-250828",
           "prompt": "竹林で遊ぶかわいいパンダ",
-          "size": "1024x1024",
+          "size": "1:1",
           "n": 1,
           "image_urls": [
-            "https://example.com/image1.png"
+            "https://cdn.apimart.ai/doc/1761215838466614297_9852.png"
           ]
         }
         """;
@@ -177,7 +177,7 @@ $payload = [
     "size" => "1024x1024",
     "n" => 1,
     "image_urls" => [
-        "https://example.com/image1.png"
+        "https://cdn.apimart.ai/doc/1761215838466614297_9852.png"
     ]
 ];
 
@@ -210,7 +210,7 @@ payload = {
   size: "1024x1024",
   n: 1,
   image_urls: [
-    "https://example.com/image1.png"
+    "https://cdn.apimart.ai/doc/1761215838466614297_9852.png"
   ]
 }
 
@@ -234,10 +234,10 @@ let url = URL(string: "https://api.apimart.ai/v1/images/generations")!
 let payload: [String: Any] = [
     "model": "doubao-seedream-4-0-250828",
     "prompt": "竹林で遊ぶかわいいパンダ",
-    "size": "1024x1024",
+    "size": "1:1",
     "n": 1,
     "image_urls": [
-        "https://example.com/image1.png"
+        "https://cdn.apimart.ai/doc/1761215838466614297_9852.png"
     ]
 ]
 
@@ -279,7 +279,7 @@ class Program
             ""size"": ""1024x1024"",
             ""n"": 1,
             ""image_urls"": [
-                ""https://example.com/image1.png""
+                ""https://cdn.apimart.ai/doc/1761215838466614297_9852.png""
             ]
         }";
 
@@ -313,7 +313,7 @@ int main(void) {
             "\"prompt\":\"竹林で遊ぶかわいいパンダ\","
             "\"size\":\"1024x1024\","
             "\"n\":1,"
-            "\"image_urls\":[\"https://example.com/image1.png\"]"
+            "\"image_urls\":[\"https://cdn.apimart.ai/doc/1761215838466614297_9852.png\"]"
         "}";
 
         struct curl_slist *headers = NULL;
@@ -353,7 +353,7 @@ int main(int argc, const char * argv[]) {
             @"size": @"1024x1024",
             @"n": @1,
             @"image_urls": @[
-                @"https://example.com/image1.png"
+                @"https://cdn.apimart.ai/doc/1761215838466614297_9852.png"
             ]
         };
         
@@ -398,10 +398,10 @@ let url = "https://api.apimart.ai/v1/images/generations"
 let payload = {|{
   "model": "doubao-seedream-4-0-250828",
   "prompt": "A cute panda playing in a bamboo forest",
-  "size": "1024x1024",
+  "size": "1:1",
   "n": 1,
   "image_urls": [
-    "https://example.com/image1.png"
+    "https://cdn.apimart.ai/doc/1761215838466614297_9852.png"
   ]
 }|}
 
@@ -432,7 +432,7 @@ void main() async {
     'size': '1024x1024',
     'n': 1,
     'image_urls': [
-      'https://example.com/image1.png'
+      'https://cdn.apimart.ai/doc/1761215838466614297_9852.png'
     ]
   };
   
@@ -461,7 +461,7 @@ payload <- list(
   size = "1024x1024",
   n = 1,
   image_urls = list(
-    "https://example.com/image1.png"
+    "https://cdn.apimart.ai/doc/1761215838466614297_9852.png"
   )
 )
 
