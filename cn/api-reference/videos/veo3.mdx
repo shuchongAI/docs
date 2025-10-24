@@ -26,7 +26,7 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
     "model": "veo3.1",
     "prompt": "一群海豚在碧蓝海洋中跳跃",
     "duration": 10,
-    "resolution": "1920x1080"
+    "resolution": "16:9"
   }'
 ```
 
@@ -47,5 +47,9 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
 </ParamField>
 
 <ParamField query="resolution" type="string">
-  视频分辨率，支持 "1920x1080", "1280x720"
+  视频分辨率
+  
+  支持的格式：
+  - `16:9` (横屏)
+  - `9:16` (竖屏)
 </ParamField>
