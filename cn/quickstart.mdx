@@ -20,11 +20,8 @@ description: "快速开始使用我们的API服务"
 
 ### 图像生成模型
 - **GPT-4o-image**: 高质量图像生成
-- **Seedream-4.0**: 专业图像生成
-- **Gemini-2.5-Flash-Image**: 快速图像生成
 
 ### 视频生成模型
-- **VEO3**: 高质量视频生成
 - **Sora2**: 专业视频生成
 
 ## 第三步：发送请求
@@ -50,10 +47,10 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "veo3",
+    "model": "sora-2",
     "prompt": "海浪拍打着海岸",
-    "duration": 10,
-    "resolution": "1920x1080"
+    "duration": 15,
+    "resolution": "16:9"
   }'
 ```
 
