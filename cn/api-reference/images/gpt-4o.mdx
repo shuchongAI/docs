@@ -23,7 +23,7 @@ curl -X POST https://api.apimart.ai/v1/images/generations \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "GPT-4o-image-image",
+    "model": "gpt-4o-image",
     "prompt": "星空下的古老城堡",
     "size": "1:1",
     "n": 1,
@@ -46,7 +46,7 @@ curl -X POST https://api.apimart.ai/v1/images/generations \
   "data": {
     "created": 1757156493,
     "id": "task-unified-1757156493-k9m2xpvw",
-    "model": "GPT-4o-image-image",
+    "model": "gpt-4o-image",
     "object": "image.generation.task",
     "progress": 0,
     "status": "pending",
@@ -64,7 +64,7 @@ curl -X POST https://api.apimart.ai/v1/images/generations \
 ## 参数说明
 
 <ParamField query="model" type="string" required>
-  模型名称，固定为 "GPT-4o-image-image"
+  模型名称，固定为 "gpt-4o-image"
 </ParamField>
 
 <ParamField query="prompt" type="string" required>
