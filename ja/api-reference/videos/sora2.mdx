@@ -26,7 +26,7 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
     "model": "sora-2",
     "prompt": "夕日に岸に打ち寄せる波",
     "duration": 15,
-    "resolution": "1920x1080"
+    "resolution": "16:9"
   }'
 ```
 
@@ -47,6 +47,10 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
 </ParamField>
 
 <ParamField query="resolution" type="string">
-  動画解像度。サポート: "1920x1080", "1280x720"。
+  動画解像度
+  
+  サポートされている形式：
+  - `16:9` (横向き)
+  - `9:16` (縦向き)
 </ParamField>
 

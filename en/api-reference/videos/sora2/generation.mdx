@@ -26,7 +26,7 @@ curl --request POST \
     "model": "sora-2",
     "prompt": "A waterfall cascading down forming a rainbow",
     "duration": 5,
-    "resolution": "1920x1080",
+    "resolution": "16:9",
     "image_urls": ["https://example.com/image.png"]
   }'
 ```
@@ -40,7 +40,7 @@ payload = {
     "model": "sora-2",
     "prompt": "A waterfall cascading down forming a rainbow",
     "duration": 5,
-    "resolution": "1920x1080",
+    "resolution": "16:9",
     "image_urls": ["https://example.com/image.png"]
 }
 
@@ -61,7 +61,7 @@ const payload = {
   model: "sora-2",
   prompt: "A waterfall cascading down forming a rainbow",
   duration: 15,
-  resolution: "1920x1080",
+  resolution: "16:9",
   image_urls: ["https://example.com/image.png"]
 };
 
@@ -98,7 +98,7 @@ func main() {
         "model":      "sora-2",
         "prompt":     "A waterfall cascading down forming a rainbow",
         "duration":   15,
-        "resolution": "1920x1080",
+        "resolution": "16:9",
         "image_urls":  ["https://example.com/image.png"],
     }
 
@@ -135,7 +135,7 @@ public class Main {
           "model": "sora-2",
           "prompt": "A waterfall cascading down forming a rainbow",
           "duration": 5,
-          "resolution": "1920x1080",
+          "resolution": "16:9",
           "image_urls": ["https://example.com/image.png"]
         }
         """;
@@ -165,7 +165,7 @@ $payload = [
     "model" => "sora-2",
     "prompt" => "A waterfall cascading down forming a rainbow",
     "duration" => 15,
-    "resolution" => "1920x1080",
+    "resolution" => "16:9",
     "image_urls" => ["https://example.com/image.png"]
 ];
 
@@ -196,7 +196,7 @@ payload = {
   model: "sora-2",
   prompt: "A waterfall cascading down forming a rainbow",
   duration: 15,
-  resolution: "1920x1080",
+  resolution: "16:9",
   image_urls: ["https://example.com/image.png"]
 }
 
@@ -221,7 +221,7 @@ let payload: [String: Any] = [
     "model": "sora-2",
     "prompt": "A waterfall cascading down forming a rainbow",
     "duration": 5,
-    "resolution": "1920x1080",
+    "resolution": "16:9",
     "image_urls": ["https://example.com/image.png"]
 ]
 
@@ -261,7 +261,7 @@ class Program
             ""model"": ""sora-2"",
             ""prompt"": ""A waterfall cascading down forming a rainbow"",
             ""duration"": 15,
-            ""resolution"": ""1920x1080"",
+            ""resolution"": ""16:9"",
             ""image_urls"": [""https://example.com/image.png""]
         }";
 
@@ -294,7 +294,7 @@ int main(void) {
             "\"model\":\"sora-2\","
             "\"prompt\":\"A waterfall cascading down forming a rainbow\","
             "\"duration\":15,"
-            "\"resolution\":\"1920x1080\","
+            "\"resolution\":\"16:9\","
             "\"image_urls\":[\"https://example.com/image.png\"]"
         "}";
 
@@ -333,7 +333,7 @@ int main(int argc, const char * argv[]) {
             @"model": @"sora-2",
             @"prompt": @"A waterfall cascading down forming a rainbow",
             @"duration": @15,
-            @"resolution": @"1920x1080",
+            @"resolution": @"16:9",
             @"image_urls": @[@"https://example.com/image.png"]
         };
         
@@ -379,7 +379,7 @@ let payload = {|{
   "model": "sora-2",
   "prompt": "A waterfall cascading down forming a rainbow",
   "duration": 5,
-  "resolution": "1920x1080",
+        "resolution": "16:9",
   "image_urls": "https://example.com/image.png"
 }|}
 
@@ -408,7 +408,7 @@ void main() async {
     'model': 'sora-2',
     'prompt': 'A waterfall cascading down forming a rainbow',
     'duration': 15,
-    'resolution': '1920x1080',
+    'resolution': '16:9',
     'image_urls': ['https://example.com/image.png']
   };
   
@@ -435,7 +435,7 @@ payload <- list(
   model = "sora-2",
   prompt = "A waterfall cascading down forming a rainbow",
   duration = 15,
-  resolution = "1920x1080",
+  resolution = "16:9",
   image_urls = c("https://example.com/image.png")
 )
 
@@ -587,8 +587,8 @@ cat(content(response, "text"))
   Video resolution
 
   Supported formats:
-  - `1920x1080` (Full HD)
-  - `1280x720` (HD)
+  - `16:9` (Landscape)
+  - `9:16` (Portrait)
 </ParamField>
 
 <ParamField body="image_urls" type="array">

@@ -73,13 +73,7 @@
                 "group": "Video Series",
                 "icon": "video",
                 "pages": [
-                  {
-                    "group": "VEO3",
-                    "icon": "video",
-                    "pages": [
-                      "en/api-reference/videos/veo3/generation"
-                    ]
-                  },
+               
                   {
                     "group": "Sora2",
                     "icon": "video",
@@ -158,13 +152,7 @@
                 "group": "视频系列",
                 "icon": "video",
                 "pages": [
-                  {
-                    "group": "VEO3",
-                    "icon": "video",
-                    "pages": [
-                      "cn/api-reference/videos/veo3/generation"
-                    ]
-                  },
+              
                   {
                     "group": "Sora2",
                     "icon": "video",
@@ -243,13 +231,7 @@
                 "group": "動画シリーズ",
                 "icon": "video",
                 "pages": [
-                  {
-                    "group": "VEO3",
-                    "icon": "video",
-                    "pages": [
-                      "ja/api-reference/videos/veo3/generation"
-                    ]
-                  },
+              
                   {
                     "group": "Sora2",
                     "icon": "video",
@@ -327,13 +309,7 @@
                 "group": "비디오 시리즈",
                 "icon": "video",
                 "pages": [
-                  {
-                    "group": "VEO3",
-                    "icon": "video",
-                    "pages": [
-                      "ko/api-reference/videos/veo3/generation"
-                    ]
-                  },
+                
                   {
                     "group": "Sora2",
                     "icon": "video",

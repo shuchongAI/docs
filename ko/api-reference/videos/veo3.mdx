@@ -26,7 +26,7 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
     "model": "veo3.1",
     "prompt": "정원에서 노는 새끼 고양이",
     "duration": 10,
-    "resolution": "1920x1080"
+    "resolution": "16:9"
   }'
 ```
 
@@ -47,6 +47,10 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
 </ParamField>
 
 <ParamField query="resolution" type="string">
-  비디오 해상도. 지원: "1920x1080", "1280x720".
+  비디오 해상도
+  
+  지원 형식:
+  - `16:9` (가로)
+  - `9:16` (세로)
 </ParamField>
 
