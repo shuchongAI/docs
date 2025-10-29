@@ -1,0 +1,410 @@
+{
+  "$schema": "https://apicore.mintlify.app/docs",
+  "theme": "mint",
+  "name": "APIMart",
+  "title": "APIMart",
+
+  "colors": {
+    "primary": "#2563EB",
+    "light": "#3B82F6",
+    "dark": "#1D4ED8"
+  },
+  "favicon": "./logo/logo.png",
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://api.apimart.ai"
+  },
+  "topbarLinks": [
+    {
+      "name": "Dashboard",
+      "url": "https://api.apimart.ai"
+    }
+  ],
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "navigation": {
+    "languages": [
+      {
+        "language": "en",
+        "tabs": [
+          {
+            "tab": "API Manual",
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "en/index"
+                ]
+              },
+              {
+                "group": "Text Series",
+                "icon": "text",
+                "pages": [
+                  "en/api-reference/texts/general/chat-completions",
+                  "en/api-reference/texts/general/claude-messages",
+                  "en/api-reference/texts/gemini/quickstart",
+                  "en/api-reference/texts/openai/responses"
+                ]
+              },
+              {
+                "group": "Image Series",
+                "icon": "image",
+                "pages": [
+                  {
+                    "group": "GPT-4o-image",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/gpt-4o/generation"
+                    ]
+                  }                
+                ]
+              },
+              {
+                "group": "Video Series",
+                "icon": "video",
+                "pages": [
+                  {
+                    "group": "Sora2",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/sora-2/generation"
+                    ]
+                  },
+                  {
+                    "group": "VEO3 (Coming Soon)",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/veo3/generation"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Audio Series",
+                "icon": "microphone",
+                "pages": [
+                  "en/api-reference/audios/whisper-1",
+                  "en/api-reference/audios/tts"
+                ]
+              },
+              {
+                "group": "Task Management",
+                "icon": "list-check",
+                "pages": ["en/api-reference/tasks/status"]
+              }
+            ]
+          },
+          {
+            "tab": "Guides",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "en/quickstart",
+                  "en/development"
+                ]
+              }
+            ]
+          }
+
+        ]
+      },
+      {
+        "language": "cn",
+        "tabs": [
+          {
+            "tab": "API 手册",
+            "groups": [
+              {
+                "group": "概览",
+                "pages": [
+                  "cn/index"
+                ]
+              },
+              {
+                "group": "文字系列",
+                "icon": "text",
+                "pages": [
+                  "cn/api-reference/texts/general/chat-completions",
+                  "cn/api-reference/texts/general/claude-messages",
+                  "cn/api-reference/texts/gemini/quickstart",
+                  "cn/api-reference/texts/openai/responses"
+                ]
+              },
+              {
+                "group": "图像系列",
+                "icon": "image",
+                "pages": [
+                  {
+                    "group": "GPT-4o-image",
+                    "icon": "image",
+                    "pages": [
+                      "cn/api-reference/images/gpt-4o/generation"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "视频系列",
+                "icon": "video",
+                "pages": [
+                  {
+                    "group": "Sora2",
+                    "icon": "video",
+                    "pages": [
+                      "cn/api-reference/videos/sora-2/generation"
+                    ]
+                  },
+                  {
+                    "group": "VEO3（即将上线）",
+                    "icon": "video",
+                    "pages": [
+                      "cn/api-reference/videos/veo3/generation"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "音频系列",
+                "icon": "microphone",
+                "pages": [
+                  "cn/api-reference/audios/whisper-1",
+                  "cn/api-reference/audios/tts"
+                ]
+              },
+              {
+                "group": "任务管理",
+                "icon": "list-check",
+                "pages": ["cn/api-reference/tasks/status"]
+              }
+            ]
+          },
+          {
+            "tab": "用户指南",
+            "groups": [
+              {
+                "group": "开始使用",
+                "pages": [
+                  "cn/quickstart",
+                  "cn/development"
+                ]
+              }
+            ]
+          }
+        
+        ]
+      },
+      {
+        "language": "ja",
+        "tabs": [
+          {
+            "tab": "APIマニュアル",
+            "groups": [
+              {
+                "group": "概要",
+                "pages": [
+                  "ja/index"
+                ]
+              },
+              {
+                "group": "テキストシリーズ",
+                "icon": "text",
+                "pages": [
+                  "ja/api-reference/texts/general/chat-completions",
+                  "ja/api-reference/texts/general/claude-messages",
+                  "ja/api-reference/texts/gemini/quickstart",
+                  "ja/api-reference/texts/openai/responses"
+                ]
+              },
+              {
+                "group": "画像シリーズ",
+                "icon": "image",
+                "pages": [
+                  {
+                    "group": "GPT-4o-image",
+                    "icon": "image",
+                    "pages": [
+                      "ja/api-reference/images/gpt-4o/generation"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "動画シリーズ",
+                "icon": "video",
+                "pages": [
+                  {
+                    "group": "Sora2",
+                    "icon": "video",
+                    "pages": [
+                      "ja/api-reference/videos/sora-2/generation"
+                    ]
+                  },
+                  {
+                    "group": "VEO3（近日公開）",
+                    "icon": "video",
+                    "pages": [
+                      "ja/api-reference/videos/veo3/generation"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "オーディオシリーズ",
+                "icon": "microphone",
+                "pages": [
+                  "ja/api-reference/audios/whisper-1",
+                  "ja/api-reference/audios/tts"
+                ]
+              },
+              {
+                "group": "タスク管理",
+                "icon": "list-check",
+                "pages": ["ja/api-reference/tasks/status"]
+              }
+            ]
+          },
+          {
+            "tab": "ガイド",
+            "groups": [
+              {
+                "group": "はじめに",
+                "pages": [
+                  "ja/quickstart",
+                  "ja/development"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "language": "ko",
+        "tabs": [
+          {
+            "tab": "API 매뉴얼",
+            "groups": [
+              {
+                "group": "개요",
+                "pages": [
+                  "ko/index"
+                ]
+              },
+              {
+                "group": "텍스트 시리즈",
+                "icon": "text",
+                "pages": [
+                  "ko/api-reference/texts/general/chat-completions",
+                  "ko/api-reference/texts/general/claude-messages",
+                  "ko/api-reference/texts/gemini/quickstart",
+                  "ko/api-reference/texts/openai/responses"
+                ]
+              },
+              {
+                "group": "이미지 시리즈",
+                "icon": "image",
+                "pages": [
+                  {
+                    "group": "GPT-4o-image",
+                    "icon": "image",
+                    "pages": [
+                      "ko/api-reference/images/gpt-4o/generation"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "비디오 시리즈",
+                "icon": "video",
+                "pages": [
+                  {
+                    "group": "Sora2",
+                    "icon": "video",
+                    "pages": [
+                      "ko/api-reference/videos/sora-2/generation"
+                    ]
+                  },
+                  {
+                    "group": "VEO3（출시 예정）",
+                    "icon": "video",
+                    "pages": [
+                      "ko/api-reference/videos/veo3/generation"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "오디오 시리즈",
+                "icon": "microphone",
+                "pages": [
+                  "ko/api-reference/audios/whisper-1",
+                  "ko/api-reference/audios/tts"
+                ]
+              },
+              {
+                "group": "작업 관리",
+                "icon": "list-check",
+                "pages": ["ko/api-reference/tasks/status"]
+              }
+            ]
+          },
+          {
+            "tab": "가이드",
+            "groups": [
+              {
+                "group": "시작하기",
+                "pages": [
+                  "ko/quickstart",
+                  "ko/development"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "navbar": {
+    "links": [
+      { 
+        "label":"",
+        "href": "https://x.com/APIMart_",
+        "icon": "x-twitter"
+      },
+      {
+        "label": "Discord",
+        "href": "https://discord.gg/V8zqssyZ5c",
+        "icon": "discord"
+      },
+      
+      {
+        "label": "WeChat",
+        "href": "https://cdn.apimart.ai/social-media/wechat.jpg",
+        "icon": "weixin"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://api.apimart.ai"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/APIMart_",
+      "website": "http://apimart.ai",
+      "discord": "https://discord.gg/V8zqssyZ5c"
+    }
+  }
+
+}

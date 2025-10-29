@@ -1,0 +1,881 @@
+﻿---
+title: "汎用チャットAPI"
+description: "
+- すべてのテキスト生成モデルをサポートする統合チャットAPIインターフェース
+
+- modelパラメータで異なるAIモデルを選択可能
+
+- OpenAI Chat Completions API形式と互換性あり
+"
+api: "POST https://api.apimart.ai/v1/chat/completions"
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/chat/completions \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "gpt-4o", # サポートされている任意のモデルIDに置き換え可能
+    "messages": [
+      {
+        "role": "system",
+        "content": "あなたはプロフェッショナルなAIアシスタントです。"
+      },
+      {
+        "role": "user",
+        "content": "人工知能の歴史について教えてください。"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/chat/completions"
+
+payload = {
+    "model": "gpt-4o",  # サポートされている任意のモデルIDに置き換え可能
+    "messages": [
+        {
+            "role": "system",
+            "content": "あなたはプロフェッショナルなAIアシスタントです。"
+        },
+        {
+            "role": "user",
+            "content": "人工知能の歴史について教えてください。"
+        }
+    ]
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/chat/completions";
+
+const payload = {
+  model: "gpt-4o",  // サポートされている任意のモデルIDに置き換え可能
+  messages: [
+    {
+      role: "system",
+      content: "あなたはプロフェッショナルなAIアシスタントです。"
+    },
+    {
+      role: "user",
+      content: "人工知能の歴史について教えてください。"
+    }
+  ]
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/chat/completions"
+
+    payload := map[string]interface{}{
+        "model": "gpt-4o",  // サポートされている任意のモデルIDに置き換え可能
+        "messages": []map[string]string{
+            {
+                "role":    "system",
+                "content": "あなたはプロフェッショナルなAIアシスタントです。",
+            },
+            {
+                "role":    "user",
+                "content": "人工知能の歴史について教えてください。",
+            },
+        },
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/chat/completions";
+
+        // サポートされている任意のモデルIDに置き換え可能
+        String payload = """
+        {
+          "model": "gpt-4o",
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a professional AI assistant."
+            },
+            {
+              "role": "user",
+              "content": "Tell me about the history of artificial intelligence."
+            }
+          ]
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/chat/completions";
+
+// サポートされている任意のモデルIDに置き換え可能
+$payload = [
+    "model" => "gpt-4o",
+    "messages" => [
+        [
+            "role" => "system",
+            "content" => "You are a professional AI assistant."
+        ],
+        [
+            "role" => "user",
+            "content" => "Tell me about the history of artificial intelligence."
+        ]
+    ]
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1/chat/completions")
+
+# サポートされている任意のモデルIDに置き換え可能
+payload = {
+  model: "gpt-4o",
+  messages: [
+    {
+      role: "system",
+      content: "あなたはプロフェッショナルなAIアシスタントです。"
+    },
+    {
+      role: "user",
+      content: "人工知能の歴史について教えてください。"
+    }
+  ]
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/chat/completions")!
+
+let payload: [String: Any] = [
+    "model": "gpt-4o",  // サポートされている任意のモデルIDに置き換え可能
+    "messages": [
+        [
+            "role": "system",
+            "content": "You are a professional AI assistant."
+        ],
+        [
+            "role": "user",
+            "content": "Tell me about the history of artificial intelligence."
+        ]
+    ]
+]
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+    
+    if let data = data, let responseString = String(data: data, encoding: .utf8) {
+        print(responseString)
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/chat/completions";
+
+        // サポートされている任意のモデルIDに置き換え可能
+        var payload = @"{
+            ""model"": ""gpt-4o"",
+            ""messages"": [
+                {
+                    ""role"": ""system"",
+                    ""content"": ""You are a professional AI assistant.""
+                },
+                {
+                    ""role"": ""user"",
+                    ""content"": ""Tell me about the history of artificial intelligence.""
+                }
+            ]
+        }";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
+
+        var content = new StringContent(payload, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(url, content);
+        var result = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(result);
+    }
+}
+```
+
+```c C
+#include <stdio.h>
+#include <curl/curl.h>
+
+int main(void) {
+    CURL *curl;
+    CURLcode res;
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if(curl) {
+        const char *url = "https://api.apimart.ai/v1/chat/completions";
+        //  "gpt-4o" はサポートされている任意のモデルIDに置き換え可能
+        const char *payload = "{"
+            "\"model\":\"gpt-4o\","
+            "\"messages\":[{\"role\":\"system\",\"content\":\"You are a professional AI assistant.\"},{\"role\":\"user\",\"content\":\"Tell me about the history of artificial intelligence.\"}]"
+        "}";
+
+        struct curl_slist *headers = NULL;
+        headers = curl_slist_append(headers, "Authorization: Bearer <token>");
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, payload);
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+        res = curl_easy_perform(curl);
+
+        if(res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+        }
+
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+    return 0;
+}
+```
+
+```objectivec Objective-C
+#import <Foundation/Foundation.h>
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        NSURL *url = [NSURL URLWithString:@"https://api.apimart.ai/v1/chat/completions"];
+        
+        NSDictionary *payload = @{
+            @"model": @"gpt-4o",  // サポートされている任意のモデルIDに置き換え可能
+            @"messages": @[
+                @{
+                    @"role": @"system",
+                    @"content": @"あなたはプロフェッショナルなAIアシスタントです。"
+                },
+                @{
+                    @"role": @"user",
+                    @"content": @"人工知能の歴史について教えてください。"
+                }
+            ]
+        };
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload
+                                                          options:0
+                                                            error:&error];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:@"Bearer <token>" forHTTPHeaderField:@"Authorization"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:jsonData];
+        
+        NSURLSessionDataTask *task = [[NSURLSession sharedSession] 
+            dataTaskWithRequest:request
+            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                if (error) {
+                    NSLog(@"Error: %@", error);
+                    return;
+                }
+                NSString *result = [[NSString alloc] initWithData:data 
+                                                        encoding:NSUTF8StringEncoding];
+                NSLog(@"%@", result);
+            }];
+        
+        [task resume];
+        [[NSRunLoop mainRunLoop] run];
+    }
+    return 0;
+}
+```
+
+```ocaml OCaml
+(* Requires cohttp and yojson libraries *)
+open Lwt
+open Cohttp
+open Cohttp_lwt_unix
+
+let url = "https://api.apimart.ai/v1/chat/completions"
+
+(* サポートされている任意のモデルIDに置き換え可能 *)
+let payload = {|{
+  "model": "gpt-4o",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a professional AI assistant."
+    },
+    {
+      "role": "user",
+      "content": "Tell me about the history of artificial intelligence."
+    }
+  ]
+}|}
+
+let () =
+  let headers = Header.init ()
+    |> fun h -> Header.add h "Authorization" "Bearer <token>"
+    |> fun h -> Header.add h "Content-Type" "application/json"
+  in
+  let body = Cohttp_lwt.Body.of_string payload in
+  
+  let response = Client.post ~headers ~body (Uri.of_string url) >>= fun (resp, body) ->
+    body |> Cohttp_lwt.Body.to_string >|= fun body_str ->
+    print_endline body_str
+  in
+  Lwt_main.run response
+```
+
+```dart Dart
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+void main() async {
+  final url = Uri.parse('https://api.apimart.ai/v1/chat/completions');
+  
+  // サポートされている任意のモデルIDに置き換え可能
+  final payload = {
+    'model': 'gpt-4o',
+    'messages': [
+      {
+        'role': 'system',
+        'content': 'あなたはプロフェッショナルなAIアシスタントです。'
+      },
+      {
+        'role': 'user',
+        'content': '人工知能の歴史について教えてください。'
+      }
+    ]
+  };
+  
+  final response = await http.post(
+    url,
+    headers: {
+      'Authorization': 'Bearer <token>',
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode(payload),
+  );
+  
+  print(response.body);
+}
+```
+
+```r R
+library(httr)
+library(jsonlite)
+
+url <- "https://api.apimart.ai/v1/chat/completions"
+
+# サポートされている任意のモデルIDに置き換え可能
+payload <- list(
+  model = "gpt-4o",
+  messages = list(
+    list(
+      role = "system",
+      content = "You are a professional AI assistant."
+    ),
+    list(
+      role = "user",
+      content = "Tell me about the history of artificial intelligence."
+    )
+  )
+)
+
+response <- POST(
+  url,
+  add_headers(
+    Authorization = "Bearer <token>",
+    `Content-Type` = "application/json"
+  ),
+  body = toJSON(payload, auto_unbox = TRUE),
+  encode = "raw"
+)
+
+cat(content(response, "text"))
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": {
+    "id": "chatcmpl-9876543210",
+    "object": "chat.completion",
+    "created": 1677652288,
+    "model": "gpt-4o",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "人工知能（AI）の歴史は1950年代に遡ります...\n\n1. **初期（1950年代～1960年代）**：チューリングテストの提案がAI研究の始まりを示しました...\n\n2. **エキスパートシステム時代（1970年代～1980年代）**：ルールベースのシステムが医療診断や財務分析などの分野で応用され始めました...\n\n3. **機械学習の台頭（1990年代～2000年代）**：統計的学習手法が徐々に主流となりました...\n\n4. **ディープラーニング革命（2010年代～現在）**：ニューラルネットワーク技術のブレークスルーがAIの爆発的な成長をもたらしました..."
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 28,
+      "completion_tokens": 320,
+      "total_tokens": 348
+    }
+  }
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "リクエストパラメータが無効です",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "認証に失敗しました。APIキーを確認してください",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "アカウント残高が不足しています。チャージしてください",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 403
+{
+  "error": {
+    "code": 403,
+    "message": "アクセスが禁止されています。このリソースへのアクセス権限がありません",
+    "type": "permission_error"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "リクエストが多すぎます。後でもう一度お試しください",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "サーバー内部エラー。後でもう一度お試しください",
+    "type": "server_error"
+  }
+}
+```
+
+```json 502
+{
+  "error": {
+    "code": 502,
+    "message": "ゲートウェイエラー。サービスが一時的に利用できません",
+    "type": "bad_gateway"
+  }
+}
+```
+
+</ResponseExample>
+
+## 認証
+
+<ParamField header="Authorization" type="string" required>
+  すべてのAPIエンドポイントはBearer Token認証が必要です
+
+  APIキーの取得方法：
+
+  [APIキー管理ページ](https://api.apimart.ai/console/token)にアクセスしてAPIキーを取得してください
+
+  リクエストヘッダーに追加：
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## リクエストボディ
+
+<ParamField body="model" type="string" required>
+  モデル名
+
+  サポートされているモデル：
+  - **OpenAI**: `gpt-5`, `gpt-5-chat-latest`, `gpt-5-mini`, `gpt-5-nano`, `gpt-5-pro`
+  - **Anthropic**: `claude-sonnet-4-5-20250929`, `claude-opus-4-1-20250805`, `claude-haiku-4-5-20251001`, `claude-opus-4-1-20250805-thinking`, `claude-sonnet-4-5-20250929-thinking`
+  - **Google**: `gemini-2.5-pro`, `gemini-2.5-flash`, `gemini-2.5-pro-thinking`, `gemini-2.5-flash-lite`
+  - **DeepSeek**: `deepseek-v3.1-250821`, `deepseek-v3.1-think-250821`, `deepseek-v3-0324`
+  - **Doubao**: `doubao-seed-1-6-251015`, `doubao-seed-1-6-flash-250828`, `doubao-seed-1-6-thinking-250715`
+  - 随時新しいモデルを追加中...
+</ParamField>
+
+<ParamField body="messages" type="array" required>
+  会話メッセージのリスト
+
+  各メッセージには以下が含まれます：
+  - `role`: ロールタイプ（`system`, `user`, `assistant`）
+  - `content`: メッセージ内容（文字列またはマルチモーダルコンテンツ配列）
+</ParamField>
+
+<ParamField body="temperature" type="number">
+  出力のランダム性を制御、範囲は0～2
+
+  - 低い値（例：0.2）は出力をより決定的にします
+  - 高い値（例：1.8）は出力をよりランダムにします
+
+  デフォルト：1.0
+</ParamField>
+
+<ParamField body="max_tokens" type="integer">
+  生成する最大トークン数
+
+  モデルによって最大制限が異なります。詳細は各モデルのドキュメントを参照してください
+</ParamField>
+
+<ParamField body="stream" type="boolean">
+  ストリーミング出力を使用するかどうか
+
+  - `true`: ストリーミングレスポンス（SSE形式）
+  - `false`: 一度に完全なレスポンス
+
+  デフォルト：false
+</ParamField>
+
+<ParamField body="top_p" type="number">
+  ニュークレアスサンプリングパラメータ、範囲は0～1
+
+  生成されるテキストの多様性を制御します。temperatureとの併用は推奨されません
+
+  デフォルト：1.0
+</ParamField>
+
+<ParamField body="frequency_penalty" type="number">
+  頻度ペナルティ、範囲は-2.0～2.0
+
+  正の値は同じ単語を繰り返す可能性を減らします
+
+  デフォルト：0
+</ParamField>
+
+<ParamField body="presence_penalty" type="number">
+  存在ペナルティ、範囲は-2.0～2.0
+
+  正の値は新しいトピックについて話す可能性を増やします
+
+  デフォルト：0
+</ParamField>
+
+<ParamField body="stop" type="string or array">
+  停止シーケンス
+
+  最大4つのシーケンスを指定でき、遭遇すると生成が停止します
+</ParamField>
+
+<ParamField body="n" type="integer">
+  生成する完了の数
+
+  デフォルト：1
+</ParamField>
+
+## レスポンス
+
+<ResponseField name="id" type="string">
+  レスポンスの一意の識別子
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  オブジェクトタイプ、`chat.completion`に固定
+</ResponseField>
+
+<ResponseField name="created" type="integer">
+  作成タイムスタンプ
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  実際に使用されたモデル名
+</ResponseField>
+
+<ResponseField name="choices" type="array">
+  生成されたレスポンスのリスト
+
+  <Expandable title="プロパティ">
+    <ResponseField name="index" type="integer">
+      選択肢のインデックス
+    </ResponseField>
+
+    <ResponseField name="message" type="object">
+      メッセージ内容
+
+      <Expandable title="プロパティ">
+        <ResponseField name="role" type="string">
+          ロールタイプ（assistant）
+        </ResponseField>
+
+        <ResponseField name="content" type="string">
+          生成されたテキスト内容
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="finish_reason" type="string">
+      完了理由
+
+      可能な値：
+      - `stop` - 自然な完了
+      - `length` - 最大長に達した
+      - `content_filter` - コンテンツがフィルタされた
+      - `function_call` - 関数呼び出し
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="usage" type="object">
+  トークン使用統計
+
+  <Expandable title="プロパティ">
+    <ResponseField name="prompt_tokens" type="integer">
+      入力メッセージのトークン数
+    </ResponseField>
+
+    <ResponseField name="completion_tokens" type="integer">
+      生成されたコンテンツのトークン数
+    </ResponseField>
+
+    <ResponseField name="total_tokens" type="integer">
+      合計トークン数
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## サポートされているモデル
+
+### OpenAIシリーズ
+- `gpt-5` - GPT-5ベースモデル
+- `gpt-5-chat-latest` - GPT-5最新会話版
+- `gpt-5-mini` - GPT-5軽量版、コストパフォーマンスに優れる
+- `gpt-5-nano` - GPT-5超軽量版
+- `gpt-5-pro` - GPT-5プロフェッショナル強化版
+
+### Anthropicシリーズ
+- `claude-haiku-4-5-20251001` - Claude 4.5高速レスポンス版
+- `claude-sonnet-4-5-20250929` - Claude 4.5バランス版
+- `claude-opus-4-1-20250805` - 最も強力なClaude 4.1フラッグシップモデル
+- `claude-opus-4-1-20250805-thinking` - Claude 4.1 Opus深い思考版
+- `claude-sonnet-4-5-20250929-thinking` - Claude 4.5 Sonnet深い思考版
+
+### Googleシリーズ
+- `gemini-2.5-flash` - Gemini 2.5高速版
+- `gemini-2.5-pro` - Gemini 2.5プロフェッショナル版
+- `gemini-2.5-flash-lite` - Gemini 2.5超軽量版
+- `gemini-2.5-pro-thinking` - Gemini 2.5 Pro深い思考版
+
+### DeepSeekシリーズ
+- `deepseek-v3.1-250821` - DeepSeek V3.1ベース版
+- `deepseek-v3.1-think-250821` - DeepSeek V3.1思考版
+- `deepseek-v3-0324` - DeepSeek V3標準版
+
+### Doubaoシリーズ
+- `doubao-seed-1-6-flash-250828` - Doubao Seed 1.6高速版
+- `doubao-seed-1-6-thinking-250715` - Doubao Seed 1.6思考版
+- `doubao-seed-1-6-251015` - Doubao Seed 1.6標準版
+
+## 使用例
+
+### 基本的な会話
+```json
+{
+  "model": "gpt-4o",
+  "messages": [
+    {"role": "user", "content": "こんにちは"}
+  ]
+}
+```
+
+### システムプロンプト
+```json
+{
+  "model": "claude-3-5-sonnet",
+  "messages": [
+    {"role": "system", "content": "あなたはプロフェッショナルなPythonプログラミング講師です"},
+    {"role": "user", "content": "リスト内包表記の使い方を教えてください"}
+  ]
+}
+```
+
+### 複数ターンの会話
+```json
+{
+  "model": "gemini-2.0-flash",
+  "messages": [
+    {"role": "user", "content": "機械学習とは何ですか？"},
+    {"role": "assistant", "content": "機械学習は人工知能の一分野です..."},
+    {"role": "user", "content": "例を挙げていただけますか？"}
+  ]
+}
+```
+
+### ストリーミング出力
+```json
+{
+  "model": "gpt-4o",
+  "messages": [
+    {"role": "user", "content": "春についての詩を書いてください"}
+  ],
+  "stream": true
+}
+```
+

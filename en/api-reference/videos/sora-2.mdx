@@ -1,0 +1,56 @@
+---
+title: "Sora-2"
+description: "Use the Sora-2 model for video generation"
+icon: "video"
+---
+
+# Sora-2 Video Generation
+
+Use the Sora-2 model for high‑quality video generation.
+
+## Highlights
+
+- Asynchronous processing: returns a task ID for subsequent queries
+- Multiple modes: text-to-video, image-to-video
+- Expiring links: generated video links are valid for 24 hours
+
+## Request example
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/videos/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "sora-2",
+    "prompt": "A waterfall cascading down forming a rainbow",
+    "duration": 15,
+    "aspect_ratio": "16:9"
+  }'
+```
+
+</RequestExample>
+
+## Parameters
+
+<ParamField query="model" type="string" required>
+  Model name. Use "sora-2".
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  Text description for video generation.
+</ParamField>
+
+<ParamField query="duration" type="integer">
+  Video duration (seconds). Supported: 10 or 15.
+</ParamField>
+
+<ParamField query="aspect_ratio" type="string">
+  Video aspect_ratio
+  
+  Supported formats:
+  - `16:9` (Landscape)
+  - `9:16` (Portrait)
+</ParamField>
+

@@ -1,0 +1,77 @@
+﻿---
+title: "Gemini-2.5-Flash-Image"
+description: "画像生成にGemini-2.5-Flash-Imageモデルを使用します"
+icon: "image"
+---
+
+# Gemini-2.5-Flash-Image 画像生成
+
+高速な画像生成のためにGemini-2.5-Flash-Imageモデルを使用します。
+
+## ハイライト
+
+- **非同期処理**：後続のクエリ用にタスクIDを返します
+- **高速生成速度**：迅速な画像作成に最適化されています
+- **リンクの有効期限**：生成された画像のリンクは24時間有効です
+
+## リクエスト例
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemini-2.5-flash-image",
+    "prompt": "月明かりの下の竹林の小道",
+    "size": "1:1",
+    "n": 1
+  }'
+```
+
+</RequestExample>
+
+## レスポンス例
+
+<ResponseExample>
+
+```json
+{
+  "code": 200,
+  "data": {
+    "created": 1757156493,
+    "id": "task-unified-1757156512-a7n4jhc2",
+    "model": "gemini-2.5-flash-image",
+    "object": "image.generation.task",
+    "progress": 0,
+    "status": "pending",
+    "task_info": {
+      "can_cancel": true,
+      "estimated_time": 60
+    },
+    "type": "image"
+  }
+}
+```
+
+</ResponseExample>
+
+## パラメータ
+
+<ParamField query="model" type="string" required>
+  モデル名、"gemini-2.5-flash-image"固定
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  画像生成のためのテキスト説明
+</ParamField>
+
+<ParamField query="size" type="string">
+  画像のサイズ。サポート: "1024x1024", "1024x1536", "1536x1024"
+</ParamField>
+
+<ParamField query="n" type="integer">
+  生成する画像の数。デフォルト: 1
+</ParamField>
+

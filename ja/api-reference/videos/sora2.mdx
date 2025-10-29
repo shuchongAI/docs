@@ -1,0 +1,56 @@
+---
+title: "Sora2"
+description: "動画生成にSora2モデルを使用します"
+icon: "video"
+---
+
+# Sora2 動画生成
+
+高品質な動画生成のためにSora2モデルを使用します。
+
+## ハイライト
+
+- 非同期処理: 後続のクエリ用にタスクIDを返します
+- 複数のモード: テキストから動画、画像から動画
+- リンクの有効期限: 生成された動画のリンクは24時間有効です
+
+## リクエスト例
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/videos/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "sora-2",
+    "prompt": "夕日に岸に打ち寄せる波",
+    "duration": 15,
+    "aspect_ratio": "16:9"
+  }'
+```
+
+</RequestExample>
+
+## パラメータ
+
+<ParamField query="model" type="string" required>
+  モデル名。"sora-2"を使用してください。
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  動画生成のためのテキスト説明。
+</ParamField>
+
+<ParamField query="duration" type="integer">
+  動画の長さ (秒)。デフォルト: 15。
+</ParamField>
+
+<ParamField query="aspect_ratio" type="string">
+  動画解像度
+  
+  サポートされている形式：
+  - `16:9` (横向き)
+  - `9:16` (縦向き)
+</ParamField>
+

@@ -1,0 +1,80 @@
+---
+title: "Development Guide"
+description: "Integrate the API into your application"
+---
+
+# Development Guide
+
+This guide helps you integrate our API services into your application.
+
+## Asynchronous Processing
+
+Our API uses an asynchronous processing model:
+
+1. Submit a task: send a generation request and receive a task ID
+2. Poll status: periodically check task status
+3. Get results: fetch generation results when the task completes
+
+### Polling example
+
+```python
+import time
+
+def wait_for_completion(client, task_id, max_wait=300):
+    """Wait for the task to complete"""
+    start_time = time.time()
+    
+    while time.time() - start_time < max_wait:
+        result = client.tasks.get(task_id)
+        
+        if result.status == "completed":
+            return result
+        elif result.status == "failed":
+            raise Exception(f"Task failed: {result.error}")
+        
+        time.sleep(2)  # wait 2 seconds before querying again
+    
+    raise Exception("Task timeout")
+```
+
+## Error Handling
+
+### Common errors
+
+| Status | Description | Resolution |
+|--------|-------------|------------|
+| 400 | Invalid request parameters | Check request parameters and format |
+| 401 | Authentication failed | Verify your API key |
+| 402 | Insufficient balance | Top up your account balance |
+| 429 | Rate limit exceeded | Reduce request frequency |
+| 500 | Server error | Retry later |
+
+### Example
+
+```python
+try:
+    response = client.images.generate(...)
+except EvolinkError as e:
+    if e.status_code == 401:
+        print("Invalid API key")
+    elif e.status_code == 402:
+        print("Insufficient account balance")
+    else:
+        print(f"Error: {e.message}")
+```
+
+## Best Practices
+
+1. Caching: generated image/video links are valid for 24 hours
+2. Retries: implement exponential backoff on transient errors
+3. Monitoring: regularly check API usage and quotas
+4. Security: keep your API key secure
+
+## Support
+
+If you run into issues during development, you can get help via:
+
+- Email: zhihong@apimart.ai
+- Live chat: visit our website
+- Docs: browse the full API documentation
+

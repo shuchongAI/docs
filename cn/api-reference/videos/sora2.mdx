@@ -1,0 +1,52 @@
+---
+title: "Sora2"
+description: "使用 Sora2 模型进行视频生成"
+icon: "video"
+---
+
+# Sora2 视频生成
+
+使用 Sora2 模型进行高质量的视频生成�?
+## 功能特点
+
+- **异步处理模式**：返回任务ID用于后续查询
+- **支持多种生成模式**：文本转视频、图生视频等
+- **生成的视频链�?*：有效期�?4小时，请尽快保存
+
+## 请求示例
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/videos/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "sora-2",
+    "prompt": "瀑布倾泻而下，彩虹横跨山�?,
+    "duration": 15,
+    "aspect_ratio": "16:9"
+  }'
+```
+
+</RequestExample>
+
+## 参数说明
+
+<ParamField query="model" type="string" required>
+  模型名称，固定为 "sora-2"
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  视频生成的文本描�?</ParamField>
+
+<ParamField query="duration" type="integer">
+  视频时长（秒），默认�?15
+</ParamField>
+
+<ParamField query="aspect_ratio" type="string">
+  视频分辨�?  
+  支持的格式：
+  - `16:9` (横屏)
+  - `9:16` (竖屏)
+</ParamField>

@@ -1,0 +1,56 @@
+---
+title: "Sora2"
+description: "비디오 생성을 위해 Sora2 모델을 사용합니다"
+icon: "video"
+---
+
+# Sora2 비디오 생성
+
+고품질 비디오 생성을 위해 Sora2 모델을 사용합니다.
+
+## 주요 기능
+
+- 비동기 처리: 후속 쿼리를 위한 작업 ID 반환
+- 다중 모드: 텍스트-투-비디오, 이미지-투-비디오
+- 링크 만료: 생성된 비디오 링크는 24시간 동안 유효
+
+## 요청 예시
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/videos/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "sora-2",
+    "prompt": "석양에 해안에 부딪히는 파도",
+    "duration": 15,
+    "aspect_ratio": "16:9"
+  }'
+```
+
+</RequestExample>
+
+## 매개변수
+
+<ParamField query="model" type="string" required>
+  모델 이름. "sora-2"를 사용하세요.
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  비디오 생성을 위한 텍스트 설명.
+</ParamField>
+
+<ParamField query="duration" type="integer">
+  비디오 길이 (초). 기본값: 15.
+</ParamField>
+
+<ParamField query="aspect_ratio" type="string">
+  비디오 해상도
+  
+  지원 형식:
+  - `16:9` (가로)
+  - `9:16` (세로)
+</ParamField>
+

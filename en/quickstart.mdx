@@ -1,0 +1,75 @@
+---
+title: "Quick Start"
+description: "Quickly start using our API services"
+---
+
+# Quick Start
+
+Welcome to our API services! This guide helps you quickly get started with image and video generation.
+
+## Step 1: Get an API Key
+
+1. Visit the [API Key Management page](https://api.apimart.ai/console/token)
+2. Sign in to your account
+3. Create a new API key
+4. Save your key securely (it is shown only once)
+
+## Step 2: Choose a Model
+
+We provide multiple AI models to choose from.
+
+### Image Generation Models
+- GPT-4o-image: High‑quality image generation
+
+### Video Generation Models
+- Sora2: Professional video generation
+
+## Step 3: Send a Request
+
+### Image generation example
+
+```bash
+curl -X POST https://api.apimart.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o-image",
+    "prompt": "A cute panda",
+    "size": "1024x1024",
+    "n": 1
+  }'
+```
+
+### Video generation example
+
+```bash
+curl -X POST https://api.apimart.ai/v1/videos/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "sora-2",
+    "prompt": "Waves crashing against the shore",
+    "duration": 15,
+    "aspect_ratio": "16:9"
+  }'
+```
+
+## Step 4: Check Task Status
+
+Because we use asynchronous processing, you need to query task status to obtain results.
+
+```bash
+curl -X GET https://api.apimart.ai/v1/tasks/YOUR_TASK_ID \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## What’s Next
+
+<Card title="View API docs" icon="book" href="/en/api-reference/introduction">
+  Learn more about all available API endpoints.
+  </Card>
+
+<Card title="Development Guide" icon="code" href="/en/development">
+  Learn how to integrate the API into your application.
+</Card>
+

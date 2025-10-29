@@ -1,0 +1,1152 @@
+---
+title: "Claude Messages API"
+description: "
+- Claude Messages API 형식과 완벽하게 호환
+
+- 다중 턴 대화 및 단일 쿼리 지원
+
+- 텍스트 및 이미지를 포함한 멀티모달 콘텐츠 지원
+"
+api: "POST https://api.apimart.ai/v1/messages"
+---
+
+<RequestExample>
+
+```bash cURL
+curl https://api.apimart.ai/v1/messages \
+  -H "x-api-key: $API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-sonnet-4-5-20250929",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Hello, world"}
+    ]
+  }'
+```
+
+```python Python
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.apimart.ai"
+)
+
+message = client.messages.create(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "Hello, world"}
+    ]
+)
+
+print(message.content)
+```
+
+```javascript JavaScript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env.API_KEY,
+  baseURL: 'https://api.apimart.ai'
+});
+
+const message = await client.messages.create({
+  model: 'claude-sonnet-4-5-20250929',
+  max_tokens: 1024,
+  messages: [
+    { role: 'user', content: 'Hello, world' }
+  ]
+});
+
+console.log(message.content);
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+    "os"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/messages"
+
+    payload := map[string]interface{}{
+        "model": "claude-sonnet-4-5-20250929",
+        "max_tokens": 1024,
+        "messages": []map[string]string{
+            {
+                "role":    "user",
+                "content": "Hello, world",
+            },
+        },
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("x-api-key", os.Getenv("API_KEY"))
+    req.Header.Set("anthropic-version", "2023-06-01")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/messages";
+        String apiKey = System.getenv("API_KEY");
+
+        String payload = """
+        {
+          "model": "claude-sonnet-4-5-20250929",
+          "max_tokens": 1024,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Hello, world"
+            }
+          ]
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("x-api-key", apiKey)
+            .header("anthropic-version", "2023-06-01")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/messages";
+$apiKey = getenv('API_KEY');
+
+$payload = [
+    "model" => "claude-sonnet-4-5-20250929",
+    "max_tokens" => 1024,
+    "messages" => [
+        [
+            "role" => "user",
+            "content" => "Hello, world"
+        ]
+    ]
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "x-api-key: " . $apiKey,
+    "anthropic-version: 2023-06-01",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1/messages")
+api_key = ENV['API_KEY']
+
+payload = {
+  model: "claude-sonnet-4-5-20250929",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: "Hello, world"
+    }
+  ]
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["x-api-key"] = api_key
+request["anthropic-version"] = "2023-06-01"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/messages")!
+let apiKey = ProcessInfo.processInfo.environment["API_KEY"] ?? ""
+
+let payload: [String: Any] = [
+    "model": "claude-sonnet-4-5-20250929",
+    "max_tokens": 1024,
+    "messages": [
+        [
+            "role": "user",
+            "content": "Hello, world"
+        ]
+    ]
+]
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+request.setValue("2023-06-01", forHTTPHeaderField: "anthropic-version")
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+
+    if let data = data, let responseString = String(data: data, encoding: .utf8) {
+        print(responseString)
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/messages";
+        var apiKey = Environment.GetEnvironmentVariable("API_KEY");
+
+        var payload = @"{
+            ""model"": ""claude-sonnet-4-5-20250929"",
+            ""max_tokens"": 1024,
+            ""messages"": [
+                {
+                    ""role"": ""user"",
+                    ""content"": ""Hello, world""
+                }
+            ]
+        }";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("x-api-key", apiKey);
+        client.DefaultRequestHeaders.Add("anthropic-version", "2023-06-01");
+
+        var content = new StringContent(payload, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(url, content);
+        var result = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(result);
+    }
+}
+```
+
+```c C
+#include <stdio.h>
+#include <curl/curl.h>
+#include <stdlib.h>
+
+int main(void) {
+    CURL *curl;
+    CURLcode res;
+    const char *api_key = getenv("API_KEY");
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if(curl) {
+        const char *url = "https://api.apimart.ai/v1/messages";
+        const char *payload = "{"
+            "\"model\":\"claude-sonnet-4-5-20250929\","
+            "\"max_tokens\":1024,"
+            "\"messages\":[{\"role\":\"user\",\"content\":\"Hello, world\"}]"
+        "}";
+
+        char auth_header[256];
+        snprintf(auth_header, sizeof(auth_header), "x-api-key: %s", api_key);
+
+        struct curl_slist *headers = NULL;
+        headers = curl_slist_append(headers, auth_header);
+        headers = curl_slist_append(headers, "anthropic-version: 2023-06-01");
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, payload);
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+        res = curl_easy_perform(curl);
+
+        if(res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+        }
+
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+    return 0;
+}
+```
+
+```objectivec Objective-C
+#import <Foundation/Foundation.h>
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        NSURL *url = [NSURL URLWithString:@"https://api.apimart.ai/v1/messages"];
+        NSString *apiKey = [NSProcessInfo processInfo].environment[@"API_KEY"];
+
+        NSDictionary *payload = @{
+            @"model": @"claude-sonnet-4-5-20250929",
+            @"max_tokens": @1024,
+            @"messages": @[
+                @{
+                    @"role": @"user",
+                    @"content": @"Hello, world"
+                }
+            ]
+        };
+
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload
+                                                          options:0
+                                                            error:&error];
+
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:apiKey forHTTPHeaderField:@"x-api-key"];
+        [request setValue:@"2023-06-01" forHTTPHeaderField:@"anthropic-version"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:jsonData];
+
+        NSURLSessionDataTask *task = [[NSURLSession sharedSession]
+            dataTaskWithRequest:request
+            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                if (error) {
+                    NSLog(@"Error: %@", error);
+                    return;
+                }
+                NSString *result = [[NSString alloc] initWithData:data
+                                                        encoding:NSUTF8StringEncoding];
+                NSLog(@"%@", result);
+            }];
+
+        [task resume];
+        [[NSRunLoop mainRunLoop] run];
+    }
+    return 0;
+}
+```
+
+```ocaml OCaml
+(* Requires cohttp and yojson libraries *)
+open Lwt
+open Cohttp
+open Cohttp_lwt_unix
+
+let url = "https://api.apimart.ai/v1/messages"
+let api_key = Sys.getenv "API_KEY"
+
+let payload = {|{
+  "model": "claude-sonnet-4-5-20250929",
+  "max_tokens": 1024,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hello, world"
+    }
+  ]
+}|}
+
+let () =
+  let headers = Header.init ()
+    |> fun h -> Header.add h "x-api-key" api_key
+    |> fun h -> Header.add h "anthropic-version" "2023-06-01"
+    |> fun h -> Header.add h "Content-Type" "application/json"
+  in
+  let body = Cohttp_lwt.Body.of_string payload in
+
+  let response = Client.post ~headers ~body (Uri.of_string url) >>= fun (resp, body) ->
+    body |> Cohttp_lwt.Body.to_string >|= fun body_str ->
+    print_endline body_str
+  in
+  Lwt_main.run response
+```
+
+```dart Dart
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
+void main() async {
+  final url = Uri.parse('https://api.apimart.ai/v1/messages');
+  final apiKey = Platform.environment['API_KEY'];
+
+  final payload = {
+    'model': 'claude-sonnet-4-5-20250929',
+    'max_tokens': 1024,
+    'messages': [
+      {
+        'role': 'user',
+        'content': 'Hello, world'
+      }
+    ]
+  };
+
+  final response = await http.post(
+    url,
+    headers: {
+      'x-api-key': apiKey!,
+      'anthropic-version': '2023-06-01',
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode(payload),
+  );
+
+  print(response.body);
+}
+```
+
+```r R
+library(httr)
+library(jsonlite)
+
+url <- "https://api.apimart.ai/v1/messages"
+api_key <- Sys.getenv("API_KEY")
+
+payload <- list(
+  model = "claude-sonnet-4-5-20250929",
+  max_tokens = 1024,
+  messages = list(
+    list(
+      role = "user",
+      content = "Hello, world"
+    )
+  )
+)
+
+response <- POST(
+  url,
+  add_headers(
+    `x-api-key` = api_key,
+    `anthropic-version` = "2023-06-01",
+    `Content-Type` = "application/json"
+  ),
+  body = toJSON(payload, auto_unbox = TRUE),
+  encode = "raw"
+)
+
+cat(content(response, "text"))
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": {
+    "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+    "type": "message",
+    "role": "assistant",
+    "content": [
+      {
+        "type": "text",
+        "text": "안녕하세요! 저는 Claude입니다. 만나서 반갑습니다."
+      }
+    ],
+    "model": "claude-sonnet-4-5-20250929",
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "usage": {
+      "input_tokens": 12,
+      "output_tokens": 18
+    }
+  }
+}
+```
+
+```json 400
+{
+  "type": "error",
+  "error": {
+    "type": "invalid_request_error",
+    "message": "잘못된 요청 매개변수"
+  }
+}
+```
+
+```json 401
+{
+  "type": "error",
+  "error": {
+    "type": "authentication_error",
+    "message": "유효하지 않은 API 키"
+  }
+}
+```
+
+```json 429
+{
+  "type": "error",
+  "error": {
+    "type": "rate_limit_error",
+    "message": "요청 한도 초과"
+  }
+}
+```
+
+```json 500
+{
+  "type": "error",
+  "error": {
+    "type": "api_error",
+    "message": "내부 서버 오류"
+  }
+}
+```
+
+</ResponseExample>
+
+## 인증
+
+<ParamField header="x-api-key" type="string" required>
+  인증을 위한 API 키
+
+  [API 키 관리 페이지](https://api.apimart.ai/console/token)를 방문하여 API 키를 받으세요
+
+  요청 헤더에 추가:
+  ```
+  x-api-key: YOUR_API_KEY
+  ```
+</ParamField>
+
+<ParamField header="anthropic-version" type="string" required>
+  API 버전
+
+  사용할 Claude API 버전을 지정합니다
+
+  예: `2023-06-01`
+</ParamField>
+
+## 요청 본문
+
+<ParamField body="model" type="string" required>
+  모델 이름
+
+  - `claude-haiku-4-5-20251001` - Claude 4.5 빠른 응답 버전
+  - `claude-sonnet-4-5-20250929` - Claude 4.5 균형 버전
+  - `claude-opus-4-1-20250805` - 가장 강력한 Claude 4.1 플래그십 모델
+  - `claude-opus-4-1-20250805-thinking` - Claude 4.1 Opus 심층 사고 버전
+  - `claude-sonnet-4-5-20250929-thinking` - Claude 4.5 Sonnet 심층 사고 버전
+</ParamField>
+
+<ParamField body="messages" type="array" required>
+  메시지 목록
+
+  모델이 다음 응답을 생성하기 위한 메시지 배열입니다. `user`와 `assistant` 역할을 번갈아 사용할 수 있습니다.
+
+  각 메시지는 다음을 포함합니다:
+  - `role`: 역할 (`user` 또는 `assistant`)
+  - `content`: 콘텐츠 (문자열 또는 콘텐츠 블록 배열)
+
+  **단일 사용자 메시지:**
+  ```json
+  [{"role": "user", "content": "안녕하세요, Claude"}]
+  ```
+
+  **다중 턴 대화:**
+  ```json
+  [
+    {"role": "user", "content": "안녕하세요."},
+    {"role": "assistant", "content": "안녕하세요, 저는 Claude입니다. 어떻게 도와드릴까요?"},
+    {"role": "user", "content": "LLM을 쉽게 설명해주실 수 있나요?"}
+  ]
+  ```
+
+  **미리 채워진 어시스턴트 응답:**
+  ```json
+  [
+    {"role": "user", "content": "태양의 그리스 이름은? (A) Sol (B) Helios (C) Sun"},
+    {"role": "assistant", "content": "정답은 ("}
+  ]
+  ```
+</ParamField>
+
+<ParamField body="max_tokens" type="integer" required>
+  생성할 최대 토큰 수
+
+  중지하기 전에 생성할 최대 토큰 수입니다. 모델이 이 제한에 도달하기 전에 중지될 수 있습니다.
+
+  모델마다 최대값이 다릅니다.
+
+  최소값: 1
+</ParamField>
+
+<ParamField body="system" type="string | array">
+  시스템 프롬프트
+
+  시스템 프롬프트는 Claude의 역할, 성격, 목표 및 지시사항을 설정합니다.
+
+  **문자열 형식:**
+  ```json
+  {
+    "system": "당신은 전문 Python 프로그래밍 튜터입니다"
+  }
+  ```
+
+  **구조화된 형식:**
+  ```json
+  {
+    "system": [
+      {
+        "type": "text",
+        "text": "당신은 전문 Python 프로그래밍 튜터입니다"
+      }
+    ]
+  }
+  ```
+</ParamField>
+
+<ParamField body="temperature" type="number">
+  Temperature 매개변수, 범위 0-1
+
+  출력의 무작위성을 제어합니다:
+  - 낮은 값 (예: 0.2): 더 결정적이고 보수적
+  - 높은 값 (예: 0.8): 더 무작위적이고 창의적
+
+  기본값: 1.0
+</ParamField>
+
+<ParamField body="top_p" type="number">
+  핵 샘플링 매개변수, 범위 0-1
+
+  핵 샘플링을 사용합니다. `temperature` 또는 `top_p` 중 하나만 사용하는 것을 권장합니다.
+
+  기본값: 1.0
+</ParamField>
+
+<ParamField body="top_k" type="integer">
+  Top-K 샘플링
+
+  상위 K개 옵션에서만 샘플링하여 확률이 낮은 "롱테일" 응답을 제거합니다.
+
+  고급 사용 사례에만 권장됩니다.
+</ParamField>
+
+<ParamField body="stream" type="boolean">
+  스트리밍 활성화
+
+  `true`이면 Server-Sent Events (SSE)를 사용하여 응답을 스트리밍합니다.
+
+  기본값: false
+</ParamField>
+
+<ParamField body="stop_sequences" type="array">
+  중지 시퀀스
+
+  모델이 생성을 중지하도록 하는 사용자 정의 텍스트 시퀀스입니다.
+
+  최대 4개의 시퀀스.
+
+  예: `["\n\nHuman:", "\n\nAssistant:"]`
+</ParamField>
+
+<ParamField body="metadata" type="object">
+  메타데이터
+
+  요청에 대한 메타데이터 객체입니다.
+
+  포함:
+  - `user_id`: 사용자 식별자
+</ParamField>
+
+<ParamField body="tools" type="array">
+  도구 정의
+
+  모델이 작업을 완료하는 데 사용할 수 있는 도구 목록입니다.
+
+  **함수 도구 예:**
+  ```json
+  {
+    "tools": [
+      {
+        "name": "get_weather",
+        "description": "주어진 위치의 현재 날씨 가져오기",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "도시 및 주, 예: San Francisco, CA"
+            },
+            "unit": {
+              "type": "string",
+              "enum": ["celsius", "fahrenheit"],
+              "description": "온도 단위"
+            }
+          },
+          "required": ["location"]
+        }
+      }
+    ]
+  }
+  ```
+
+  지원되는 도구 유형:
+  - 사용자 정의 함수 도구
+  - 컴퓨터 사용 도구 (computer_20241022)
+  - 텍스트 편집기 도구 (text_editor_20241022)
+  - Bash 도구 (bash_20241022)
+</ParamField>
+
+<ParamField body="tool_choice" type="object">
+  도구 선택 전략
+
+  모델이 도구를 사용하는 방법을 제어합니다:
+
+  - `{"type": "auto"}`: 자동 결정 (기본값)
+  - `{"type": "any"}`: 도구를 반드시 사용해야 함
+  - `{"type": "tool", "name": "tool_name"}`: 특정 도구 사용
+</ParamField>
+
+## 응답
+
+<ResponseField name="id" type="string">
+  고유 메시지 식별자
+
+  예: `"msg_013Zva2CMHLNnXjNJJKqJ2EF"`
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  객체 유형
+
+  항상 `"message"`
+</ResponseField>
+
+<ResponseField name="role" type="string">
+  역할
+
+  항상 `"assistant"`
+</ResponseField>
+
+<ResponseField name="content" type="array">
+  콘텐츠 블록 배열
+
+  모델에서 생성된 콘텐츠로, 콘텐츠 블록의 배열입니다.
+
+  **텍스트 콘텐츠:**
+  ```json
+  [{"type": "text", "text": "안녕하세요! 저는 Claude입니다."}]
+  ```
+
+  **도구 사용:**
+  ```json
+  [
+    {
+      "type": "tool_use",
+      "id": "toolu_01A09q90qw90lq917835lq9",
+      "name": "get_weather",
+      "input": {"location": "San Francisco, CA", "unit": "celsius"}
+    }
+  ]
+  ```
+
+  콘텐츠 유형:
+  - `text`: 텍스트 콘텐츠
+  - `tool_use`: 도구 호출
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  요청을 처리한 모델
+
+  예: `"claude-sonnet-4-5-20250929"`
+</ResponseField>
+
+<ResponseField name="stop_reason" type="string">
+  중지 이유
+
+  가능한 값:
+  - `end_turn`: 자연스러운 완료
+  - `max_tokens`: 최대 토큰 도달
+  - `stop_sequence`: 중지 시퀀스 도달
+  - `tool_use`: 도구 호출됨
+</ResponseField>
+
+<ResponseField name="stop_sequence" type="string | null">
+  트리거된 중지 시퀀스
+
+  생성된 중지 시퀀스 (있는 경우), 그렇지 않으면 `null`
+</ResponseField>
+
+<ResponseField name="usage" type="object">
+  토큰 사용량 통계
+
+  <Expandable title="속성">
+    <ResponseField name="input_tokens" type="integer">
+      입력 토큰 수
+    </ResponseField>
+
+    <ResponseField name="output_tokens" type="integer">
+      출력 토큰 수
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## 사용 예제
+
+### 기본 대화
+
+```python
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.apimart.ai"
+)
+
+message = client.messages.create(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "양자 컴퓨팅의 기초를 설명해주세요"}
+    ]
+)
+
+print(message.content[0].text)
+```
+
+### 다중 턴 대화
+
+```python
+messages = [
+    {"role": "user", "content": "머신러닝이 무엇인가요?"},
+    {"role": "assistant", "content": "머신러닝은 AI의 한 분야입니다..."},
+    {"role": "user", "content": "실용적인 예를 들어주실 수 있나요?"}
+]
+
+message = client.messages.create(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=1024,
+    messages=messages
+)
+```
+
+### 시스템 프롬프트 사용
+
+```python
+message = client.messages.create(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=1024,
+    system="당신은 코드 리뷰와 최적화 전문가인 시니어 Python 개발자입니다.",
+    messages=[
+        {"role": "user", "content": "이 코드를 어떻게 최적화할 수 있나요?\n\n[code]"}
+    ]
+)
+```
+
+### 스트리밍 응답
+
+```python
+with client.messages.stream(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "AI에 대한 짧은 에세이를 작성해주세요"}
+    ]
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
+```
+
+### 도구 사용
+
+```python
+tools = [
+    {
+        "name": "get_stock_price",
+        "description": "실시간 주식 가격 가져오기",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "ticker": {
+                    "type": "string",
+                    "description": "주식 티커 심볼, 예: AAPL"
+                }
+            },
+            "required": ["ticker"]
+        }
+    }
+]
+
+message = client.messages.create(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=1024,
+    tools=tools,
+    messages=[
+        {"role": "user", "content": "테슬라의 주식 가격은 얼마인가요?"}
+    ]
+)
+
+# 도구 호출 처리
+if message.stop_reason == "tool_use":
+    tool_use = next(block for block in message.content if block.type == "tool_use")
+    print(f"도구 호출: {tool_use.name}")
+    print(f"인수: {tool_use.input}")
+```
+
+### 비전 이해
+
+```python
+message = client.messages.create(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "url",
+                        "url": "https://example.com/image.jpg"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": "이 이미지를 설명해주세요"
+                }
+            ]
+        }
+    ]
+)
+```
+
+### Base64 이미지
+
+```python
+import base64
+
+with open("image.jpg", "rb") as image_file:
+    image_data = base64.b64encode(image_file.read()).decode("utf-8")
+
+message = client.messages.create(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "image/jpeg",
+                        "data": image_data
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": "이 이미지를 분석해주세요"
+                }
+            ]
+        }
+    ]
+)
+```
+
+## 모범 사례
+
+### 1. 프롬프트 엔지니어링
+
+**명확한 역할 정의:**
+```python
+system = """당신은 다음을 전문으로 하는 경험 많은 데이터 과학자입니다:
+- 통계 분석 및 데이터 시각화
+- 머신러닝 모델 개발
+- Python 및 R 프로그래밍
+전문적이고 정확한 조언을 제공하세요."""
+```
+
+**구조화된 출력:**
+```python
+message = "분석 결과를 summary, key_findings, recommendations 필드가 포함된 JSON 형식으로 반환해주세요."
+```
+
+### 2. 오류 처리
+
+```python
+from anthropic import APIError, RateLimitError
+
+try:
+    message = client.messages.create(
+        model="claude-sonnet-4-5-20250929",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": "안녕하세요"}]
+    )
+except RateLimitError:
+    print("요청 한도 초과, 나중에 다시 시도해주세요")
+except APIError as e:
+    print(f"API 오류: {e}")
+```
+
+### 3. 토큰 최적화
+
+```python
+# 더 짧은 프롬프트 사용
+messages = [
+    {"role": "user", "content": "핵심 포인트 요약:\n\n[긴 텍스트]"}
+]
+
+# 출력 길이 제한
+message = client.messages.create(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=500,  # 출력 제한
+    messages=messages
+)
+```
+
+### 4. 응답 미리 채우기
+
+```python
+# 모델을 특정 형식으로 안내
+messages = [
+    {"role": "user", "content": "Python 모범 사례 5가지를 나열해주세요"},
+    {"role": "assistant", "content": "Python 모범 사례 5가지:\n\n1."}
+]
+
+message = client.messages.create(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=1024,
+    messages=messages
+)
+```
+
+## 스트리밍 응답 처리
+
+### Python 스트리밍
+
+```python
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.apimart.ai"
+)
+
+with client.messages.stream(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "Python 데코레이터 예제를 작성해주세요"}
+    ]
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
+```
+
+### JavaScript 스트리밍
+
+```javascript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env.API_KEY,
+  baseURL: 'https://api.apimart.ai'
+});
+
+const stream = await client.messages.stream({
+  model: 'claude-sonnet-4-5-20250929',
+  max_tokens: 1024,
+  messages: [
+    { role: 'user', content: 'React 컴포넌트 예제를 작성해주세요' }
+  ]
+});
+
+for await (const chunk of stream) {
+  if (chunk.type === 'content_block_delta' &&
+      chunk.delta.type === 'text_delta') {
+    process.stdout.write(chunk.delta.text);
+  }
+}
+```
+
+## 중요 참고사항
+
+1. **API 키 보안**:
+   - API 키를 환경 변수에 저장하세요
+   - 소스 코드에 키를 하드코딩하지 마세요
+   - 정기적으로 키를 교체하세요
+
+2. **요청 제한**:
+   - API 요청 제한에 유의하세요
+   - 재시도 메커니즘을 구현하세요
+   - 지수 백오프를 사용하세요
+
+3. **토큰 관리**:
+   - 토큰 사용량을 모니터링하세요
+   - 프롬프트 길이를 최적화하세요
+   - 적절한 max_tokens 값을 사용하세요
+
+4. **모델 선택**:
+   - Opus: 복잡한 작업, 깊은 사고 필요
+   - Sonnet: 균형잡힌 성능과 비용
+   - Haiku: 빠른 응답, 간단한 작업
+
+5. **콘텐츠 필터링**:
+   - 사용자 입력을 검증하세요
+   - 민감한 정보를 필터링하세요
+   - 콘텐츠 조정을 구현하세요

@@ -1,0 +1,77 @@
+﻿---
+title: "Gemini-2.5-Flash-Image"
+description: "이미지 생성을 위해 Gemini-2.5-Flash-Image 모델을 사용합니다"
+icon: "image"
+---
+
+# Gemini-2.5-Flash-Image 이미지 생성
+
+빠른 이미지 생성을 위해 Gemini-2.5-Flash-Image 모델을 사용합니다.
+
+## 주요 기능
+
+- **비동기 처리**: 후속 쿼리를 위한 작업 ID 반환
+- **빠른 생성 속도**: 신속한 이미지 생성에 최적화
+- **링크 만료**: 생성된 이미지 링크는 24시간 동안 유효
+
+## 요청 예시
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemini-2.5-flash-image",
+    "prompt": "달빛 아래 대나무 숲 길",
+    "size": "1:1",
+    "n": 1
+  }'
+```
+
+</RequestExample>
+
+## 응답 예시
+
+<ResponseExample>
+
+```json
+{
+  "code": 200,
+  "data": {
+    "created": 1757156493,
+    "id": "task-unified-1757156512-a7n4jhc2",
+    "model": "gemini-2.5-flash-image",
+    "object": "image.generation.task",
+    "progress": 0,
+    "status": "pending",
+    "task_info": {
+      "can_cancel": true,
+      "estimated_time": 60
+    },
+    "type": "image"
+  }
+}
+```
+
+</ResponseExample>
+
+## 매개변수
+
+<ParamField query="model" type="string" required>
+  모델 이름, "gemini-2.5-flash-image"로 고정
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  이미지 생성을 위한 텍스트 설명
+</ParamField>
+
+<ParamField query="size" type="string">
+  이미지 크기. 지원: "1024x1024", "1024x1536", "1536x1024"
+</ParamField>
+
+<ParamField query="n" type="integer">
+  생성할 이미지 수. 기본값: 1
+</ParamField>
+

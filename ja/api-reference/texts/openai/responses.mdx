@@ -1,0 +1,1269 @@
+---
+title: "OpenAI マルチモーダル Responses API"
+description: "
+- OpenAI Responses API形式と完全互換
+
+- テキストと画像を使用したマルチモーダル入力をサポート
+
+- ツール拡張をサポート：Web検索、ファイル検索、関数呼び出し、リモートMCP
+"
+api: "POST https://api.apimart.ai/v1/responses"
+---
+
+<RequestExample>
+
+```bash cURL
+curl https://api.apimart.ai/v1/responses \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -d '{
+    "model": "gpt-5",
+    "input": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "この画像には何が写っていますか？"
+          },
+          {
+            "type": "input_image",
+            "image_url": "https://openai-documentation.vercel.app/images/cat_and_otter.png"
+          }
+        ]
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+import os
+
+url = "https://api.apimart.ai/v1/responses"
+
+payload = {
+    "model": "gpt-5",
+    "input": [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "input_text",
+                    "text": "この画像には何が写っていますか？"
+                },
+                {
+                    "type": "input_image",
+                    "image_url": "https://openai-documentation.vercel.app/images/cat_and_otter.png"
+                }
+            ]
+        }
+    ]
+}
+
+headers = {
+    "Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY')}",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/responses";
+
+const payload = {
+  model: "gpt-5",
+  input: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "input_text",
+          text: "この画像には何が写っていますか？"
+        },
+        {
+          type: "input_image",
+          image_url: "https://openai-documentation.vercel.app/images/cat_and_otter.png"
+        }
+      ]
+    }
+  ]
+};
+
+const headers = {
+  "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+    "os"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/responses"
+
+    payload := map[string]interface{}{
+        "model": "gpt-5",
+        "input": []map[string]interface{}{
+            {
+                "role": "user",
+                "content": []map[string]string{
+                    {
+                        "type": "input_text",
+                        "text": "この画像には何が写っていますか？",
+                    },
+                    {
+                        "type":      "input_image",
+                        "image_url": "https://openai-documentation.vercel.app/images/cat_and_otter.png",
+                    },
+                },
+            },
+        },
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer "+os.Getenv("OPENAI_API_KEY"))
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/responses";
+        String apiKey = System.getenv("OPENAI_API_KEY");
+
+        String payload = """
+        {
+          "model": "gpt-5",
+          "input": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "この画像には何が写っていますか？"
+                },
+                {
+                  "type": "input_image",
+                  "image_url": "https://openai-documentation.vercel.app/images/cat_and_otter.png"
+                }
+              ]
+            }
+          ]
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer " + apiKey)
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/responses";
+$apiKey = getenv('OPENAI_API_KEY');
+
+$payload = [
+    "model" => "gpt-5",
+    "input" => [
+        [
+            "role" => "user",
+            "content" => [
+                [
+                    "type" => "input_text",
+                    "text" => "What is in this image?"
+                ],
+                [
+                    "type" => "input_image",
+                    "image_url" => "https://openai-documentation.vercel.app/images/cat_and_otter.png"
+                ]
+            ]
+        ]
+    ]
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer " . $apiKey,
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1/responses")
+api_key = ENV['OPENAI_API_KEY']
+
+payload = {
+  model: "gpt-5",
+  input: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "input_text",
+          text: "この画像には何が写っていますか？"
+        },
+        {
+          type: "input_image",
+          image_url: "https://openai-documentation.vercel.app/images/cat_and_otter.png"
+        }
+      ]
+    }
+  ]
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer #{api_key}"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/responses")!
+let apiKey = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] ?? ""
+
+let payload: [String: Any] = [
+    "model": "gpt-5",
+    "input": [
+        [
+            "role": "user",
+            "content": [
+                [
+                    "type": "input_text",
+                    "text": "この画像には何が写っていますか？"
+                ],
+                [
+                    "type": "input_image",
+                    "image_url": "https://openai-documentation.vercel.app/images/cat_and_otter.png"
+                ]
+            ]
+        ]
+    ]
+]
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+    
+    if let data = data, let responseString = String(data: data, encoding: .utf8) {
+        print(responseString)
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/responses";
+        var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+
+        var payload = @"{
+            ""model"": ""gpt-5"",
+            ""input"": [
+                {
+                    ""role"": ""user"",
+                    ""content"": [
+                        {
+                            ""type"": ""input_text"",
+                            ""text"": ""What is in this image?""
+                        },
+                        {
+                            ""type"": ""input_image"",
+                            ""image_url"": ""https://openai-documentation.vercel.app/images/cat_and_otter.png""
+                        }
+                    ]
+                }
+            ]
+        }";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+
+        var content = new StringContent(payload, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(url, content);
+        var result = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(result);
+    }
+}
+```
+
+```c C
+#include <stdio.h>
+#include <curl/curl.h>
+#include <stdlib.h>
+
+int main(void) {
+    CURL *curl;
+    CURLcode res;
+    const char *api_key = getenv("OPENAI_API_KEY");
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if(curl) {
+        const char *url = "https://api.apimart.ai/v1/responses";
+        const char *payload = "{"
+            "\"model\":\"gpt-5\","
+            "\"input\":[{\"role\":\"user\",\"content\":[{\"type\":\"input_text\",\"text\":\"What is in this image?\"},{\"type\":\"input_image\",\"image_url\":\"https://openai-documentation.vercel.app/images/cat_and_otter.png\"}]}]"
+        "}";
+
+        char auth_header[256];
+        snprintf(auth_header, sizeof(auth_header), "Authorization: Bearer %s", api_key);
+
+        struct curl_slist *headers = NULL;
+        headers = curl_slist_append(headers, auth_header);
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, payload);
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+        res = curl_easy_perform(curl);
+
+        if(res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+        }
+
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+    return 0;
+}
+```
+
+```objectivec Objective-C
+#import <Foundation/Foundation.h>
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        NSURL *url = [NSURL URLWithString:@"https://api.apimart.ai/v1/responses"];
+        NSString *apiKey = [NSProcessInfo processInfo].environment[@"OPENAI_API_KEY"];
+        
+        NSDictionary *payload = @{
+            @"model": @"gpt-5",
+            @"input": @[
+                @{
+                    @"role": @"user",
+                    @"content": @[
+                        @{
+                            @"type": @"input_text",
+                            @"text": @"What is in this image?"
+                        },
+                        @{
+                            @"type": @"input_image",
+                            @"image_url": @"https://openai-documentation.vercel.app/images/cat_and_otter.png"
+                        }
+                    ]
+                }
+            ]
+        };
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload
+                                                          options:0
+                                                            error:&error];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:[NSString stringWithFormat:@"Bearer %@", apiKey] 
+            forHTTPHeaderField:@"Authorization"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:jsonData];
+        
+        NSURLSessionDataTask *task = [[NSURLSession sharedSession] 
+            dataTaskWithRequest:request
+            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                if (error) {
+                    NSLog(@"Error: %@", error);
+                    return;
+                }
+                NSString *result = [[NSString alloc] initWithData:data 
+                                                        encoding:NSUTF8StringEncoding];
+                NSLog(@"%@", result);
+            }];
+        
+        [task resume];
+        [[NSRunLoop mainRunLoop] run];
+    }
+    return 0;
+}
+```
+
+```ocaml OCaml
+(* Requires cohttp and yojson libraries *)
+open Lwt
+open Cohttp
+open Cohttp_lwt_unix
+
+let url = "https://api.apimart.ai/v1/responses"
+let api_key = Sys.getenv "OPENAI_API_KEY"
+
+let payload = {|{
+  "model": "gpt-5",
+  "input": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "input_text",
+          "text": "What is in this image?"
+        },
+        {
+          "type": "input_image",
+          "image_url": "https://openai-documentation.vercel.app/images/cat_and_otter.png"
+        }
+      ]
+    }
+  ]
+}|}
+
+let () =
+  let headers = Header.init ()
+    |> fun h -> Header.add h "Authorization" ("Bearer " ^ api_key)
+    |> fun h -> Header.add h "Content-Type" "application/json"
+  in
+  let body = Cohttp_lwt.Body.of_string payload in
+  
+  let response = Client.post ~headers ~body (Uri.of_string url) >>= fun (resp, body) ->
+    body |> Cohttp_lwt.Body.to_string >|= fun body_str ->
+    print_endline body_str
+  in
+  Lwt_main.run response
+```
+
+```dart Dart
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
+void main() async {
+  final url = Uri.parse('https://api.apimart.ai/v1/responses');
+  final apiKey = Platform.environment['OPENAI_API_KEY'];
+  
+  final payload = {
+    'model': 'gpt-5',
+    'input': [
+      {
+        'role': 'user',
+        'content': [
+          {
+            'type': 'input_text',
+            'text': 'What is in this image?'
+          },
+          {
+            'type': 'input_image',
+            'image_url': 'https://openai-documentation.vercel.app/images/cat_and_otter.png'
+          }
+        ]
+      }
+    ]
+  };
+  
+  final response = await http.post(
+    url,
+    headers: {
+      'Authorization': 'Bearer $apiKey',
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode(payload),
+  );
+  
+  print(response.body);
+}
+```
+
+```r R
+library(httr)
+library(jsonlite)
+
+url <- "https://api.apimart.ai/v1/responses"
+api_key <- Sys.getenv("OPENAI_API_KEY")
+
+payload <- list(
+  model = "gpt-5",
+  input = list(
+    list(
+      role = "user",
+      content = list(
+        list(
+          type = "input_text",
+          text = "What is in this image?"
+        ),
+        list(
+          type = "input_image",
+          image_url = "https://openai-documentation.vercel.app/images/cat_and_otter.png"
+        )
+      )
+    )
+  )
+)
+
+response <- POST(
+  url,
+  add_headers(
+    Authorization = paste("Bearer", api_key),
+    `Content-Type` = "application/json"
+  ),
+  body = toJSON(payload, auto_unbox = TRUE),
+  encode = "raw"
+)
+
+cat(content(response, "text"))
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": {
+    "id": "resp-9876543210",
+    "object": "response",
+    "created": 1677652288,
+    "model": "gpt-5",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "この画像には猫とカワウソが写っています。とても可愛らしく心温まるシーンで、お互いに交流しているように見えます。猫とカワウソは仲良くしているようです。"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 156,
+      "completion_tokens": 45,
+      "total_tokens": 201
+    }
+  }
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "リクエストパラメータが無効です",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "認証に失敗しました。APIキーを確認してください",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "アカウント残高が不足しています。チャージして再度お試しください",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 403
+{
+  "error": {
+    "code": 403,
+    "message": "アクセスが禁止されています。このリソースへのアクセス権限がありません",
+    "type": "permission_error"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "リクエストが多すぎます。後でもう一度お試しください",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "サーバー内部エラー。後でもう一度お試しください",
+    "type": "server_error"
+  }
+}
+```
+
+```json 502
+{
+  "error": {
+    "code": 502,
+    "message": "ゲートウェイエラー。サーバーが一時的に利用できません",
+    "type": "bad_gateway"
+  }
+}
+```
+
+</ResponseExample>
+
+## Authorizations
+
+<ParamField header="Authorization" type="string" required>
+  ##すべてのAPIはBearer Token認証が必要です##
+
+  APIキーの取得:
+
+  [APIキー管理ページ](https://api.apimart.ai/console/token)にアクセスしてAPIキーを取得してください
+
+  リクエストヘッダーに追加:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Body
+
+<ParamField body="model" type="string" required>
+  モデル名
+
+  サポートされるモデル:
+  - `gpt-5` - OpenAI最新マルチモーダルモデル
+  - `GPT-4o-image` - GPT-4最適化マルチモーダルモデル
+  - `gpt-4-vision` - GPT-4ビジョン理解モデル
+  - さらに多くのモデルが近日公開予定...
+</ParamField>
+
+<ParamField body="input" type="array" required>
+  入力コンテンツリスト
+
+  各入力項目には以下が含まれます:
+  - `role`: ロールタイプ (`user`, `assistant`, `system`)
+  - `content`: コンテンツ配列、複数のタイプをサポート:
+    - `input_text`: テキスト入力
+    - `input_image`: 画像入力
+</ParamField>
+
+<ParamField body="temperature" type="number">
+  出力のランダム性を制御、範囲は0-2
+
+  - 低い値 (例: 0.2) は出力をより決定的にします
+  - 高い値 (例: 1.8) は出力をよりランダムにします
+
+  デフォルト: 1.0
+</ParamField>
+
+<ParamField body="max_tokens" type="integer">
+  生成する最大トークン数
+
+  モデルによって最大制限が異なりますので、特定のモデルのドキュメントを参照してください
+</ParamField>
+
+<ParamField body="stream" type="boolean">
+  ストリーミング出力を使用するかどうか
+
+  - `true`: ストリームレスポンス (SSE形式)
+  - `false`: 完全なレスポンスを一度に返す
+
+  デフォルト: false
+</ParamField>
+
+<ParamField body="top_p" type="number">
+  Nucleusサンプリングパラメータ、範囲は0-1
+
+  生成されるテキストの多様性を制御します。temperatureと交互に使用することをお勧めします
+
+  デフォルト: 1.0
+</ParamField>
+
+<ParamField body="tools" type="array">
+  モデル機能を拡張するためのツールリスト
+
+  サポートされるツールタイプ:
+  - **Web検索** (`web_search`): リアルタイムインターネット情報検索
+  - **ファイル検索** (`file_search`): アップロードされたファイルコンテンツの検索
+  - **関数呼び出し** (`function`): カスタム関数の呼び出し
+  - **リモートMCP** (`remote_mcp`): リモートModel Context Protocolサービスへの接続
+
+  例: `[{"type": "web_search"}]`
+</ParamField>
+
+## Response
+
+<ResponseField name="id" type="string">
+  レスポンスの一意の識別子
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  オブジェクトタイプ、`response`に固定
+</ResponseField>
+
+<ResponseField name="created" type="integer">
+  作成タイムスタンプ
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  使用された実際のモデル名
+</ResponseField>
+
+<ResponseField name="choices" type="array">
+  生成されたレスポンスリスト
+
+  <Expandable title="Properties">
+    <ResponseField name="index" type="integer">
+      選択肢のインデックス
+    </ResponseField>
+
+    <ResponseField name="message" type="object">
+      メッセージ内容
+
+      <Expandable title="Properties">
+        <ResponseField name="role" type="string">
+          ロールタイプ (assistant)
+        </ResponseField>
+
+        <ResponseField name="content" type="string">
+          生成されたテキストコンテンツ
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="finish_reason" type="string">
+      終了理由
+
+      可能な値:
+      - `stop` - 自然な完了
+      - `length` - 最大長に到達
+      - `content_filter` - コンテンツフィルタリング
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="usage" type="object">
+  トークン使用統計
+
+  <Expandable title="Properties">
+    <ResponseField name="prompt_tokens" type="integer">
+      入力のトークン数
+    </ResponseField>
+
+    <ResponseField name="completion_tokens" type="integer">
+      出力のトークン数
+    </ResponseField>
+
+    <ResponseField name="total_tokens" type="integer">
+      総トークン数
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## 使用例
+
+### テキストのみの入力
+```json
+{
+  "model": "gpt-5",
+  "input": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "input_text",
+          "text": "こんにちは、人工知能について紹介してください"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Web検索ツールの使用
+```json
+{
+  "model": "gpt-5",
+  "tools": [{"type": "web_search"}],
+  "input": "今日はどんなポジティブなニュースがありますか？"
+}
+```
+
+```bash cURL例
+curl "https://api.apimart.ai/v1/responses" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $OPENAI_API_KEY" \
+    -d '{
+        "model": "gpt-5",
+        "tools": [{"type": "web_search"}],
+        "input": "今日はどんなポジティブなニュースがありますか？"
+    }'
+```
+
+### 画像理解
+```json
+{
+  "model": "gpt-5",
+  "input": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "input_text",
+          "text": "この画像を説明してください"
+        },
+        {
+          "type": "input_image",
+          "image_url": "https://example.com/image.jpg"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 複数画像分析
+```json
+{
+  "model": "gpt-5",
+  "input": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "input_text",
+          "text": "これら2つの画像の類似点と相違点を比較してください"
+        },
+        {
+          "type": "input_image",
+          "image_url": "https://example.com/image1.jpg"
+        },
+        {
+          "type": "input_image",
+          "image_url": "https://example.com/image2.jpg"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Base64エンコード画像
+```json
+{
+  "model": "gpt-5",
+  "input": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "input_text",
+          "text": "この画像を分析してください"
+        },
+        {
+          "type": "input_image",
+          "image_url": "data:image/jpeg;base64,/9j/4AAQSkZJRg..."
+        }
+      ]
+    }
+  ]
+}
+```
+
+### ファイル検索ツールの使用
+```json
+{
+  "model": "gpt-5",
+  "tools": [{"type": "file_search"}],
+  "input": "アップロードされたドキュメントに基づいて、会社の四半期業績を要約してください"
+}
+```
+
+### 関数呼び出しの使用
+```json
+{
+  "model": "gpt-5",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "指定された都市の天気情報を取得",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string",
+              "description": "都市名、例: 東京"
+            },
+            "unit": {
+              "type": "string",
+              "enum": ["celsius", "fahrenheit"],
+              "description": "温度単位"
+            }
+          },
+          "required": ["city"]
+        }
+      }
+    }
+  ],
+  "input": "今日の東京の天気はどうですか？"
+}
+```
+
+### リモートMCPの使用
+```json
+{
+  "model": "gpt-5",
+  "tools": [
+    {
+      "type": "remote_mcp",
+      "remote_mcp": {
+        "url": "https://mcp.example.com/api",
+        "auth_token": "your_mcp_token"
+      }
+    }
+  ],
+  "input": "データベースのユーザー情報を照会してください"
+}
+```
+
+### 複数ツールの組み合わせ
+```json
+{
+  "model": "gpt-5",
+  "tools": [
+    {"type": "web_search"},
+    {"type": "file_search"},
+    {
+      "type": "function",
+      "function": {
+        "name": "calculate",
+        "description": "数学計算を実行",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "expression": {
+              "type": "string",
+              "description": "数式"
+            }
+          },
+          "required": ["expression"]
+        }
+      }
+    }
+  ],
+  "input": "最新のビットコイン価格を検索し、ビットコイン100個の総価値を計算してください"
+}
+```
+
+## コンテンツタイプ仕様
+
+### input_text
+テキスト入力タイプ
+
+**プロパティ:**
+- `type`: `"input_text"`に固定
+- `text`: テキストコンテンツ (文字列)
+
+### input_image
+画像入力タイプ
+
+**プロパティ:**
+- `type`: `"input_image"`に固定
+- `image_url`: 画像URLまたはBase64エンコードされたデータURI
+
+**サポートされる画像形式:**
+- JPEG
+- PNG
+- GIF
+- WebP
+
+**画像サイズ制限:**
+- 最大ファイルサイズ: 20MB
+- 推奨解像度: 2048x2048ピクセル以下
+
+## ツール使用の詳細
+
+### Web検索
+
+Web検索ツールを使用すると、モデルがリアルタイムのインターネット情報にアクセスできます。
+
+**設定例:**
+```json
+{
+  "tools": [{"type": "web_search"}]
+}
+```
+
+**使用例:**
+- 最新ニュースと時事問題の照会
+- リアルタイムデータの取得 (株価、天気、為替レートなど)
+- 最新の技術文書の検索
+- 事実情報の確認
+
+### ファイル検索
+
+ファイル検索ツールを使用すると、モデルがアップロードされたドキュメント内の関連情報を検索できます。
+
+**設定例:**
+```json
+{
+  "tools": [{"type": "file_search"}]
+}
+```
+
+**使用例:**
+- 社内文書の分析
+- 技術仕様とマニュアルの検索
+- 契約書と法的文書の照会
+- ナレッジベースQ&Aシステム
+
+### 関数呼び出し
+
+カスタム関数を定義して、モデルが外部APIを呼び出したり特定の操作を実行したりできるようにします。
+
+**完全な設定例:**
+```json
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_stock_price",
+        "description": "リアルタイム株価を取得",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "株式銘柄コード、例: AAPL"
+            },
+            "currency": {
+              "type": "string",
+              "enum": ["USD", "CNY"],
+              "description": "通貨単位",
+              "default": "USD"
+            }
+          },
+          "required": ["symbol"]
+        }
+      }
+    }
+  ]
+}
+```
+
+**パラメータの説明:**
+- `name`: 関数名 (必須)
+- `description`: 関数の説明 (必須)
+- `parameters`: JSON Schema形式を使用したパラメータ定義
+  - `type`: パラメータタイプ
+  - `properties`: パラメータプロパティ定義
+  - `required`: 必須パラメータリスト
+
+**使用例:**
+- サードパーティAPIの呼び出し
+- データベースクエリの実行
+- ビジネスプロセスのトリガー
+- 内部システムとの統合
+
+### リモートMCP
+
+リモートModel Context Protocol (MCP) サービスに接続してモデル機能を拡張します。
+
+**設定例:**
+```json
+{
+  "tools": [
+    {
+      "type": "remote_mcp",
+      "remote_mcp": {
+        "url": "https://your-mcp-server.com/api",
+        "auth_token": "your_auth_token",
+        "timeout": 30
+      }
+    }
+  ]
+}
+```
+
+**パラメータの説明:**
+- `url`: MCPサーバーアドレス (必須)
+- `auth_token`: 認証トークン (オプション)
+- `timeout`: タイムアウト(秒)、デフォルトは30秒
+
+**使用例:**
+- エンタープライズレベルのAIサービスへの接続
+- ドメイン固有モデルの使用
+- 保護されたデータソースへのアクセス
+- 分散AIシステム統合
+
+## ツールレスポンス形式
+
+モデルがツールを使用すると、レスポンス形式にツール呼び出し情報が含まれます:
+
+```json
+{
+  "id": "resp-123456",
+  "object": "response",
+  "created": 1677652288,
+  "model": "gpt-5",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "call_abc123",
+            "type": "function",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"東京\"}"
+            }
+          }
+        ]
+      },
+      "finish_reason": "tool_calls"
+    }
+  ]
+}
+```
+
+**ツール呼び出しワークフロー:**
+1. モデルがユーザー入力を受信
+2. ツールが必要かどうかを分析
+3. 必要な場合、ツール呼び出しリクエストを返す
+4. クライアントがツール呼び出しを実行
+5. ツール結果をモデルに返す
+6. モデルが最終レスポンスを生成
+
+## 重要な注意事項
+
+1. **画像URL要件**:
+   - 公開的にアクセス可能なURLである必要があります
+   - またはBase64エンコードされたData URI形式を使用
+
+2. **トークン課金**:
+   - 画像は解像度に応じてトークンを消費します
+   - 高解像度画像はコスト最適化のために自動的にサイズ調整されます
+   - ツール呼び出しも追加トークンを消費します
+
+3. **コンテンツの順序**:
+   - コンテンツ配列内の要素の順序がモデルの理解に影響します
+   - テキスト指示を最初に、次に画像を配置することをお勧めします
+
+4. **マルチモーダルの組み合わせ**:
+   - 1つのリクエストで複数のテキストと画像を混在させることができます
+   - コンテキストの一貫性を保つマルチターン会話をサポートします
+
+5. **ツール使用の制限**:
+   - 複数のツールを同時に使用する場合、モデルが最も適切なツールをインテリジェントに選択します
+   - 関数呼び出しには明確な関数定義とパラメータの説明が必要です
+   - Web検索結果は地域と時間によって制限される場合があります
+
+6. **API互換性**:
+   - OpenAI Responses API形式と完全に互換性があります
+   - 既存のOpenAIコードをシームレスに移行できます
+   - すべてのOpenAIツール拡張機能をサポートします
+

@@ -1,0 +1,643 @@
+---
+title: "Gemini Native Format"
+description: "
+- Call Gemini models using Google Native API format
+
+- Synchronous processing mode with real-time response
+
+- Minimal parameters for quick start
+"
+api: "POST https://api.apimart.ai/v1beta/models/{model}:{method}"
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "Hello, please introduce yourself"
+        }
+      ]
+    }
+  ]
+}'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent"
+
+payload = {
+    "contents": [
+        {
+            "role": "user",
+            "parts": [
+                {
+                    "text": "Hello, please introduce yourself"
+                }
+            ]
+        }
+    ]
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent";
+
+const payload = {
+  contents: [
+    {
+      role: "user",
+      parts: [
+        {
+          text: "Hello, please introduce yourself"
+        }
+      ]
+    }
+  ]
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent"
+
+    payload := map[string]interface{}{
+        "contents": []map[string]interface{}{
+            {
+                "role": "user",
+                "parts": []map[string]interface{}{
+                    {
+                        "text": "Hello, please introduce yourself",
+                    },
+                },
+            },
+        },
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent";
+
+        String payload = """
+        {
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "Hello, please introduce yourself"
+                }
+              ]
+            }
+          ]
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent";
+
+$payload = [
+    "contents" => [
+        [
+            "role" => "user",
+            "parts" => [
+                [
+                    "text" => "Hello, please introduce yourself"
+                ]
+            ]
+        ]
+    ]
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1beta/models/gemini-2.5-pro:generateContent")
+
+payload = {
+  contents: [
+    {
+      role: "user",
+      parts: [
+        {
+          text: "Hello, please introduce yourself"
+        }
+      ]
+    }
+  ]
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": {
+    "candidates": [
+      {
+        "content": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "Hello! I'm pleased to introduce myself.\n\nI am a large language model, trained and developed by Google..."
+            }
+          ]
+        },
+        "finishReason": "STOP",
+        "index": 0,
+        "safetyRatings": [
+          {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "probability": "NEGLIGIBLE"
+          }
+        ]
+      }
+    ],
+    "promptFeedback": {
+      "safetyRatings": [
+        {
+          "category": "HARM_CATEGORY_HATE_SPEECH",
+          "probability": "NEGLIGIBLE"
+        }
+      ]
+    ]
+  },
+  "usageMetadata": {
+    "promptTokenCount": 4,
+    "candidatesTokenCount": 611,
+    "totalTokenCount": 2422,
+    "thoughtsTokenCount": 1807,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4
+      }
+    ]
+  }
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "Invalid request parameters",
+    "status": "INVALID_ARGUMENT"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "Authentication failed, please check your API Key",
+    "status": "UNAUTHENTICATED"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "Insufficient balance, please recharge",
+    "status": "PAYMENT_REQUIRED"
+  }
+}
+```
+
+```json 403
+{
+  "error": {
+    "code": 403,
+    "message": "Access denied",
+    "status": "PERMISSION_DENIED"
+  }
+}
+```
+
+```json 404
+{
+  "error": {
+    "code": 404,
+    "message": "Model not found",
+    "status": "NOT_FOUND"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "Rate limit exceeded, please try again later",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "Internal server error",
+    "status": "INTERNAL"
+  }
+}
+```
+
+```json 502
+{
+  "error": {
+    "code": 502,
+    "message": "Bad gateway, service temporarily unavailable",
+    "status": "BAD_GATEWAY"
+  }
+}
+```
+
+```json 503
+{
+  "error": {
+    "code": 503,
+    "message": "Service temporarily unavailable",
+    "status": "UNAVAILABLE"
+  }
+}
+```
+
+</ResponseExample>
+
+## Authorizations
+
+<ParamField header="Authorization" type="string" required>
+  All API endpoints require Bearer Token authentication
+
+  Get your API Key:
+
+  Visit the [API Key Management Page](https://api.apimart.ai/console/token) to get your API Key
+
+  Add it to the request header:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Path Parameters
+
+<ParamField path="model" type="string" required>
+  Model name
+
+  The examples use `gemini-2.5-pro`, which you can replace with other supported Gemini models:
+
+  - `gemini-2.5-flash` - Gemini 2.5 Flash
+  - `gemini-2.5-pro` - Gemini 2.5 Pro
+  - `gemini-2.5-flash-lite` - Gemini 2.5 Flash Lite
+  - `gemini-2.5-pro-thinking` - Gemini 2.5 Pro Deep Thinking
+</ParamField>
+
+<ParamField path="method" type="enum<string>" required>
+  Generation method (recommended: `generateContent` for quick start):
+
+  - `generateContent`: Wait for complete response and return at once
+  - `streamGenerateContent`: Stream response, return content in chunks
+
+  Available options: `generateContent`, `streamGenerateContent`
+</ParamField>
+
+## Body
+
+<ParamField body="contents" type="array" required>
+  List of conversation contents
+
+  Minimum 1 message required
+
+  <Expandable title="contents object structure">
+    <ParamField body="role" type="string" required>
+      Role type:
+      - `user`: User message
+      - `model`: Model response (used in conversation history)
+    </ParamField>
+
+    <ParamField body="parts" type="array" required>
+      Message content parts
+
+      <Expandable title="parts object structure">
+        <ParamField body="text" type="string">
+          Text content
+        </ParamField>
+
+        <ParamField body="inlineData" type="object">
+          Inline data (for multimodal input)
+
+          <Expandable title="inlineData properties">
+            <ParamField body="mimeType" type="string">
+              MIME type, e.g. `image/jpeg`, `image/png`
+            </ParamField>
+
+            <ParamField body="data" type="string">
+              Base64 encoded data
+            </ParamField>
+          </Expandable>
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+
+  Example:
+  ```json
+  [
+    {
+      "role": "user",
+      "parts": [{ "text": "Hello, please introduce yourself" }]
+    }
+  ]
+  ```
+</ParamField>
+
+<ParamField body="generationConfig" type="object">
+  Generation configuration (optional)
+
+  <Expandable title="generationConfig properties">
+    <ParamField body="temperature" type="number">
+      Controls output randomness, range 0.0-2.0
+
+      - Lower values make output more deterministic
+      - Higher values make output more random
+
+      Default: 1.0
+    </ParamField>
+
+    <ParamField body="maxOutputTokens" type="integer">
+      Maximum number of tokens to generate
+
+      Different models have different maximum limits
+    </ParamField>
+
+    <ParamField body="topP" type="number">
+      Nucleus sampling parameter, range 0.0-1.0
+
+      Controls the probability mass considered during sampling
+    </ParamField>
+
+    <ParamField body="topK" type="integer">
+      Top-K sampling parameter
+
+      Sample only from the K most probable tokens at each step
+    </ParamField>
+
+    <ParamField body="stopSequences" type="array">
+      List of stop sequences
+
+      Stop generation when these sequences are encountered
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="safetySettings" type="array">
+  Safety settings (optional)
+
+  <Expandable title="safetySettings object structure">
+    <ParamField body="category" type="string">
+      Safety category:
+      - `HARM_CATEGORY_HATE_SPEECH`: Hate speech
+      - `HARM_CATEGORY_DANGEROUS_CONTENT`: Dangerous content
+      - `HARM_CATEGORY_HARASSMENT`: Harassment
+      - `HARM_CATEGORY_SEXUALLY_EXPLICIT`: Sexually explicit content
+    </ParamField>
+
+    <ParamField body="threshold" type="string">
+      Threshold level:
+      - `BLOCK_NONE`: Don't block
+      - `BLOCK_ONLY_HIGH`: Block only high risk
+      - `BLOCK_MEDIUM_AND_ABOVE`: Block medium and above risk
+      - `BLOCK_LOW_AND_ABOVE`: Block low and above risk
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## Response
+
+<ResponseField name="candidates" type="array">
+  List of candidate responses
+
+  <Expandable title="candidates object structure">
+    <ResponseField name="content" type="object">
+      Generated content
+
+      <Expandable title="content properties">
+        <ResponseField name="role" type="string">
+          Role, typically `model`
+        </ResponseField>
+
+        <ResponseField name="parts" type="array">
+          List of content parts
+
+          <Expandable title="parts object">
+            <ResponseField name="text" type="string">
+              Generated text content
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="finishReason" type="string">
+      Finish reason:
+      - `STOP`: Normal completion
+      - `MAX_TOKENS`: Maximum token limit reached
+      - `SAFETY`: Stopped for safety reasons
+      - `RECITATION`: Stopped due to recitation
+      - `OTHER`: Other reasons
+    </ResponseField>
+
+    <ResponseField name="index" type="integer">
+      Index of the candidate response
+    </ResponseField>
+
+    <ResponseField name="safetyRatings" type="array">
+      List of safety ratings
+
+      <Expandable title="safetyRatings object">
+        <ResponseField name="category" type="string">
+          Safety category
+        </ResponseField>
+
+        <ResponseField name="probability" type="string">
+          Probability level: `NEGLIGIBLE`, `LOW`, `MEDIUM`, `HIGH`
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="promptFeedback" type="object">
+  Prompt feedback information
+
+  <Expandable title="promptFeedback properties">
+    <ResponseField name="safetyRatings" type="array">
+      Safety ratings for the prompt
+    </ResponseField>
+
+    <ResponseField name="blockReason" type="string">
+      Block reason (if prompt was blocked)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="usageMetadata" type="object">
+  Usage statistics
+
+  <Expandable title="usageMetadata properties">
+    <ResponseField name="promptTokenCount" type="integer">
+      Number of tokens in the prompt
+    </ResponseField>
+
+    <ResponseField name="candidatesTokenCount" type="integer">
+      Number of tokens in candidate responses
+    </ResponseField>
+
+    <ResponseField name="totalTokenCount" type="integer">
+      Total number of tokens consumed
+    </ResponseField>
+
+    <ResponseField name="thoughtsTokenCount" type="integer">
+      Number of tokens used for thinking (if applicable)
+    </ResponseField>
+
+    <ResponseField name="promptTokensDetails" type="array">
+      Prompt token details
+
+      <Expandable title="promptTokensDetails object">
+        <ResponseField name="modality" type="string">
+          Modality type: `TEXT`, `IMAGE`, etc.
+        </ResponseField>
+
+        <ResponseField name="tokenCount" type="integer">
+          Number of tokens for this modality
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+

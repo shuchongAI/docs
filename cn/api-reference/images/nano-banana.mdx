@@ -1,0 +1,76 @@
+﻿---
+title: "Gemini-2.5-Flash-Image"
+description: "使用 Gemini-2.5-Flash-Image 模型进行图像生成"
+icon: "image"
+---
+
+# Gemini-2.5-Flash-Image 图像生成
+
+使用 Gemini-2.5-Flash-Image 模型进行快速图像生成。
+
+## 功能特点
+
+- **异步处理模式**：返回任务ID用于后续查询
+- **快速生成速度**：针对快速图像创建进行优化
+- **生成的图像链接**：有效期为24小时，请尽快保存
+
+## 请求示例
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemini-2.5-flash-image",
+    "prompt": "月光下的竹林小径",
+    "size": "1:1",
+    "n": 1
+  }'
+```
+
+</RequestExample>
+
+## 响应示例
+
+<ResponseExample>
+
+```json
+{
+  "code": 200,
+  "data": {
+    "created": 1757156493,
+    "id": "task-unified-1757156512-a7n4jhc2",
+    "model": "gemini-2.5-flash-image",
+    "object": "image.generation.task",
+    "progress": 0,
+    "status": "pending",
+    "task_info": {
+      "can_cancel": true,
+      "estimated_time": 60
+    },
+    "type": "image"
+  }
+}
+```
+
+</ResponseExample>
+
+## 参数说明
+
+<ParamField query="model" type="string" required>
+  模型名称，固定为 "gemini-2.5-flash-image"
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  图像生成的文本描述
+</ParamField>
+
+<ParamField query="size" type="string">
+  生成图像的尺寸，支持 "1024x1024", "1024x1536", "1536x1024"
+</ParamField>
+
+<ParamField query="n" type="integer">
+  生成图像的数量，默认为 1
+</ParamField>

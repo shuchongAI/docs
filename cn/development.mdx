@@ -1,0 +1,79 @@
+---
+title: "开发指南"
+description: "在您的应用中集成API的开发指南"
+---
+
+# 开发指南
+
+本指南将帮助您在应用程序中集成我们的API服务。
+
+## 异步处理
+
+我们的API使用异步处理模式：
+
+1. **提交任务**：发送生成请求，获得任务ID
+2. **轮询状态**：定期查询任务状态
+3. **获取结果**：任务完成后获取生成结果
+
+### 轮询示例
+
+```python
+import time
+
+def wait_for_completion(client, task_id, max_wait=300):
+    """等待任务完成"""
+    start_time = time.time()
+    
+    while time.time() - start_time < max_wait:
+        result = client.tasks.get(task_id)
+        
+        if result.status == "completed":
+            return result
+        elif result.status == "failed":
+            raise Exception(f"任务失败: {result.error}")
+        
+        time.sleep(2)  # 等待2秒后再次查询
+    
+    raise Exception("任务超时")
+```
+
+## 错误处理
+
+### 常见错误码
+
+| 状态码 | 说明 | 解决方案 |
+|--------|------|----------|
+| 400 | 请求参数错误 | 检查请求参数格式 |
+| 401 | 认证失败 | 检查API密钥 |
+| 402 | 余额不足 | 充值账户余额 |
+| 429 | 请求频率限制 | 降低请求频率 |
+| 500 | 服务器错误 | 稍后重试 |
+
+### 错误处理示例
+
+```python
+try:
+    response = client.images.generate(...)
+except EvolinkError as e:
+    if e.status_code == 401:
+        print("API密钥无效")
+    elif e.status_code == 402:
+        print("账户余额不足")
+    else:
+        print(f"错误: {e.message}")
+```
+
+## 最佳实践
+
+1. **合理使用缓存**：生成的图像/视频链接有效期为24小时
+2. **错误重试**：实现指数退避重试机制
+3. **监控使用量**：定期检查API使用情况
+4. **安全存储**：妥善保管您的API密钥
+
+## 支持
+
+如果您在开发过程中遇到问题，可以通过以下方式获取帮助：
+
+- 📧 邮件支持：zhihong@apimart.ai
+- 💬 在线客服：访问我们的网站
+- 📚 文档中心：查看完整的API文档

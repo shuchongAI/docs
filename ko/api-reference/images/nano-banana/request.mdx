@@ -1,0 +1,43 @@
+---
+title: "요청 매개변수"
+description: "Gemini-2.5-Flash-Image 이미지 생성 요청 매개변수"
+---
+
+# 요청 매개변수
+
+## 요청 예시
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemini-2.5-flash-image-preview",
+    "prompt": "달빛 아래 대나무 숲 길",
+    "size": "1:1",
+    "n": 1
+  }'
+```
+
+</RequestExample>
+
+## 매개변수
+
+<ParamField query="model" type="string" required>
+  모델 이름, "gemini-2.5-flash-image-preview"로 고정
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  이미지 생성을 위한 텍스트 설명
+</ParamField>
+
+<ParamField query="size" type="string">
+  이미지 크기. 지원: "1024x1024", "1024x1536", "1536x1024"
+</ParamField>
+
+<ParamField query="n" type="integer">
+  생성할 이미지 수. 기본값: 1
+</ParamField>
+

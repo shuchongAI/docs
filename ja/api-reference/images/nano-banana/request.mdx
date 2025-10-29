@@ -1,0 +1,43 @@
+---
+title: "リクエストパラメータ"
+description: "Gemini-2.5-Flash-Image 画像生成のリクエストパラメータ"
+---
+
+# リクエストパラメータ
+
+## リクエスト例
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemini-2.5-flash-image-preview",
+    "prompt": "月明かりの下の竹林の小道",
+    "size": "1:1",
+    "n": 1
+  }'
+```
+
+</RequestExample>
+
+## パラメータ
+
+<ParamField query="model" type="string" required>
+  モデル名、"gemini-2.5-flash-image-preview"固定
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  画像生成のためのテキスト説明
+</ParamField>
+
+<ParamField query="size" type="string">
+  画像のサイズ。サポート: "1024x1024", "1024x1536", "1536x1024"
+</ParamField>
+
+<ParamField query="n" type="integer">
+  生成する画像の数。デフォルト: 1
+</ParamField>
+

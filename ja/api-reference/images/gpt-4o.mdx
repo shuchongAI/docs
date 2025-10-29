@@ -1,0 +1,60 @@
+---
+title: "GPT-4o-image"
+description: "画像生成にGPT-4o-imageモデルを使用します"
+icon: "image"
+---
+
+# GPT-4o-image 画像生成
+
+高品質な画像生成のためにGPT-4o-imageモデルを使用します。複数の生成モードがサポートされています。
+
+## ハイライト
+
+- 非同期処理: 後続のクエリ用にタスクIDを返します
+- 複数のモード: テキストから画像、画像から画像、画像編集
+- リンクの有効期限: 生成された画像のリンクは24時間有効です
+
+## リクエスト例
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o-image",
+    "prompt": "海の上の鮮やかな色の美しい夕日",
+    "size": "1:1",
+    "n": 1,
+    "image_urls": [
+      "https://example.com/image1.png",
+      "https://example.com/image2.png"
+    ]
+  }'
+```
+
+</RequestExample>
+
+## パラメータ
+
+<ParamField query="model" type="string" required>
+  モデル名。"gpt-4o-image"を使用してください。
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  画像生成のためのテキスト説明。
+</ParamField>
+
+<ParamField query="size" type="string">
+  出力サイズ。サポート: "1024x1024", "1792x1024", "1024x1792"。
+</ParamField>
+
+<ParamField query="n" type="integer">
+  生成する画像の数。デフォルト: 1。
+</ParamField>
+
+<ParamField query="image_urls" type="array">
+  画像から画像モードのための参照画像URL。
+</ParamField>
+

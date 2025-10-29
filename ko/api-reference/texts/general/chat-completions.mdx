@@ -1,0 +1,881 @@
+﻿---
+title: "범용 채팅 API"
+description: "
+- 모든 텍스트 생성 모델을 지원하는 통합 채팅 API 인터페이스
+
+- model 매개변수를 통해 다양한 AI 모델 선택 가능
+
+- OpenAI Chat Completions API 형식과 호환
+"
+api: "POST https://api.apimart.ai/v1/chat/completions"
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/chat/completions \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "gpt-4o", # 지원되는 모든 모델 ID로 교체 가능
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a professional AI assistant."
+      },
+      {
+        "role": "user",
+        "content": "Tell me about the history of artificial intelligence."
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/chat/completions"
+
+payload = {
+    "model": "gpt-4o",  # 지원되는 모든 모델 ID로 교체 가능
+    "messages": [
+        {
+            "role": "system",
+            "content": "당신은 전문 AI 어시스턴트입니다."
+        },
+        {
+            "role": "user",
+            "content": "인공지능의 역사에 대해 알려주세요."
+        }
+    ]
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/chat/completions";
+
+const payload = {
+  model: "gpt-4o",  // 지원되는 모든 모델 ID로 교체 가능
+  messages: [
+    {
+      role: "system",
+      content: "You are a professional AI assistant."
+    },
+    {
+      role: "user",
+      content: "Tell me about the history of artificial intelligence."
+    }
+  ]
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/chat/completions"
+
+    payload := map[string]interface{}{
+        "model": "gpt-4o",  // 지원되는 모든 모델 ID로 교체 가능
+        "messages": []map[string]string{
+            {
+                "role":    "system",
+                "content": "당신은 전문 AI 어시스턴트입니다.",
+            },
+            {
+                "role":    "user",
+                "content": "인공지능의 역사에 대해 알려주세요.",
+            },
+        },
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/chat/completions";
+
+        // 지원되는 모든 모델 ID로 교체 가능
+        String payload = """
+        {
+          "model": "gpt-4o",
+          "messages": [
+            {
+              "role": "system",
+              "content": "당신은 전문 AI 어시스턴트입니다."
+            },
+            {
+              "role": "user",
+              "content": "인공지능의 역사에 대해 알려주세요."
+            }
+          ]
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/chat/completions";
+
+// 지원되는 모든 모델 ID로 교체 가능
+$payload = [
+    "model" => "gpt-4o",
+    "messages" => [
+        [
+            "role" => "system",
+            "content" => "You are a professional AI assistant."
+        ],
+        [
+            "role" => "user",
+            "content" => "Tell me about the history of artificial intelligence."
+        ]
+    ]
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1/chat/completions")
+
+# 지원되는 모든 모델 ID로 교체 가능
+payload = {
+  model: "gpt-4o",
+  messages: [
+    {
+      role: "system",
+      content: "You are a professional AI assistant."
+    },
+    {
+      role: "user",
+      content: "Tell me about the history of artificial intelligence."
+    }
+  ]
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/chat/completions")!
+
+let payload: [String: Any] = [
+    "model": "gpt-4o",  // 지원되는 모든 모델 ID로 교체 가능
+    "messages": [
+        [
+            "role": "system",
+            "content": "당신은 전문 AI 어시스턴트입니다."
+        ],
+        [
+            "role": "user",
+            "content": "인공지능의 역사에 대해 알려주세요."
+        ]
+    ]
+]
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+    
+    if let data = data, let responseString = String(data: data, encoding: .utf8) {
+        print(responseString)
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/chat/completions";
+
+        // 지원되는 모든 모델 ID로 교체 가능
+        var payload = @"{
+            ""model"": ""gpt-4o"",
+            ""messages"": [
+                {
+                    ""role"": ""system"",
+                    ""content"": ""You are a professional AI assistant.""
+                },
+                {
+                    ""role"": ""user"",
+                    ""content"": ""Tell me about the history of artificial intelligence.""
+                }
+            ]
+        }";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
+
+        var content = new StringContent(payload, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(url, content);
+        var result = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(result);
+    }
+}
+```
+
+```c C
+#include <stdio.h>
+#include <curl/curl.h>
+
+int main(void) {
+    CURL *curl;
+    CURLcode res;
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if(curl) {
+        const char *url = "https://api.apimart.ai/v1/chat/completions";
+        //  지원되는 모든 모델 ID로 교체 가능
+        const char *payload = "{"
+            "\"model\":\"gpt-4o\","
+            "\"messages\":[{\"role\":\"system\",\"content\":\"You are a professional AI assistant.\"},{\"role\":\"user\",\"content\":\"Tell me about the history of artificial intelligence.\"}]"
+        "}";
+
+        struct curl_slist *headers = NULL;
+        headers = curl_slist_append(headers, "Authorization: Bearer <token>");
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, payload);
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+        res = curl_easy_perform(curl);
+
+        if(res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+        }
+
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+    return 0;
+}
+```
+
+```objectivec Objective-C
+#import <Foundation/Foundation.h>
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        NSURL *url = [NSURL URLWithString:@"https://api.apimart.ai/v1/chat/completions"];
+        
+        NSDictionary *payload = @{
+            @"model": @"gpt-4o",  // 지원되는 모든 모델 ID로 교체 가능
+            @"messages": @[
+                @{
+                    @"role": @"system",
+                    @"content": @"You are a professional AI assistant."
+                },
+                @{
+                    @"role": @"user",
+                    @"content": @"Tell me about the history of artificial intelligence."
+                }
+            ]
+        };
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload
+                                                          options:0
+                                                            error:&error];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:@"Bearer <token>" forHTTPHeaderField:@"Authorization"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:jsonData];
+        
+        NSURLSessionDataTask *task = [[NSURLSession sharedSession] 
+            dataTaskWithRequest:request
+            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                if (error) {
+                    NSLog(@"Error: %@", error);
+                    return;
+                }
+                NSString *result = [[NSString alloc] initWithData:data 
+                                                        encoding:NSUTF8StringEncoding];
+                NSLog(@"%@", result);
+            }];
+        
+        [task resume];
+        [[NSRunLoop mainRunLoop] run];
+    }
+    return 0;
+}
+```
+
+```ocaml OCaml
+(* Requires cohttp and yojson libraries *)
+open Lwt
+open Cohttp
+open Cohttp_lwt_unix
+
+let url = "https://api.apimart.ai/v1/chat/completions"
+
+(* 지원되는 모든 모델 ID로 교체 가능 *)
+let payload = {|{
+  "model": "gpt-4o",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a professional AI assistant."
+    },
+    {
+      "role": "user",
+      "content": "Tell me about the history of artificial intelligence."
+    }
+  ]
+}|}
+
+let () =
+  let headers = Header.init ()
+    |> fun h -> Header.add h "Authorization" "Bearer <token>"
+    |> fun h -> Header.add h "Content-Type" "application/json"
+  in
+  let body = Cohttp_lwt.Body.of_string payload in
+  
+  let response = Client.post ~headers ~body (Uri.of_string url) >>= fun (resp, body) ->
+    body |> Cohttp_lwt.Body.to_string >|= fun body_str ->
+    print_endline body_str
+  in
+  Lwt_main.run response
+```
+
+```dart Dart
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+void main() async {
+  final url = Uri.parse('https://api.apimart.ai/v1/chat/completions');
+  
+  // 지원되는 모든 모델 ID로 교체 가능
+  final payload = {
+    'model': 'gpt-4o',
+    'messages': [
+      {
+        'role': 'system',
+        'content': 'You are a professional AI assistant.'
+      },
+      {
+        'role': 'user',
+        'content': 'Tell me about the history of artificial intelligence.'
+      }
+    ]
+  };
+  
+  final response = await http.post(
+    url,
+    headers: {
+      'Authorization': 'Bearer <token>',
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode(payload),
+  );
+  
+  print(response.body);
+}
+```
+
+```r R
+library(httr)
+library(jsonlite)
+
+url <- "https://api.apimart.ai/v1/chat/completions"
+
+# 지원되는 모든 모델 ID로 교체 가능
+payload <- list(
+  model = "gpt-4o",
+  messages = list(
+    list(
+      role = "system",
+      content = "You are a professional AI assistant."
+    ),
+    list(
+      role = "user",
+      content = "Tell me about the history of artificial intelligence."
+    )
+  )
+)
+
+response <- POST(
+  url,
+  add_headers(
+    Authorization = "Bearer <token>",
+    `Content-Type` = "application/json"
+  ),
+  body = toJSON(payload, auto_unbox = TRUE),
+  encode = "raw"
+)
+
+cat(content(response, "text"))
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": {
+    "id": "chatcmpl-9876543210",
+    "object": "chat.completion",
+    "created": 1677652288,
+    "model": "gpt-4o",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "인공지능(AI)의 역사는 1950년대로 거슬러 올라갑니다...\n\n1. **초기 시대 (1950s-1960s)**: 튜링 테스트의 제안이 AI 연구의 시작을 알렸습니다...\n\n2. **전문가 시스템 시대 (1970s-1980s)**: 규칙 기반 시스템이 의료 진단, 금융 분석 등의 분야에 적용되기 시작했습니다...\n\n3. **머신러닝의 부상 (1990s-2000s)**: 통계적 학습 방법이 점차 주류가 되었습니다...\n\n4. **딥러닝 혁명 (2010s-현재)**: 신경망 기술의 돌파구가 AI의 폭발적인 성장을 가져왔습니다..."
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 28,
+      "completion_tokens": 320,
+      "total_tokens": 348
+    }
+  }
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "잘못된 요청 매개변수",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "인증 실패, API 키를 확인해주세요",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "계정 잔액 부족, 충전이 필요합니다",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 403
+{
+  "error": {
+    "code": 403,
+    "message": "접근 금지, 이 리소스에 접근할 권한이 없습니다",
+    "type": "permission_error"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "요청이 너무 많습니다, 나중에 다시 시도해주세요",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "내부 서버 오류, 나중에 다시 시도해주세요",
+    "type": "server_error"
+  }
+}
+```
+
+```json 502
+{
+  "error": {
+    "code": 502,
+    "message": "잘못된 게이트웨이, 서비스 일시적으로 사용 불가",
+    "type": "bad_gateway"
+  }
+}
+```
+
+</ResponseExample>
+
+## 인증
+
+<ParamField header="Authorization" type="string" required>
+  모든 API 엔드포인트는 Bearer Token 인증이 필요합니다
+
+  API 키 받기:
+
+  [API 키 관리 페이지](https://api.apimart.ai/console/token)를 방문하여 API 키를 받으세요
+
+  요청 헤더에 추가:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## 요청 본문
+
+<ParamField body="model" type="string" required>
+  모델 이름
+
+  지원되는 모델:
+  - **OpenAI**: `gpt-5`, `gpt-5-chat-latest`, `gpt-5-mini`, `gpt-5-nano`, `gpt-5-pro`
+  - **Anthropic**: `claude-sonnet-4-5-20250929`, `claude-opus-4-1-20250805`, `claude-haiku-4-5-20251001`, `claude-opus-4-1-20250805-thinking`, `claude-sonnet-4-5-20250929-thinking`
+  - **Google**: `gemini-2.5-pro`, `gemini-2.5-flash`, `gemini-2.5-pro-thinking`, `gemini-2.5-flash-lite`
+  - **DeepSeek**: `deepseek-v3.1-250821`, `deepseek-v3.1-think-250821`, `deepseek-v3-0324`
+  - **Doubao**: `doubao-seed-1-6-251015`, `doubao-seed-1-6-flash-250828`, `doubao-seed-1-6-thinking-250715`
+  - 더 많은 모델이 계속 추가되고 있습니다...
+</ParamField>
+
+<ParamField body="messages" type="array" required>
+  대화 메시지 목록
+
+  각 메시지는 다음을 포함합니다:
+  - `role`: 역할 유형 (`system`, `user`, `assistant`)
+  - `content`: 메시지 내용 (문자열 또는 멀티모달 콘텐츠 배열)
+</ParamField>
+
+<ParamField body="temperature" type="number">
+  출력 무작위성 제어, 범위 0-2
+
+  - 낮은 값 (예: 0.2)은 출력을 더 결정적으로 만듭니다
+  - 높은 값 (예: 1.8)은 출력을 더 무작위로 만듭니다
+
+  기본값: 1.0
+</ParamField>
+
+<ParamField body="max_tokens" type="integer">
+  생성할 최대 토큰 수
+
+  모델마다 최대 제한이 다르므로 특정 모델 문서를 참조하세요
+</ParamField>
+
+<ParamField body="stream" type="boolean">
+  스트리밍 출력 사용 여부
+
+  - `true`: 스트리밍 응답 (SSE 형식)
+  - `false`: 한번에 완전한 응답
+
+  기본값: false
+</ParamField>
+
+<ParamField body="top_p" type="number">
+  핵 샘플링 매개변수, 범위 0-1
+
+  생성된 텍스트의 다양성을 제어, temperature와 함께 사용하는 것을 권장합니다
+
+  기본값: 1.0
+</ParamField>
+
+<ParamField body="frequency_penalty" type="number">
+  빈도 페널티, 범위 -2.0 ~ 2.0
+
+  양수 값은 같은 단어를 반복할 가능성을 줄입니다
+
+  기본값: 0
+</ParamField>
+
+<ParamField body="presence_penalty" type="number">
+  존재 페널티, 범위 -2.0 ~ 2.0
+
+  양수 값은 새로운 주제에 대해 말할 가능성을 높입니다
+
+  기본값: 0
+</ParamField>
+
+<ParamField body="stop" type="string or array">
+  중지 시퀀스
+
+  최대 4개의 시퀀스, 해당 시퀀스를 만나면 생성이 중지됩니다
+</ParamField>
+
+<ParamField body="n" type="integer">
+  생성할 완료 개수
+
+  기본값: 1
+</ParamField>
+
+## 응답
+
+<ResponseField name="id" type="string">
+  응답의 고유 식별자
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  객체 유형, `chat.completion`으로 고정
+</ResponseField>
+
+<ResponseField name="created" type="integer">
+  생성 타임스탬프
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  실제 사용된 모델 이름
+</ResponseField>
+
+<ResponseField name="choices" type="array">
+  생성된 응답 목록
+
+  <Expandable title="속성">
+    <ResponseField name="index" type="integer">
+      선택 인덱스
+    </ResponseField>
+
+    <ResponseField name="message" type="object">
+      메시지 내용
+
+      <Expandable title="속성">
+        <ResponseField name="role" type="string">
+          역할 유형 (assistant)
+        </ResponseField>
+
+        <ResponseField name="content" type="string">
+          생성된 텍스트 내용
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="finish_reason" type="string">
+      완료 이유
+
+      가능한 값:
+      - `stop` - 자연스러운 완료
+      - `length` - 최대 길이 도달
+      - `content_filter` - 콘텐츠 필터링됨
+      - `function_call` - 함수 호출
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="usage" type="object">
+  토큰 사용량 통계
+
+  <Expandable title="속성">
+    <ResponseField name="prompt_tokens" type="integer">
+      입력 메시지의 토큰 수
+    </ResponseField>
+
+    <ResponseField name="completion_tokens" type="integer">
+      생성된 콘텐츠의 토큰 수
+    </ResponseField>
+
+    <ResponseField name="total_tokens" type="integer">
+      총 토큰 수
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## 지원되는 모델
+
+### OpenAI 시리즈
+- `gpt-5` - GPT-5 기본 모델
+- `gpt-5-chat-latest` - GPT-5 최신 대화 버전
+- `gpt-5-mini` - GPT-5 경량 버전, 비용 효율적
+- `gpt-5-nano` - GPT-5 초경량 버전
+- `gpt-5-pro` - GPT-5 프로페셔널 강화 버전
+
+### Anthropic 시리즈
+- `claude-haiku-4-5-20251001` - Claude 4.5 빠른 응답 버전
+- `claude-sonnet-4-5-20250929` - Claude 4.5 밸런스 버전
+- `claude-opus-4-1-20250805` - 가장 강력한 Claude 4.1 플래그십 모델
+- `claude-opus-4-1-20250805-thinking` - Claude 4.1 Opus 깊은 사고 버전
+- `claude-sonnet-4-5-20250929-thinking` - Claude 4.5 Sonnet 깊은 사고 버전
+
+### Google 시리즈
+- `gemini-2.5-flash` - Gemini 2.5 고속 버전
+- `gemini-2.5-pro` - Gemini 2.5 프로페셔널 버전
+- `gemini-2.5-flash-lite` - Gemini 2.5 초경량 버전
+- `gemini-2.5-pro-thinking` - Gemini 2.5 Pro 깊은 사고 버전
+
+### DeepSeek 시리즈
+- `deepseek-v3.1-250821` - DeepSeek V3.1 기본 버전
+- `deepseek-v3.1-think-250821` - DeepSeek V3.1 사고 버전
+- `deepseek-v3-0324` - DeepSeek V3 표준 버전
+
+### Doubao 시리즈
+- `doubao-seed-1-6-flash-250828` - Doubao Seed 1.6 고속 버전
+- `doubao-seed-1-6-thinking-250715` - Doubao Seed 1.6 사고 버전
+- `doubao-seed-1-6-251015` - Doubao Seed 1.6 표준 버전
+
+## 사용 예제
+
+### 기본 대화
+```json
+{
+  "model": "gpt-4o",
+  "messages": [
+    {"role": "user", "content": "안녕하세요"}
+  ]
+}
+```
+
+### 시스템 프롬프트
+```json
+{
+  "model": "claude-3-5-sonnet",
+  "messages": [
+    {"role": "system", "content": "당신은 전문 Python 프로그래밍 튜터입니다"},
+    {"role": "user", "content": "리스트 컴프리헨션을 어떻게 사용하나요?"}
+  ]
+}
+```
+
+### 다중 턴 대화
+```json
+{
+  "model": "gemini-2.0-flash",
+  "messages": [
+    {"role": "user", "content": "머신러닝이 무엇인가요?"},
+    {"role": "assistant", "content": "머신러닝은 인공지능의 한 분야입니다..."},
+    {"role": "user", "content": "예를 들어 설명해주시겠어요?"}
+  ]
+}
+```
+
+### 스트리밍 출력
+```json
+{
+  "model": "gpt-4o",
+  "messages": [
+    {"role": "user", "content": "봄에 관한 시를 써주세요"}
+  ],
+  "stream": true
+}
+```
+
