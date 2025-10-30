@@ -23,7 +23,7 @@ curl --request POST \
   --header 'Authorization: Bearer <token>' \
   --header 'Content-Type: application/json' \
   --data '{
-    "model": "veo3.1",
+    "model": "veo3.1-fast",
     "prompt": "돌고래가 푸른 바다에서 뛰어다니는",
     "duration": 8,
     "aspect_ratio": "16:9",
@@ -37,7 +37,7 @@ import requests
 url = "https://api.apimart.ai/v1/videos/generations"
 
 payload = {
-    "model": "veo3.1",
+    "model": "veo3.1-fast",
     "prompt": "돌고래가 푸른 바다에서 뛰어다니는",
     "duration": 8,
     "aspect_ratio": "16:9",
@@ -132,7 +132,7 @@ public class Main {
 
         String payload = """
         {
-          "model": "veo3.1",
+          "model": "veo3.1-fast",
           "prompt": "돌고래가 푸른 바다에서 뛰어다니는",
           "duration": 8,
           "aspect_ratio": "16:9",
@@ -218,7 +218,7 @@ import Foundation
 let url = URL(string: "https://api.apimart.ai/v1/videos/generations")!
 
 let payload: [String: Any] = [
-    "model": "veo3.1",
+    "model": "veo3.1-fast",
     "prompt": "돌고래가 푸른 바다에서 뛰어다니는",
     "duration": 8,
     "aspect_ratio": "16:9",
@@ -291,7 +291,7 @@ int main(void) {
     if(curl) {
         const char *url = "https://api.apimart.ai/v1/videos/generations";
         const char *payload = "{"
-            "\"model\":\"veo3\","
+            "\"model\":\"veo3.1-fast\","
             "\"prompt\":\"海豚在碧蓝海洋中跳跃\","
             "\"duration\":8,"
             "\"aspect_ratio\":\"16:9\","
@@ -459,19 +459,12 @@ cat(content(response, "text"))
 ```json 200
 {
   "code": 200,
-  "data": {
-    "created": 1757156493,
-    "id": "task_01J9HA7JPQ9A0Z6JZ3V8M9W6PZ",
-    "model": "veo3.1",
-    "object": "video.generation.task",
-    "progress": 0,
-    "status": "pending",
-    "task_info": {
-      "can_cancel": true,
-      "estimated_time": 300
-    },
-    "type": "video"
-  }
+  "data": [
+    {
+      "status": "submitted",
+      "task_id": "task_01K8SGYNNNVBQTXNR4MM964S7K"
+    }
+  ]
 }
 ```
 
@@ -565,10 +558,14 @@ cat(content(response, "text"))
 
 ## 요청 본문
 
-<ParamField body="model" type="string" default="veo3.1" required>
+<ParamField body="model" type="string" default="veo3.1-fast" required>
   비디오 생성 모델명
 
-  Example: `"veo3.1"`
+  사용 가능한 모델：
+  - `veo3.1-fast` - 빠른 생성 모델, 빠른 미리보기 및 반복 작업에 적합
+  - `veo3.1-quality` - 고품질 생성 모델, 최종 제작에 적합
+
+  Example: `"veo3.1-fast"`
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
