@@ -88,7 +88,7 @@
                     ]
                   },
                   {
-                    "group": "VEO3 (Coming Soon)",
+                    "group": "VEO3",
                     "icon": "video",
                     "pages": [
                       "en/api-reference/videos/veo3/generation"
@@ -180,7 +180,7 @@
                     ]
                   },
                   {
-                    "group": "VEO3（即将上线）",
+                    "group": "VEO3",
                     "icon": "video",
                     "pages": [
                       "cn/api-reference/videos/veo3/generation"
@@ -272,7 +272,7 @@
                     ]
                   },
                   {
-                    "group": "VEO3（近日公開）",
+                    "group": "VEO3",
                     "icon": "video",
                     "pages": [
                       "ja/api-reference/videos/veo3/generation"
@@ -363,7 +363,7 @@
                     ]
                   },
                   {
-                    "group": "VEO3（출시 예정）",
+                    "group": "VEO3",
                     "icon": "video",
                     "pages": [
                       "ko/api-reference/videos/veo3/generation"
