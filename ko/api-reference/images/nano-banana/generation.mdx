@@ -58,7 +58,7 @@ const url = "https://api.apimart.ai/v1/images/generations";
 const payload = {
   model: "gemini-2.5-flash-image-preview",
   prompt: "네온 불빛이 있는 현대 도시 야경",
-  size: "1024x1024",
+  size: "1:1",
   n: 1
 };
 
@@ -159,7 +159,7 @@ $url = "https://api.apimart.ai/v1/images/generations";
 $payload = [
     "model" => "gemini-2.5-flash-image-preview",
     "prompt" => "달빛 아래 대나무 숲 길",
-    "size" => "1024x1024",
+    "size" => "1:1",
     "n" => 1
 ];
 
@@ -189,7 +189,7 @@ url = URI("https://api.apimart.ai/v1/images/generations")
 payload = {
   model: "gemini-2.5-flash-image-preview",
   prompt: "네온 불빛이 있는 현대 도시 야경",
-  size: "1024x1024",
+  size: "1:1",
   n: 1
 }
 
@@ -252,7 +252,7 @@ class Program
         var payload = @"{
             ""model"": ""gemini-2.5-flash-image-preview"",
             ""prompt"": ""달빛 아래 대나무 숲 길"",
-            ""size"": ""1024x1024"",
+            ""size"": ""1:1"",
             ""n"": 1
         }";
 
@@ -284,7 +284,7 @@ int main(void) {
         const char *payload = "{"
             "\"model\":\"gemini-2.5-flash-image-preview\","
             "\"prompt\":\"달빛 아래 대나무 숲 길\","
-            "\"size\":\"1024x1024\","
+            "\"size\":\"1:1\","
             "\"n\":1"
         "}";
 
@@ -322,7 +322,7 @@ int main(int argc, const char * argv[]) {
         NSDictionary *payload = @{
             @"model": @"gemini-2.5-flash-image-preview",
             @"prompt": @"달빛 아래 대나무 숲 길",
-            @"size": @"1024x1024",
+            @"size": @"1:1",
             @"n": @1
         };
         
@@ -395,7 +395,7 @@ void main() async {
   final payload = {
     'model': 'gemini-2.5-flash-image-preview',
     'prompt': '달빛 아래 대나무 숲 길',
-    'size': '1024x1024',
+    'size': '1:1',
     'n': 1
   };
   
@@ -421,7 +421,7 @@ url <- "https://api.apimart.ai/v1/images/generations"
 payload <- list(
   model = "gemini-2.5-flash-image-preview",
   prompt = "달빛 아래 대나무 숲 길",
-  size = "1024x1024",
+  size = "1:1",
   n = 1
 )
 
@@ -560,7 +560,7 @@ cat(content(response, "text"))
   이미지 생성 크기
 
   지원되는 형식:
-  - 비율: `1:1`
+  - 비율: `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`
 </ParamField>
 
 <ParamField body="n" type="integer">

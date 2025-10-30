@@ -66,7 +66,14 @@
                     "pages": [
                       "en/api-reference/images/gpt-4o/generation"
                     ]
-                  }                
+                  },
+                  {
+                    "group": "Gemini-2.5-Flash-Image (Nano banana)",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/nano-banana/generation"
+                    ]
+                  }
                 ]
               },
               {
@@ -150,6 +157,13 @@
                     "icon": "image",
                     "pages": [
                       "cn/api-reference/images/gpt-4o/generation"
+                    ]
+                  },
+                  {
+                    "group": "Gemini-2.5-Flash-Image（Nano banana）",
+                    "icon": "image",
+                    "pages": [
+                      "cn/api-reference/images/nano-banana/generation"
                     ]
                   }
                 ]
@@ -236,6 +250,13 @@
                     "pages": [
                       "ja/api-reference/images/gpt-4o/generation"
                     ]
+                  },
+                  {
+                    "group": "Gemini-2.5-Flash-Image (Nano banana)",
+                    "icon": "image",
+                    "pages": [
+                      "ja/api-reference/images/nano-banana/generation"
+                    ]
                   }
                 ]
               },
@@ -319,6 +340,13 @@
                     "icon": "image",
                     "pages": [
                       "ko/api-reference/images/gpt-4o/generation"
+                    ]
+                  },
+                  {
+                    "group": "Gemini-2.5-Flash-Image (Nano banana)",
+                    "icon": "image",
+                    "pages": [
+                      "ko/api-reference/images/nano-banana/generation"
                     ]
                   }
                 ]

@@ -149,7 +149,7 @@ KO_TRANSLATIONS = {
     "Video aspect_ratio": "비디오 해상도",
     "Supported formats:": "지원되는 형식:",
     "- Ratios: `1:1`, `2:3`, `3:2`": "- 비율: `1:1`, `2:3`, `3:2`",
-    "- Pixels: `1024x1024`, `1024x1536`, `1536x1024`": "- 픽셀: `1024x1024`, `1024x1536`, `1536x1024`",
+    "- Pixels: `1:1`, `1024x1536`, `1536x1024`": "- 픽셀: `1:1`, `1024x1536`, `1536x1024`",
     "Number of images to generate": "생성할 이미지 수",
     "Supports 1, 2, 4. Charges will be pre-deducted based on the number": "1, 2, 4를 지원합니다. 수량에 따라 요금이 사전 차감됩니다",
     "Reference image URL list for image-to-image or image editing": "이미지 간 변환 또는 이미지 편집을 위한 참조 이미지 URL 목록",
@@ -194,7 +194,7 @@ KO_TRANSLATIONS = {
     # 更多翻译
     "Image generation size": "이미지 생성 크기",
     "- Ratios: `1:1`, `2:3`, `3:2`": "- 비율: `1:1`, `2:3`, `3:2`",
-    "- Pixels: `1024x1024`, `1024x1536`, `1536x1024`": "- 픽셀: `1024x1024`, `1024x1536`, `1536x1024`",
+    "- Pixels: `1:1`, `1024x1536`, `1536x1024`": "- 픽셀: `1:1`, `1024x1536`, `1536x1024`",
     "Reference image URL list for image-to-image or image editing": "이미지 간 변환 또는 이미지 편집을 위한 참조 이미지 URL 목록",
     "- Each image should not exceed 10MB": "- 각 이미지는 10MB를 초과하지 않아야 합니다",
 
