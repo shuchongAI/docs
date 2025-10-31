@@ -594,6 +594,15 @@ cat(content(response, "text"))
   - 最大文件大小：10MB
 </ParamField>
 
+<ParamField body="watermark" type="boolean" default="false">
+  是否在生成的视频中添加水印
+
+  - `false`：不添加水印
+  - `true`：在视频中添加Sora官方水印
+
+  默认值：`false`
+</ParamField>
+
 ## Response
 
 <ResponseField name="code" type="integer">

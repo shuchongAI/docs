@@ -594,6 +594,15 @@ cat(content(response, "text"))
   - Maximum file size: 10MB
 </ParamField>
 
+<ParamField body="watermark" type="boolean" default="false">
+  Whether to add a watermark to the generated video
+
+  - `false`: No watermark
+  - `true`: Add Sora official watermark to the video
+
+  Default: `false`
+</ParamField>
+
 ## Response
 
 <ResponseField name="code" type="integer">

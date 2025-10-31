@@ -594,6 +594,15 @@ cat(content(response, "text"))
   - 最大ファイルサイズ: 10MB
 </ParamField>
 
+<ParamField body="watermark" type="boolean" default="false">
+  生成された動画にウォーターマークを追加するかどうか
+
+  - `false`：ウォーターマークを追加しない
+  - `true`：動画にSora公式ウォーターマークを追加
+
+  デフォルト: `false`
+</ParamField>
+
 ## レスポンス
 
 <ResponseField name="code" type="integer">

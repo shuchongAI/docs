@@ -594,6 +594,15 @@ cat(content(response, "text"))
   - 최대 파일 크기: 10MB
 </ParamField>
 
+<ParamField body="watermark" type="boolean" default="false">
+  생성된 비디오에 워터마크를 추가할지 여부
+
+  - `false`：워터마크를 추가하지 않음
+  - `true`：비디오에 Sora 공식 워터마크 추가
+
+  기본값: `false`
+</ParamField>
+
 ## 응답
 
 <ResponseField name="code" type="integer">
