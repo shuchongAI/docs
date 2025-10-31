@@ -596,60 +596,20 @@ cat(content(response, "text"))
 
 ## 응답
 
-<ResponseField name="created" type="integer">
-  작업 생성 타임스탬프
+<ResponseField name="code" type="integer">
+  응답 상태 코드, 성공 시 200
 </ResponseField>
 
-<ResponseField name="id" type="string">
-  고유한 작업 식별자
-</ResponseField>
+<ResponseField name="data" type="array">
+  응답 데이터 배열
 
-<ResponseField name="model" type="string">
-  실제 사용된 모델 이름
-</ResponseField>
-
-<ResponseField name="object" type="string">
-  객체 유형, `video.generation.task`로 고정됨
-</ResponseField>
-
-<ResponseField name="progress" type="integer">
-  작업 완료 진행률 (0-100)
-</ResponseField>
-
-<ResponseField name="status" type="string">
-  작업 상태
-
-  가능한 값:
-  - `pending` - 처리 대기 중
-  - `processing` - 진행 중
-  - `completed` - 완료됨
-  - `failed` - 실패
-</ResponseField>
-
-<ResponseField name="task_info" type="object">
-  작업 세부정보
-
-  <Expandable title="속성">
-    <ResponseField name="can_cancel" type="boolean">
-      작업을 취소할 수 있는지 여부
+  <Expandable title="배열 요소">
+    <ResponseField name="status" type="string">
+      작업 상태, 초기 제출 시 `submitted`
     </ResponseField>
 
-    <ResponseField name="estimated_time" type="integer">
-      예상 완료 시간(초)
-    </ResponseField>
-  </Expandable>
-</ResponseField>
-
-<ResponseField name="type" type="string">
-  출력 유형, `video`로 고정됨
-</ResponseField>
-
-<ResponseField name="usage" type="object">
-  청구 정보
-
-  <Expandable title="속성">
-    <ResponseField name="total_tokens" type="integer">
-      소비된 총 토큰 수
+    <ResponseField name="task_id" type="string">
+      작업 상태 및 결과를 조회하기 위한 고유한 작업 식별자
     </ResponseField>
   </Expandable>
 </ResponseField>

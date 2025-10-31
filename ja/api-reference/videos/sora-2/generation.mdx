@@ -596,60 +596,20 @@ cat(content(response, "text"))
 
 ## レスポンス
 
-<ResponseField name="created" type="integer">
-  タスク作成タイムスタンプ
+<ResponseField name="code" type="integer">
+  レスポンスステータスコード、成功時は200
 </ResponseField>
 
-<ResponseField name="id" type="string">
-  一意のタスク識別子
-</ResponseField>
+<ResponseField name="data" type="array">
+  レスポンスデータ配列
 
-<ResponseField name="model" type="string">
-  実際に使用されたモデル名
-</ResponseField>
-
-<ResponseField name="object" type="string">
-  オブジェクトタイプ、`video.generation.task`に固定
-</ResponseField>
-
-<ResponseField name="progress" type="integer">
-  タスク完了進捗率 (0-100)
-</ResponseField>
-
-<ResponseField name="status" type="string">
-  タスクステータス
-
-  可能な値:
-  - `pending` - 処理待ち
-  - `processing` - 処理中
-  - `completed` - 完了
-  - `failed` - 失敗
-</ResponseField>
-
-<ResponseField name="task_info" type="object">
-  タスク詳細
-
-  <Expandable title="プロパティ">
-    <ResponseField name="can_cancel" type="boolean">
-      タスクをキャンセルできるかどうか
+  <Expandable title="配列要素">
+    <ResponseField name="status" type="string">
+      タスクステータス、初期送信時は `submitted`
     </ResponseField>
 
-    <ResponseField name="estimated_time" type="integer">
-      推定完了時間（秒）
-    </ResponseField>
-  </Expandable>
-</ResponseField>
-
-<ResponseField name="type" type="string">
-  出力タイプ、`video`に固定
-</ResponseField>
-
-<ResponseField name="usage" type="object">
-  課金情報
-
-  <Expandable title="プロパティ">
-    <ResponseField name="total_tokens" type="integer">
-      消費された総トークン数
+    <ResponseField name="task_id" type="string">
+      タスクステータスと結果を照会するための一意のタスク識別子
     </ResponseField>
   </Expandable>
 </ResponseField>

@@ -598,60 +598,22 @@ cat(content(response, "text"))
 
 ## Response
 
-<ResponseField name="created" type="integer">
-  任务创建时间戳
+<ResponseField name="code" type="integer">
+  响应状态码
 </ResponseField>
 
-<ResponseField name="id" type="string">
-  任务唯一标识符
-</ResponseField>
-
-<ResponseField name="model" type="string">
-  实际使用的模型名称
-</ResponseField>
-
-<ResponseField name="object" type="string">
-  对象类型，固定为 `video.generation.task`
-</ResponseField>
-
-<ResponseField name="progress" type="integer">
-  任务完成进度百分比（0-100）
-</ResponseField>
-
-<ResponseField name="status" type="string">
-  任务状态
-
-  可能的值：
-  - `pending` - 等待处理
-  - `processing` - 处理中
-  - `completed` - 已完成
-  - `failed` - 失败
-</ResponseField>
-
-<ResponseField name="task_info" type="object">
-  任务详细信息
+<ResponseField name="data" type="array">
+  返回数据数组
 
   <Expandable title="属性">
-    <ResponseField name="can_cancel" type="boolean">
-      是否可以取消任务
+    <ResponseField name="status" type="string">
+      任务状态
+
+      - `submitted` - 已提交
     </ResponseField>
 
-    <ResponseField name="estimated_time" type="integer">
-      预计完成时间（秒）
-    </ResponseField>
-  </Expandable>
-</ResponseField>
-
-<ResponseField name="type" type="string">
-  输出类型，固定为 `video`
-</ResponseField>
-
-<ResponseField name="usage" type="object">
-  计费信息
-
-  <Expandable title="属性">
-    <ResponseField name="total_tokens" type="integer">
-      消耗的总token数
+    <ResponseField name="task_id" type="string">
+      任务唯一标识符
     </ResponseField>
   </Expandable>
 </ResponseField>

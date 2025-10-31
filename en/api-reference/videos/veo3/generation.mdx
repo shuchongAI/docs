@@ -598,60 +598,22 @@ cat(content(response, "text"))
 
 ## Response
 
-<ResponseField name="created" type="integer">
-  Task creation timestamp
+<ResponseField name="code" type="integer">
+  Response status code
 </ResponseField>
 
-<ResponseField name="id" type="string">
-  Unique task identifier
-</ResponseField>
-
-<ResponseField name="model" type="string">
-  The actual model name used
-</ResponseField>
-
-<ResponseField name="object" type="string">
-  Object type, fixed as `video.generation.task`
-</ResponseField>
-
-<ResponseField name="progress" type="integer">
-  Task completion progress percentage (0-100)
-</ResponseField>
-
-<ResponseField name="status" type="string">
-  Task status
-
-  Possible values:
-  - `pending` - Waiting for processing
-  - `processing` - In progress
-  - `completed` - Completed
-  - `failed` - Failed
-</ResponseField>
-
-<ResponseField name="task_info" type="object">
-  Task details
+<ResponseField name="data" type="array">
+  Response data array
 
   <Expandable title="Properties">
-    <ResponseField name="can_cancel" type="boolean">
-      Whether the task can be cancelled
+    <ResponseField name="status" type="string">
+      Task status
+
+      - `submitted` - Submitted
     </ResponseField>
 
-    <ResponseField name="estimated_time" type="integer">
-      Estimated completion time (seconds)
-    </ResponseField>
-  </Expandable>
-</ResponseField>
-
-<ResponseField name="type" type="string">
-  Output type, fixed as `video`
-</ResponseField>
-
-<ResponseField name="usage" type="object">
-  Billing information
-
-  <Expandable title="Properties">
-    <ResponseField name="total_tokens" type="integer">
-      Total tokens consumed
+    <ResponseField name="task_id" type="string">
+      Unique task identifier
     </ResponseField>
   </Expandable>
 </ResponseField>

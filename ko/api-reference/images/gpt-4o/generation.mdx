@@ -610,60 +610,22 @@ cat(content(response, "text"))
 
 ## 응답
 
-<ResponseField name="created" type="integer">
-  작업 생성 타임스탬프
+<ResponseField name="code" type="integer">
+  응답 상태 코드
 </ResponseField>
 
-<ResponseField name="id" type="string">
-  고유한 작업 식별자
-</ResponseField>
-
-<ResponseField name="model" type="string">
-  실제로 사용된 모델 이름
-</ResponseField>
-
-<ResponseField name="object" type="string">
-  객체 타입, `image.generation.task`로 고정
-</ResponseField>
-
-<ResponseField name="progress" type="integer">
-  작업 완료 진행률 (0-100)
-</ResponseField>
-
-<ResponseField name="status" type="string">
-  작업 상태
-
-  가능한 값:
-  - `pending` - 처리 대기 중
-  - `processing` - 진행 중
-  - `completed` - 완료됨
-  - `failed` - 실패
-</ResponseField>
-
-<ResponseField name="task_info" type="object">
-  작업 세부 정보
+<ResponseField name="data" type="array">
+  응답 데이터 배열
 
   <Expandable title="속성">
-    <ResponseField name="can_cancel" type="boolean">
-      작업 취소 가능 여부
+    <ResponseField name="status" type="string">
+      작업 상태
+
+      - `submitted` - 제출됨
     </ResponseField>
 
-    <ResponseField name="estimated_time" type="integer">
-      예상 완료 시간 (초)
-    </ResponseField>
-  </Expandable>
-</ResponseField>
-
-<ResponseField name="type" type="string">
-  출력 타입, `image`로 고정
-</ResponseField>
-
-<ResponseField name="usage" type="object">
-  과금 정보
-
-  <Expandable title="속성">
-    <ResponseField name="total_tokens" type="integer">
-      소비된 총 토큰 수
+    <ResponseField name="task_id" type="string">
+      고유한 작업 식별자
     </ResponseField>
   </Expandable>
 </ResponseField>

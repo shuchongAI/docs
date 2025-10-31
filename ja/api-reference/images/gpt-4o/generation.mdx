@@ -610,60 +610,22 @@ cat(content(response, "text"))
 
 ## レスポンス
 
-<ResponseField name="created" type="integer">
-  タスク作成タイムスタンプ
+<ResponseField name="code" type="integer">
+  レスポンスステータスコード
 </ResponseField>
 
-<ResponseField name="id" type="string">
-  一意のタスク識別子
-</ResponseField>
-
-<ResponseField name="model" type="string">
-  実際に使用されたモデル名
-</ResponseField>
-
-<ResponseField name="object" type="string">
-  オブジェクトタイプ、`image.generation.task`に固定
-</ResponseField>
-
-<ResponseField name="progress" type="integer">
-  タスク完了進捗率（0-100）
-</ResponseField>
-
-<ResponseField name="status" type="string">
-  タスクステータス
-
-  可能な値：
-  - `pending` - 処理待ち
-  - `processing` - 進行中
-  - `completed` - 完了
-  - `failed` - 失敗
-</ResponseField>
-
-<ResponseField name="task_info" type="object">
-  タスク詳細
+<ResponseField name="data" type="array">
+  レスポンスデータ配列
 
   <Expandable title="プロパティ">
-    <ResponseField name="can_cancel" type="boolean">
-      タスクがキャンセル可能かどうか
+    <ResponseField name="status" type="string">
+      タスクステータス
+
+      - `submitted` - 送信済み
     </ResponseField>
 
-    <ResponseField name="estimated_time" type="integer">
-      推定完了時間（秒）
-    </ResponseField>
-  </Expandable>
-</ResponseField>
-
-<ResponseField name="type" type="string">
-  出力タイプ、`image`に固定
-</ResponseField>
-
-<ResponseField name="usage" type="object">
-  課金情報
-
-  <Expandable title="プロパティ">
-    <ResponseField name="total_tokens" type="integer">
-      消費された合計トークン数
+    <ResponseField name="task_id" type="string">
+      一意のタスク識別子
     </ResponseField>
   </Expandable>
 </ResponseField>
