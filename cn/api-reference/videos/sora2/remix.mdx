@@ -23,7 +23,8 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "model": "sora-2",
-    "prompt": "再加一只小狗"
+    "prompt": "再加一只小狗",
+    "duration": 15
   }'
 ```
 
@@ -34,7 +35,8 @@ url = "https://api.apimart.ai/v1/videos/{video_id}/remix"
 
 payload = {
     "model": "sora-2",
-    "prompt": "再加一只小狗"
+    "prompt": "再加一只小狗",
+    "duration": 15
 }
 
 headers = {
@@ -52,7 +54,8 @@ const url = "https://api.apimart.ai/v1/videos/{video_id}/remix";
 
 const payload = {
   model: "sora-2",
-  prompt: "再加一只小狗"
+  prompt: "再加一只小狗",
+  duration: 15
 };
 
 const headers = {
@@ -536,13 +539,26 @@ cat(content(response, "text"))
 <ParamField body="model" type="string" default="sora-2" required>
   视频编辑模型名称
 
-  示例：`"sora-2"`
+  支持的模型：
+  - `sora-2` - 标准版本
+  - `sora-2-pro` - 专业版本，支持更长时长
+
+  示例：`"sora-2"` 或 `"sora-2-pro"`
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
   编辑指令描述
 
   描述您想要对视频进行的修改，最多 1000 个字符
+</ParamField>
+
+<ParamField body="duration" type="integer">
+  视频时长（秒）
+
+  - `sora-2`：支持 10 或 15 秒
+  - `sora-2-pro`：支持 15 秒（高清）或 25 秒
+
+  示例：`15`
 </ParamField>
 
 ## Response

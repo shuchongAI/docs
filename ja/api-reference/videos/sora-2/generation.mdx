@@ -561,7 +561,11 @@ cat(content(response, "text"))
 <ParamField body="model" type="string" default="sora-2" required>
   動画生成モデル名
 
-  Example: `"sora-2"`
+  サポートされているモデル：
+  - `sora-2` - 標準バージョン
+  - `sora-2-pro` - プロフェッショナルバージョン、より長い時間をサポート
+
+  例：`"sora-2"` または `"sora-2-pro"`
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
@@ -573,9 +577,10 @@ cat(content(response, "text"))
 <ParamField body="duration" type="integer">
   動画の長さ（秒）
 
-  サポートされている値：`10` または `15`
+  - `sora-2`：10秒または15秒をサポート
+  - `sora-2-pro`：15秒（HD）または25秒をサポート
 
-  Example: `10`
+  例：`10`
 </ParamField>
 
 <ParamField body="aspect_ratio" type="string">

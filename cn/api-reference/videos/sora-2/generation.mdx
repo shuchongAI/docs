@@ -561,7 +561,11 @@ cat(content(response, "text"))
 <ParamField body="model" type="string" default="sora-2" required>
   视频生成模型名称
 
-  Example: `"sora-2"`
+  支持的模型：
+  - `sora-2` - 标准版本
+  - `sora-2-pro` - 专业版本，支持更长时长
+
+  示例：`"sora-2"` 或 `"sora-2-pro"`
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
@@ -573,9 +577,10 @@ cat(content(response, "text"))
 <ParamField body="duration" type="integer">
   视频时长（秒）
 
-  支持的值：`10` 或 `15`
+  - `sora-2`：支持 10 或 15 秒
+  - `sora-2-pro`：支持 15 秒（高清）或 25 秒
 
-  Example: `10`
+  示例：`10`
 </ParamField>
 
 <ParamField body="aspect_ratio" type="string">

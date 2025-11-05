@@ -23,7 +23,8 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "model": "sora-2",
-    "prompt": "Add a puppy playing in the scene"
+    "prompt": "Add a puppy playing in the scene",
+    "duration": 15
   }'
 ```
 
@@ -34,7 +35,8 @@ url = "https://api.apimart.ai/v1/videos/{video_id}/remix"
 
 payload = {
     "model": "sora-2",
-    "prompt": "Add a puppy playing in the scene"
+    "prompt": "Add a puppy playing in the scene",
+    "duration": 15
 }
 
 headers = {
@@ -536,13 +538,26 @@ cat(content(response, "text"))
 <ParamField body="model" type="string" default="sora-2" required>
   Video remix model name
 
-  Example: `"sora-2"`
+  Supported models:
+  - `sora-2` - Standard version
+  - `sora-2-pro` - Professional version, supports longer duration
+
+  Example: `"sora-2"` or `"sora-2-pro"`
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
   Remix instruction description
 
   Describe the modifications you want to make to the video, maximum 1000 characters
+</ParamField>
+
+<ParamField body="duration" type="integer">
+  Video duration in seconds
+
+  - `sora-2`: Supports 10 or 15 seconds
+  - `sora-2-pro`: Supports 15 seconds (HD) or 25 seconds
+
+  Example: `15`
 </ParamField>
 
 ## Response

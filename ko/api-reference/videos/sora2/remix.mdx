@@ -536,13 +536,26 @@ cat(content(response, "text"))
 <ParamField body="model" type="string" default="sora-2" required>
   비디오 리믹스 모델 이름
 
-  예시: `"sora-2"`
+  지원되는 모델:
+  - `sora-2` - 표준 버전
+  - `sora-2-pro` - 프로페셔널 버전, 더 긴 재생 시간 지원
+
+  예시: `"sora-2"` 또는 `"sora-2-pro"`
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
   리믹스 지시 설명
 
   비디오에 적용하려는 수정 사항을 설명하세요, 최대 1000자
+</ParamField>
+
+<ParamField body="duration" type="integer">
+  비디오 재생 시간 (초)
+
+  - `sora-2`: 10초 또는 15초 지원
+  - `sora-2-pro`: 15초 (HD) 또는 25초 지원
+
+  예시: `15`
 </ParamField>
 
 ## 응답
