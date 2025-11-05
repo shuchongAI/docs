@@ -84,7 +84,8 @@
                     "group": "Sora2",
                     "icon": "video",
                     "pages": [
-                      "en/api-reference/videos/sora-2/generation"
+                      "en/api-reference/videos/sora-2/generation",
+                      "en/api-reference/videos/sora2/remix"
                     ]
                   },
                   {
@@ -176,7 +177,8 @@
                     "group": "Sora2",
                     "icon": "video",
                     "pages": [
-                      "cn/api-reference/videos/sora-2/generation"
+                      "cn/api-reference/videos/sora-2/generation",
+                      "cn/api-reference/videos/sora2/remix"
                     ]
                   },
                   {
@@ -268,7 +270,8 @@
                     "group": "Sora2",
                     "icon": "video",
                     "pages": [
-                      "ja/api-reference/videos/sora-2/generation"
+                      "ja/api-reference/videos/sora-2/generation",
+                      "ja/api-reference/videos/sora2/remix"
                     ]
                   },
                   {
@@ -359,7 +362,8 @@
                     "group": "Sora2",
                     "icon": "video",
                     "pages": [
-                      "ko/api-reference/videos/sora-2/generation"
+                      "ko/api-reference/videos/sora-2/generation",
+                      "ko/api-reference/videos/sora2/remix"
                     ]
                   },
                   {
