@@ -26,7 +26,10 @@ curl --request POST \
     "model": "gemini-2.5-flash-image-preview",
     "prompt": "月明かりの下の竹林の小道",
     "size": "1:1",
-    "n": 1
+    "n": 1,
+    "image_urls": [
+      "https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png"
+    ]
   }'
 ```
 
@@ -39,7 +42,10 @@ payload = {
     "model": "gemini-2.5-flash-image-preview",
     "prompt": "月明かりの下の竹林の小道",
     "size": "1:1",
-    "n": 1
+    "n": 1,
+    "image_urls": [
+        "https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png"
+    ]
 }
 
 headers = {
@@ -59,7 +65,10 @@ const payload = {
   model: "gemini-2.5-flash-image-preview",
   prompt: "月明かりの下の竹林の小道",
   size: "1:1",
-  n: 1
+  n: 1,
+  image_urls: [
+    "https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png"
+  ]
 };
 
 const headers = {
@@ -96,6 +105,9 @@ func main() {
         "prompt": "月明かりの下の竹林の小道",
         "size":   "1:1",
         "n":      1,
+        "image_urls": []string{
+            "https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png",
+        },
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -131,7 +143,10 @@ public class Main {
           "model": "gemini-2.5-flash-image-preview",
           "prompt": "月明かりの下の竹林の小道",
           "size": "1:1",
-          "n": 1
+          "n": 1,
+          "image_urls": [
+            "https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png"
+          ]
         }
         """;
 
@@ -160,7 +175,10 @@ $payload = [
     "model" => "gemini-2.5-flash-image-preview",
     "prompt" => "月明かりの下の竹林の小道",
     "size" => "1:1",
-    "n" => 1
+    "n" => 1,
+    "image_urls" => [
+        "https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png"
+    ]
 ];
 
 $ch = curl_init($url);
@@ -190,7 +208,10 @@ payload = {
   model: "gemini-2.5-flash-image-preview",
   prompt: "月明かりの下の竹林の小道",
   size: "1:1",
-  n: 1
+  n: 1,
+  image_urls: [
+    "https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png"
+  ]
 }
 
 http = Net::HTTP.new(url.host, url.port)
@@ -214,7 +235,10 @@ let payload: [String: Any] = [
     "model": "gemini-2.5-flash-image-preview",
     "prompt": "月明かりの下の竹林の小道",
     "size": "1:1",
-    "n": 1
+    "n": 1,
+    "image_urls": [
+        "https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png"
+    ]
 ]
 
 var request = URLRequest(url: url)
@@ -253,7 +277,10 @@ class Program
             ""model"": ""gemini-2.5-flash-image-preview"",
             ""prompt"": ""月明かりの下の竹林の小道"",
             ""size"": ""1:1"",
-            ""n"": 1
+            ""n"": 1,
+            ""image_urls"": [
+                ""https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png""
+            ]
         }";
 
         using var client = new HttpClient();
@@ -285,7 +312,8 @@ int main(void) {
             "\"model\":\"gemini-2.5-flash-image-preview\","
             "\"prompt\":\"月明かりの下の竹林の小道\","
             "\"size\":\"1:1\","
-            "\"n\":1"
+            "\"n\":1,"
+            "\"image_urls\":[\"https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png\"]"
         "}";
 
         struct curl_slist *headers = NULL;
@@ -323,7 +351,10 @@ int main(int argc, const char * argv[]) {
             @"model": @"gemini-2.5-flash-image-preview",
             @"prompt": @"月明かりの下の竹林の小道",
             @"size": @"1:1",
-            @"n": @1
+            @"n": @1,
+            @"image_urls": @[
+                @"https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png"
+            ]
         };
         
         NSError *error;
@@ -368,7 +399,10 @@ let payload = {|{
   "model": "gemini-2.5-flash-image-preview",
   "prompt": "月明かりの下の竹林の小道",
   "size": "1:1",
-  "n": 1
+  "n": 1,
+  "image_urls": [
+    "https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png"
+  ]
 }|}
 
 let () =
@@ -396,7 +430,10 @@ void main() async {
     'model': 'gemini-2.5-flash-image-preview',
     'prompt': '月明かりの下の竹林の小道',
     'size': '1:1',
-    'n': 1
+    'n': 1,
+    'image_urls': [
+      'https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png'
+    ]
   };
   
   final response = await http.post(
@@ -422,7 +459,10 @@ payload <- list(
   model = "gemini-2.5-flash-image-preview",
   prompt = "月明かりの下の竹林の小道",
   size = "1:1",
-  n = 1
+  n = 1,
+  image_urls = list(
+    "https://cdn.apimart.ai/files/9998237590083776-36dfe26e-f6dd-43d4-83d5-afc5e6d29070-image_task_01K9BX28VRC2WG4S6F0N0DYWPJ_0.png"
+  )
 )
 
 response <- POST(
