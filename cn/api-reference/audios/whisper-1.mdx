@@ -8,6 +8,7 @@ description: "
 - 最大文件大小 25 MB
 "
 api: "POST https://api.apimart.ai/v1/audio/transcriptions"
+contentType: "multipart/form-data"
 ---
 
 <RequestExample>
@@ -570,8 +571,21 @@ cat(content(response, "text"))
 
 ## Body
 
-<ParamField body="file" type="file" required>
-  要转录的音频文件
+<Note>
+  **⚠️ 此接口不支持在线调用（Try it）**
+  
+  由于文件上传的限制，请使用以下方式测试：
+  - **Apifox / Postman** - 导入后手动将 `file` 参数改为文件类型
+  - **cURL** - 参考右侧代码示例
+  - **SDK** - 使用各语言的 SDK 示例代码
+</Note>
+
+<ParamField body="file" type="string" format="binary" required>
+  要转录的音频文件（文件类型）
+
+  **⚠️ 注意**：如果使用 Apifox 等工具测试：
+  1. 导入后需要手动将此参数类型改为 `file`
+  2. 确保请求 Content-Type 为 `multipart/form-data`
 
   支持的格式：mp3, mp4, mpeg, mpga, m4a, wav, webm
   

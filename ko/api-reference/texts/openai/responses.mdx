@@ -725,7 +725,7 @@ cat(content(response, "text"))
 
 ## Body
 
-<ParamField body="model" type="string" required>
+<ParamField body="model" type="string" required default="gpt-5">
   모델 이름
 
   지원되는 모델:
@@ -738,11 +738,48 @@ cat(content(response, "text"))
 <ParamField body="input" type="array" required>
   입력 콘텐츠 목록
 
-  각 입력 항목에는 다음이 포함됩니다:
-  - `role`: 역할 유형 (`user`, `assistant`, `system`)
-  - `content`: 콘텐츠 배열, 여러 유형 지원:
-    - `input_text`: 텍스트 입력
-    - `input_image`: 이미지 입력
+  입력 배열, 각 항목은 `role`과 `content` 필드를 포함합니다.
+
+  **💡 빠른 입력 (Try it 영역):**
+  1. "+ Add an item"을 클릭하여 입력 항목 추가
+  2. `role` 입력: `user` (사용자 메시지), `assistant` (AI 응답), 또는 `system` (시스템 프롬프트)
+  3. `content` 콘텐츠 블록 추가 (텍스트와 이미지 포함 가능)
+  
+  <Expandable title="필드 상세">
+    <ParamField body="role" type="string" required default="user">
+      역할 유형
+      
+      선택 가능: `user` (사용자 메시지), `assistant` (AI 응답, 다중 턴용), `system` (시스템 프롬프트, AI 동작 설정)
+    </ParamField>
+
+    <ParamField body="content" type="array" required>
+      콘텐츠 배열
+      
+      여러 유형의 콘텐츠 블록을 지원하며, 텍스트와 이미지를 포함할 수 있습니다.
+      
+      <Expandable title="콘텐츠 블록 유형">
+        <ParamField body="type" type="string" required>
+          콘텐츠 유형
+          
+          선택 가능:
+          - `input_text`: 텍스트 입력
+          - `input_image`: 이미지 입력
+        </ParamField>
+        
+        <ParamField body="text" type="string">
+          텍스트 내용
+          
+          `type`이 `input_text`일 때 사용, 텍스트 내용 입력
+        </ParamField>
+        
+        <ParamField body="image_url" type="string">
+          이미지 URL
+          
+          `type`이 `input_image`일 때 사용, 이미지 URL 또는 base64 인코딩 입력
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 <ParamField body="temperature" type="number">

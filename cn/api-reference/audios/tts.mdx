@@ -3,7 +3,7 @@ title: "TTS 文字转语音"
 description: "
 - 支持多种语音模型和音色选择
 
-- 输出高质量音频格式：mp3、opus、aac、flac、wav、pcm
+- 输出高质量音频格式：opus、aac、flac、wav、pcm
 
 - 最大输入文本 4096 个字符
 "
@@ -402,7 +402,7 @@ let json_body = `Assoc [
   ("model", `String "tts-1");
   ("input", `String "今天天气真好,适合出去散步。");
   ("voice", `String "alloy");
-  ("response_format", `String "mp3");
+  ("response_format", `String "opus");
   ("speed", `Float 1.0)
 ]
 
@@ -578,11 +578,11 @@ cat("Audio saved to speech.opus\n")
 
 ## Body
 
-<ParamField body="model" type="string" required>
+<ParamField body="model" type="string" required default="gpt-4o-mini-tts">
   TTS 模型名称
 
   可选值:
-  - `gpt-4o-mini-tts` - GPT-4o Mini TTS 模型(暂不支持 mp3 格式)
+  - `gpt-4o-mini-tts` - GPT-4o Mini TTS 模型
 
   Example: `"gpt-4o-mini-tts"`
 </ParamField>
@@ -609,18 +609,17 @@ cat("Audio saved to speech.opus\n")
   Example: `"alloy"`
 </ParamField>
 
-<ParamField body="response_format" type="string" default="mp3">
+<ParamField body="response_format" type="string" required default="wav">
   音频输出格式
 
   支持的格式:
-  - `mp3` - MP3 格式(默认)
+  - `wav` - WAV 格式,未压缩(默认)
   - `opus` - Opus 格式,用于互联网流媒体
   - `aac` - AAC 格式
   - `flac` - FLAC 格式,无损压缩
-  - `wav` - WAV 格式,未压缩
   - `pcm` - PCM 格式,原始音频数据
 
-  Example: `"mp3"`
+  Example: `"wav"`
 </ParamField>
 
 <ParamField body="speed" type="number" default="1.0">

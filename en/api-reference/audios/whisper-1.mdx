@@ -8,6 +8,7 @@ description: "
 - Maximum file size 25 MB
 "
 api: "POST https://api.apimart.ai/v1/audio/transcriptions"
+contentType: "multipart/form-data"
 ---
 
 <RequestExample>
@@ -570,8 +571,21 @@ from the test audio.
 
 ## Body
 
-<ParamField body="file" type="file" required>
-  Audio file to transcribe
+<Note>
+  **⚠️ Online testing (Try it) is not supported for this endpoint**
+  
+  Due to file upload limitations, please test using:
+  - **Apifox / Postman** - Manually change `file` parameter to file type after importing
+  - **cURL** - Refer to code examples on the right
+  - **SDK** - Use SDK examples in various languages
+</Note>
+
+<ParamField body="file" type="string" format="binary" required>
+  Audio file to transcribe (File type)
+
+  **⚠️ Note**: When testing with Apifox or similar tools:
+  1. After importing, manually change this parameter type to `file`
+  2. Ensure request Content-Type is `multipart/form-data`
 
   Supported formats: mp3, mp4, mpeg, mpga, m4a, wav, webm
   

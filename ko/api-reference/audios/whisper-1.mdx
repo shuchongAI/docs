@@ -8,6 +8,7 @@ description: "
 - 최대 파일 크기 25 MB
 "
 api: "POST https://api.apimart.ai/v1/audio/transcriptions"
+contentType: "multipart/form-data"
 ---
 
 <RequestExample>
@@ -568,10 +569,23 @@ cat(content(response, "text"))
   ```
 </ParamField>
 
-## Body
+## 요청 본문
 
-<ParamField body="file" type="file" required>
-  변환할 오디오 파일
+<Note>
+  **⚠️ 이 엔드포인트는 온라인 테스트(Try it)를 지원하지 않습니다**
+  
+  파일 업로드 제한으로 인해 다음 방법으로 테스트하세요:
+  - **Apifox / Postman** - 가져온 후 `file` 매개변수를 수동으로 파일 타입으로 변경
+  - **cURL** - 오른쪽 코드 예제 참조
+  - **SDK** - 각 언어의 SDK 예제 코드 사용
+</Note>
+
+<ParamField body="file" type="string" format="binary" required>
+  변환할 오디오 파일 (파일 타입)
+
+  **⚠️ 참고**: Apifox 등의 도구로 테스트할 때:
+  1. 가져온 후 이 매개변수 타입을 수동으로 `file`로 변경하세요
+  2. 요청 Content-Type이 `multipart/form-data`인지 확인하세요
 
   지원 형식: mp3, mp4, mpeg, mpga, m4a, wav, webm
   

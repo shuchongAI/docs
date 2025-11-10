@@ -653,7 +653,7 @@ cat(content(response, "text"))
 
 ## Body
 
-<ParamField body="model" type="string" required>
+<ParamField body="model" type="string" required default="gpt-5">
   模型名称
 
   支持的模型包括：
@@ -668,9 +668,55 @@ cat(content(response, "text"))
 <ParamField body="messages" type="array" required>
   对话消息列表
 
-  每条消息包含：
-  - `role`: 角色类型（`system`、`user`、`assistant`）
-  - `content`: 消息内容（字符串或多模态内容数组）
+  消息数组，每条消息包含 `role` 和 `content` 两个字段。
+
+  **💡 快速填写（Try it 区域）：**
+  1. 点击 "+ Add an item" 添加一条消息
+  2. `role` 输入：`user`（用户消息）、`assistant`（AI回复）或 `system`（系统提示词）
+  3. `content` 输入：你想说的话
+  
+  <Expandable title="详细字段说明">
+    <ParamField body="role" type="string" required default="user">
+      角色类型
+      
+      可选值：`user`（用户消息）、`assistant`（AI回复，用于多轮对话）、`system`（系统提示词，设置AI行为）
+    </ParamField>
+
+    <ParamField body="content" type="string" required>
+      消息内容
+      
+      填写你想说的话或问题
+    </ParamField>
+  </Expandable>
+
+  **示例：**
+  ```json
+  [{"role": "user", "content": "你好，请介绍一下你自己"}]
+  ```
+
+  **进阶用法：**
+
+  添加系统提示词（让 AI 扮演特定角色）：
+  ```json
+  [
+    {"role": "system", "content": "你是专业的Python导师"},
+    {"role": "user", "content": "如何学习编程？"}
+  ]
+  ```
+
+  多轮对话（包含上下文）：
+  ```json
+  [
+    {"role": "user", "content": "你好"},
+    {"role": "assistant", "content": "你好！有什么可以帮你的？"},
+    {"role": "user", "content": "介绍一下人工智能"}
+  ]
+  ```
+
+  **角色说明：**
+  - `user`: 用户消息（大多数情况用这个）
+  - `system`: 系统提示词，设置 AI 的行为和角色
+  - `assistant`: AI 的历史回复，用于多轮对话时提供上下文
 </ParamField>
 
 <ParamField body="temperature" type="number">

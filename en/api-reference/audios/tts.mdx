@@ -3,7 +3,7 @@ title: "TTS Text-to-Speech"
 description: "
 - Support multiple voice models and voice selections
 
-- Output high-quality audio formats: mp3, opus, aac, flac, wav, pcm
+- Output high-quality audio formats: wav, opus, aac, flac, pcm
 
 - Maximum input text of 4096 characters
 "
@@ -578,11 +578,11 @@ Binary audio data stream
 
 ## Body
 
-<ParamField body="model" type="string" required>
+<ParamField body="model" type="string" required default="gpt-4o-mini-tts">
   TTS model name
 
   Available models:
-  - `gpt-4o-mini-tts` - GPT-4o Mini TTS model (mp3 format not supported yet)
+  - `gpt-4o-mini-tts` - GPT-4o Mini TTS model
 
   Example: `"gpt-4o-mini-tts"`
 </ParamField>
@@ -609,18 +609,17 @@ Binary audio data stream
   Example: `"alloy"`
 </ParamField>
 
-<ParamField body="response_format" type="string" default="mp3">
+<ParamField body="response_format" type="string" required default="wav">
   Audio output format
 
   Supported formats:
-  - `mp3` - MP3 format (default)
+  - `wav` - WAV format, uncompressed (default)
   - `opus` - Opus format, for internet streaming
   - `aac` - AAC format
   - `flac` - FLAC format, lossless compression
-  - `wav` - WAV format, uncompressed
   - `pcm` - PCM format, raw audio data
 
-  Example: `"mp3"`
+  Example: `"wav"`
 </ParamField>
 
 <ParamField body="speed" type="number" default="1.0">

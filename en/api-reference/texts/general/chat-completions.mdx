@@ -666,9 +666,50 @@ cat(content(response, "text"))
 <ParamField body="messages" type="array" required>
   List of conversation messages
 
-  Each message contains:
-  - `role`: Role type (`system`, `user`, `assistant`)
-  - `content`: Message content (string or multimodal content array)
+  <Expandable title="Message object structure">
+    <ParamField body="role" type="enum<string>" required default="user">
+      Role type
+      
+      - `user` - User message
+      - `assistant` - AI response (for multi-turn)
+      - `system` - System prompt
+    </ParamField>
+
+    <ParamField body="content" type="string" required>
+      Message content
+      
+      Your question or message
+    </ParamField>
+  </Expandable>
+
+  **Example:**
+  ```json
+  [{"role": "user", "content": "Hello, please introduce yourself"}]
+  ```
+
+  **Advanced usage:**
+
+  Add system prompt (to define AI behavior):
+  ```json
+  [
+    {"role": "system", "content": "You are a professional Python tutor"},
+    {"role": "user", "content": "How do I learn programming?"}
+  ]
+  ```
+
+  Multi-turn conversation (with context):
+  ```json
+  [
+    {"role": "user", "content": "Hello"},
+    {"role": "assistant", "content": "Hi! How can I help you?"},
+    {"role": "user", "content": "Tell me about AI"}
+  ]
+  ```
+
+  **Role descriptions:**
+  - `user`: User message (use this most of the time)
+  - `system`: System prompt to set AI behavior and role
+  - `assistant`: AI's previous responses, used for conversation context
 </ParamField>
 
 <ParamField body="temperature" type="number">

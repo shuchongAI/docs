@@ -15,7 +15,7 @@ api: "POST https://api.apimart.ai/v1/messages"
 ```bash cURL
 curl https://api.apimart.ai/v1/messages \
   -H "x-api-key: $API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2025-10-01" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-sonnet-4-5-20250929",
@@ -94,7 +94,7 @@ func main() {
 
     req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
     req.Header.Set("x-api-key", os.Getenv("API_KEY"))
-    req.Header.Set("anthropic-version", "2023-06-01")
+    req.Header.Set("anthropic-version", "2025-10-01")
     req.Header.Set("Content-Type", "application/json")
 
     client := &http.Client{}
@@ -137,7 +137,7 @@ public class Main {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))
             .header("x-api-key", apiKey)
-            .header("anthropic-version", "2023-06-01")
+            .header("anthropic-version", "2025-10-01")
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(payload))
             .build();
@@ -173,7 +173,7 @@ curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "x-api-key: " . $apiKey,
-    "anthropic-version: 2023-06-01",
+    "anthropic-version: 2025-10-01",
     "Content-Type: application/json"
 ]);
 
@@ -208,7 +208,7 @@ http.use_ssl = true
 
 request = Net::HTTP::Post.new(url)
 request["x-api-key"] = api_key
-request["anthropic-version"] = "2023-06-01"
+request["anthropic-version"] = "2025-10-01"
 request["Content-Type"] = "application/json"
 request.body = payload.to_json
 
@@ -236,7 +236,7 @@ let payload: [String: Any] = [
 var request = URLRequest(url: url)
 request.httpMethod = "POST"
 request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
-request.setValue("2023-06-01", forHTTPHeaderField: "anthropic-version")
+request.setValue("2025-10-01", forHTTPHeaderField: "anthropic-version")
 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
 
@@ -280,7 +280,7 @@ class Program
 
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("x-api-key", apiKey);
-        client.DefaultRequestHeaders.Add("anthropic-version", "2023-06-01");
+        client.DefaultRequestHeaders.Add("anthropic-version", "2025-10-01");
 
         var content = new StringContent(payload, Encoding.UTF8, "application/json");
         var response = await client.PostAsync(url, content);
@@ -317,7 +317,7 @@ int main(void) {
 
         struct curl_slist *headers = NULL;
         headers = curl_slist_append(headers, auth_header);
-        headers = curl_slist_append(headers, "anthropic-version: 2023-06-01");
+        headers = curl_slist_append(headers, "anthropic-version: 2025-10-01");
         headers = curl_slist_append(headers, "Content-Type: application/json");
 
         curl_easy_setopt(curl, CURLOPT_URL, url);
@@ -367,7 +367,7 @@ int main(int argc, const char * argv[]) {
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod:@"POST"];
         [request setValue:apiKey forHTTPHeaderField:@"x-api-key"];
-        [request setValue:@"2023-06-01" forHTTPHeaderField:@"anthropic-version"];
+        [request setValue:@"2025-10-01" forHTTPHeaderField:@"anthropic-version"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         [request setHTTPBody:jsonData];
         
@@ -413,7 +413,7 @@ let payload = {|{
 let () =
   let headers = Header.init ()
     |> fun h -> Header.add h "x-api-key" api_key
-    |> fun h -> Header.add h "anthropic-version" "2023-06-01"
+    |> fun h -> Header.add h "anthropic-version" "2025-10-01"
     |> fun h -> Header.add h "Content-Type" "application/json"
   in
   let body = Cohttp_lwt.Body.of_string payload in
@@ -449,7 +449,7 @@ void main() async {
     url,
     headers: {
       'x-api-key': apiKey!,
-      'anthropic-version': '2023-06-01',
+      'anthropic-version': '2025-10-01',
       'Content-Type': 'application/json',
     },
     body: jsonEncode(payload),
@@ -481,7 +481,7 @@ response <- POST(
   url,
   add_headers(
     `x-api-key` = api_key,
-    `anthropic-version` = "2023-06-01",
+    `anthropic-version` = "2025-10-01",
     `Content-Type` = "application/json"
   ),
   body = toJSON(payload, auto_unbox = TRUE),
@@ -579,12 +579,12 @@ cat(content(response, "text"))
 
   使用するClaude APIバージョンを指定します
 
-  例：`2023-06-01`
+  例：`2025-10-01`
 </ParamField>
 
 ## リクエストボディ
 
-<ParamField body="model" type="string" required>
+<ParamField body="model" type="string" required default="claude-haiku-4-5-20251001">
   モデル名
 
   - `claude-haiku-4-5-20251001` - Claude 4.5 高速レスポンス版
@@ -597,11 +597,28 @@ cat(content(response, "text"))
 <ParamField body="messages" type="array" required>
   メッセージのリスト
 
-  モデルが次のレスポンスを生成するためのメッセージの配列。`user`と`assistant`ロールの交互をサポートします。
+  モデルが次のレスポンスを生成するためのメッセージの配列。各メッセージには `role` と `content` の2つのフィールドが含まれます。
 
-  各メッセージには以下が含まれます：
-  - `role`: ロール（`user`または`assistant`）
-  - `content`: コンテンツ（文字列またはコンテンツブロックの配列）
+  **💡 クイック入力（Try itエリア）：**
+  1. "+ Add an item" をクリックしてメッセージを追加
+  2. `role` に入力：`user`（ユーザーメッセージ）または `assistant`（AI応答、複数ターン会話用）
+  3. `content` に入力：話したい内容
+  
+  <Expandable title="フィールド詳細">
+    <ParamField body="role" type="string" required default="user">
+      ロールタイプ
+      
+      選択肢：`user`（ユーザーメッセージ）、`assistant`（AI応答、複数ターン会話および事前入力用）
+      
+      注：Claude APIではシステムプロンプトは別の `system` パラメータを使用し、messagesには含めません
+    </ParamField>
+
+    <ParamField body="content" type="string" required>
+      メッセージ内容
+      
+      メッセージのテキスト内容
+    </ParamField>
+  </Expandable>
 
   **単一のユーザーメッセージ：**
   ```json
@@ -626,14 +643,12 @@ cat(content(response, "text"))
   ```
 </ParamField>
 
-<ParamField body="max_tokens" type="integer" required>
+<ParamField body="max_tokens" type="integer">
   生成する最大トークン数
 
   停止前に生成する最大トークン数。モデルはこの制限に達する前に停止する可能性があります。
 
-  モデルによって最大値が異なります。
-
-  最小値：1
+  モデルによって最大値が異なります。最小値：1
 </ParamField>
 
 <ParamField body="system" type="string | array">

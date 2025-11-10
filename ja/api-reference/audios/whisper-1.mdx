@@ -8,6 +8,7 @@ description: "
 - 最大ファイルサイズ 25 MB
 "
 api: "POST https://api.apimart.ai/v1/audio/transcriptions"
+contentType: "multipart/form-data"
 ---
 
 <RequestExample>
@@ -568,10 +569,23 @@ cat(content(response, "text"))
   ```
 </ParamField>
 
-## Body
+## リクエストボディ
 
-<ParamField body="file" type="file" required>
-  文字起こしする音声ファイル
+<Note>
+  **⚠️ このエンドポイントはオンラインテスト（Try it）に対応していません**
+  
+  ファイルアップロードの制限により、以下の方法でテストしてください：
+  - **Apifox / Postman** - インポート後、手動で `file` パラメータをファイルタイプに変更
+  - **cURL** - 右側のコード例を参照
+  - **SDK** - 各言語のSDKサンプルコードを使用
+</Note>
+
+<ParamField body="file" type="string" format="binary" required>
+  文字起こしする音声ファイル（ファイルタイプ）
+
+  **⚠️ 注意**：Apifoxなどのツールでテストする場合：
+  1. インポート後、このパラメータタイプを手動で `file` に変更してください
+  2. リクエストのContent-Typeが `multipart/form-data` であることを確認してください
 
   対応形式：mp3, mp4, mpeg, mpga, m4a, wav, webm
   

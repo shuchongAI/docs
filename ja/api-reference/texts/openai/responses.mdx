@@ -725,7 +725,7 @@ cat(content(response, "text"))
 
 ## Body
 
-<ParamField body="model" type="string" required>
+<ParamField body="model" type="string" required default="gpt-5">
   モデル名
 
   サポートされるモデル:
@@ -738,11 +738,48 @@ cat(content(response, "text"))
 <ParamField body="input" type="array" required>
   入力コンテンツリスト
 
-  各入力項目には以下が含まれます:
-  - `role`: ロールタイプ (`user`, `assistant`, `system`)
-  - `content`: コンテンツ配列、複数のタイプをサポート:
-    - `input_text`: テキスト入力
-    - `input_image`: 画像入力
+  入力配列、各項目には `role` と `content` の2つのフィールドが含まれます。
+
+  **💡 クイック入力（Try itエリア）：**
+  1. "+ Add an item" をクリックして入力項目を追加
+  2. `role` に入力：`user`（ユーザーメッセージ）、`assistant`（AI応答）、または `system`（システムプロンプト）
+  3. `content` にコンテンツブロックを追加（テキストと画像を含められます）
+  
+  <Expandable title="フィールド詳細">
+    <ParamField body="role" type="string" required default="user">
+      ロールタイプ
+      
+      選択肢：`user`（ユーザーメッセージ）、`assistant`（AI応答、複数ターン用）、`system`（システムプロンプト、AI動作設定）
+    </ParamField>
+
+    <ParamField body="content" type="array" required>
+      コンテンツ配列
+      
+      複数のタイプのコンテンツブロックをサポート、テキストと画像を含めることができます。
+      
+      <Expandable title="コンテンツブロックタイプ">
+        <ParamField body="type" type="string" required>
+          コンテンツタイプ
+          
+          選択肢：
+          - `input_text`: テキスト入力
+          - `input_image`: 画像入力
+        </ParamField>
+        
+        <ParamField body="text" type="string">
+          テキスト内容
+          
+          `type` が `input_text` の場合に使用、テキスト内容を入力
+        </ParamField>
+        
+        <ParamField body="image_url" type="string">
+          画像URL
+          
+          `type` が `input_image` の場合に使用、画像のURLまたはbase64エンコーディングを入力
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 <ParamField body="temperature" type="number">

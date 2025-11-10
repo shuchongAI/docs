@@ -3,7 +3,7 @@ title: "TTS 텍스트 음성 변환"
 description: "
 - 다양한 음성 모델 및 음색 선택 지원
 
-- 고품질 오디오 형식 출력: mp3, opus, aac, flac, wav, pcm
+- 고품질 오디오 형식 출력: opus, aac, flac, wav, pcm
 
 - 최대 입력 텍스트 4096자
 "
@@ -578,11 +578,11 @@ cat("Audio saved to speech.opus\n")
 
 ## Body
 
-<ParamField body="model" type="string" required>
+<ParamField body="model" type="string" required default="gpt-4o-mini-tts">
   TTS 모델 이름
 
   사용 가능한 모델:
-  - `gpt-4o-mini-tts` - GPT-4o Mini TTS 모델 (mp3 형식은 아직 지원되지 않음)
+  - `gpt-4o-mini-tts` - GPT-4o Mini TTS 모델
 
   예: `"gpt-4o-mini-tts"`
 </ParamField>
@@ -609,18 +609,17 @@ cat("Audio saved to speech.opus\n")
   예: `"alloy"`
 </ParamField>
 
-<ParamField body="response_format" type="string" default="mp3">
+<ParamField body="response_format" type="string" required default="wav">
   오디오 출력 형식
 
   지원되는 형식:
-  - `mp3` - MP3 형식 (기본값)
+  - `wav` - WAV 형식, 비압축 (기본값)
   - `opus` - Opus 형식, 인터넷 스트리밍용
   - `aac` - AAC 형식
   - `flac` - FLAC 형식, 무손실 압축
-  - `wav` - WAV 형식, 비압축
   - `pcm` - PCM 형식, 원시 오디오 데이터
 
-  예: `"mp3"`
+  예: `"wav"`
 </ParamField>
 
 <ParamField body="speed" type="number" default="1.0">

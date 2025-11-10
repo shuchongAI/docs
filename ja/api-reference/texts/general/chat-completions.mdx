@@ -666,9 +666,50 @@ cat(content(response, "text"))
 <ParamField body="messages" type="array" required>
   会話メッセージのリスト
 
-  各メッセージには以下が含まれます：
-  - `role`: ロールタイプ（`system`, `user`, `assistant`）
-  - `content`: メッセージ内容（文字列またはマルチモーダルコンテンツ配列）
+  <Expandable title="メッセージオブジェクトの構造">
+    <ParamField body="role" type="enum<string>" required default="user">
+      役割タイプ
+      
+      - `user` - ユーザーメッセージ
+      - `assistant` - AI応答（複数ターン用）
+      - `system` - システムプロンプト
+    </ParamField>
+
+    <ParamField body="content" type="string" required>
+      メッセージ内容
+      
+      質問や話したい内容
+    </ParamField>
+  </Expandable>
+
+  **例：**
+  ```json
+  [{"role": "user", "content": "こんにちは、自己紹介をお願いします"}]
+  ```
+
+  **応用的な使い方：**
+
+  システムプロンプトを追加（AIに特定の役割を持たせる）：
+  ```json
+  [
+    {"role": "system", "content": "あなたはプロのPython講師です"},
+    {"role": "user", "content": "プログラミングの学び方を教えてください"}
+  ]
+  ```
+
+  複数ターンの会話（コンテキスト付き）：
+  ```json
+  [
+    {"role": "user", "content": "こんにちは"},
+    {"role": "assistant", "content": "こんにちは！何かお手伝いできますか？"},
+    {"role": "user", "content": "AIについて教えてください"}
+  ]
+  ```
+
+  **役割の説明：**
+  - `user`: ユーザーメッセージ（ほとんどの場合これを使用）
+  - `system`: システムプロンプト、AIの動作や役割を設定
+  - `assistant`: AIの過去の返答、会話のコンテキストとして使用
 </ParamField>
 
 <ParamField body="temperature" type="number">

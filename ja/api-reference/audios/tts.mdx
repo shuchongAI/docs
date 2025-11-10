@@ -3,7 +3,7 @@ title: "TTS テキスト音声変換"
 description: "
 - 複数の音声モデルと音声選択をサポート
 
-- 高品質オーディオフォーマット出力: mp3、opus、aac、flac、wav、pcm
+- 高品質オーディオフォーマット出力: wav、opus、aac、flac、pcm
 
 - 最大入力テキスト 4096 文字
 "
@@ -578,11 +578,11 @@ cat("Audio saved to speech.opus\n")
 
 ## Body
 
-<ParamField body="model" type="string" required>
+<ParamField body="model" type="string" required default="gpt-4o-mini-tts">
   TTSモデル名
 
   利用可能なモデル:
-  - `gpt-4o-mini-tts` - GPT-4o Mini TTS モデル(mp3 形式は未対応)
+  - `gpt-4o-mini-tts` - GPT-4o Mini TTS モデル
 
   例: `"gpt-4o-mini-tts"`
 </ParamField>
@@ -609,18 +609,17 @@ cat("Audio saved to speech.opus\n")
   例: `"alloy"`
 </ParamField>
 
-<ParamField body="response_format" type="string" default="mp3">
+<ParamField body="response_format" type="string" required default="wav">
   オーディオ出力フォーマット
 
   サポートされているフォーマット:
-  - `mp3` - MP3フォーマット（デフォルト）
+  - `wav` - WAVフォーマット、非圧縮（デフォルト）
   - `opus` - Opusフォーマット、インターネットストリーミング用
   - `aac` - AACフォーマット
   - `flac` - FLACフォーマット、ロスレス圧縮
-  - `wav` - WAVフォーマット、非圧縮
   - `pcm` - PCMフォーマット、生のオーディオデータ
 
-  例: `"mp3"`
+  例: `"wav"`
 </ParamField>
 
 <ParamField body="speed" type="number" default="1.0">

@@ -725,7 +725,7 @@ cat(content(response, "text"))
 
 ## Body
 
-<ParamField body="model" type="string" required>
+<ParamField body="model" type="string" required default="gpt-5">
   Model name
 
   Supported models include:
@@ -738,11 +738,48 @@ cat(content(response, "text"))
 <ParamField body="input" type="array" required>
   Input content list
 
-  Each input item contains:
-  - `role`: Role type (`user`, `assistant`, `system`)
-  - `content`: Content array, supports multiple types:
-    - `input_text`: Text input
-    - `input_image`: Image input
+  Input array, each item contains `role` and `content` fields.
+
+  **💡 Quick fill (Try it area):**
+  1. Click "+ Add an item" to add an input item
+  2. `role` input: `user` (user message), `assistant` (AI response), or `system` (system prompt)
+  3. `content` add content blocks (can include text and images)
+  
+  <Expandable title="Field details">
+    <ParamField body="role" type="string" required default="user">
+      Role type
+      
+      Options: `user` (user message), `assistant` (AI response, for multi-turn), `system` (system prompt, to set AI behavior)
+    </ParamField>
+
+    <ParamField body="content" type="array" required>
+      Content array
+      
+      Supports multiple types of content blocks, can include text and images.
+      
+      <Expandable title="Content block types">
+        <ParamField body="type" type="string" required>
+          Content type
+          
+          Options:
+          - `input_text`: Text input
+          - `input_image`: Image input
+        </ParamField>
+        
+        <ParamField body="text" type="string">
+          Text content
+          
+          Used when `type` is `input_text`, fill in the text content
+        </ParamField>
+        
+        <ParamField body="image_url" type="string">
+          Image URL
+          
+          Used when `type` is `input_image`, fill in the image URL or base64 encoding
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 <ParamField body="temperature" type="number">
