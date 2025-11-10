@@ -586,12 +586,14 @@ cat(content(response, "text"))
   - 比率：`1:1`, `2:3`, `3:2`
 </ParamField>
 
-<ParamField body="n" type="integer" default="1">
+<ParamField body="n" type="integer">
   生成する画像の数
 
   1、2、4をサポート。数量に基づいて料金が事前に差し引かれます
   
-  **⚠️ 注意：** 純粋な数字を入力してください（例：`1`）。引用符は使用しないでください
+  デフォルト：1
+  
+  **⚠️ 注意：** 純粋な数字を入力してください（例：`1`）。引用符を使用するとエラーになります
 </ParamField>
 
 <ParamField body="image_urls" type="array">

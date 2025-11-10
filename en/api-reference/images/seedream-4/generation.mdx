@@ -610,14 +610,16 @@ cat(content(response, "text"))
   - `21:9`
 </ParamField>
 
-<ParamField body="n" type="integer" default="1">
+<ParamField body="n" type="integer">
   Number of images to generate
 
   Range: 1-15 (minimum 1, maximum 15)
+  
+  Default: 1
 
   **Note:** 
   - The actual number of images that can be generated is affected by both this parameter and the number of input reference images. The total of reference images + generated images must be ≤ 15
-  - **Enter a plain number (e.g., `1`), do not use quotes**
+  - **Must enter a plain number (e.g., `1`), do not use quotes or it will cause an error**
 
   Charges will be pre-deducted based on the number
 </ParamField>

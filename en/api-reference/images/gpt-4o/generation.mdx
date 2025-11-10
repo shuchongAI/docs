@@ -591,12 +591,14 @@ cat(content(response, "text"))
   - Ratios: `1:1`, `2:3`, `3:2`
 </ParamField>
 
-<ParamField body="n" type="integer" default="1">
+<ParamField body="n" type="integer">
   Number of images to generate
 
   Supports 1, 2, 4. Charges will be pre-deducted based on the number
   
-  **⚠️ Note:** Enter a plain number (e.g., `1`), do not use quotes
+  Default: 1
+  
+  **⚠️ Note:** Must enter a plain number (e.g., `1`), do not use quotes or it will cause an error
 </ParamField>
 
 <ParamField body="image_urls" type="array">

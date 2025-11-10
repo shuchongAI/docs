@@ -586,12 +586,14 @@ cat(content(response, "text"))
   - 比例：`1:1`、`2:3`、`3:2`
 </ParamField>
 
-<ParamField body="n" type="integer" default="1">
+<ParamField body="n" type="integer">
   生成图像的数量
 
   支持 1、2、4，会根据生成数量进行预扣费
   
-  **⚠️ 注意：** 输入纯数字（例如：`1`），不要加引号
+  默认值：1
+  
+  **⚠️ 注意：** 必须输入纯数字（如 `1`），不要加引号，否则会报错
 </ParamField>
 
 <ParamField body="image_urls" type="array">
