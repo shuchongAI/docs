@@ -766,10 +766,12 @@ cat(content(response, "text"))
   最大4つのシーケンスを指定でき、遭遇すると生成が停止します
 </ParamField>
 
-<ParamField body="n" type="integer">
+<ParamField body="n" type="integer" default="1">
   生成する完了の数
 
   デフォルト：1
+  
+  **⚠️ 注意：** 純粋な数字を入力してください（例：`1`）。引用符は使用しないでください
 </ParamField>
 
 ## レスポンス

@@ -591,18 +591,36 @@ cat(content(response, "text"))
   - Ratios: `1:1`, `2:3`, `3:2`
 </ParamField>
 
-<ParamField body="n" type="integer">
+<ParamField body="n" type="integer" default="1">
   Number of images to generate
 
   Supports 1, 2, 4. Charges will be pre-deducted based on the number
+  
+  **⚠️ Note:** Enter a plain number (e.g., `1`), do not use quotes
 </ParamField>
 
 <ParamField body="image_urls" type="array">
   Reference image URL list for image-to-image or image editing
 
-  - Maximum 5 images
-  - Each image should not exceed 10MB
-  - Supported formats: .jpeg, .jpg, .png, .webp
+  **💡 Quick fill (Try it area):**
+  1. Click "+ Add an item" to add an image URL
+  2. Enter the complete image URL address
+
+  <Expandable title="Field details">
+    <ParamField body="url" type="string" required>
+      Image URL address
+      
+      Can be:
+      - Publicly accessible image URL (http:// or https://)
+      - Base64 encoded image data
+      
+      **Limitations:**
+      - Single image up to 10MB
+      - Supported formats: .jpeg, .jpg, .png, .webp
+    </ParamField>
+  </Expandable>
+
+  **Limitation:** Maximum 5 images
 </ParamField>
 
 <ParamField body="mask_url" type="string">

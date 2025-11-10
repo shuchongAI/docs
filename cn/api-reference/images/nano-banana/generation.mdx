@@ -607,14 +607,32 @@ cat(content(response, "text"))
   生成图像的数量
 
   固定为 1
+  
+  **⚠️ 注意：** 输入纯数字（例如：`1`），不要加引号
 </ParamField>
 
 <ParamField body="image_urls" type="array">
   参考图像的 URL 列表，用于图生图或图像编辑
 
-  - 最多 5 张图片
-  - 每张图片不超过 10MB
-  - 支持的格式：.jpeg、.jpg、.png、.webp
+  **💡 快速填写（Try it 区域）：**
+  1. 点击 "+ Add an item" 添加一个图像URL
+  2. 输入图像的完整 URL 地址
+
+  <Expandable title="详细字段说明">
+    <ParamField body="url" type="string" required>
+      图像URL地址
+      
+      可以是：
+      - 公开可访问的图像URL（http:// 或 https://）
+      - Base64 编码的图像数据
+      
+      **限制：**
+      - 单张图片不超过 10MB
+      - 支持格式：.jpeg、.jpg、.png、.webp
+    </ParamField>
+  </Expandable>
+
+  **限制：** 最多 5 张图片
 </ParamField>
 
 <ParamField body="mask_url" type="string">

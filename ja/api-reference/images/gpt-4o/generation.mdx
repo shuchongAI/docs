@@ -586,18 +586,36 @@ cat(content(response, "text"))
   - 比率：`1:1`, `2:3`, `3:2`
 </ParamField>
 
-<ParamField body="n" type="integer">
+<ParamField body="n" type="integer" default="1">
   生成する画像の数
 
   1、2、4をサポート。数量に基づいて料金が事前に差し引かれます
+  
+  **⚠️ 注意：** 純粋な数字を入力してください（例：`1`）。引用符は使用しないでください
 </ParamField>
 
 <ParamField body="image_urls" type="array">
   画像から画像または画像編集のための参照画像URLリスト
 
-  - 最大5枚の画像
-  - 各画像は10MBを超えないこと
-  - サポート形式：.jpeg, .jpg, .png, .webp
+  **💡 クイック入力（Try itエリア）：**
+  1. "+ Add an item" をクリックして画像URLを追加
+  2. 画像の完全なURL アドレスを入力
+
+  <Expandable title="フィールド詳細">
+    <ParamField body="url" type="string" required>
+      画像URLアドレス
+      
+      以下が可能：
+      - 公開アクセス可能な画像URL（http:// または https://）
+      - Base64エンコードされた画像データ
+      
+      **制限：**
+      - 単一画像は最大 10MB
+      - 対応形式：.jpeg、.jpg、.png、.webp
+    </ParamField>
+  </Expandable>
+
+  **制限：** 最大 5 枚の画像
 </ParamField>
 
 <ParamField body="mask_url" type="string">

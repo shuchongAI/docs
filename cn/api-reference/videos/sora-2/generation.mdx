@@ -594,9 +594,23 @@ cat(content(response, "text"))
 <ParamField body="image_urls" type="array">
   用于图生视频的参考图像 URL 数组
 
-  - 每个元素必须是有效的图像 URL
-  - 支持的格式：.jpeg、.jpg、.png、.webp
-  - 最大文件大小：10MB
+  **💡 快速填写（Try it 区域）：**
+  1. 点击 "+ Add an item" 添加一个图像URL
+  2. 输入图像的完整 URL 地址
+
+  <Expandable title="详细字段说明">
+    <ParamField body="url" type="string" required>
+      图像URL地址
+      
+      可以是：
+      - 公开可访问的图像URL（http:// 或 https://）
+      - Base64 编码的图像数据
+      
+      **限制：**
+      - 最大文件大小：10MB
+      - 支持格式：.jpeg、.jpg、.png、.webp
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 <ParamField body="watermark" type="boolean" default="false">

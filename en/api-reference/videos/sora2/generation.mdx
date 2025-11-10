@@ -587,9 +587,23 @@ cat(content(response, "text"))
 <ParamField body="image_urls" type="array">
   Array of reference image URLs for image-to-video generation
 
-  - Each element must be a valid image URL
-  - Supported formats: .jpeg, .jpg, .png, .webp
-  - Maximum file size: 10MB
+  **💡 Quick fill (Try it area):**
+  1. Click "+ Add an item" to add an image URL
+  2. Enter the complete image URL address
+
+  <Expandable title="Field details">
+    <ParamField body="url" type="string" required>
+      Image URL address
+      
+      Can be:
+      - Publicly accessible image URL (http:// or https://)
+      - Base64 encoded image data
+      
+      **Limitations:**
+      - Maximum file size: 10MB
+      - Supported formats: .jpeg, .jpg, .png, .webp
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 ## Response
