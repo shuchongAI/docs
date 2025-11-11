@@ -134,43 +134,6 @@ After configuration, you can start using Cursor's AI features:
 2. Right-click and select "Explain with AI" or use shortcut
 3. AI will explain the code's functionality and logic in detail
 
-## Advanced Configuration
-
-### Customize AI Behavior
-
-In Cursor settings, you can customize AI behavior:
-
-| Option | Description | Recommended Setting |
-|--------|-------------|---------------------|
-| **Temperature** | Controls randomness and creativity of output | `0.3` - `0.7` (conservative for code generation) |
-| **Max Tokens** | Maximum length of a single response | `2048` - `4096` |
-| **Context Window** | Context window size | Choose based on model capabilities |
-
-### Using .cursorrules File
-
-Create a `.cursorrules` file in your project root to define project-specific AI behavior rules:
-
-```text
-# Project Coding Standards
-- Use TypeScript for type checking
-- Follow ESLint rules
-- Use 4-space indentation
-- Add detailed comments
-
-# AI Assistance Rules
-- Prioritize code readability
-- Use functional programming style
-- Add unit tests
-```
-
-### Configure Proxy (Optional)
-
-If you need to access APIMart through a proxy:
-
-1. Find the **Proxy** option in Cursor settings
-2. Configure HTTP/HTTPS proxy address
-3. Save and restart Cursor
-
 ## FAQ
 
 ### Q1: Cannot connect to APIMart service?
