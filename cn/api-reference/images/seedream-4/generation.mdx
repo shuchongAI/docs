@@ -627,11 +627,25 @@ cat(content(response, "text"))
 <ParamField body="image_urls" type="array">
   参考图像的 URL 列表，用于图生图或图像编辑
 
+  支持两种格式：
+  
+  **1. 完整的图像URL地址**
+  - 公开可访问的图像URL（http:// 或 https://）
+  - 示例：`https://example.com/image.jpg`
+  
+  **2. Base64 编码格式**
+  - **必须使用完整的 Data URI 格式**
+  - 格式：`data:image/{格式};base64,{base64数据}`
+  - 支持的图片格式：jpeg、png
+  - 示例：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
+  - ⚠️ 注意：必须包含 `data:image/jpeg;base64,` 前缀部分
+
+  **限制：**
   - 最多 10 张图片
   - 图片格式：jpeg、png
   - 宽高比（宽/高）范围：[1/3, 3]
   - 宽高长度（px）> 14
-  - 大小：不超过 10MB
+  - 单张图片大小：不超过 10MB
   - 总像素：不超过 6000×6000 px
 </ParamField>
 

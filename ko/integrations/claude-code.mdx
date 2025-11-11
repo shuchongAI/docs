@@ -1,0 +1,168 @@
+---
+title: "Claude Code에서 APIMart 사용"
+description: "APIMart를 사용하여 Claude Code에 더 안정적인 서비스 제공"
+---
+
+# Claude Code에서 APIMart API 서비스 사용
+
+이 가이드는 Claude Code 편집기에서 APIMart API 서비스를 구성하고 사용하여 더 안정적이고 빠른 AI 지원 프로그래밍 경험을 제공하는 방법을 안내합니다.
+
+## 전제 조건
+
+시작하기 전에 다음을 확인하세요:
+
+1. ✅ Claude Code 편집기 설치 준비 완료
+2. ✅ APIMart [API 키](https://api.apimart.ai/console/token) 획득 완료
+
+## 단계 1: Claude Code 설치
+
+다음 방법 중 하나를 선택하여 Claude Code를 설치합니다:
+
+### 방법 1: 네이티브 설치 (권장)
+
+#### Homebrew (macOS, Linux):
+
+```bash
+brew install --cask claude-code
+```
+
+#### macOS, Linux, WSL:
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+#### Windows PowerShell:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+#### Windows CMD:
+
+```cmd
+curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+```
+
+### 방법 2: NPM 설치
+
+Node.js 18 이상이 설치되어 있는 경우:
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+설치 후 Claude Code 실행:
+
+```bash
+claude
+```
+
+## 단계 2: 구성 파일 생성
+
+### 2.1 구성 폴더 생성
+
+먼저 Claude Code를 실행하여 구성 폴더를 생성합니다. 터미널에서:
+
+```bash
+claude
+```
+
+`Ctrl + C`를 눌러 종료합니다. 그러면 구성 폴더가 자동으로 생성됩니다.
+
+### 2.2 구성 폴더 위치
+
+OS에 따라 구성 폴더 위치가 다릅니다:
+
+**Windows:**
+```bash
+C:\Users\%username%\.claude
+```
+
+**macOS:**
+```bash
+~/.claude
+```
+
+**Linux:**
+```bash
+~/.claude
+```
+
+### 2.3 settings.json 파일 생성
+
+#### Windows
+
+`.claude` 디렉토리에 `settings.json` 파일을 생성하고 다음 내용을 입력:
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.apimart.ai",
+    "ANTHROPIC_AUTH_TOKEN": "sk-xxxxxxxxxxxx",
+    "ANTHROPIC_MODEL": "claude-haiku-4-5-20251001"
+  }
+}
+```
+
+#### Ubuntu/macOS
+
+Ubuntu/macOS에서는 `vi` 또는 `vim` 명령으로 `settings.json` 파일을 생성하거나 편집할 수 있습니다:
+
+```bash
+vim ~/.claude/settings.json
+```
+
+편집기에 다음 내용을 입력:
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.apimart.ai",
+    "ANTHROPIC_AUTH_TOKEN": "sk-xxxxxxxxxxxx",
+    "ANTHROPIC_MODEL": "claude-haiku-4-5-20251001"
+  }
+}
+```
+
+저장하고 종료 (`Esc` 누르고 `:wq` 입력 후 `Enter`).
+
+<Note>
+**중요:**
+- `ANTHROPIC_AUTH_TOKEN` 값을 [APIMart 콘솔](https://api.apimart.ai/console/token)에서 얻은 실제 API 키(`sk-`로 시작)로 교체하세요
+- `ANTHROPIC_MODEL`은 다른 지원 모델로 변경 가능합니다
+</Note>
+
+## 단계 3: 모델 선택
+
+APIMart는 여러 고성능 모델을 지원합니다:
+
+### 텍스트 생성 모델
+
+| 모델 ID | 모델명 | 특징 | 권장 용도 |
+|---------|-------|------|----------|
+| `gpt-4o` | GPT-4o | 가장 강력한 성능, 멀티모달 | 복잡한 코드, 아키텍처 설계 |
+| `gpt-4o-mini` | GPT-4o Mini | 빠른 응답, 비용 효율적 | 코드 완성, 일상 프로그래밍 |
+| `claude-sonnet-4-5-20250929` | Claude Sonnet 4.5 | 뛰어난 추론 능력 | 알고리즘 설계, 최적화 |
+| `claude-haiku-4-5-20251001` | Claude Haiku 4.5 | 초고속 응답 | 빠른 답변, 스니펫 |
+
+## 지원
+
+<CardGroup cols={2}>
+  <Card title="기술 지원" icon="headset" href="mailto:zhihong@apimart.ai">
+    이메일로 기술 지원 받기
+  </Card>
+  
+  <Card title="API 문서" icon="book" href="/ko/api-reference/texts/general/chat-completions">
+    전체 API 문서 보기
+  </Card>
+  
+  <Card title="서비스 상태" icon="signal" href="https://status.apimart.ai">
+    API 서비스 상태 확인
+  </Card>
+  
+  <Card title="사용 통계" icon="chart-line" href="https://api.apimart.ai/console/usage">
+    사용량 및 비용 확인
+  </Card>
+</CardGroup>
+

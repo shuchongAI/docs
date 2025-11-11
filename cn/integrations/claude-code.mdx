@@ -1,0 +1,405 @@
+---
+title: "在 Claude Code 中使用 APIMart"
+description: "用 APIMart 为 Claude Code 提供更稳定的服务"
+---
+
+# 在 Claude Code 中使用 APIMart API 服务
+
+本指南将教您如何在 Claude Code 编辑器中配置使用 APIMart 的 API 服务，获得更稳定、更快速的 AI 辅助编程体验。
+
+## 前提条件
+
+在开始之前，请确保您已经：
+
+1. 获取了 APIMart 的 [API 密钥](https://api.apimart.ai/console/token)
+
+## 第一步：安装 Claude Code
+
+选择以下任一方式安装 Claude Code：
+
+### 方式 1：原生安装（推荐）
+
+#### Homebrew (macOS, Linux):
+
+```bash
+brew install --cask claude-code
+```
+
+#### macOS, Linux, WSL:
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+#### Windows PowerShell:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+#### Windows CMD:
+
+```cmd
+curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+```
+
+### 方式 2：NPM 安装
+
+如果您已安装 Node.js 18 或更新版本：
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+安装完成后，启动 Claude Code：
+
+```bash
+claude
+```
+
+## 第二步：配置 API
+
+有两种配置方式，推荐使用**方式一（环境变量）**，更简单直接。
+
+### 方式一：使用环境变量（推荐）⭐
+
+这是最简单的配置方式，直接在终端设置环境变量即可。
+
+#### Windows (PowerShell)
+
+```powershell
+$env:ANTHROPIC_API_KEY="sk-xxxxxxxxxxxx"
+$env:ANTHROPIC_MODEL="gpt-4o"
+$env:ANTHROPIC_BASE_URL="https://api.apimart.ai"
+```
+
+然后启动 Claude Code：
+```powershell
+claude
+```
+
+#### Windows (CMD)
+
+```cmd
+set ANTHROPIC_API_KEY=sk-xxxxxxxxxxxx
+set ANTHROPIC_MODEL=gpt-4o
+set ANTHROPIC_BASE_URL=https://api.apimart.ai
+```
+
+然后启动 Claude Code：
+```cmd
+claude
+```
+
+#### macOS/Linux
+
+```bash
+export ANTHROPIC_API_KEY="sk-xxxxxxxxxxxx"
+export ANTHROPIC_MODEL="gpt-4o"
+export ANTHROPIC_BASE_URL="https://api.apimart.ai"
+```
+
+然后启动 Claude Code：
+```bash
+claude
+```
+
+<Note>
+**重要提示：**
+- 将 `sk-xxxxxxxxxxxx` 替换为您从 [APIMart 控制台](https://api.apimart.ai/console/token) 获取的实际 API 密钥
+- `ANTHROPIC_MODEL` 可以改为其他支持的模型（如 `gpt-4o-mini`、`claude-sonnet-4-5-20250929` 等）
+- 这种方式配置的环境变量在**关闭终端后会失效**，需要重新设置
+</Note>
+
+#### 永久配置环境变量
+
+如果想要永久保存，可以添加到系统配置文件：
+
+**macOS/Linux (添加到 ~/.bashrc 或 ~/.zshrc):**
+```bash
+echo 'export ANTHROPIC_API_KEY="sk-xxxxxxxxxxxx"' >> ~/.bashrc
+echo 'export ANTHROPIC_MODEL="gpt-4o"' >> ~/.bashrc
+echo 'export ANTHROPIC_BASE_URL="https://api.apimart.ai"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**Windows (永久设置系统环境变量):**
+1. 右键"此电脑" → "属性" → "高级系统设置" → "环境变量"
+2. 在"用户变量"中新建以下变量：
+   - `ANTHROPIC_API_KEY` = `sk-xxxxxxxxxxxx`
+   - `ANTHROPIC_MODEL` = `gpt-4o`
+   - `ANTHROPIC_BASE_URL` = `https://api.apimart.ai`
+3. 重启终端
+
+### 方式二：使用配置文件
+
+如果不想使用环境变量，也可以创建配置文件。
+
+#### 2.1 生成配置文件夹
+
+首次使用需要先启动一次 Claude Code 以生成配置文件夹：
+
+```bash
+claude
+```
+
+启动后，按 `Ctrl + C` 退出，此时会自动生成配置文件夹：
+- Windows: `C:\Users\%username%\.claude`
+- macOS/Linux: `~/.claude`
+
+#### 2.2 创建 settings.json 配置文件
+
+**Windows 操作流程：**
+
+在 `.claude` 目录下创建 `settings.json` 文件，并填写以下内容：
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.apimart.ai",
+    "ANTHROPIC_AUTH_TOKEN": "sk-xxxxxxxxxxxx",
+    "ANTHROPIC_MODEL": "gpt-4o"
+  }
+}
+```
+
+**Ubuntu/macOS 操作流程：**
+
+使用 `vim` 命令创建或修改配置文件：
+
+```bash
+vim ~/.claude/settings.json
+```
+
+在编辑器中输入以下内容：
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.apimart.ai",
+    "ANTHROPIC_AUTH_TOKEN": "sk-xxxxxxxxxxxx",
+    "ANTHROPIC_MODEL": "gpt-4o"
+  }
+}
+```
+
+保存并退出（按 `Esc`，输入 `:wq`，按 `Enter`）。
+
+<Note>
+**重要提示：**
+- 将 `ANTHROPIC_AUTH_TOKEN` 的值替换为您的实际 API 密钥（以 `sk-` 开头）
+- `ANTHROPIC_MODEL` 可以根据需要更改为其他支持的模型
+</Note>
+
+### 配置参数说明
+
+| 参数 | 说明 | 示例值 |
+|------|------|--------|
+| `ANTHROPIC_BASE_URL` | APIMart API 基础地址 | `https://api.apimart.ai` |
+| `ANTHROPIC_API_KEY` 或 `ANTHROPIC_AUTH_TOKEN` | 您的 APIMart API 密钥 | `sk-xxxxxxxxxxxx` |
+| `ANTHROPIC_MODEL` | 使用的模型名称 | `gpt-4o` |
+
+## 第三步：开始使用
+
+配置完成后，您可以开始使用 Claude Code 进行 AI 辅助编程了！
+
+### 支持的模型
+
+APIMart 支持以下模型，您可以在配置文件中更改 `model` 字段来切换：
+
+| 模型名称 | 模型 ID | 特点 | 推荐用途 |
+|---------|---------|------|---------|
+| GPT-4o | `gpt-4o` | 最强性能，多模态支持 | 复杂代码、架构设计 |
+| GPT-4o Mini | `gpt-4o-mini` | 快速响应，性价比高 | 代码补全、日常编程 |
+| Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` | 优秀的推理能力 | 算法设计、代码优化 |
+| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | 极速响应 | 快速问答、代码片段 |
+| Gemini Flash | `gemini-2.0-flash-exp` | 创新功能 | 实验性功能 |
+
+### 基本使用
+
+在终端中运行：
+
+```bash
+claude
+```
+
+然后开始与 AI 对话，进行：
+- 💬 代码问答
+- 🔧 代码生成
+- 🐛 Bug 修复
+- 📝 代码解释
+- ♻️ 代码重构
+
+## 常见问题
+
+### Q1: 配置后仍然弹出登录选择页面？
+
+如果配置后，启动 Claude Code 仍然显示：
+```
+Select login method:
+1. Claude account with subscription
+2. Anthropic Console account · API usage billing
+```
+
+**原因：** 配置没有生效。
+
+**解决方案：**
+
+#### 如果使用环境变量方式（推荐）：
+
+1. **确认环境变量设置正确**：
+   
+   检查环境变量是否设置成功（在同一终端窗口中）：
+   
+   **Windows (PowerShell):**
+   ```powershell
+   echo $env:ANTHROPIC_API_KEY
+   echo $env:ANTHROPIC_BASE_URL
+   ```
+   
+   **Windows (CMD):**
+   ```cmd
+   echo %ANTHROPIC_API_KEY%
+   echo %ANTHROPIC_BASE_URL%
+   ```
+   
+   **macOS/Linux:**
+   ```bash
+   echo $ANTHROPIC_API_KEY
+   echo $ANTHROPIC_BASE_URL
+   ```
+
+2. **必须在设置环境变量的同一终端窗口中启动 Claude Code**：
+   ```bash
+   # 1. 先设置环境变量
+   export ANTHROPIC_API_KEY="sk-xxxxxxxxxxxx"
+   export ANTHROPIC_MODEL="gpt-4o"
+   export ANTHROPIC_BASE_URL="https://api.apimart.ai"
+   
+   # 2. 然后在同一窗口启动
+   claude
+   ```
+
+3. **如果切换了终端窗口，需要重新设置环境变量**
+
+#### 如果使用配置文件方式：
+
+1. **检查文件名和位置**：
+   - 文件名必须是 `settings.json`（不是 `config.json`）
+   - Windows: `C:\Users\%username%\.claude\settings.json`
+   - macOS/Linux: `~/.claude/settings.json`
+
+2. **验证文件内容**（注意 JSON 格式）：
+   ```json
+   {
+     "env": {
+       "ANTHROPIC_BASE_URL": "https://api.apimart.ai",
+       "ANTHROPIC_AUTH_TOKEN": "sk-xxxxxxxxxxxx",
+       "ANTHROPIC_MODEL": "gpt-4o"
+     }
+   }
+   ```
+   
+   ⚠️ **重要检查项：**
+   - 确保有正确的花括号和逗号
+   - 所有的键和值都用双引号（不是单引号）
+   - 最后一项后面没有多余的逗号
+   - API 密钥以 `sk-` 开头
+
+3. **删除旧的配置文件**（如果存在）：
+   - 检查是否有其他配置文件（如 `config.json`）并删除
+   - 只保留 `settings.json`
+
+4. **完全退出并重启**：
+   - Windows: 关闭终端窗口（不是 Ctrl+C）
+   - 重新打开终端，输入 `claude`
+
+### Q2: 出现 "Unable to connect to Anthropic services" 错误？
+
+如果看到以下错误信息：
+```
+Unable to connect to Anthropic services
+Failed to connect to api.anthropic.com: ERR_BAD_REQUEST
+```
+
+**原因：** 这说明 Claude Code 正在尝试连接 Anthropic 官方服务器，而不是 APIMart。
+
+**解决方案：**
+参考 Q1 的解决方案，确保配置文件正确且被加载
+
+### Q3: 如何验证配置是否正确？
+
+启动 Claude Code 后，尝试发送一个简单的问题，如 "Hello"。如果收到 AI 回复，说明配置成功。
+
+### Q4: API 密钥无效？
+
+**解决方案：**
+1. 检查密钥是否正确复制（无多余空格），且以 `sk-` 开头
+2. 访问 [控制台](https://api.apimart.ai/console/token) 确认密钥有效
+3. 确保 `ANTHROPIC_BASE_URL` 设置为 `https://api.apimart.ai`
+
+### Q5: 如何切换模型？
+
+编辑 `settings.json` 配置文件，修改 `ANTHROPIC_MODEL` 字段：
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.apimart.ai",
+    "ANTHROPIC_AUTH_TOKEN": "sk-xxxxxxxxxxxx",
+    "ANTHROPIC_MODEL": "gpt-4o-mini"
+  }
+}
+```
+
+保存后重启 Claude Code 即可。
+
+### Q6: 响应速度慢？
+
+**优化建议：**
+1. 切换到更快的模型（如 `gpt-4o-mini` 或 `claude-haiku-4-5-20251001`）
+2. 减少 `maxTokens` 设置
+3. 检查网络连接
+4. 查看 [API 状态](https://status.apimart.ai)
+
+### Q7: 如何查看使用情况和费用？
+
+访问 [APIMart 控制台](https://api.apimart.ai/console/usage) 查看：
+- ✅ 实时请求统计
+- 💰 Token 消耗明细
+- 📊 费用统计
+- 📈 使用趋势
+
+## 获取支持
+
+如果您在使用过程中遇到问题：
+
+<CardGroup cols={2}>
+  <Card title="技术支持" icon="headset" href="mailto:zhihong@apimart.ai">
+    发送邮件获取技术支持
+  </Card>
+  
+  <Card title="API 文档" icon="book" href="/cn/api-reference/texts/general/chat-completions">
+    查看完整的 API 文档
+  </Card>
+  
+  <Card title="服务状态" icon="signal" href="https://status.apimart.ai">
+    查看 API 服务状态
+  </Card>
+  
+  <Card title="使用统计" icon="chart-line" href="https://api.apimart.ai/console/usage">
+    查看使用情况和费用
+  </Card>
+</CardGroup>
+
+## 相关资源
+
+- 📖 [Claude Code 官方文档](https://docs.anthropic.com/claude/docs/claude-code)
+- 🚀 [APIMart 快速开始](/cn/quickstart)
+- 🔧 [开发指南](/cn/development)
+- 🎨 [图像生成 API](/cn/api-reference/images/gpt-4o/generation)
+- 🎬 [视频生成 API](/cn/api-reference/videos/sora-2/generation)
+
+---
+
+**提示：** 开始使用 Claude Code + APIMart，享受更稳定、更快速的 AI 编程体验！如有任何问题，随时联系我们的 [技术支持](mailto:zhihong@apimart.ai)。

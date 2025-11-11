@@ -1,0 +1,168 @@
+---
+title: "Using APIMart in Claude Code"
+description: "Use APIMart to provide more stable services for Claude Code"
+---
+
+# Using APIMart API Services in Claude Code
+
+This guide will teach you how to configure and use APIMart API services in the Claude Code editor for a more stable and faster AI-assisted programming experience.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+1. ✅ Ready to install Claude Code editor
+2. ✅ Obtained an APIMart [API Key](https://api.apimart.ai/console/token)
+
+## Step 1: Install Claude Code
+
+Choose one of the following methods to install Claude Code:
+
+### Method 1: Native Install (Recommended)
+
+#### Homebrew (macOS, Linux):
+
+```bash
+brew install --cask claude-code
+```
+
+#### macOS, Linux, WSL:
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+#### Windows PowerShell:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+#### Windows CMD:
+
+```cmd
+curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+```
+
+### Method 2: NPM Install
+
+If you have Node.js 18 or newer installed:
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+After installation, launch Claude Code:
+
+```bash
+claude
+```
+
+## Step 2: Create Configuration File
+
+### 2.1 Generate Configuration Folder
+
+First launch Claude Code to generate the configuration folder. In terminal:
+
+```bash
+claude
+```
+
+Press `Ctrl + C` to exit. This will automatically generate the configuration folder.
+
+### 2.2 Find Configuration Folder
+
+Configuration folder location varies by OS:
+
+**Windows:**
+```bash
+C:\Users\%username%\.claude
+```
+
+**macOS:**
+```bash
+~/.claude
+```
+
+**Linux:**
+```bash
+~/.claude
+```
+
+### 2.3 Create settings.json File
+
+#### Windows
+
+Create a `settings.json` file in the `.claude` directory with the following content:
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.apimart.ai",
+    "ANTHROPIC_AUTH_TOKEN": "sk-xxxxxxxxxxxx",
+    "ANTHROPIC_MODEL": "claude-haiku-4-5-20251001"
+  }
+}
+```
+
+#### Ubuntu/macOS
+
+Ubuntu/macOS users can use `vi` or `vim` to create or edit the `settings.json` file:
+
+```bash
+vim ~/.claude/settings.json
+```
+
+Enter the following content in the editor:
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.apimart.ai",
+    "ANTHROPIC_AUTH_TOKEN": "sk-xxxxxxxxxxxx",
+    "ANTHROPIC_MODEL": "claude-haiku-4-5-20251001"
+  }
+}
+```
+
+Save and exit (press `Esc`, type `:wq`, press `Enter`).
+
+<Note>
+**Important:**
+- Replace `ANTHROPIC_AUTH_TOKEN` value with your actual API key from [APIMart Console](https://api.apimart.ai/console/token) (starts with `sk-`)
+- `ANTHROPIC_MODEL` can be changed to other supported models
+</Note>
+
+## Step 3: Select Model
+
+APIMart supports multiple high-performance models:
+
+### Text Generation Models
+
+| Model ID | Model Name | Features | Recommended Use |
+|----------|-----------|----------|----------------|
+| `gpt-4o` | GPT-4o | Most powerful, multimodal | Complex code, architecture design |
+| `gpt-4o-mini` | GPT-4o Mini | Fast response, cost-effective | Code completion, daily programming |
+| `claude-sonnet-4-5-20250929` | Claude Sonnet 4.5 | Excellent reasoning | Algorithm design, optimization |
+| `claude-haiku-4-5-20251001` | Claude Haiku 4.5 | Ultra-fast response | Quick answers, snippets |
+
+## Get Support
+
+<CardGroup cols={2}>
+  <Card title="Technical Support" icon="headset" href="mailto:zhihong@apimart.ai">
+    Email for technical support
+  </Card>
+  
+  <Card title="API Documentation" icon="book" href="/en/api-reference/texts/general/chat-completions">
+    View complete API documentation
+  </Card>
+  
+  <Card title="Service Status" icon="signal" href="https://status.apimart.ai">
+    View API service status
+  </Card>
+  
+  <Card title="Usage Statistics" icon="chart-line" href="https://api.apimart.ai/console/usage">
+    View usage and costs
+  </Card>
+</CardGroup>
+

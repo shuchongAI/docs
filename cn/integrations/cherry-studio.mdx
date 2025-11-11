@@ -1,0 +1,252 @@
+---
+title: "在 Cherry Studio 中使用 APIMart"
+description: "详细指导如何在 Cherry Studio 桌面客户端中配置和使用 APIMart API 服务，本指南将帮助您在 Cherry Studio 中配置 APIMart API，以便使用丰富的 AI 模型资源。"
+---
+
+
+
+
+## 准备工作
+
+在开始之前，请确保：
+
+1. **已安装 Cherry Studio**  
+   从 [Cherry Studio 官网](https://cherry-ai.com/) 下载并安装适合您操作系统的版本
+
+2. **已获取 APIMart API 密钥**  
+   登录 [APIMart 控制台](https://api.apimart.ai/console/token) 获取您的 API 密钥（以 `sk-` 开头）
+
+<Note>
+**提示：** 如果还没有 APIMart 账户，请先在 [APIMart](https://api.apimart.ai) 注册并获取 API 密钥。
+</Note>
+
+## 第一步：打开 Cherry Studio 设置
+
+启动 Cherry Studio 后，进入设置页面：
+
+1. 点击右上角的 **⚙️ 设置** 图标（齿轮图标）
+2. 或使用快捷键：
+   - Windows/Linux: `Ctrl + `
+   - macOS: `Cmd + `
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/main-interface.png" alt="Cherry Studio 主界面" />
+</Frame>
+
+<caption>*Cherry Studio 主界面，点击右上角齿轮图标进入设置*</caption>
+
+## 第二步：添加 APIMart 模型平台
+
+### 2.1 进入模型服务管理
+
+在设置页面中：
+
+1. 在左侧菜单找到 **模型服务** 选项
+2. 点击进入模型服务管理页面
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/settings-providers.png" alt="Cherry Studio 设置页面 - 模型服务" />
+</Frame>
+
+<caption>*在设置页面左侧菜单找到"模型服务"选项*</caption>
+
+### 2.2 添加 APIMart 提供商
+
+1. 在模型服务页面底部，点击 **"+ 添加"** 按钮
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/add-provider-config.png" alt="添加提供商弹窗" />
+</Frame>
+
+<caption>*点击"+ 添加"后会弹出添加提供商对话框*</caption>
+
+2. 在弹出的 **"添加提供商"** 对话框中填写：
+   - **提供商名称**：`APIMart`（可自定义）
+   - **提供商类型**：选择 `OpenAI`
+
+3. 点击 **"确定"** 按钮
+
+### 2.3 配置 APIMart API 信息
+
+添加提供商后，在右侧配置区域填写 API 信息：
+
+| 配置项 | 填写内容 |
+|--------|----------|
+| **API 密钥** | 您的 APIMart API 密钥（`sk-xxxxxxxxxxxx`） |
+| **API 地址** | `https://api.apimart.ai` |
+
+<Note>
+**重要提示：**
+- API 地址必须是 `https://api.apimart.ai`（不要包含 `/v1` 或其他路径）
+- API 密钥必须是从 APIMart 控制台获取的以 `sk-` 开头的密钥
+- 填写完成后可以点击 **"检测"** 按钮测试连接
+</Note>
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/settings.png" alt="配置 APIMart API 信息" />
+</Frame>
+
+<caption>*填写 API 密钥和 API 地址，确保 APIMart 提供商状态为 ON（绿色开关）*</caption>
+
+## 第三步：添加和管理模型
+
+### 3.1 打开模型管理
+
+在 APIMart 提供商配置完成后：
+
+1. 确保 APIMart 提供商右上角的开关为 **ON**（绿色）
+2. 在右侧配置区域，找到 **"模型"** 部分
+3. 点击 **"管理"** 按钮打开模型选择窗口
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/provider-list.png" alt="APIMart 模型管理" />
+</Frame>
+
+<caption>*点击"管理"按钮打开 APIMart 模型选择窗口*</caption>
+
+### 3.2 添加需要的模型
+
+在弹出的模型选择窗口中：
+
+1. 可以使用搜索框查找特定模型
+2. 使用顶部的分类标签筛选：**全部**、**推理**、**视觉**、**联网**、**免费**、**嵌入**、**重排**、**工具**
+3. 找到您想使用的模型，点击右侧的 **+** 按钮添加：
+   - `gpt-4o` / `chatgpt-4o` - OpenAI GPT-4o 模型
+   - `gpt-4o-mini` - 更快速且经济的版本
+   - `claude-3` 系列 - Claude 3 模型（含多个变体）
+   - `claude_code_sonnet-4` - Claude Code Sonnet 4
+   - `claude_code_haiku-4` - Claude Code Haiku 4
+   - `gemini-2.0-flash-exp` - Google Gemini 2.0 Flash
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/model-selection.png" alt="已添加的模型列表" />
+</Frame>
+
+<caption>*已添加的模型会显示在右侧，可以展开查看具体变体*</caption>
+
+4. 添加完所需模型后，关闭模型选择窗口即可
+
+<Tip>
+**推荐模型：**
+- 💰 **高性价比：** `gpt-4o-mini`、`claude_code_haiku-4`
+- 🚀 **高性能：** `gpt-4o` / `chatgpt-4o`、`claude_code_sonnet-4`
+- 🎨 **多模态：** `claude-3` 系列、`gemini-2.0-flash-exp`
+</Tip>
+
+## 第四步：开始对话
+
+配置完成后，您就可以开始使用了：
+
+1. 回到主界面，点击顶部的 **"+"** 号或选择现有对话
+2. 在对话页面顶部，点击模型选择器
+3. 选择 **APIMart** 提供商下的模型
+4. 开始与 AI 对话！
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/new-chat.png" alt="新建对话" />
+</Frame>
+
+<caption>*新建对话并选择 APIMart 服务商和模型*</caption>
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/chat-interface.png" alt="对话界面" />
+</Frame>
+
+<caption>*Cherry Studio 对话界面示例*</caption>
+
+## 高级配置
+
+### 自定义模型参数
+
+Cherry Studio 允许您为每个对话自定义模型参数：
+
+| 参数 | 说明 | 推荐值 |
+|------|------|--------|
+| **Temperature** | 控制输出的随机性和创造性 | `0.7`（平衡）到 `1.0`（创造性） |
+| **Max Tokens** | 单次回复的最大长度 | `2048` - `4096` |
+| **Top P** | 核采样参数 | `0.9` - `1.0` |
+| **Frequency Penalty** | 降低重复内容的概率 | `0.0` - `0.5` |
+| **Presence Penalty** | 鼓励谈论新话题 | `0.0` - `0.5` |
+
+### 设置代理（可选）
+
+如果您需要通过代理访问 APIMart：
+
+1. 在设置中找到 **"网络"** 或 **"Network"** 选项
+2. 配置 HTTP/HTTPS 代理地址
+3. 保存并重启 Cherry Studio
+
+## 常见问题
+
+### Q1: 无法连接到 APIMart 服务？
+
+**解决方案：**
+
+1. **检查 Base URL**：
+   - 确保 Base URL 是 `https://api.apimart.ai`
+   - 不要添加 `/v1` 后缀
+
+2. **验证 API Key**：
+   - 确认 API Key 正确且以 `sk-` 开头
+   - 在 [APIMart 控制台](https://api.apimart.ai/console/token) 检查密钥是否有效
+
+3. **检查网络连接**：
+   - 确保能够访问 `https://api.apimart.ai`
+   - 如果在国内，可能需要配置代理
+
+### Q2: 模型列表为空或无法刷新？
+
+**解决方案：**
+
+1. **手动添加模型**：
+   - 如果自动刷新失败，可以手动添加常用模型
+   - 在模型管理中，手动输入模型名称（如 `gpt-4o`）
+
+2. **检查 API 权限**：
+   - 确认您的 API Key 有访问模型列表的权限
+   - 联系 APIMart 支持检查账户状态
+
+### Q3: 对话时出现错误提示？
+
+**常见错误及解决方案：**
+
+| 错误信息 | 原因 | 解决方法 |
+|---------|------|---------|
+| `401 Unauthorized` | API Key 无效或过期 | 重新获取 API Key 并更新配置 |
+| `429 Too Many Requests` | 请求频率超限 | 稍等片刻后重试 |
+| `500 Internal Server Error` | 服务器临时故障 | 等待几分钟后重试 |
+| `insufficient_quota` | 账户余额不足 | 前往控制台充值 |
+
+### Q4: 如何查看 API 使用情况和费用？
+
+登录 [APIMart 控制台](https://api.apimart.ai/console) 查看：
+- 📊 API 调用统计
+- 💰 费用明细
+- 📈 使用趋势图表
+
+## 功能特性
+
+使用 Cherry Studio + APIMart，您可以：
+
+- 💬 **多模型对话** - 在同一界面使用不同的 AI 模型
+- 🖼️ **图像理解** - 支持图像输入的多模态对话
+- 📝 **上下文管理** - 智能管理对话历史和上下文
+- 🎨 **自定义提示词** - 创建和管理提示词模板
+- 📊 **对话导出** - 导出对话记录为 Markdown 等格式
+- 🔄 **模型对比** - 同时使用多个模型并对比输出
+
+## 支持与帮助
+
+如果您在使用过程中遇到任何问题：
+
+- 📚 [APIMart 文档中心](https://docs.apimart.ai)
+- 💬 [Discord 社区](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 技术支持：zhihong@apimart.ai
+
+---
+
+<Card title="开始使用 APIMart" icon="rocket" href="https://api.apimart.ai">
+  立即注册 APIMart，获取您的 API 密钥，开启 AI 之旅！
+</Card>
+

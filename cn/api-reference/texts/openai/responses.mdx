@@ -775,7 +775,20 @@ cat(content(response, "text"))
         <ParamField body="image_url" type="string">
           图像URL
           
-          当 `type` 为 `input_image` 时使用，填写图像的URL地址或base64编码
+          当 `type` 为 `input_image` 时使用
+          
+          支持两种格式：
+          
+          **1. 完整的图像URL地址**
+          - 公开可访问的图像URL（http:// 或 https://）
+          - 示例：`https://example.com/image.jpg`
+          
+          **2. Base64 编码格式**
+          - **必须使用完整的 Data URI 格式**
+          - 格式：`data:image/{格式};base64,{base64数据}`
+          - 支持的图片格式：jpeg、png、gif、webp
+          - 示例：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
+          - ⚠️ 注意：必须包含 `data:image/jpeg;base64,` 前缀部分
         </ParamField>
       </Expandable>
     </ParamField>
@@ -1107,6 +1120,18 @@ curl "https://api.apimart.ai/v1/responses" \
 **属性：**
 - `type`: 固定为 `"input_image"`
 - `image_url`: 图像URL或Base64编码的数据URI
+
+**支持两种格式：**
+
+1. **完整的图像URL地址**
+   - 公开可访问的图像URL（http:// 或 https://）
+   - 示例：`https://example.com/image.jpg`
+
+2. **Base64 编码格式**
+   - **必须使用完整的 Data URI 格式**
+   - 格式：`data:image/{格式};base64,{base64数据}`
+   - 示例：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
+   - ⚠️ 注意：必须包含 `data:image/jpeg;base64,` 前缀部分（其中 `jpeg` 可以替换为 `png`、`gif`、`webp` 等）
 
 **支持的图像格式：**
 - JPEG

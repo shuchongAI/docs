@@ -121,6 +121,16 @@
                   "en/quickstart",
                   "en/development"
                 ]
+              },
+              {
+                "group": "Integration Guides",
+                "icon": "plug",
+                "pages": [
+                  "en/integrations/cherry-studio",
+                  "en/integrations/cursor",
+                  "en/integrations/cline",
+                  "en/integrations/immersive-translate"
+                ]
               }
             ]
           }
@@ -213,6 +223,16 @@
                 "pages": [
                   "cn/quickstart",
                   "cn/development"
+                ]
+              },
+              {
+                "group": "集成指南",
+                "icon": "plug",
+                "pages": [
+                  "cn/integrations/cherry-studio",
+                  "cn/integrations/cursor",
+                  "cn/integrations/cline",
+                  "cn/integrations/immersive-translate"
                 ]
               }
             ]
@@ -307,6 +327,16 @@
                   "ja/quickstart",
                   "ja/development"
                 ]
+              },
+              {
+                "group": "統合ガイド",
+                "icon": "plug",
+                "pages": [
+                  "ja/integrations/cherry-studio",
+                  "ja/integrations/cursor",
+                  "ja/integrations/cline",
+                  "ja/integrations/immersive-translate"
+                ]
               }
             ]
           }
@@ -398,6 +428,16 @@
                 "pages": [
                   "ko/quickstart",
                   "ko/development"
+                ]
+              },
+              {
+                "group": "통합 가이드",
+                "icon": "plug",
+                "pages": [
+                  "ko/integrations/cherry-studio",
+                  "ko/integrations/cursor",
+                  "ko/integrations/cline",
+                  "ko/integrations/immersive-translate"
                 ]
               }
             ]

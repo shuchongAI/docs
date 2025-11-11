@@ -1,0 +1,621 @@
+---
+title: "在 VSCode 中使用 Cline 集成 APIMart"
+description: "详细指导如何在 Visual Studio Code 中使用 Cline 插件配置 APIMart API 服务。本指南将帮助您在 VSCode 中通过 Cline 插件使用 APIMart 的 AI 模型进行代码开发、调试和优化。"
+---
+
+## 简介
+
+Cline（前身为 Claude Dev）是一个强大的 VSCode 扩展，它允许开发者直接在编辑器中与 AI 助手交互，执行代码编写、调试、重构等任务。通过配置 APIMart API，您可以在 Cline 中使用多种先进的 AI 模型。
+
+## 准备工作
+
+在开始之前，请确保：
+
+1. **已安装 Visual Studio Code**  
+   从 [官方网站](https://code.visualstudio.com/) 下载并安装 VSCode
+
+2. **已安装 Cline 扩展**  
+   在 VSCode 扩展市场搜索 "Cline" 并安装
+
+3. **已获取 APIMart API 密钥**  
+   登录 [APIMart 控制台](https://api.apimart.ai/console/token) 获取您的 API 密钥（以 `sk-` 开头）
+
+<Note>
+**提示：** 如果还没有 APIMart 账户，请先在 [APIMart](https://api.apimart.ai) 注册并获取 API 密钥。
+</Note>
+
+## 第一步：安装 Cline 扩展
+
+### 1.1 打开扩展市场
+
+在 VSCode 中：
+
+1. 点击左侧活动栏的 **扩展** 图标（或按 `Ctrl+Shift+X` / `Cmd+Shift+X`）
+2. 在搜索框中输入 **Cline**
+3. 找到 Cline 扩展（作者：Cline）
+4. 点击 **安装** 按钮
+
+### 1.2 验证安装
+
+安装完成后：
+
+1. 左侧活动栏会出现 **Cline** 图标（机器人头像）
+2. 点击图标打开 Cline 侧边栏
+3. 首次打开会看到欢迎界面 "Hi, I'm Cline"
+4. 显示两个选项：
+   - **Get Started for Free** - 使用官方提供的免费试用
+   - **Use your own API key** - 使用自己的 API 密钥
+
+<Frame>
+  <img src="/images/integrations/cline/extension-install.png" alt="Cline 扩展安装" />
+</Frame>
+
+<caption>*在 VSCode 扩展市场搜索并安装 Cline*</caption>
+
+## 第二步：配置 APIMart API
+
+### 2.1 选择使用自己的 API 密钥
+
+在 Cline 欢迎界面：
+
+1. 点击 **Use your own API key** 按钮
+2. 这将打开 API 配置界面
+
+<Frame>
+  <img src="/images/integrations/cline/sidebar-settings.png" alt="Cline 欢迎界面" />
+</Frame>
+
+<caption>*Cline 欢迎界面，选择 "Use your own API key" 使用 APIMart*</caption>
+
+<Note>
+**提示：** 如果您之前已经配置过，可以点击 Cline 侧边栏顶部的 **设置**（齿轮图标）进入配置。
+</Note>
+### 2.2 配置 API 提供商
+
+在打开的 Settings（设置）界面：
+
+1. 展开 **API Configuration**（API 配置）部分
+2. 在 **API Provider** 下拉菜单中选择 **OpenAI Compatible**
+3. 这将显示 OpenAI 兼容的配置选项
+
+<Note>
+**重要提示：** APIMart 完全兼容 OpenAI API 格式，因此选择 "OpenAI Compatible" 即可。
+</Note>
+
+### 2.3 填写 API 配置
+
+依次填写以下配置信息：
+
+| 配置项 | 填写内容 | 说明 |
+|--------|----------|------|
+| **API Provider** | `OpenAI Compatible` | 从下拉菜单选择 |
+| **Base URL** | `https://api.apimart.ai/v1` | APIMart API 基础地址 |
+| **OpenAI Compatible API Key** | `sk-xxxxxxxxxxxx` | 您的 APIMart API 密钥 |
+| **Model ID** | `gpt-5` 或 `claude-sonnet-4-5-20250929` | 输入要使用的模型 ID |
+
+<Frame>
+  <img src="/images/integrations/cline/api-config.png" alt="配置 APIMart API" />
+</Frame>
+
+<caption>*在 Settings 界面配置 API Provider、Base URL、API Key 和 Model ID*</caption>
+
+<Note>
+**配置说明：**
+- **API Key**：必须是从 [APIMart 控制台](https://api.apimart.ai/console/token) 获取的以 `sk-` 开头的密钥
+- **Base URL**：固定为 `https://api.apimart.ai/v1`，注意包含 `/v1` 后缀
+- **Model ID**：直接输入模型 ID，如 `gpt-5`、`gpt-4o`、`claude-sonnet-4-5-20250929` 等
+- 配置界面下方会显示该模型的能力说明（如是否支持图片、浏览器使用等）
+</Note>
+
+### 2.4 保存配置
+
+配置完成后：
+
+1. 点击右上角的 **Done** 按钮
+2. 配置会自动保存
+3. Cline 会立即使用新的配置连接 APIMart
+4. 返回到 Cline 主界面，显示 "What can I do for you?"
+
+## 第三步：选择合适的模型
+
+### 推荐模型
+
+根据不同的开发场景选择合适的模型：
+
+**文本生成 & 代码开发：**
+
+- **gpt-5** ⭐ 最新模型，代码生成质量最高
+  - 适合：复杂算法、架构设计、代码重构
+  - 特点：理解能力强，代码质量高
+  
+- **gpt-4o** 高性能模型
+  - 适合：日常开发、代码审查、Bug 修复
+  - 特点：速度快，质量稳定
+  
+- **gpt-4o-mini** 💰 经济实惠
+  - 适合：简单代码生成、注释编写、文档生成
+  - 特点：性价比高，响应快速
+
+**Claude 系列（推理能力强）：**
+
+- **claude-sonnet-4-5-20250929** 
+  - 适合：复杂逻辑推理、算法优化
+  - 特点：推理能力出色，适合解决复杂问题
+  
+- **claude-haiku-4-5-20251001**
+  - 适合：快速代码补全、简单问题解答
+  - 特点：速度极快，成本低
+
+<Tip>
+**模型选择建议：**
+- 🚀 **复杂项目、重要功能：** `gpt-5`、`gpt-4o`、`claude-sonnet-4-5-20250929`
+- 💼 **日常开发、常规任务：** `gpt-4o`、`gpt-4o-mini`
+- 💰 **成本敏感、高频使用：** `gpt-4o-mini`、`claude-haiku-4-5-20251001`
+</Tip>
+
+### 切换模型
+
+在 Cline 主界面底部：
+
+1. 找到输入框下方的模型按钮（显示当前模型，如 `openai-compatible:clau...`）
+2. 点击该按钮可以切换模型
+3. 或者在设置中修改 **Model ID** 字段
+4. 更改后立即生效，无需重启 VSCode
+
+<Note>
+**提示：** 当前使用的模型会显示在输入框下方的按钮上，点击可快速切换。
+</Note>
+
+## 第四步：开始使用 Cline
+
+### 4.1 基本对话
+
+配置完成后，与 AI 助手进行对话：
+
+1. 在 Cline 主界面会显示 "**What can I do for you?**"
+2. 在底部的输入框（显示 "Type your task here..."）中输入您的需求
+3. 例如："创建一个计算斐波那契数列的函数"
+4. 按 `Enter` 发送
+5. AI 会分析您的需求，生成代码，并可以直接应用到您的项目中
+6. 执行的每个步骤都会在侧边栏中显示进度
+
+### 4.2 代码生成
+
+让 AI 生成代码：
+
+**示例 1：创建函数**
+```
+请创建一个 JavaScript 函数，用于验证邮箱地址格式
+```
+
+**示例 2：实现功能**
+```
+帮我实现一个用户登录表单，包含邮箱和密码输入，使用 React Hooks
+```
+
+**示例 3：编写测试**
+```
+为 calculateTotal 函数编写单元测试，使用 Jest
+```
+
+<Frame>
+  <img src="/images/integrations/cline/chat-interface.png" alt="Cline 对话界面" />
+</Frame>
+
+<caption>*在 Cline 中与 AI 对话生成代码*</caption>
+
+### 4.3 代码解释和改进
+
+对现有代码进行分析和优化：
+
+**右键菜单快捷操作：**
+
+1. 在编辑器中选中需要处理的代码
+2. 右键点击，会出现 Cline 相关选项：
+   - **Explain with Cline** - 解释这段代码的功能和逻辑
+   - **Improve with Cline** - 优化和改进这段代码
+3. 选择对应的操作
+4. Cline 会在侧边栏显示分析结果和改进建议
+
+**通过对话操作：**
+
+也可以在 Cline 侧边栏直接输入：
+```
+重构这段代码，提高可读性和性能
+```
+
+<Frame>
+  <img src="/images/integrations/cline/code-refactor.png" alt="代码解释和改进" />
+</Frame>
+
+<caption>*右键使用 "Explain with Cline" 或 "Improve with Cline" 快速处理代码*</caption>
+
+### 4.4 Bug 调试
+
+寻找和修复错误：
+
+1. 将错误信息或有问题的代码发送给 Cline
+2. 例如："这段代码报错：TypeError: Cannot read property 'name' of undefined"
+3. AI 会分析问题并提供解决方案
+4. 可以直接应用修复方案
+
+### 4.5 代码解释
+
+理解复杂代码：
+
+1. 选中难以理解的代码片段
+2. 在 Cline 输入："解释这段代码的功能"
+3. AI 会提供详细的代码解释和工作原理
+
+### 4.6 文档生成
+
+自动生成代码文档：
+
+**生成函数注释：**
+```
+为这个函数添加 JSDoc 注释
+```
+
+**生成 README：**
+```
+为这个项目生成一个 README.md 文件
+```
+
+## 高级功能
+
+### 多文件操作
+
+Cline 可以同时处理多个文件：
+
+1. **创建多个文件**：
+   ```
+   创建一个完整的 Express.js API，包括路由、控制器和模型文件
+   ```
+
+2. **批量修改**：
+   ```
+   将项目中所有的 var 替换为 const 或 let
+   ```
+
+3. **项目重构**：
+   ```
+   将这个项目从 JavaScript 迁移到 TypeScript
+   ```
+
+
+<caption>*Cline 可以同时创建和修改多个文件*</caption>
+
+### 终端命令执行
+
+Cline 可以帮助执行终端命令：
+
+1. **安装依赖**：
+   ```
+   安装 axios 和 dotenv 包
+   ```
+
+2. **运行脚本**：
+   ```
+   运行 npm test
+   ```
+
+3. **Git 操作**：
+   ```
+   创建一个 Git commit，消息为 "feat: add user authentication"
+   ```
+
+**命令执行流程：**
+
+1. Cline 会在侧边栏显示 "**Cline wants to execute this command:**"
+2. 显示具体的命令内容（如 `gcc fibonacci.c -o fibonacci.exe`）
+3. 底部会出现两个按钮：
+   - **Run Command** - 执行命令
+   - **Reject** - 拒绝执行
+4. 点击 "Run Command" 后，命令会在集成终端中执行
+5. 执行结果会显示在终端和 Cline 侧边栏中
+
+<Warning>
+**安全提示：** Cline 执行终端命令前必须经过您的明确确认。请仔细检查命令内容，特别是涉及文件删除、系统配置等敏感操作时，确认无误后再点击 "Run Command"。
+</Warning>
+
+### 上下文管理
+
+Cline 会自动管理对话上下文：
+
+- **当前文件上下文**：自动包含正在编辑的文件
+- **选中代码上下文**：自动包含您选中的代码片段
+- **项目结构上下文**：理解您的项目结构
+- **错误信息上下文**：自动捕获终端错误信息
+
+### 自定义提示词
+
+创建自定义提示词模板：
+
+1. 在 Cline 设置中找到 **Custom Instructions** 或 **自定义指令**
+2. 添加您的偏好设置，例如：
+   ```
+   - 使用 TypeScript 而不是 JavaScript
+   - 遵循 Airbnb 代码规范
+   - 函数使用箭头函数语法
+   - 优先使用函数式编程风格
+   ```
+3. AI 会在所有交互中遵循这些指令
+
+## 常见问题
+
+### Q1: Cline 提示 API 密钥无效？
+
+**解决方案：**
+
+1. **检查 API Key 格式**：
+   - 确认 API Key 以 `sk-` 开头
+   - 确保复制完整，没有多余的空格
+
+2. **检查 Base URL**：
+   - 必须是 `https://api.apimart.ai/v1`
+   - 注意包含 `/v1` 后缀
+
+3. **验证密钥有效性**：
+   - 在 [APIMart 控制台](https://api.apimart.ai/console/token) 检查密钥状态
+   - 确认账户有足够余额
+
+4. **重新配置**：
+   - 删除现有配置
+   - 重新输入 API Key 和 Base URL
+
+### Q2: Cline 响应速度慢？
+
+**解决方案：**
+
+1. **切换到更快的模型**：
+   - 使用 `gpt-4o-mini` 或 `claude-haiku-4-5-20251001`
+   - 这些模型响应速度更快
+
+2. **减少上下文长度**：
+   - 避免一次性发送过长的代码
+   - 将大型任务分解为多个小任务
+
+3. **检查网络连接**：
+   - 确保网络稳定
+   - 考虑使用代理服务器
+
+4. **优化请求内容**：
+   - 提问更具体明确
+   - 避免模糊或过于宽泛的问题
+
+### Q3: Cline 生成的代码质量不理想？
+
+**解决方案：**
+
+1. **使用更高质量的模型**：
+   - 切换到 `gpt-5` 或 `claude-sonnet-4-5-20250929`
+   - 这些模型代码生成质量更高
+
+2. **提供更详细的需求**：
+   - 明确说明期望的实现方式
+   - 提供示例代码或参考
+   - 说明技术栈和框架版本
+
+3. **使用自定义指令**：
+   - 在设置中添加代码规范要求
+   - 指定编程风格和最佳实践
+
+4. **迭代优化**：
+   - 与 AI 进行多轮对话
+   - 逐步完善代码质量
+
+### Q4: 如何管理 API 使用成本？
+
+**解决方案：**
+
+1. **选择合适的模型**：
+   - 日常开发使用 `gpt-4o-mini`
+   - 复杂任务使用 `gpt-5`
+
+2. **优化提问方式**：
+   - 问题尽量具体明确
+   - 避免重复询问相同问题
+
+3. **使用代码选择**：
+   - 只选中需要处理的代码部分
+   - 避免发送整个文件的上下文
+
+4. **监控使用情况**：
+   - 定期查看 [APIMart 控制台](https://api.apimart.ai/console)
+   - 了解 API 调用频率和费用
+
+### Q5: Cline 无法访问某些文件？
+
+**解决方案：**
+
+1. **检查文件权限**：
+   - 确保文件有读写权限
+   - 特别是在 Linux/macOS 系统上
+
+2. **检查 .gitignore**：
+   - Cline 默认忽略 .gitignore 中的文件
+   - 可以在设置中调整这个行为
+
+3. **工作区设置**：
+   - 确保文件在 VSCode 工作区内
+   - 检查工作区信任设置
+
+4. **重新加载 VSCode**：
+   - 使用 `Ctrl+Shift+P` / `Cmd+Shift+P`
+   - 运行 "Reload Window" 命令
+
+## 使用技巧
+
+### 1. 充分利用上下文
+
+**提供完整信息**：
+```
+我有一个 Express.js 项目，使用 MongoDB 数据库。
+请帮我创建一个用户认证系统，包括注册、登录和JWT令牌验证。
+项目结构是：
+- src/models/
+- src/controllers/
+- src/routes/
+- src/middleware/
+```
+
+### 2. 增量式开发
+
+**从简单开始，逐步完善**：
+```
+第一步：创建基本的用户模型
+第二步：添加密码加密功能
+第三步：实现注册和登录接口
+第四步：添加 JWT 令牌验证
+```
+
+### 3. 代码审查助手
+
+**让 AI 审查您的代码**：
+```
+请审查这段代码，检查：
+1. 潜在的安全问题
+2. 性能优化机会
+3. 代码规范问题
+4. 可能的 Bug
+```
+
+### 4. 学习新技术
+
+**使用 Cline 学习**：
+```
+我想学习 React Hooks。
+请创建一个示例项目，展示 useState, useEffect, useContext 的用法，
+并为每个 Hook 添加详细注释解释其工作原理。
+```
+
+### 5. 快速原型开发
+
+**快速验证想法**：
+```
+创建一个简单的待办事项应用，要求：
+- 使用 React 和 LocalStorage
+- 可以添加、删除、标记完成
+- 简单的 CSS 样式
+- 在一个 HTML 文件中完成
+```
+
+### 6. 结对编程
+
+**与 AI 协作开发**：
+```
+我正在实现一个排序算法，
+我写了前半部分，请帮我完成剩余部分：
+
+function quickSort(arr) {
+    if (arr.length <= 1) return arr;
+    const pivot = arr[0];
+    // 请继续实现...
+}
+```
+
+## 功能特性
+
+使用 Cline + APIMart，您可以：
+
+- 💻 **智能代码生成** - 从自然语言描述生成高质量代码
+- 🔧 **代码重构优化** - 自动优化代码结构和性能
+- 🐛 **Bug 调试辅助** - 快速定位和修复代码问题
+- 📝 **文档自动生成** - 生成注释、README、API 文档
+- 🧪 **测试用例编写** - 自动生成单元测试和集成测试
+- 🔄 **代码转换迁移** - 语言转换、框架迁移
+- 💡 **代码解释说明** - 理解复杂代码逻辑
+- 🎯 **最佳实践建议** - 提供代码规范和优化建议
+- 🚀 **快速原型开发** - 快速验证想法和概念
+- 🤖 **终端命令执行** - 自动执行开发命令
+
+## 键盘快捷键
+
+Cline 常用快捷键：
+
+| 快捷键 | 功能 | 说明 |
+|--------|------|------|
+| `Ctrl+Shift+P` / `Cmd+Shift+P` | 命令面板 | 访问所有 Cline 命令 |
+| `Ctrl+Shift+X` / `Cmd+Shift+X` | 扩展市场 | 安装和管理扩展 |
+| 点击 Cline 图标 | 打开/关闭侧边栏 | 快速访问 Cline |
+| `Ctrl+K Ctrl+I` | 内联建议 | 在编辑器中获取 AI 建议 |
+
+<Tip>
+**提示：** 您可以在 VSCode 的键盘快捷键设置中自定义 Cline 的快捷键。
+</Tip>
+
+## 最佳实践
+
+### 1. 清晰的任务描述
+
+❌ **不好的提问：**
+```
+写个登录功能
+```
+
+✅ **好的提问：**
+```
+创建一个用户登录功能，要求：
+- 使用 React 和 TypeScript
+- 表单验证（邮箱格式、密码长度）
+- 使用 axios 调用 API
+- 登录成功后存储 JWT token 到 localStorage
+- 错误处理和用户提示
+```
+
+### 2. 提供上下文信息
+
+**包含项目相关信息：**
+- 使用的技术栈和框架
+- 相关的文件结构
+- 现有的代码约定
+- 依赖的第三方库
+
+### 3. 迭代式改进
+
+**不要期望一次完美：**
+1. 先生成基本功能
+2. 测试和验证
+3. 提出改进意见
+4. 逐步完善
+
+### 4. 代码审查
+
+**生成代码后务必审查：**
+- 检查逻辑正确性
+- 验证安全性
+- 测试边界情况
+- 确保符合项目规范
+
+### 5. 保持对话连贯
+
+**利用上下文连续性：**
+```
+第一轮：创建用户模型
+第二轮：基于刚才的模型，创建 CRUD 接口
+第三轮：为这些接口添加权限验证
+```
+
+## 支持与帮助
+
+如果您在使用过程中遇到任何问题：
+
+- 📚 [APIMart 文档中心](https://docs.apimart.ai)
+- 📚 [Cline 官方文档](https://github.com/clinebot/cline)
+- 💬 [Discord 社区](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 技术支持：zhihong@apimart.ai
+
+## 视频教程
+
+<Note>
+**即将推出：** 我们正在制作详细的视频教程，涵盖 Cline + APIMart 的各种使用场景和最佳实践。
+</Note>
+
+---
+
+<Card title="开始使用 APIMart" icon="rocket" href="https://api.apimart.ai">
+  立即注册 APIMart，获取您的 API 密钥，在 VSCode 中体验 AI 辅助开发！
+</Card>
+
+

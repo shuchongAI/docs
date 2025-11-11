@@ -1,0 +1,251 @@
+---
+title: "Cherry StudioでAPIMarｔを使用する"
+description: "Cherry Studioデスクトップクライアントで APIMart API サービスを設定および使用する方法の詳細ガイド。このガイドでは、Cherry StudioでAPIMart APIを設定し、豊富なAIモデルリソースにアクセスする方法を説明します。"
+---
+
+
+
+## 準備
+
+開始する前に、以下を確認してください：
+
+1. **Cherry Studioがインストールされている**  
+   [Cherry Studio公式サイト](https://cherry-ai.com/)からお使いのOSに適したバージョンをダウンロードしてインストールしてください
+
+2. **APIMart APIキーを取得済み**  
+   [APIMarｔコンソール](https://api.apimart.ai/console/token)にログインしてAPIキー（`sk-`で始まる）を取得してください
+
+<Note>
+**ヒント:** APIMarｔアカウントをお持ちでない場合は、まず[APIMart](https://api.apimart.ai)で登録してAPIキーを取得してください。
+</Note>
+
+## ステップ1：Cherry Studio設定を開く
+
+Cherry Studioを起動後、設定ページに移動します：
+
+1. 右上の**⚙️ 設定**アイコン（歯車アイコン）をクリック
+2. またはキーボードショートカットを使用：
+   - Windows/Linux: `Ctrl + ,`
+   - macOS: `Cmd + ,`
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/main-interface.png" alt="Cherry Studio メインインターフェース" />
+</Frame>
+
+<caption>*Cherry Studio メインインターフェース、右上の歯車アイコンをクリックして設定に入る*</caption>
+
+## ステップ2：APIMarｔモデルプラットフォームを追加
+
+### 2.1 モデルサービス管理にアクセス
+
+設定ページで：
+
+1. 左側メニューの**モデルサービス**オプションを見つける
+2. クリックしてモデルサービス管理ページに入る
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/settings-providers.png" alt="Cherry Studio 設定 - モデルサービス" />
+</Frame>
+
+<caption>*設定ページの左側メニューで「モデルサービス」オプションを見つける*</caption>
+
+### 2.2 APIMart プロバイダーを追加
+
+1. モデルサービスページの下部にある**「+ 添加」**ボタンをクリック
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/add-provider-config.png" alt="プロバイダー追加ダイアログ" />
+</Frame>
+
+<caption>*「+ 添加」をクリックするとプロバイダー追加ダイアログが表示されます*</caption>
+
+2. **「プロバイダーを追加」**ダイアログで入力：
+   - **プロバイダー名**：`APIMart`（カスタマイズ可能）
+   - **プロバイダータイプ**：`OpenAI`を選択
+
+3. **「確定」**ボタンをクリック
+
+### 2.3 APIMart API 情報を設定
+
+プロバイダーを追加後、右側の設定エリアでAPI情報を入力：
+
+| 設定項目 | 入力内容 |
+|---------|---------|
+| **API キー** | お客様のAPIMart APIキー（`sk-xxxxxxxxxxxx`） |
+| **API アドレス** | `https://api.apimart.ai` |
+
+<Note>
+**重要：**
+- API アドレスは`https://api.apimart.ai`である必要があります（`/v1`やその他のパスを含めないでください）
+- API キーは、APIMarｔコンソールから取得した`sk-`で始まるキーである必要があります
+- 入力後、**「検測」**ボタンをクリックして接続をテストできます
+</Note>
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/settings.png" alt="APIMart API 情報を設定" />
+</Frame>
+
+<caption>*APIキーとAPIアドレスを入力し、APIMarｔプロバイダーの状態がON（緑色のスイッチ）であることを確認*</caption>
+
+## ステップ3：モデルを追加して管理
+
+### 3.1 モデル管理を開く
+
+APIMarｔプロバイダーの設定完了後：
+
+1. APIMarｔプロバイダー右上のスイッチが**ON**（緑色）であることを確認
+2. 右側の設定エリアで、**「モデル」**セクションを見つける
+3. **「管理」**ボタンをクリックしてモデル選択ウィンドウを開く
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/provider-list.png" alt="APIMart モデル管理" />
+</Frame>
+
+<caption>*「管理」ボタンをクリックしてAPIMarｔモデル選択ウィンドウを開く*</caption>
+
+### 3.2 必要なモデルを追加
+
+表示されたモデル選択ウィンドウで：
+
+1. 検索ボックスを使用して特定のモデルを検索できます
+2. 上部の分類タブでフィルタリング：**全部**、**推理**、**視覚**、**聯網**、**免費**、**嵌入**、**重排**、**工具**
+3. 使用したいモデルを見つけて、右側の**+**ボタンをクリックして追加：
+   - `gpt-4o` / `chatgpt-4o` - OpenAI GPT-4oモデル
+   - `gpt-4o-mini` - より高速で経済的なバージョン
+   - `claude-3` シリーズ - Claude 3モデル（複数の変体を含む）
+   - `claude_code_sonnet-4` - Claude Code Sonnet 4
+   - `claude_code_haiku-4` - Claude Code Haiku 4
+   - `gemini-2.0-flash-exp` - Google Gemini 2.0 Flash
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/model-selection.png" alt="追加されたモデルリスト" />
+</Frame>
+
+<caption>*追加されたモデルは右側に表示され、展開して具体的な変体を確認できます*</caption>
+
+4. 必要なモデルをすべて追加したら、モデル選択ウィンドウを閉じます
+
+<Tip>
+**推奨モデル：**
+- 💰 **コストパフォーマンス：** `gpt-4o-mini`、`claude_code_haiku-4`
+- 🚀 **高性能：** `gpt-4o` / `chatgpt-4o`、`claude_code_sonnet-4`
+- 🎨 **マルチモーダル：** `claude-3` シリーズ、`gemini-2.0-flash-exp`
+</Tip>
+
+## ステップ4：チャットを開始
+
+設定完了後、使用を開始できます：
+
+1. メインインターフェースに戻り、上部の**「+」**をクリックするか既存のチャットを選択
+2. チャットページ上部で、モデルセレクターをクリック
+3. **APIMart**プロバイダー下のモデルを選択
+4. AIとのチャットを開始！
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/new-chat.png" alt="新しいチャット" />
+</Frame>
+
+<caption>*新しいチャットを作成してAPIMarｔプロバイダーとモデルを選択*</caption>
+
+<Frame>
+  <img src="/images/integrations/cherry-studio/chat-interface.png" alt="チャットインターフェース" />
+</Frame>
+
+<caption>*Cherry Studio チャットインターフェースの例*</caption>
+
+## 高度な設定
+
+### モデルパラメータのカスタマイズ
+
+Cherry Studioでは、各会話のモデルパラメータをカスタマイズできます：
+
+| パラメータ | 説明 | 推奨値 |
+|-----------|------|--------|
+| **Temperature** | 出力のランダム性と創造性を制御 | `0.7`（バランス）から`1.0`（創造的） |
+| **Max Tokens** | 1回の応答の最大長 | `2048` - `4096` |
+| **Top P** | ニュークリアスサンプリングパラメータ | `0.9` - `1.0` |
+| **Frequency Penalty** | 繰り返しコンテンツの確率を減少 | `0.0` - `0.5` |
+| **Presence Penalty** | 新しいトピックについて話すことを促進 | `0.0` - `0.5` |
+
+### プロキシを設定（オプション）
+
+プロキシ経由でAPIMarｔにアクセスする必要がある場合：
+
+1. 設定で**「ネットワーク」**または**「Network」**オプションを見つける
+2. HTTP/HTTPSプロキシアドレスを設定
+3. 保存してCherry Studioを再起動
+
+## よくある質問
+
+### Q1：APIMarｔサービスに接続できない？
+
+**解決策：**
+
+1. **Base URLを確認**：
+   - Base URLが`https://api.apimart.ai`であることを確認
+   - `/v1`サフィックスを追加しないでください
+
+2. **API Keyを確認**：
+   - API Keyが正しく、`sk-`で始まることを確認
+   - [APIMarｔコンソール](https://api.apimart.ai/console/token)でキーが有効か確認
+
+3. **ネットワーク接続を確認**：
+   - `https://api.apimart.ai`にアクセスできることを確認
+   - 中国国内の場合、プロキシの設定が必要な場合があります
+
+### Q2：モデルリストが空または更新できない？
+
+**解決策：**
+
+1. **手動でモデルを追加**：
+   - 自動更新が失敗した場合、一般的なモデルを手動で追加できます
+   - モデル管理で、モデル名を手動で入力（例：`gpt-4o`）
+
+2. **API権限を確認**：
+   - API Keyにモデルリストへのアクセス権限があることを確認
+   - APIMarｔサポートに連絡してアカウントステータスを確認
+
+### Q3：会話中にエラーメッセージが表示される？
+
+**一般的なエラーと解決策：**
+
+| エラーメッセージ | 原因 | 解決方法 |
+|----------------|------|---------|
+| `401 Unauthorized` | API Keyが無効または期限切れ | API Keyを再取得して設定を更新 |
+| `429 Too Many Requests` | リクエストレート制限超過 | しばらく待ってから再試行 |
+| `500 Internal Server Error` | 一時的なサーバー問題 | 数分待ってから再試行 |
+| `insufficient_quota` | アカウント残高不足 | コンソールでチャージ |
+
+### Q4：API使用状況と料金を確認するには？
+
+[APIMarｔコンソール](https://api.apimart.ai/console)にログインして確認：
+- 📊 API呼び出し統計
+- 💰 料金詳細
+- 📈 使用トレンドチャート
+
+## 機能
+
+Cherry Studio + APIMarｔを使用すると、以下が可能です：
+
+- 💬 **マルチモデル会話** - 同じインターフェースで異なるAIモデルを使用
+- 🖼️ **画像理解** - 画像入力をサポートするマルチモーダル会話
+- 📝 **コンテキスト管理** - 会話履歴とコンテキストのインテリジェント管理
+- 🎨 **カスタムプロンプト** - プロンプトテンプレートの作成と管理
+- 📊 **会話エクスポート** - 会話記録をMarkdownなどの形式でエクスポート
+- 🔄 **モデル比較** - 複数のモデルを同時に使用して出力を比較
+
+## サポート＆ヘルプ
+
+問題が発生した場合：
+
+- 📚 [APIMarｔドキュメント](https://docs.apimart.ai)
+- 💬 [Discordコミュニティ](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 テクニカルサポート：zhihong@apimart.ai
+
+---
+
+<Card title="APIMarｔを今すぐ使い始める" icon="rocket" href="https://api.apimart.ai">
+  今すぐAPIMarｔに登録して、APIキーを取得し、AIの旅を始めましょう！
+</Card>
+

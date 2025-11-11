@@ -593,15 +593,24 @@ cat(content(response, "text"))
 
   **💡 快速填写（Try it 区域）：**
   1. 点击 "+ Add an item" 添加一个图像URL
-  2. 输入图像的完整 URL 地址
+  2. 输入图像的完整 URL 地址或base64数据
 
   <Expandable title="详细字段说明">
     <ParamField body="url" type="string" required>
       图像URL地址
       
-      可以是：
+      支持两种格式：
+      
+      **1. 完整的图像URL地址**
       - 公开可访问的图像URL（http:// 或 https://）
-      - Base64 编码的图像数据
+      - 示例：`https://example.com/image.jpg`
+      
+      **2. Base64 编码格式**
+      - **必须使用完整的 Data URI 格式**
+      - 格式：`data:image/{格式};base64,{base64数据}`
+      - 支持的图片格式：jpeg、png、webp 等
+      - 示例：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
+      - ⚠️ 注意：必须包含 `data:image/jpeg;base64,` 前缀部分
       
       **限制：**
       - 最大文件大小：10MB
