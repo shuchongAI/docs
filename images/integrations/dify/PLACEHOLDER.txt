@@ -1,0 +1,25 @@
+⚠️ 图片占位符说明
+
+此目录的图片尚未添加。文档中已包含所有图片引用，但实际图片文件需要由您提供。
+
+📋 需要的图片列表：
+
+必需图片（P0 - 优先级最高）：
+1. main-interface.png - Dify 主界面
+2. model-provider-menu.png - 模型提供商菜单
+3. openai-custom-api.png - OpenAI 自定义 API 配置（推荐方式）⭐ 新增
+4. openai-model-list.png - OpenAI 模型列表（启用模型）⭐ 新增 重要
+5. add-provider-dialog.png - 添加模型对话框（方式二）
+6. custom-model-section.png - 自定义模型部分（方式二）
+7. create-app.png - 创建应用
+8. model-selection.png - 选择模型
+9. model-parameters.png - 模型参数配置
+10. prompt-editor.png - 提示词编辑器
+11. app-preview.png - 应用预览和测试
+12. publish-options.png - 发布应用选项
+13. app-logs.png - 应用日志
+
+详细要求请参阅 README.md 文件。
+
+当您添加截图后，请删除此占位符文件。
+

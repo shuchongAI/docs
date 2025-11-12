@@ -129,6 +129,7 @@
                   "en/integrations/cherry-studio",
                   "en/integrations/cursor",
                   "en/integrations/cline",
+                  "en/integrations/dify",
                   "en/integrations/immersive-translate"
                 ]
               }
@@ -232,6 +233,7 @@
                   "cn/integrations/cherry-studio",
                   "cn/integrations/cursor",
                   "cn/integrations/cline",
+                  "cn/integrations/dify",
                   "cn/integrations/immersive-translate"
                 ]
               }
@@ -335,6 +337,7 @@
                   "ja/integrations/cherry-studio",
                   "ja/integrations/cursor",
                   "ja/integrations/cline",
+                  "ja/integrations/dify",
                   "ja/integrations/immersive-translate"
                 ]
               }
@@ -437,6 +440,7 @@
                   "ko/integrations/cherry-studio",
                   "ko/integrations/cursor",
                   "ko/integrations/cline",
+                  "ko/integrations/dify",
                   "ko/integrations/immersive-translate"
                 ]
               }

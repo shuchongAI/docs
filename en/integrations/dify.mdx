@@ -1,0 +1,573 @@
+---
+title: "Using APIMart in Dify"
+description: "Detailed guide on how to configure and use APIMart API service in Dify LLMOps platform. This guide will help you configure APIMart API in Dify to build powerful AI applications."
+---
+
+
+
+## Prerequisites
+
+Before you begin, please ensure:
+
+1. **Dify account registered**  
+   Visit [Dify Official Website](https://dify.ai/) to register an account, choose cloud or self-hosted version
+
+2. **APIMart API Key obtained**  
+   Log in to [APIMart Console](https://api.apimart.ai/console/token) to get your API key (starts with `sk-`)
+
+<Note>
+**Tip:** If you don't have an APIMart account yet, please register at [APIMart](https://api.apimart.ai) and obtain an API key first.
+</Note>
+
+## Step 1: Log in to Dify and Access Settings
+
+### 1.1 Access Dify Platform
+
+- **Cloud Version:** Visit [https://cloud.dify.ai](https://cloud.dify.ai) and log in
+- **Self-hosted Version:** Visit your Dify deployment address
+
+<Frame>
+  <img src="/images/integrations/dify/main-interface.png" alt="Dify Main Interface" />
+</Frame>
+
+<caption>*Dify main interface showing application list and create app button*</caption>
+
+### 1.2 Navigate to Model Settings
+
+1. Click the **avatar icon** in the top right corner
+2. Select **Settings**
+3. Choose **Model Provider** in the left menu
+
+<Frame>
+  <img src="/images/integrations/dify/model-provider-menu.png" alt="Model Provider Settings Page" />
+</Frame>
+
+<caption>*Find "Model Provider" option in the left menu*</caption>
+
+<Note>
+**Note:** Dify supports configuring multiple model providers. You can use APIMart alongside other providers.
+</Note>
+
+## Step 2: Add APIMart Model Provider
+
+<Note>
+**Configuration Methods:** There are two ways to configure APIMart in Dify:
+
+**Method 1 (Recommended):** Use OpenAI Provider's Custom API Feature
+- In OpenAI provider settings, directly modify Base URL to `https://api.apimart.ai/v1`
+- Enter your APIMart API Key
+- Faster and simpler configuration
+
+**Method 2:** Add as Custom Model Provider (This Guide's Method)
+- More flexible, can manage APIMart provider separately
+- Convenient for using multiple API providers simultaneously
+
+Both methods are functionally identical. Choose based on your preference.
+</Note>
+
+### 2.1 Select Configuration Method
+
+#### Method 1: Use OpenAI Custom API (Recommended)
+
+1. Find the **OpenAI** provider on the Model Provider page
+2. Click the **Configure** or **Settings** button
+3. On the configuration page:
+   - **API Key**: Enter your APIMart API key (`sk-xxxxxxxxxxxx`)
+   - **API Base URL** or **Base URL**: Enter `https://api.apimart.ai/v1`
+4. Click **Save**
+
+<Frame>
+  <img src="/images/integrations/dify/openai-custom-api.png" alt="OpenAI Custom API Configuration" />
+</Frame>
+
+<caption>*Configure APIMart's API Key and Base URL in OpenAI provider*</caption>
+
+5. After configuration, return to the OpenAI provider page and view the **Model List**
+6. In the model list, find the models you need (e.g., `gpt-4o`, `gpt-4o-mini`, `chatgpt-4o-latest`, etc.)
+7. Click the **switch** on the right side of the model to enable it (blue indicates enabled)
+
+<Frame>
+  <img src="/images/integrations/dify/openai-model-list.png" alt="OpenAI Model List" />
+</Frame>
+
+<caption>*Enable the models you need in the OpenAI model list*</caption>
+
+<Warning>
+**Important:** Only enable models that are actually supported by APIMart!
+
+Although Dify's OpenAI model list displays many models, only those supported by APIMart will work correctly. Enabling unsupported models will cause API call failures.
+
+Please refer to [APIMart API Documentation](https://docs.apimart.ai) for the complete list of supported models.
+</Warning>
+
+<Tip>
+**APIMart supported and recommended models:**
+
+**GPT Series:**
+- `gpt-5` / `gpt-5-chat-latest` - GPT-5 series models
+- `chatgpt-4o-latest` / `gpt-4o` - Latest GPT-4o model
+- `gpt-4o-mini` - Fast and economical version
+- `gpt-4.1` / `gpt-4.1-mini` - GPT-4.1 series
+
+**Claude Series:**
+- `claude-sonnet-4-5-20250929` - Claude Sonnet 4.5
+- `claude-haiku-4-5-20251001` - Claude Haiku 4.5
+
+**Gemini Series:**
+- `gemini-2.0-flash-exp` - Google Gemini 2.0 Flash
+
+You can enable multiple models simultaneously and switch between them flexibly in your applications.
+</Tip>
+
+After completion, you can use it directly. Jump to [Step 3](#step-3-use-apimart-models-in-applications).
+
+#### Method 2: Add Custom Model Provider
+
+On the Model Provider page:
+
+1. Scroll down to the **Custom Model** section
+2. Click the **+ Add Model** button
+
+<Frame>
+  <img src="/images/integrations/dify/custom-model-section.png" alt="Custom Model Section" />
+</Frame>
+
+<caption>*Scroll to the custom model section and click "+ Add Model" button*</caption>
+
+### 2.2 Configure APIMart Provider
+
+In the configuration dialog, fill in the following information:
+
+| Field | Value |
+|-------|-------|
+| **Model Name** | `APIMart` or custom name |
+| **Model Type** | Select `LLM` (Large Language Model) |
+| **API Key** | Your APIMart API key (`sk-xxxxxxxxxxxx`) |
+| **API endpoint URL** | `https://api.apimart.ai/v1` |
+| **Endpoint model name** | Enter specific model name (e.g., `gpt-4o`, `gpt-4o-mini`, `claude-sonnet-4-5-20250929`, etc.) |
+
+<Frame>
+  <img src="/images/integrations/dify/add-provider-dialog.png" alt="Add Provider Dialog" />
+</Frame>
+
+<caption>*Fill in APIMart provider configuration*</caption>
+
+<Warning>
+**Important:**
+- Base URL must include `/v1` suffix: `https://api.apimart.ai/v1`
+- API Key must be obtained from APIMart console and start with `sk-`
+- Ensure your API key has sufficient balance
+</Warning>
+
+### 2.3 Add More Models (Optional)
+
+To add more models, repeat the above steps:
+
+1. In the custom model section, click the **+ Add Model** button again
+2. Fill in the configuration information for another model
+3. Click Save
+
+<Frame>
+  <img src="/images/integrations/dify/apimart-config.png" alt="Add Multiple Models" />
+</Frame>
+
+<caption>*Repeat the add model steps to configure multiple different models*</caption>
+
+**Recommended Models to Add:**
+
+#### GPT-4/5 Series
+
+| Model ID | Model Name | Context Length | Use Case |
+|----------|-----------|----------------|----------|
+| `gpt-5` | GPT-5 | 128,000 | Complex tasks, long text processing |
+| `gpt-4o` | GPT-4o | 128,000 | High-quality chat, code generation |
+| `gpt-4o-mini` | GPT-4o Mini | 128,000 | Fast response, cost-effective |
+
+#### Claude Series
+
+| Model ID | Model Name | Context Length | Use Case |
+|----------|-----------|----------------|----------|
+| `claude-sonnet-4-5-20250929` | Claude Sonnet 4.5 | 200,000 | Complex reasoning, code analysis |
+| `claude-haiku-4-5-20251001` | Claude Haiku 4.5 | 200,000 | Fast response, simple tasks |
+
+#### Gemini Series
+
+| Model ID | Model Name | Context Length | Use Case |
+|----------|-----------|----------------|----------|
+| `gemini-2.0-flash-exp` | Gemini 2.0 Flash | 32,000 | Multimodal, real-time applications |
+
+<Tip>
+**Performance Recommendations:**
+- 💰 **Cost-effective:** `gpt-4o-mini`, `claude-haiku-4-5-20251001`
+- 🚀 **High-performance:** `gpt-5`, `gpt-4o`, `claude-sonnet-4-5-20250929`
+- ⚡ **Fast response:** `gemini-2.0-flash-exp`, `gpt-4o-mini`
+</Tip>
+
+## Step 3: Use APIMart Models in Applications
+
+### 3.1 Create New Application
+
+1. Return to Dify homepage
+2. Click **Create App** button
+3. Select application type:
+   - **Chatbot** - Conversational application
+   - **Text Generator** - Text generation application
+   - **Agent** - Intelligent agent
+   - **Workflow** - Complex workflow application
+
+<Frame>
+  <img src="/images/integrations/dify/create-app.png" alt="Create Application" />
+</Frame>
+
+<caption>*Select application type to create new app*</caption>
+
+### 3.2 Select APIMart Model
+
+On the application orchestration page:
+
+1. Find the **Model Settings** area
+2. Click the **Select Model** dropdown
+3. Select **APIMart** provider
+4. Choose your configured model (e.g., `gpt-4o`)
+
+<Frame>
+  <img src="/images/integrations/dify/model-selection.png" alt="Select APIMart Model" />
+</Frame>
+
+<caption>*Select APIMart provider's model in the application*</caption>
+
+### 3.3 Configure Model Parameters
+
+Adjust model parameters as needed:
+
+| Parameter | Description | Recommended Value |
+|-----------|-------------|-------------------|
+| **Temperature** | Controls output randomness | 0.7 (creative) / 0.3 (precise) |
+| **Max Tokens** | Maximum output length | 2000-4000 |
+| **Top P** | Nucleus sampling parameter | 0.9 |
+| **Presence Penalty** | Reduce repetition | 0.0-0.5 |
+| **Frequency Penalty** | Reduce frequent words | 0.0-0.5 |
+
+<Frame>
+  <img src="/images/integrations/dify/model-parameters.png" alt="Configure Model Parameters" />
+</Frame>
+
+<caption>*Adjust model parameters based on application needs*</caption>
+
+## Step 4: Build and Test Application
+
+### 4.1 Add Prompts
+
+On the application orchestration page:
+
+1. Write prompts in the **System Prompt** area
+2. Use variables to make your app dynamic:
+   - `{{variable_name}}` - User input variable
+   - `{{context}}` - Knowledge base context
+
+**Example Prompt:**
+
+```
+You are a professional customer service assistant, skilled at answering product questions.
+
+Product Information: {{product_info}}
+
+Please provide accurate and friendly answers based on user questions. If unsure, honestly inform the user.
+
+User Question: {{user_question}}
+```
+
+<Frame>
+  <img src="/images/integrations/dify/prompt-editor.png" alt="Prompt Editor" />
+</Frame>
+
+<caption>*Write and configure prompts in the prompt editor*</caption>
+
+### 4.2 Add Knowledge Base (Optional)
+
+If you need RAG (Retrieval Augmented Generation) capability:
+
+1. Click **Knowledge Base** in the left menu
+2. Create new knowledge base and upload documents
+3. Link knowledge base on application orchestration page
+4. Configure retrieval parameters
+
+### 4.3 Test Application
+
+1. Input test questions in the **Preview** panel on the right
+2. Review AI response effectiveness
+3. Adjust prompts and parameters as needed
+4. Repeat testing until satisfied
+
+<Frame>
+  <img src="/images/integrations/dify/app-preview.png" alt="Application Preview and Testing" />
+</Frame>
+
+<caption>*Test application effectiveness in the preview panel*</caption>
+
+### 4.4 Publish Application
+
+After testing:
+
+1. Click **Publish** button in top right
+2. Select publishing method:
+   - **API Call** - Integration via API
+   - **Embed in Website** - Generate embed code
+   - **Public Link** - Generate share link
+
+<Frame>
+  <img src="/images/integrations/dify/publish-options.png" alt="Publish Application Options" />
+</Frame>
+
+<caption>*Select appropriate publishing method*</caption>
+
+## Step 5: Monitor and Optimize
+
+### 5.1 View Application Logs
+
+On the application details page:
+
+1. Click the **Logs** tab
+2. View all conversation records
+3. Analyze user questions and AI responses
+4. Discover improvement opportunities
+
+<Frame>
+  <img src="/images/integrations/dify/app-logs.png" alt="Application Logs" />
+</Frame>
+
+<caption>*View and analyze application usage logs*</caption>
+
+### 5.2 Monitor API Usage
+
+Log in to [APIMart Console](https://api.apimart.ai/console) to view:
+
+- 📊 **API Call Statistics** - Total calls, success rate
+- 💰 **Cost Details** - Daily/monthly costs
+- 📈 **Usage Trends** - Usage change trends
+- 🔍 **Request Logs** - Detailed request records
+
+### 5.3 Optimize Application Performance
+
+Optimize based on monitoring data:
+
+1. **Adjust Model Selection**
+   - Use `gpt-4o-mini` for simple tasks to reduce costs
+   - Use `gpt-4o` or `claude-sonnet-4-5` for complex tasks to improve quality
+
+2. **Optimize Prompts**
+   - Make prompts clearer and more specific
+   - Add examples to improve effectiveness
+   - Use chain-of-thought for better reasoning
+
+3. **Configure Caching**
+   - Enable caching for similar questions
+   - Reduce API call costs
+
+## Advanced Features
+
+### Using Workflow Orchestration
+
+Dify's workflow feature allows you to:
+
+1. **Conditional Branches** - Execute different logic based on conditions
+2. **Multi-model Collaboration** - Combine advantages of multiple models
+3. **External Tool Calls** - Call APIs, databases, and other external resources
+4. **Variable Passing** - Pass data between different nodes
+
+### Configuring Agent Capabilities
+
+Build intelligent agents with APIMart models:
+
+1. **Tool Calling** - Let AI call external tools
+2. **Memory Management** - Maintain long-term conversation memory
+3. **Autonomous Decision-making** - AI autonomously plans execution steps
+
+### Multimodal Applications
+
+Leverage APIMart's multimodal capabilities:
+
+1. **Image Understanding** - Use `gpt-4o` or `claude-3` to process images
+2. **Image Generation** - Integrate APIMart's image generation API
+3. **Voice Processing** - Integrate TTS and STT services
+
+## FAQ
+
+### Q1: Cannot connect to APIMart service?
+
+**Solution:**
+
+1. **Check Base URL**:
+   - Ensure it's `https://api.apimart.ai/v1` (includes `/v1`)
+   - Don't add extra paths or omit `/v1`
+
+2. **Verify API Key**:
+   - Confirm API Key starts with `sk-`
+   - Check if key is valid in [APIMart Console](https://api.apimart.ai/console/token)
+
+3. **Check Network Connection**:
+   - Ensure server can access `https://api.apimart.ai`
+   - Self-hosted versions need to ensure server network connectivity
+
+### Q2: Model response is slow?
+
+**Solution:**
+
+1. **Switch to Faster Models**:
+   - Use `gpt-4o-mini` instead of `gpt-4o`
+   - Use `gemini-2.0-flash-exp` for faster response
+
+2. **Optimize Prompt Length**:
+   - Reduce unnecessary context
+   - Simplify prompt descriptions
+
+3. **Adjust Knowledge Base Retrieval**:
+   - Reduce number of retrieved documents
+   - Increase similarity threshold
+
+### Q3: API calls fail or return errors?
+
+**Common errors and solutions:**
+
+| Error Message | Cause | Solution |
+|--------------|-------|----------|
+| `401 Unauthorized` | Invalid or expired API Key | Re-obtain API Key and update configuration |
+| `429 Too Many Requests` | Request rate limit exceeded | Adjust app concurrency settings or wait and retry |
+| `500 Internal Server Error` | Temporary server issue | Wait a few minutes and retry |
+| `insufficient_quota` | Insufficient account balance | Top up in console |
+| `context_length_exceeded` | Input exceeds context length | Reduce input length or use model with larger context |
+
+### Q4: How to reduce API usage costs?
+
+**Cost optimization suggestions:**
+
+1. **Model Selection**:
+   - Use `gpt-4o-mini` for simple tasks (cost is only 1/10 of `gpt-4o`)
+   - Consider more economical models for batch tasks
+
+2. **Enable Caching**:
+   - Return cached results for same questions
+   - Configure similarity matching in Dify
+
+3. **Optimize Output Length**:
+   - Set reasonable Max Tokens
+   - Avoid generating overly long responses
+
+4. **Use Streaming Output**:
+   - Improve user experience without increasing costs
+
+### Q5: How to handle sensitive data?
+
+**Data security recommendations:**
+
+1. **Use Environment Variables**:
+   - Don't hardcode API Keys in code
+   - Use Dify's environment variable feature
+
+2. **Configure Access Control**:
+   - Set application access permissions
+   - Enable authentication for API calls
+
+3. **Audit Logs**:
+   - Regularly check application logs
+   - Monitor abnormal access patterns
+
+## Best Practices
+
+### 1. Prompt Engineering
+
+**Structured Prompts:**
+
+```
+# Role Definition
+You are a professional [role description]
+
+# Task Objective
+You need to help users [task description]
+
+# Output Requirements
+- Requirement 1
+- Requirement 2
+- Requirement 3
+
+# Input Information
+{{user_input}}
+```
+
+### 2. Knowledge Base Management
+
+- **Chunking Strategy**: Set reasonable document chunk size (recommended 500-1000 characters)
+- **Metadata Tagging**: Add metadata to documents for easier retrieval
+- **Regular Updates**: Keep knowledge base content up-to-date
+
+### 3. Error Handling
+
+- **Friendly Messages**: Provide clear error messages to users
+- **Fallback Strategy**: Switch to backup model when primary fails
+- **Retry Mechanism**: Auto-retry for temporary errors
+
+### 4. Performance Monitoring
+
+- **Set Alerts**: Alert for low balance, high error rates
+- **Regular Analysis**: Analyze usage data weekly/monthly
+- **Continuous Optimization**: Adjust configuration based on data
+
+## Use Case Examples
+
+### 1. Intelligent Customer Service
+
+**Application Configuration:**
+- Model: `gpt-4o-mini` (cost-effective)
+- Knowledge Base: Product docs, FAQ
+- Features: Auto-answer common questions, escalate complex issues to human
+
+### 2. Content Creation Assistant
+
+**Application Configuration:**
+- Model: `gpt-4o` or `claude-sonnet-4-5` (high quality)
+- Features: Article generation, rewriting, polishing
+- Parameters: Temperature=0.8 (enhance creativity)
+
+### 3. Code Assistant
+
+**Application Configuration:**
+- Model: `claude-sonnet-4-5` (excellent for code)
+- Features: Code generation, explanation, debugging
+- Knowledge Base: Project docs, API docs
+
+### 4. Data Analysis Assistant
+
+**Application Configuration:**
+- Model: `gpt-4o` (strong reasoning ability)
+- Tools: Python code execution, data visualization
+- Features: Data analysis, report generation
+
+## Features
+
+Using Dify + APIMart, you can:
+
+- 🤖 **Quickly Build AI Apps** - Create powerful AI applications without coding
+- 📚 **Knowledge Base Enhancement** - RAG technology lets AI answer based on your data
+- 🔧 **Flexible Workflows** - Visually orchestrate complex AI logic
+- 🎯 **Precise Prompt Management** - Version control and A/B testing
+- 📊 **Complete Monitoring & Analytics** - Understand app usage and performance
+- 🔌 **Multiple Integration Methods** - API, embedded, WebApp, and more
+- 👥 **Team Collaboration** - Support multi-user collaborative development
+- 🌐 **Multi-model Support** - Flexibly switch between different AI models
+
+## Support & Help
+
+If you encounter any issues:
+
+- 📚 [APIMart Documentation](https://docs.apimart.ai)
+- 📚 [Dify Official Documentation](https://docs.dify.ai)
+- 💬 [Discord Community](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 Technical Support: zhihong@apimart.ai
+
+---
+
+<Card title="Start Using APIMart" icon="rocket" href="https://api.apimart.ai">
+  Register for APIMart now, get your API key, and build powerful AI applications in Dify!
+</Card>
+

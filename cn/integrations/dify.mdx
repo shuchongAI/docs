@@ -1,0 +1,574 @@
+---
+title: "在 Dify 中使用 APIMart"
+description: "详细指导如何在 Dify LLMOps 平台中配置和使用 APIMart API 服务，本指南将帮助您在 Dify 中配置 APIMart API，以便构建强大的 AI 应用。"
+---
+
+
+
+## 准备工作
+
+在开始之前，请确保：
+
+1. **已注册 Dify 账户**  
+   访问 [Dify 官网](https://dify.ai/) 注册账户，可选择云端版或自部署版本
+
+2. **已获取 APIMart API 密钥**  
+   登录 [APIMart 控制台](https://api.apimart.ai/console/token) 获取您的 API 密钥（以 `sk-` 开头）
+
+<Note>
+**提示：** 如果还没有 APIMart 账户，请先在 [APIMart](https://api.apimart.ai) 注册并获取 API 密钥。
+</Note>
+
+## 第一步：登录 Dify 并进入设置
+
+### 1.1 访问 Dify 平台
+
+- **云端版：** 访问 [https://cloud.dify.ai](https://cloud.dify.ai) 并登录
+- **自部署版：** 访问您的 Dify 部署地址
+
+<Frame>
+  <img src="/images/integrations/dify/main-interface.png" alt="Dify 主界面" />
+</Frame>
+
+<caption>*Dify 主界面，可以看到应用列表和创建应用按钮*</caption>
+
+### 1.2 进入模型设置页面
+
+1. 点击右上角的 **头像图标**
+2. 选择 **设置** 或 **Settings**
+3. 在左侧菜单中选择 **模型提供商** 或 **Model Provider**
+
+<Frame>
+  <img src="/images/integrations/dify/model-provider-menu.png" alt="模型提供商设置页面" />
+</Frame>
+
+<caption>*在左侧菜单中找到"模型提供商"选项*</caption>
+
+<Note>
+**说明：** Dify 支持配置多个模型提供商，您可以同时使用 APIMart 和其他提供商的服务。
+</Note>
+
+## 第二步：添加 APIMart 模型提供商
+
+<Note>
+**配置方式说明：** Dify 中有两种方式配置 APIMart：
+
+**方式一（推荐）：** 使用 OpenAI 提供商的自定义 API 功能
+- 在 OpenAI 提供商设置中，直接修改 Base URL 为 `https://api.apimart.ai/v1`
+- 输入 APIMart 的 API Key
+- 更快捷，配置简单
+
+**方式二：** 添加为自定义模型提供商（本文档方法）
+- 更灵活，可以单独管理 APIMart 提供商
+- 便于同时使用多个 API 提供商
+
+两种方式功能完全相同，根据您的使用习惯选择即可。
+</Note>
+
+### 2.1 选择添加方式
+
+#### 方式一：使用 OpenAI 自定义 API（推荐）
+
+1. 在模型提供商页面找到 **OpenAI** 提供商
+2. 点击 **配置** 或 **设置** 按钮
+3. 在配置页面：
+   - **API Key**：填入您的 APIMart API 密钥（`sk-xxxxxxxxxxxx`）
+   - **API Base URL** 或 **Base URL**：填入 `https://api.apimart.ai/v1`
+4. 点击 **保存**
+
+<Frame>
+  <img src="/images/integrations/dify/openai-custom-api.png" alt="OpenAI 自定义 API 配置" />
+</Frame>
+<Frame>
+  <img src="/images/integrations/dify/openai-custom-setting.png" alt="OpenAI 自定义 API 配置" />
+</Frame>
+<caption>*在 OpenAI 提供商中配置 APIMart 的 API Key 和 Base URL*</caption>
+
+5. 配置完成后，返回 OpenAI 提供商页面，查看 **模型列表**
+6. 在模型列表中，找到您需要使用的模型（如 `gpt-4o`、`gpt-4o-mini`、`chatgpt-4o-latest` 等）
+7. 点击模型右侧的 **开关** 启用模型（开关变为蓝色表示已启用）
+
+<Frame>
+  <img src="/images/integrations/dify/openai-model-list.png" alt="OpenAI 模型列表" />
+</Frame>
+
+<caption>*在 OpenAI 模型列表中启用需要使用的模型*</caption>
+
+<Warning>
+**重要提示：** 请只启用 APIMart 实际支持的模型！
+
+虽然 Dify 的 OpenAI 模型列表中显示了很多模型，但只有 APIMart 支持的模型才能正常调用。启用不支持的模型会导致 API 调用失败。
+
+请参考 [APIMart API 文档](https://docs.apimart.ai) 查看完整的支持模型列表。
+</Warning>
+
+<Tip>
+**APIMart 支持且推荐启用的模型：**
+
+**GPT 系列：**
+- `gpt-5` / `gpt-5-chat-latest` - GPT-5 系列模型
+- `chatgpt-4o-latest` / `gpt-4o` - 最新的 GPT-4o 模型
+- `gpt-4o-mini` - 快速且经济的版本
+- `gpt-4.1` / `gpt-4.1-mini` - GPT-4.1 系列
+
+**Claude 系列：**
+- `claude-sonnet-4-5-20250929` - Claude Sonnet 4.5
+- `claude-haiku-4-5-20251001` - Claude Haiku 4.5
+
+**Gemini 系列：**
+- `gemini-2.0-flash-exp` - Google Gemini 2.0 Flash
+
+您可以同时启用多个模型，在应用中灵活切换使用。
+</Tip>
+
+完成后即可直接使用，跳转到 [第三步](#第三步在应用中使用-apimart-模型)。
+
+#### 方式二：添加自定义模型提供商
+
+在模型提供商页面：
+
+1. 向下滚动到 **自定义模型** 或 **Custom Model** 部分
+2. 点击 **+ 添加模型** 或 **+ Add Model** 按钮
+
+<Frame>
+  <img src="/images/integrations/dify/custom-model-section.png" alt="自定义模型部分" />
+</Frame>
+
+
+<caption>*向下滚动到自定义模型部分，点击"+ 添加模型"按钮*</caption>
+
+### 2.2 配置 APIMart 提供商
+
+在弹出的配置对话框中，填写以下信息：
+
+| 配置项 | 填写内容 |
+|--------|----------|
+| **模型名称** | `APIMart` 或自定义名称 |
+| **模型类型** | 选择 `LLM`（大语言模型） |
+| **API Key** | 您的 APIMart API 密钥（`sk-xxxxxxxxxxxx`） |
+| **API endpoint URL** | `https://api.apimart.ai/v1` |
+| **API endpoint中的模型名称** | 填入具体模型名（如 `gpt-4o`、`gpt-4o-mini`、`claude-sonnet-4-5-20250929` 等） |
+
+<Frame>
+  <img src="/images/integrations/dify/add-provider-dialog.png" alt="添加提供商对话框" />
+</Frame>
+
+<caption>*填写 APIMart 提供商配置信息*</caption>
+
+<Warning>
+**重要提示：**
+- Base URL 必须包含 `/v1` 后缀：`https://api.apimart.ai/v1`
+- API 密钥必须是从 APIMart 控制台获取的以 `sk-` 开头的密钥
+- 确保您的 API 密钥有足够的余额
+</Warning>
+
+### 2.3 添加更多模型（可选）
+
+如果需要添加更多模型，重复上述步骤：
+
+1. 在自定义模型部分，再次点击 **+ 添加模型** 按钮
+2. 填写另一个模型的配置信息
+3. 点击保存
+
+
+
+<caption>*重复添加模型步骤，可以配置多个不同的模型*</caption>
+
+**推荐添加的模型：**
+
+#### GPT-4/5 系列
+
+| 模型 ID | 模型名称 | 上下文长度 | 适用场景 |
+|---------|---------|-----------|---------|
+| `gpt-5` | GPT-5 | 128,000 | 复杂任务、长文本处理 |
+| `gpt-4o` | GPT-4o | 128,000 | 高质量对话、代码生成 |
+| `gpt-4o-mini` | GPT-4o Mini | 128,000 | 快速响应、高性价比 |
+
+#### Claude 系列
+
+| 模型 ID | 模型名称 | 上下文长度 | 适用场景 |
+|---------|---------|-----------|---------|
+| `claude-sonnet-4-5-20250929` | Claude Sonnet 4.5 | 200,000 | 复杂推理、代码分析 |
+| `claude-haiku-4-5-20251001` | Claude Haiku 4.5 | 200,000 | 快速响应、简单任务 |
+
+#### Gemini 系列
+
+| 模型 ID | 模型名称 | 上下文长度 | 适用场景 |
+|---------|---------|-----------|---------|
+| `gemini-2.0-flash-exp` | Gemini 2.0 Flash | 32,000 | 多模态、实时应用 |
+
+<Tip>
+**性能建议：**
+- 💰 **高性价比：** `gpt-4o-mini`、`claude-haiku-4-5-20251001`
+- 🚀 **高性能：** `gpt-5`、`gpt-4o`、`claude-sonnet-4-5-20250929`
+- ⚡ **快速响应：** `gemini-2.0-flash-exp`、`gpt-4o-mini`
+</Tip>
+
+## 第三步：在应用中使用 APIMart 模型
+
+### 3.1 创建新应用
+
+1. 返回 Dify 主页
+2. 点击 **创建应用** 按钮
+3. 选择应用类型：
+   - **聊天助手** - 对话式应用
+   - **文本生成** - 文本生成应用
+   - **Agent** - 智能代理
+   - **工作流** - 复杂工作流应用
+
+<Frame>
+  <img src="/images/integrations/dify/create-app.png" alt="创建应用" />
+</Frame>
+
+<caption>*选择应用类型创建新应用*</caption>
+
+### 3.2 选择 APIMart 模型
+
+在应用编排页面：
+
+1. 找到 **模型设置** 区域
+2. 点击 **选择模型** 下拉菜单
+3. 选择 **APIMart** 提供商
+4. 选择您配置的具体模型（如 `gpt-4o`）
+
+<Frame>
+  <img src="/images/integrations/dify/model-selection.png" alt="选择 APIMart 模型" />
+</Frame>
+
+<caption>*在应用中选择 APIMart 提供商的模型*</caption>
+
+### 3.3 配置模型参数
+
+根据需要调整模型参数：
+
+| 参数 | 说明 | 推荐值 |
+|------|------|--------|
+| **Temperature** | 控制输出随机性 | 0.7（创意任务）/ 0.3（精确任务） |
+| **Max Tokens** | 最大输出长度 | 2000-4000 |
+| **Top P** | 核采样参数 | 0.9 |
+| **Presence Penalty** | 降低重复性 | 0.0-0.5 |
+| **Frequency Penalty** | 降低频繁词汇 | 0.0-0.5 |
+
+<Frame>
+  <img src="/images/integrations/dify/model-parameters.png" alt="配置模型参数" />
+</Frame>
+
+<caption>*根据应用需求调整模型参数*</caption>
+
+## 第四步：构建和测试应用
+
+### 4.1 添加提示词
+
+在应用编排页面：
+
+1. 在 **系统提示词** 区域编写提示词
+2. 使用变量动态化您的应用：
+   - `{{variable_name}}` - 用户输入变量
+   - `{{context}}` - 知识库上下文
+
+**示例提示词：**
+
+```
+你是一个专业的客服助手，擅长解答用户关于产品的问题。
+
+产品信息：{{product_info}}
+
+请根据用户的问题提供准确、友好的回答。如果不确定答案，请诚实地告知用户。
+
+用户问题：{{user_question}}
+```
+
+<Frame>
+  <img src="/images/integrations/dify/prompt-editor.png" alt="提示词编辑器" />
+</Frame>
+
+<caption>*在提示词编辑器中编写和配置提示词*</caption>
+
+### 4.2 添加知识库（可选）
+
+如果需要 RAG（检索增强生成）能力：
+
+1. 在左侧菜单点击 **知识库**
+2. 创建新知识库并上传文档
+3. 在应用编排页面关联知识库
+4. 配置检索参数
+
+### 4.3 测试应用
+
+1. 在右侧 **预览** 面板输入测试问题
+2. 查看 AI 响应效果
+3. 根据需要调整提示词和参数
+4. 重复测试直到满意
+
+<Frame>
+  <img src="/images/integrations/dify/app-preview.png" alt="应用预览和测试" />
+</Frame>
+
+<caption>*在预览面板测试应用效果*</caption>
+
+### 4.4 发布应用
+
+测试完成后：
+
+1. 点击右上角 **发布** 按钮
+2. 选择发布方式：
+   - **API 调用** - 通过 API 集成
+   - **嵌入网站** - 生成嵌入代码
+   - **公开链接** - 生成分享链接
+
+<Frame>
+  <img src="/images/integrations/dify/publish-options.png" alt="发布应用选项" />
+</Frame>
+
+<caption>*选择合适的发布方式*</caption>
+
+## 第五步：监控和优化
+
+### 5.1 查看应用日志
+
+在应用详情页：
+
+1. 点击 **日志** 标签
+2. 查看所有对话记录
+3. 分析用户问题和 AI 响应
+4. 发现改进机会
+
+<Frame>
+  <img src="/images/integrations/dify/app-logs.png" alt="应用日志" />
+</Frame>
+
+<caption>*查看和分析应用的使用日志*</caption>
+
+### 5.2 监控 API 使用
+
+登录 [APIMart 控制台](https://api.apimart.ai/console) 查看：
+
+- 📊 **API 调用统计** - 总调用次数、成功率
+- 💰 **费用明细** - 每日/每月费用
+- 📈 **使用趋势** - 使用量变化趋势
+- 🔍 **请求日志** - 详细的请求记录
+
+### 5.3 优化应用性能
+
+根据监控数据优化：
+
+1. **调整模型选择**
+   - 简单任务使用 `gpt-4o-mini` 降低成本
+   - 复杂任务使用 `gpt-4o` 或 `claude-sonnet-4-5` 提升质量
+
+2. **优化提示词**
+   - 使提示词更清晰具体
+   - 添加示例提升效果
+   - 使用思维链提升推理能力
+
+3. **配置缓存**
+   - 对相似问题启用缓存
+   - 降低 API 调用成本
+
+## 高级功能
+
+### 使用工作流编排
+
+Dify 的工作流功能允许您：
+
+1. **条件分支** - 根据不同条件执行不同逻辑
+2. **多模型协作** - 结合多个模型的优势
+3. **外部工具调用** - 调用 API、数据库等外部资源
+4. **变量传递** - 在不同节点间传递数据
+
+### 配置 Agent 能力
+
+使用 APIMart 的模型构建智能 Agent：
+
+1. **工具调用** - 让 AI 调用外部工具
+2. **记忆管理** - 维护长期对话记忆
+3. **自主决策** - AI 自主规划执行步骤
+
+### 多模态应用
+
+结合 APIMart 的多模态能力：
+
+1. **图像理解** - 使用 `gpt-4o` 或 `claude-3` 处理图像
+2. **图像生成** - 集成 APIMart 的图像生成 API
+3. **语音处理** - 集成 TTS 和 STT 服务
+
+## 常见问题
+
+### Q1: 无法连接到 APIMart 服务？
+
+**解决方案：**
+
+1. **检查 Base URL**：
+   - 确保是 `https://api.apimart.ai/v1`（包含 `/v1`）
+   - 不要添加额外的路径或遗漏 `/v1`
+
+2. **验证 API Key**：
+   - 确认 API Key 以 `sk-` 开头
+   - 在 [APIMart 控制台](https://api.apimart.ai/console/token) 检查密钥是否有效
+
+3. **检查网络连接**：
+   - 确保服务器能访问 `https://api.apimart.ai`
+   - 自部署版本需要确保服务器网络畅通
+
+### Q2: 模型响应速度慢？
+
+**解决方案：**
+
+1. **切换更快的模型**：
+   - 使用 `gpt-4o-mini` 代替 `gpt-4o`
+   - 使用 `gemini-2.0-flash-exp` 获得更快响应
+
+2. **优化提示词长度**：
+   - 减少不必要的上下文
+   - 简化提示词描述
+
+3. **调整知识库检索**：
+   - 减少检索文档数量
+   - 提高相似度阈值
+
+### Q3: API 调用失败或返回错误？
+
+**常见错误及解决方案：**
+
+| 错误信息 | 原因 | 解决方法 |
+|---------|------|---------|
+| `401 Unauthorized` | API Key 无效或过期 | 重新获取 API Key 并更新配置 |
+| `429 Too Many Requests` | 请求频率超限 | 调整应用并发设置或等待后重试 |
+| `500 Internal Server Error` | 服务器临时故障 | 等待几分钟后重试 |
+| `insufficient_quota` | 账户余额不足 | 前往控制台充值 |
+| `context_length_exceeded` | 输入超过上下文长度 | 减少输入长度或使用更大上下文的模型 |
+
+### Q4: 如何降低 API 使用成本？
+
+**成本优化建议：**
+
+1. **模型选择**：
+   - 简单任务使用 `gpt-4o-mini`（成本仅为 `gpt-4o` 的 1/10）
+   - 批量任务考虑使用更经济的模型
+
+2. **启用缓存**：
+   - 对相同问题返回缓存结果
+   - 在 Dify 中配置相似度匹配
+
+3. **优化输出长度**：
+   - 设置合理的 Max Tokens
+   - 避免生成过长的响应
+
+4. **使用流式输出**：
+   - 提升用户体验的同时不增加成本
+
+### Q5: 如何处理敏感数据？
+
+**数据安全建议：**
+
+1. **使用环境变量**：
+   - 不要在代码中硬编码 API Key
+   - 使用 Dify 的环境变量功能
+
+2. **配置访问控制**：
+   - 设置应用访问权限
+   - 使用 API 调用时启用认证
+
+3. **审计日志**：
+   - 定期检查应用日志
+   - 监控异常访问模式
+
+## 最佳实践
+
+### 1. 提示词工程
+
+**结构化提示词：**
+
+```
+# 角色定义
+你是一个专业的 [角色描述]
+
+# 任务目标
+你需要帮助用户 [任务描述]
+
+# 输出要求
+- 要求1
+- 要求2
+- 要求3
+
+# 输入信息
+{{user_input}}
+```
+
+### 2. 知识库管理
+
+- **分块策略**：合理设置文档分块大小（推荐 500-1000 字符）
+- **元数据标注**：为文档添加元数据便于检索
+- **定期更新**：保持知识库内容最新
+
+### 3. 错误处理
+
+- **友好提示**：给用户清晰的错误提示
+- **降级策略**：主模型失败时切换备用模型
+- **重试机制**：自动重试临时性错误
+
+### 4. 性能监控
+
+- **设置告警**：余额不足、错误率过高时告警
+- **定期分析**：每周/月分析使用数据
+- **持续优化**：根据数据调整配置
+
+## 使用场景示例
+
+### 1. 智能客服
+
+**应用配置：**
+- 模型：`gpt-4o-mini`（高性价比）
+- 知识库：产品文档、FAQ
+- 功能：自动回答常见问题，复杂问题转人工
+
+### 2. 内容创作助手
+
+**应用配置：**
+- 模型：`gpt-4o` 或 `claude-sonnet-4-5`（高质量）
+- 功能：文章生成、改写、润色
+- 参数：Temperature=0.8（提升创意性）
+
+### 3. 代码助手
+
+**应用配置：**
+- 模型：`claude-sonnet-4-5`（擅长代码）
+- 功能：代码生成、解释、调试
+- 知识库：项目文档、API 文档
+
+### 4. 数据分析助手
+
+**应用配置：**
+- 模型：`gpt-4o`（强大的推理能力）
+- 工具：Python 代码执行、数据可视化
+- 功能：数据分析、报告生成
+
+## 功能特性
+
+使用 Dify + APIMart，您可以：
+
+- 🤖 **快速构建 AI 应用** - 无需编码即可创建强大的 AI 应用
+- 📚 **知识库增强** - RAG 技术让 AI 基于您的数据回答
+- 🔧 **灵活的工作流** - 可视化编排复杂的 AI 逻辑
+- 🎯 **精准的提示词管理** - 版本控制和 A/B 测试
+- 📊 **完整的监控分析** - 了解应用使用情况和性能
+- 🔌 **多种集成方式** - API、嵌入式、WebApp 等多种方式
+- 👥 **团队协作** - 支持多人协作开发应用
+- 🌐 **多模型支持** - 灵活切换不同的 AI 模型
+
+## 支持与帮助
+
+如果您在使用过程中遇到任何问题：
+
+- 📚 [APIMart 文档中心](https://docs.apimart.ai)
+- 📚 [Dify 官方文档](https://docs.dify.ai)
+- 💬 [Discord 社区](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 技术支持：zhihong@apimart.ai
+
+---
+
+<Card title="开始使用 APIMart" icon="rocket" href="https://api.apimart.ai">
+  立即注册 APIMart，获取您的 API 密钥，在 Dify 中构建强大的 AI 应用！
+</Card>
+
