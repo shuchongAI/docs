@@ -3,6 +3,7 @@
   "theme": "mint",
   "name": "APIMart",
   "title": "APIMart",
+  "url": "https://docs.apimart.ai",
 
   "colors": {
     "primary": "#2563EB",
