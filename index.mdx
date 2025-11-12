@@ -1,85 +1,114 @@
 ---
-title: "APIMart – OpenAI-Compatible Gateway | GPT-5, Claude"
+title: "APIMart — OpenAI-Compatible API Gateway (GPT-5, Claude, Gemini)"
 description: "OpenAI-compatible API for GPT-5, Claude, Gemini. Multi-provider routing, transparent pricing, low latency. Enterprise SLA, SDK support, pay-as-you-go."
 "og:title": "APIMart – OpenAI-Compatible Gateway | GPT-5, Claude"
 "og:description": "OpenAI-compatible API for GPT-5, Claude, Gemini. Multi-provider routing, transparent pricing, low latency. Enterprise SLA, SDK support, pay-as-you-go."
 "og:url": "https://docs.apimart.ai"
-"og:image": "https://docs.apimart.ai/images/og-image.png"
 "twitter:card": "summary_large_image"
 "twitter:site": "@APIMart_"
 "twitter:creator": "@APIMart_"
 "twitter:title": "APIMart – OpenAI Gateway"
 "twitter:description": "OpenAI-compatible endpoint for GPT-5, Claude, Gemini. Multi-provider routing, transparent pricing, enterprise SLA."
-"twitter:image": "https://docs.apimart.ai/images/og-image.png"
 ---
 
-## APIMart — Affordable OpenAI-Compatible Gateway
+One unified OpenAI-compatible endpoint for GPT-5, Claude, and Gemini. Migrate from OpenAI in minutes by simply changing your base URL to `https://api.apimart.ai/v1` — keep your existing SDKs with no code rewrite. Multi-provider routing ensures low latency and high uptime. Transparent pricing, enterprise SLA, and global CDN acceleration.
 
-One unified endpoint for GPT-5, Claude, and Gemini. Migrate from OpenAI in minutes, keep your existing SDKs, and route across multiple providers for lower latency and higher uptime. Transparent pricing, enterprise SLA, and global CDN acceleration.
+## Quick Start
 
-<Card title="Quick Start" icon="rocket" horizontal href="/en/api-reference/texts/general/chat-completions">
+<Card title="Get Started Now" icon="rocket" horizontal href="/en/api-reference/texts/general/chat-completions">
   OpenAI-compatible Chat endpoint with GPT-5, Claude Sonnet 4.5, Gemini 2.0. Switch base URL, no code changes needed.
 </Card>
 
 ## OpenAI-Compatible Endpoints
 
-APIMart provides OpenAI-style endpoints for seamless migration. Simply change your base URL to `https://api.apimart.ai/v1` and keep using your existing SDKs. All interfaces follow OpenAI standards with extended support for Claude, Gemini, Sora, and VEO models.
+APIMart provides OpenAI-style endpoints for seamless migration. Simply change your base URL and keep using your existing SDKs. All interfaces follow OpenAI standards with extended support for Claude, Gemini, Sora, and VEO models.
 
-<Columns cols={3}>
-  <Card title="Chat Completion Endpoint" icon="message" href="/en/api-reference/texts/general/chat-completions">
-    Chat completion with GPT-5, GPT-4o, Claude Sonnet 4.5, Gemini 2.0 Flash. OpenAI-compatible `/v1/chat/completions` endpoint with streaming support and low latency.
-  </Card>
-  <Card title="Image Creation Endpoint" icon="image" href="/en/api-reference/images/GPT-4o-image/generation">
-    Image creation with GPT-4o Image, Gemini 2.5 Flash Image models. OpenAI-style `/v1/images/generations` endpoint for seamless integration.
-  </Card>
-  <Card title="Video Creation Endpoint" icon="video" href="/en/api-reference/videos/veo3/generation">
-    Video creation with OpenAI's Sora2, Google's VEO3 models. Async task management with status tracking and webhook support.
-  </Card>
-</Columns>
+### Chat Completion Endpoint
 
-## Transparent Pricing
+Chat completion with GPT-5, GPT-4o, Claude Sonnet 4.5, Gemini 2.0 Flash. OpenAI-compatible endpoint with streaming support and low latency.
 
-Pay-as-you-go with no subscription required. Our pricing is more affordable than official provider rates while maintaining the same quality and low latency.
+<Card title="Chat Completion API" icon="message" href="/en/api-reference/texts/general/chat-completions">
+  Access via `/v1/chat/completions` endpoint
+</Card>
 
-- **Transparent Pricing**: Clear per-token rates for all models
-- **Volume Discounts**: Lower rates for enterprise usage
-- **No Hidden Fees**: What you see is what you pay
-- **Pay As You Go**: Only pay for what you actually use
+### Image Creation Endpoint
 
-## Multi-Provider Routing & Enterprise SLA
+Image creation with GPT-4o Image, Gemini 2.5 Flash Image models. OpenAI-style endpoint for seamless integration.
+
+<Card title="Image Creation API" icon="image" href="/en/api-reference/images/GPT-4o-image/generation">
+  Access via `/v1/images/generations` endpoint
+</Card>
+
+### Video Creation Endpoint
+
+Video creation with OpenAI Sora2, Google VEO3 models. Async task management with status tracking and webhook support.
+
+<Card title="Video Creation API" icon="video" href="/en/api-reference/videos/veo3/generation">
+  Async task management with webhooks
+</Card>
+
+## Platform Benefits
+
+### Transparent Pricing
+
+Pay-as-you-go with no subscription required. Clear per-token rates for all models, more affordable than official provider rates while maintaining the same quality and low latency.
+
+- Clear per-token rates for all models
+- Volume discounts for enterprise usage
+- No hidden fees
+- Only pay for what you actually use
+
+### Multi-Provider Routing & Enterprise SLA
 
 Built-in intelligent routing across multiple LLM providers ensures high uptime and low latency. When one provider experiences issues, requests automatically route to backup providers without service interruption.
 
-<Columns cols={2}>
-  <Card title="99.9% Uptime SLA" icon="bolt">
-    Enterprise-grade reliability with automatic failover. Multi-provider routing ensures your requests are always served with minimal latency.
-  </Card>
-  <Card title="Global CDN Acceleration" icon="globe">
-    Edge locations worldwide for lowest latency. Optimized routing reduces response time and improves user experience globally.
-  </Card>
-  <Card title="Rate Limit Management" icon="gauge">
-    Automatic rate limit handling across providers. Intelligent request distribution prevents throttling and ensures smooth operation.
-  </Card>
-  <Card title="Real-Time Status" icon="activity" href="/en/api-reference/tasks/status">
-    Monitor endpoint health and performance. Track async task progress for image and video creation with webhook notifications.
-  </Card>
-</Columns>
+### 99.9% Uptime SLA
+
+Enterprise-grade reliability with automatic failover. Multi-provider routing ensures your requests are always served with minimal latency.
+
+### Global CDN Acceleration
+
+Edge locations worldwide for lowest latency. Optimized routing reduces response time and improves user experience globally.
+
+### Rate Limit Management
+
+Automatic rate limit handling across providers. Intelligent request distribution prevents throttling and ensures smooth operation.
+
+### Real-Time Status
+
+Monitor endpoint health and performance. Track async task progress for image and video creation with webhook notifications. [Check Status →](/en/api-reference/tasks/status)
 
 ## SDKs & Code Examples
 
 Official SDKs for Python, Node.js, and Java. All SDKs are OpenAI-compatible, allowing seamless migration by changing only the base URL configuration.
 
-<Columns cols={3}>
-  <Card title="Python SDK" icon="python">
-    Install with `pip install openai`. Set `base_url="https://api.apimart.ai/v1"` and use existing OpenAI code without changes.
-  </Card>
-  <Card title="Node.js SDK" icon="node-js">
-    Install with `npm install openai`. Configure `baseURL` parameter to APIMart endpoint and keep your existing integration.
-  </Card>
-  <Card title="Java SDK" icon="java">
-    OpenAI-compatible Java client. Simple configuration change enables access to all APIMart models and providers.
-  </Card>
-</Columns>
+### Python SDK
+
+Install with `pip install openai`. Set base URL and use existing OpenAI code without changes.
+
+```python
+from openai import OpenAI
+client = OpenAI(
+    base_url="https://api.apimart.ai/v1",
+    api_key="your-apimart-key"
+)
+```
+
+### Node.js SDK
+
+Install with `npm install openai`. Configure baseURL parameter to APIMart endpoint and keep your existing integration.
+
+```javascript
+import OpenAI from 'openai';
+const client = new OpenAI({
+  baseURL: 'https://api.apimart.ai/v1',
+  apiKey: 'your-apimart-key'
+});
+```
+
+### Java SDK
+
+OpenAI-compatible Java client. Simple configuration change enables access to all APIMart models and providers.
 
 ## Migration from OpenAI
 
@@ -90,7 +119,7 @@ Switch to APIMart in under 5 minutes. No code rewrite needed—just change your 
     Sign up for APIMart and get your API key from the <a href="https://api.apimart.ai/console/token" rel="nofollow" target="_blank">Console Dashboard</a>.
   </Step>
   <Step title="Update Base URL">
-    Change OpenAI base URL from `https://api.openai.com/v1` to `https://api.apimart.ai/v1`. Your existing SDK integration works without modification.
+    Change OpenAI base URL to APIMart endpoint. Your existing SDK integration works without modification.
   </Step>
   <Step title="Test Your Endpoints">
     Run your existing code with the new base URL. All OpenAI-compatible endpoints respond with identical format. Check latency and rate limits in Console Dashboard.
@@ -100,34 +129,54 @@ Switch to APIMart in under 5 minutes. No code rewrite needed—just change your 
 
 ## Supported Models via Unified Endpoint
 
-Access leading LLM providers through one OpenAI-compatible gateway. All models available at `/v1/chat/completions` endpoint with consistent request/response format.
+Access leading LLM providers through one OpenAI-compatible gateway. All models available with consistent request/response format.
 
 ### Chat Completion Models
 
 Leading language models for chat, completion, and code tasks:
 
-- **GPT-5**: OpenAI's flagship model with enhanced reasoning
+- **GPT-5**: OpenAI flagship model with enhanced reasoning
 - **GPT-4o & GPT-4o Mini**: Multimodal models balancing performance and cost
-- **Claude Sonnet 4.5 & Haiku 4.5**: Anthropic's models for complex reasoning
-- **Gemini 2.0 Flash & Flash Thinking**: Google's multimodal models
+- **Claude Sonnet 4.5 & Haiku 4.5**: Anthropic models for complex reasoning
+- **Gemini 2.0 Flash & Flash Thinking**: Google multimodal models
 
 ### Image Creation Models
 
-Image creation from text prompts via `/v1/images/generations` endpoint:
+Image creation from text prompts:
 
-- **GPT-4o Image**: OpenAI's image creation model
-- **Gemini 2.5 Flash Image**: Google's efficient image model
+- **GPT-4o Image**: OpenAI image creation model
+- **Gemini 2.5 Flash Image**: Google efficient image model
 
 ### Video Creation Models
 
 Video creation with async task tracking and webhook callbacks:
 
-- **OpenAI Sora2**: OpenAI's video creation model
-- **Google VEO3**: Google's video creation model
+- **OpenAI Sora2**: OpenAI video creation model
+- **Google VEO3**: Google video creation model
 
 ### Speech Models
 
 Speech-to-text and text-to-speech via OpenAI-compatible endpoints:
 
-- **Whisper-1**: OpenAI's transcription model
+- **Whisper-1**: OpenAI transcription model
 - **TTS**: Text-to-speech with multiple voices
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="How do I migrate from OpenAI?">
+    Simply change your base URL to `https://api.apimart.ai/v1` and use your APIMart API key. Keep your existing SDKs—no code rewrite needed. Migration typically takes under 5 minutes.
+  </Accordion>
+  
+  <Accordion title="What's included in the SLA?">
+    Our enterprise SLA includes 99.9% uptime guarantee, global CDN acceleration, multi-provider routing with automatic failover, and real-time status monitoring. Rate limit management and webhook support are included.
+  </Accordion>
+  
+  <Accordion title="How does pricing compare to OpenAI?">
+    APIMart offers transparent per-token pricing that's more affordable than official provider rates. Pay-as-you-go with no subscription, volume discounts for enterprise usage, and no hidden fees.
+  </Accordion>
+  
+  <Accordion title="What about latency and performance?">
+    Low latency is guaranteed through global CDN acceleration and intelligent multi-provider routing. Edge locations worldwide ensure optimal response times. Real-time status monitoring lets you track performance.
+  </Accordion>
+</AccordionGroup>
