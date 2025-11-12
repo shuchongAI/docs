@@ -1,111 +1,135 @@
 ---
-title: "APIMart - 高コスパ AI | GPT-5、Claude、Gemini"
-description: "高コスパ統合AI APIプラットフォーム。GPT-5、GPT-4o、Claude Sonnet、Gemini、Sora2対応。OpenAI API互換で競争力のある価格。テキスト・画像・動画生成をサポート。従量課金制でコストを削減できます。"
-'og:title': "APIMart - 高コスパ AI API プラットフォーム"
-'og:description': "GPT-5、Claude、Gemini、Sora2に統一されたOpenAI互換APIでアクセス、競争力のある価格。"
+title: "APIMart – OpenAI 互換ゲートウェイ | GPT-5、Claude"
+description: "GPT-5、Claude、Gemini 対応 OpenAI 互換エンドポイント。マルチプロバイダールーティング、透明な料金、エンタープライズ SLA、グローバル CDN。"
+'og:title': "APIMart – OpenAI 互換ゲートウェイ | GPT-5、Claude"
+'og:description': "GPT-5、Claude、Gemini 対応 OpenAI 互換エンドポイント。マルチプロバイダールーティング、透明な料金、エンタープライズ SLA。"
 'og:url': "https://docs.apimart.ai/ja"
 'twitter:card': "summary_large_image"
 'twitter:site': "@APIMart_ "
-'twitter:title': "APIMart - 高コスパ AI API プラットフォーム"
-'twitter:description': "高コスパ統合AI APIプラットフォーム。GPT-5、GPT-4o、Claude Sonnet、Gemini、Sora2対応。OpenAI API互換で競争力のある価格。テキスト・画像・動画生成をサポート。従量課金制でコストを削減できます。"
+'twitter:title': "APIMart – OpenAI ゲートウェイ"
+'twitter:description': "GPT-5、Claude、Gemini 対応 OpenAI 互換エンドポイント。マルチプロバイダールーティング、透明な料金、エンタープライズ SLA。"
 ---
 
 <head>
-  <meta name="keywords" content="AI API, GPT-5, GPT-4o, Claude Sonnet, Gemini, Sora2, VEO3, OpenAI API, 高コスパ, コストパフォーマンス, テキスト生成, 画像生成, 動画生成, API プラットフォーム, 従量課金" />
+  <meta name="keywords" content="OpenAI 互換, API ゲートウェイ, GPT-5, Claude Sonnet, Gemini, マルチプロバイダールーティング, 透明な料金, エンタープライズ SLA, 低レイテンシ, SDK, エンドポイント" />
 </head>
 
 
-## APIMart - コスパ最高のエンタープライズグレードAI APIプラットフォーム
+## APIMart — 高コスパ OpenAI 互換ゲートウェイ
 
-APIマートは、GPT-5、Claude、Geminiなどトップクラスの AI モデルへのアクセスを提供する、業界をリードする統合AIモデルAPIプラットフォームです。開発者と企業に、シンプルで安定した高性能かつコストパフォーマンスに優れた AI API サービスを提供し、テキスト生成、画像生成、動画生成などをサポートします。
+GPT-5、Claude、Gemini 用の統一エンドポイント。数分で OpenAI から移行でき、既存の SDK をそのまま使用可能。マルチプロバイダールーティングにより低レイテンシと高可用性を実現。透明な料金、エンタープライズ SLA、グローバル CDN 高速化。
 
 <Card title="クイックスタート" icon="rocket" horizontal href="/ja/api-reference/texts/general/chat-completions">
-  今すぐ GPT-5、Claude Sonnet 4.5、Gemini 2.0 などのトップクラスの AI モデルで Chat API を使用開始
+  GPT-5、Claude Sonnet 4.5、Gemini 2.0 対応の OpenAI 互換チャットエンドポイント。Base URL の切り替えのみ、コード変更不要。
 </Card>
 
-## AI 機能
+## OpenAI 互換エンドポイント
 
-APIMart は、テキスト生成、画像生成、動画生成などをカバーする包括的な AI モデル API サービスを提供します。すべてのインターフェースは OpenAI API 互換で、すぐに使用できます。
+APIMart は OpenAI スタイルのエンドポイントを提供し、シームレスな移行を実現。Base URL を `https://api.apimart.ai/v1` に変更するだけで、既存の SDK をそのまま使用可能。すべてのインターフェースは OpenAI 標準に準拠し、Claude、Gemini、Sora、VEO モデルを拡張サポート。
 
 <Columns cols={3}>
-  <Card title="テキスト生成 API" icon="message" href="/ja/api-reference/texts/general/chat-completions">
-    GPT-5、GPT-4o、Claude Sonnet 4.5、Gemini 2.0 Flash などのトップクラスの大規模言語モデルをサポートする統合チャット API インターフェース
+  <Card title="チャット補完エンドポイント" icon="message" href="/ja/api-reference/texts/general/chat-completions">
+    GPT-5、GPT-4o、Claude Sonnet 4.5、Gemini 2.0 Flash 対応。OpenAI 互換の `/v1/chat/completions` エンドポイント、ストリーミング対応、低レイテンシ。
   </Card>
-  <Card title="画像生成 API" icon="image" href="/ja/api-reference/images/GPT-4o-image/generation">
-    GPT-4o-image、Nano banana (Gemini 2.5 Flash) などの先進的な AI 画像生成モデルにアクセス
+  <Card title="画像生成エンドポイント" icon="image" href="/ja/api-reference/images/GPT-4o-image/generation">
+    GPT-4o Image、Gemini 2.5 Flash Image モデル対応。OpenAI スタイルの `/v1/images/generations` エンドポイント、シームレスな統合。
   </Card>
-  <Card title="動画生成 API" icon="video" href="/ja/api-reference/videos/veo3/generation">
-    OpenAI Sora2、Google VEO3 などの最先端 AI 動画生成技術との統合
+  <Card title="動画生成エンドポイント" icon="video" href="/ja/api-reference/videos/veo3/generation">
+    OpenAI Sora2、Google VEO3 モデル対応。非同期タスク管理、ステータス追跡と Webhook サポート。
   </Card>
 </Columns>
 
-## APIMart を選ぶ理由
+## 透明な料金体系
+
+サブスクリプション不要の従量課金。公式プロバイダーより手頃な料金で、同じ品質と低レイテンシを維持。
+
+- **透明な料金**：全モデル明確なトークン単価
+- **ボリューム割引**：エンタープライズ利用で低料金
+- **隠れた費用なし**：表示価格そのまま
+- **従量課金**：実際の使用量のみ課金
+
+## マルチプロバイダールーティングとエンタープライズ SLA
+
+複数の LLM プロバイダー間でインテリジェントルーティングを内蔵し、高可用性と低レイテンシを確保。あるプロバイダーに問題が発生しても、リクエストは自動的にバックアッププロバイダーにルーティングされ、サービス中断なし。
 
 <Columns cols={2}>
-  <Card title="OpenAI API 互換" icon="plug">
-    OpenAI API 標準と完全互換。コード変更なしで OpenAI から移行可能。主流の AI 開発フレームワークとツールをサポート
+  <Card title="99.9% 可用性 SLA" icon="bolt">
+    自動フェイルオーバー付きのエンタープライズグレードの信頼性。マルチプロバイダールーティングで最小レイテンシでのリクエスト処理を保証。
   </Card>
-  <Card title="豊富な AI モデル選択" icon="layers">
-    1つのプラットフォームで主要な AI モデルすべてにアクセス：GPT-5、Claude、Gemini、Sora2、VEO3。model パラメータで簡単に切り替え
+  <Card title="グローバル CDN 高速化" icon="globe">
+    世界中のエッジロケーションで最低レイテンシを実現。最適化されたルーティングで応答時間を短縮し、グローバルなユーザー体験を向上。
   </Card>
-  <Card title="完全なタスク管理" icon="list-check" href="/ja/api-reference/tasks/status">
-    画像・動画生成の進行状況をリアルタイムで追跡する非同期タスククエリ API。バッチ処理をサポート
+  <Card title="レート制限管理" icon="gauge">
+    プロバイダー間で自動的にレート制限を処理。インテリジェントなリクエスト分散でスロットリングを防止し、スムーズな運用を保証。
   </Card>
-  <Card title="エンタープライズグレードのパフォーマンス" icon="bolt">
-    高性能 API ゲートウェイ、99.9% 稼働率 SLA、グローバル CDN 高速化による安定した信頼性の高いエンタープライズグレードのサービス
-  </Card>
-  <Card title="コスパ最高の従量課金制" icon="wallet">
-    サブスクリプション不要、使用した分だけお支払い、透明性のある料金設定。公式 API よりお得で、AI コストを削減
-  </Card>
-  <Card title="開発者フレンドリー" icon="code">
-    包括的な API ドキュメント、豊富なコード例、複数のプログラミング言語をサポートし、迅速かつ簡単に開発統合
+  <Card title="リアルタイムステータス" icon="activity" href="/ja/api-reference/tasks/status">
+    エンドポイントの健全性とパフォーマンスを監視。画像・動画生成の非同期タスク進行状況を追跡、Webhook 通知サポート。
   </Card>
 </Columns>
 
-## AI API のクイックスタート
+## SDK とコード例
+
+Python、Node.js、Java 用の公式 SDK。すべての SDK が OpenAI 互換で、Base URL 設定の変更のみでシームレスに移行可能。
+
+<Columns cols={3}>
+  <Card title="Python SDK" icon="python">
+    `pip install openai` でインストール。`base_url="https://api.apimart.ai/v1"` を設定し、既存の OpenAI コードをそのまま使用。
+  </Card>
+  <Card title="Node.js SDK" icon="node-js">
+    `npm install openai` でインストール。`baseURL` パラメータを APIMart エンドポイントに設定し、既存の統合を維持。
+  </Card>
+  <Card title="Java SDK" icon="java">
+    OpenAI 互換 Java クライアント。簡単な設定変更で全 APIMart モデルとプロバイダーにアクセス可能。
+  </Card>
+</Columns>
+
+## OpenAI からの移行
+
+5 分以内に APIMart に切り替え可能。コードの書き直し不要、Base URL と API Key の変更のみ。
 
 <Steps>
-  <Step title="サインアップして API キーを取得">
-    無料で APIMart アカウントを登録し、[API キー管理ページ](https://api.apimart.ai/console/token) にアクセスして API キーをすぐに取得
+  <Step title="API Key を取得">
+    APIMart に登録し、<a href="https://api.apimart.ai/console/token" rel="nofollow" target="_blank">コンソールダッシュボード</a>から API Key を取得。
   </Step>
-  <Step title="AI モデルを選択">
-    GPT-5、Claude Sonnet 4.5、Gemini 2.0、Sora2 など、ビジネスニーズに合った AI モデルを選択
+  <Step title="Base URL を更新">
+    OpenAI Base URL を `https://api.openai.com/v1` から `https://api.apimart.ai/v1` に変更。既存の SDK 統合はそのまま動作。
   </Step>
-  <Step title="アプリに API を統合">
-    Python、Node.js、Java、または任意のプログラミング言語を使用して、シンプルな HTTP リクエストで AI API を呼び出し。数分で統合完了
+  <Step title="エンドポイントをテスト">
+    新しい Base URL で既存コードを実行。すべての OpenAI 互換エンドポイントは同じ形式で応答。コンソールダッシュボードでレイテンシとレート制限を確認。
   </Step>
 </Steps>
 
-## サポートされている AI モデル
 
-APIMart プラットフォームは、市場で最も先進的な AI モデルへのアクセスを提供しています。すべてのモデルは統一された API インターフェースを通じてアクセス可能で、OpenAI API 標準と互換性があります。
+## 統一エンドポイント経由でサポートされるモデル
 
-### テキスト生成モデル（LLM）
+1 つの OpenAI 互換ゲートウェイで主要 LLM プロバイダーにアクセス。すべてのモデルは `/v1/chat/completions` エンドポイントで利用可能、一貫したリクエスト/レスポンス形式。
 
-チャット、テキスト補完、コード生成などのための世界有数の大規模言語モデルにアクセス：
+### チャット補完モデル
 
-- **GPT-5**：強化された推論機能を備えた OpenAI の最新フラッグシップモデル
-- **GPT-4o & GPT-4o Mini**：性能とコストのバランスを取った OpenAI のマルチモーダルモデル
-- **Claude Sonnet 4.5 & Haiku 4.5**：複雑な推論のための Anthropic の先進的な AI モデル
-- **Gemini 2.0 Flash & Flash Thinking**：Google の最新マルチモーダル AI モデル
+チャット、補完、コードタスク用の主要言語モデル：
+
+- **GPT-5**：強化された推論機能を持つ OpenAI フラッグシップモデル
+- **GPT-4o & GPT-4o Mini**：性能とコストのバランスを取ったマルチモーダルモデル
+- **Claude Sonnet 4.5 & Haiku 4.5**：複雑な推論用 Anthropic モデル
+- **Gemini 2.0 Flash & Flash Thinking**：Google マルチモーダルモデル
 
 ### 画像生成モデル
 
-テキストの説明から高品質な AI 画像を生成：
+テキストプロンプトから `/v1/images/generations` エンドポイント経由で画像生成：
 
-- **GPT-4o-image**：OpenAI の先進的な画像生成モデル
-- **Nano banana (Gemini 2.5 Flash Image)**：Google の効率的な画像生成モデル
+- **GPT-4o Image**：OpenAI 画像生成モデル
+- **Gemini 2.5 Flash Image**：Google 効率的画像モデル
 
 ### 動画生成モデル
 
-最先端の AI 動画生成技術：
+非同期タスク追跡と Webhook コールバック付き動画生成：
 
-- **OpenAI Sora2**：OpenAI の最新動画生成モデル
-- **Google VEO3**：Google の先進的な動画生成モデル
+- **OpenAI Sora2**：OpenAI 動画生成モデル
+- **Google VEO3**：Google 動画生成モデル
 
 ### 音声モデル
 
-音声認識とテキスト読み上げ機能：
+OpenAI 互換エンドポイント経由で音声テキスト変換とテキスト音声変換：
 
-- **Whisper-1**：OpenAI の音声テキスト変換モデル
-- **TTS**：高品質なテキスト読み上げ生成
+- **Whisper-1**：OpenAI 文字起こしモデル
+- **TTS**：複数音声のテキスト読み上げ

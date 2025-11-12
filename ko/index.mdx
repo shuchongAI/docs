@@ -1,111 +1,135 @@
 ---
-title: "APIMart - 저렴한 AI | GPT-5, Claude, Gemini"
-description: "저렴한 통합 AI API 플랫폼. GPT-5, GPT-4o, Claude Sonnet, Gemini, Sora2 지원. OpenAI API 호환 및 경쟁력 있는 가격. 텍스트, 이미지, 비디오 생성 지원. 종량제로 비용을 절감할 수 있습니다."
-'og:title': "APIMart - 저렴한 AI API 플랫폼"
-'og:description': "GPT-5, Claude, Gemini, Sora2를 통합 OpenAI 호환 API로 저렴하게 이용하세요."
+title: "APIMart – OpenAI 호환 게이트웨이 | GPT-5, Claude"
+description: "GPT-5, Claude, Gemini 지원 OpenAI 호환 엔드포인트. 멀티 프로바이더 라우팅, 투명한 가격, 엔터프라이즈 SLA, 글로벌 CDN."
+'og:title': "APIMart – OpenAI 호환 게이트웨이 | GPT-5, Claude"
+'og:description': "GPT-5, Claude, Gemini 지원 OpenAI 호환 엔드포인트. 멀티 프로바이더 라우팅, 투명한 가격, 엔터프라이즈 SLA."
 'og:url': "https://docs.apimart.ai/ko"
 'twitter:card': "summary_large_image"
 'twitter:site': "@APIMart_ "
-'twitter:title': "APIMart - 저렴한 AI API 플랫폼"
-'twitter:description': "저렴한 통합 AI API 플랫폼. GPT-5, GPT-4o, Claude Sonnet, Gemini, Sora2 지원. OpenAI API 호환 및 경쟁력 있는 가격. 텍스트, 이미지, 비디오 생성 지원. 종량제로 비용을 절감할 수 있습니다."
+'twitter:title': "APIMart – OpenAI 게이트웨이"
+'twitter:description': "GPT-5, Claude, Gemini 지원 OpenAI 호환 엔드포인트. 멀티 프로바이더 라우팅, 투명한 가격, 엔터프라이즈 SLA."
 ---
 
 <head>
-  <meta name="keywords" content="AI API, GPT-5, GPT-4o, Claude Sonnet, Gemini, Sora2, VEO3, OpenAI API, 저렴한 AI, 비용 효율적, 텍스트 생성, 이미지 생성, 비디오 생성, API 플랫폼, 종량제" />
+  <meta name="keywords" content="OpenAI 호환, API 게이트웨이, GPT-5, Claude Sonnet, Gemini, 멀티 프로바이더 라우팅, 투명한 가격, 엔터프라이즈 SLA, 저지연, SDK, 엔드포인트" />
 </head>
 
 
-## APIMart - 비용 효율적인 엔터프라이즈급 AI API 플랫폼
+## APIMart — 비용 효율적 OpenAI 호환 게이트웨이
 
-APIMart는 GPT-5, Claude, Gemini와 같은 최고 수준의 AI 모델에 대한 액세스를 제공하는 선도적인 통합 AI 모델 API 플랫폼입니다. 개발자와 기업에게 간단하고 안정적이며 고성능이면서 비용 효율적인 AI API 서비스를 제공하여 텍스트 생성, 이미지 생성, 비디오 생성 등을 지원합니다.
+GPT-5, Claude, Gemini를 위한 통합 엔드포인트. 몇 분 내에 OpenAI에서 마이그레이션하고 기존 SDK를 유지하며, 멀티 프로바이더 라우팅으로 더 낮은 지연 시간과 더 높은 가동 시간 실현. 투명한 가격, 엔터프라이즈 SLA, 글로벌 CDN 가속.
 
 <Card title="빠른 시작" icon="rocket" horizontal href="/ko/api-reference/texts/general/chat-completions">
-  GPT-5, Claude Sonnet 4.5, Gemini 2.0 등 최고 수준의 AI 모델로 Chat API 사용 시작
+  GPT-5, Claude Sonnet 4.5, Gemini 2.0 지원 OpenAI 호환 채팅 엔드포인트. Base URL만 변경, 코드 수정 불필요.
 </Card>
 
-## AI 기능
+## OpenAI 호환 엔드포인트
 
-APIMart는 텍스트 생성, 이미지 생성, 비디오 생성 등을 포괄하는 종합적인 AI 모델 API 서비스를 제공합니다. 모든 인터페이스는 OpenAI API와 호환되며 바로 사용 가능합니다.
+APIMart는 원활한 마이그레이션을 위해 OpenAI 스타일 엔드포인트를 제공합니다. Base URL을 `https://api.apimart.ai/v1`로 변경하기만 하면 기존 SDK를 계속 사용할 수 있습니다. 모든 인터페이스는 OpenAI 표준을 따르며 Claude, Gemini, Sora, VEO 모델을 확장 지원합니다.
 
 <Columns cols={3}>
-  <Card title="텍스트 생성 API" icon="message" href="/ko/api-reference/texts/general/chat-completions">
-    GPT-5, GPT-4o, Claude Sonnet 4.5, Gemini 2.0 Flash 등 최고 수준의 대규모 언어 모델을 지원하는 통합 채팅 API 인터페이스
+  <Card title="채팅 완성 엔드포인트" icon="message" href="/ko/api-reference/texts/general/chat-completions">
+    GPT-5, GPT-4o, Claude Sonnet 4.5, Gemini 2.0 Flash 지원. OpenAI 호환 `/v1/chat/completions` 엔드포인트, 스트리밍 지원 및 저지연.
   </Card>
-  <Card title="이미지 생성 API" icon="image" href="/ko/api-reference/images/GPT-4o-image/generation">
-    GPT-4o-image, Nano banana (Gemini 2.5 Flash) 등 고급 AI 이미지 생성 모델에 액세스
+  <Card title="이미지 생성 엔드포인트" icon="image" href="/ko/api-reference/images/GPT-4o-image/generation">
+    GPT-4o Image, Gemini 2.5 Flash Image 모델 지원. OpenAI 스타일 `/v1/images/generations` 엔드포인트, 원활한 통합.
   </Card>
-  <Card title="비디오 생성 API" icon="video" href="/ko/api-reference/videos/veo3/generation">
-    OpenAI Sora2, Google VEO3 등 최첨단 AI 비디오 생성 기술과의 통합
+  <Card title="비디오 생성 엔드포인트" icon="video" href="/ko/api-reference/videos/veo3/generation">
+    OpenAI Sora2, Google VEO3 모델 지원. 비동기 작업 관리, 상태 추적 및 Webhook 지원.
   </Card>
 </Columns>
 
-## APIMart를 선택해야 하는 이유
+## 투명한 가격
+
+구독 없이 종량제. 공식 프로바이더 요금보다 저렴하면서 동일한 품질과 저지연 유지.
+
+- **투명한 가격**: 모든 모델의 명확한 토큰당 요금
+- **대량 할인**: 엔터프라이즈 사용량에 대한 낮은 요금
+- **숨겨진 수수료 없음**: 표시된 가격 그대로
+- **종량제**: 실제 사용량만 지불
+
+## 멀티 프로바이더 라우팅 및 엔터프라이즈 SLA
+
+여러 LLM 프로바이더 간 인텔리전트 라우팅이 내장되어 높은 가동 시간과 저지연 보장. 한 프로바이더에 문제가 발생하면 요청이 자동으로 백업 프로바이더로 라우팅되어 서비스 중단 없음.
 
 <Columns cols={2}>
-  <Card title="OpenAI API 호환" icon="plug">
-    OpenAI API 표준과 완벽하게 호환. 코드 변경 없이 OpenAI에서 마이그레이션 가능. 주요 AI 개발 프레임워크 및 도구 지원
+  <Card title="99.9% 가동 시간 SLA" icon="bolt">
+    자동 장애 조치 기능이 있는 엔터프라이즈급 안정성. 멀티 프로바이더 라우팅으로 최소 지연 시간으로 요청 처리 보장.
   </Card>
-  <Card title="풍부한 AI 모델 선택" icon="layers">
-    하나의 플랫폼에서 모든 주요 AI 모델에 액세스: GPT-5, Claude, Gemini, Sora2, VEO3. 모델 매개변수로 쉽게 전환
+  <Card title="글로벌 CDN 가속" icon="globe">
+    전 세계 엣지 로케이션으로 최저 지연 시간 실현. 최적화된 라우팅으로 응답 시간 단축 및 글로벌 사용자 경험 향상.
   </Card>
-  <Card title="완벽한 작업 관리" icon="list-check" href="/ko/api-reference/tasks/status">
-    이미지 및 비디오 생성 진행 상황을 실시간으로 추적하는 비동기 작업 쿼리 API. 배치 처리 지원
+  <Card title="속도 제한 관리" icon="gauge">
+    프로바이더 간 자동 속도 제한 처리. 인텔리전트 요청 분배로 스로틀링 방지 및 원활한 운영 보장.
   </Card>
-  <Card title="엔터프라이즈급 성능" icon="bolt">
-    고성능 API 게이트웨이, 99.9% 가동 시간 SLA, 글로벌 CDN 가속, 안정적이고 신뢰할 수 있는 엔터프라이즈급 서비스
-  </Card>
-  <Card title="비용 효율적인 종량제" icon="wallet">
-    구독 필요 없음, 사용한 만큼만 지불하는 투명한 가격. 공식 API보다 저렴하여 AI 비용 절감
-  </Card>
-  <Card title="개발자 친화적" icon="code">
-    포괄적인 API 문서, 풍부한 코드 예제, 여러 프로그래밍 언어 지원으로 신속하고 쉬운 개발 통합
+  <Card title="실시간 상태" icon="activity" href="/ko/api-reference/tasks/status">
+    엔드포인트 상태 및 성능 모니터링. 이미지 및 비디오 생성의 비동기 작업 진행 상황 추적, Webhook 알림 지원.
   </Card>
 </Columns>
 
-## AI API 빠른 시작
+## SDK 및 코드 예제
+
+Python, Node.js, Java용 공식 SDK. 모든 SDK가 OpenAI 호환이며 Base URL 설정 변경만으로 원활하게 마이그레이션.
+
+<Columns cols={3}>
+  <Card title="Python SDK" icon="python">
+    `pip install openai`로 설치. `base_url="https://api.apimart.ai/v1"` 설정 후 기존 OpenAI 코드를 변경 없이 사용.
+  </Card>
+  <Card title="Node.js SDK" icon="node-js">
+    `npm install openai`로 설치. `baseURL` 파라미터를 APIMart 엔드포인트로 설정하고 기존 통합 유지.
+  </Card>
+  <Card title="Java SDK" icon="java">
+    OpenAI 호환 Java 클라이언트. 간단한 설정 변경으로 모든 APIMart 모델 및 프로바이더 액세스 가능.
+  </Card>
+</Columns>
+
+## OpenAI에서 마이그레이션
+
+5분 이내에 APIMart로 전환. 코드 재작성 불필요, Base URL과 API Key만 변경.
 
 <Steps>
-  <Step title="가입 및 API 키 받기">
-    무료로 APIMart 계정을 등록하고 [API 키 관리 페이지](https://api.apimart.ai/console/token)를 방문하여 API 키를 즉시 받으세요
+  <Step title="API Key 받기">
+    APIMart에 가입하고 <a href="https://api.apimart.ai/console/token" rel="nofollow" target="_blank">콘솔 대시보드</a>에서 API Key를 받으세요.
   </Step>
-  <Step title="AI 모델 선택">
-    GPT-5, Claude Sonnet 4.5, Gemini 2.0, Sora2 등 비즈니스 요구 사항에 맞는 AI 모델을 선택하세요
+  <Step title="Base URL 업데이트">
+    OpenAI Base URL을 `https://api.openai.com/v1`에서 `https://api.apimart.ai/v1`로 변경. 기존 SDK 통합은 수정 없이 작동.
   </Step>
-  <Step title="앱에 API 통합">
-    Python, Node.js, Java 또는 모든 프로그래밍 언어를 사용하여 간단한 HTTP 요청으로 AI API를 호출. 몇 분 내에 통합 완료
+  <Step title="엔드포인트 테스트">
+    새 Base URL로 기존 코드 실행. 모든 OpenAI 호환 엔드포인트는 동일한 형식으로 응답. 콘솔 대시보드에서 지연 시간 및 속도 제한 확인.
   </Step>
 </Steps>
 
-## 지원되는 AI 모델
 
-APIMart 플랫폼은 시장에서 가장 발전된 AI 모델에 대한 액세스를 제공합니다. 모든 모델은 통합된 API 인터페이스를 통해 액세스할 수 있으며 OpenAI API 표준과 호환됩니다.
+## 통합 엔드포인트로 지원되는 모델
 
-### 텍스트 생성 모델 (LLM)
+하나의 OpenAI 호환 게이트웨이로 주요 LLM 프로바이더에 액세스. 모든 모델은 `/v1/chat/completions` 엔드포인트에서 사용 가능, 일관된 요청/응답 형식.
 
-채팅, 텍스트 완성, 코드 생성 등을 위한 세계 최고의 대규모 언어 모델에 액세스:
+### 채팅 완성 모델
 
-- **GPT-5**: 향상된 추론 기능을 갖춘 OpenAI의 최신 플래그십 모델
-- **GPT-4o & GPT-4o Mini**: 성능과 비용의 균형을 맞춘 OpenAI의 멀티모달 모델
-- **Claude Sonnet 4.5 & Haiku 4.5**: 복잡한 추론을 위한 Anthropic의 고급 AI 모델
-- **Gemini 2.0 Flash & Flash Thinking**: Google의 최신 멀티모달 AI 모델
+채팅, 완성, 코드 작업용 주요 언어 모델:
+
+- **GPT-5**: 향상된 추론 기능을 갖춘 OpenAI 플래그십 모델
+- **GPT-4o & GPT-4o Mini**: 성능과 비용의 균형을 맞춘 멀티모달 모델
+- **Claude Sonnet 4.5 & Haiku 4.5**: 복잡한 추론을 위한 Anthropic 모델
+- **Gemini 2.0 Flash & Flash Thinking**: Google 멀티모달 모델
 
 ### 이미지 생성 모델
 
-텍스트 설명에서 고품질 AI 이미지 생성:
+텍스트 프롬프트에서 `/v1/images/generations` 엔드포인트를 통해 이미지 생성:
 
-- **GPT-4o-image**: OpenAI의 고급 이미지 생성 모델
-- **Nano banana (Gemini 2.5 Flash Image)**: Google의 효율적인 이미지 생성 모델
+- **GPT-4o Image**: OpenAI 이미지 생성 모델
+- **Gemini 2.5 Flash Image**: Google 효율적 이미지 모델
 
 ### 비디오 생성 모델
 
-최첨단 AI 비디오 생성 기술:
+비동기 작업 추적 및 Webhook 콜백이 있는 비디오 생성:
 
-- **OpenAI Sora2**: OpenAI의 최신 비디오 생성 모델
-- **Google VEO3**: Google의 고급 비디오 생성 모델
+- **OpenAI Sora2**: OpenAI 비디오 생성 모델
+- **Google VEO3**: Google 비디오 생성 모델
 
-### 오디오 모델
+### 음성 모델
 
-음성 인식 및 텍스트 음성 변환 기능:
+OpenAI 호환 엔드포인트를 통한 음성-텍스트 및 텍스트-음성 변환:
 
-- **Whisper-1**: OpenAI의 음성-텍스트 변환 모델
-- **TTS**: 고품질 텍스트 음성 변환 생성
+- **Whisper-1**: OpenAI 전사 모델
+- **TTS**: 여러 음성으로 텍스트 음성 변환
