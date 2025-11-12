@@ -4,6 +4,13 @@
   "name": "APIMart",
   "title": "APIMart",
   "url": "https://docs.apimart.ai",
+  "metadata": {
+    "twitter:card": "summary_large_image",
+    "twitter:site": "@APIMart_",
+    "twitter:creator": "@APIMart_",
+    "og:site_name": "APIMart",
+    "og:type": "website"
+  },
   "seo": {
     "metatags": {
       "keywords": "OpenAI compatible, API gateway, GPT-5, Claude, Gemini, multi-provider, transparent pricing, SLA"
