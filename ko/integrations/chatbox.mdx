@@ -1,0 +1,281 @@
+---
+title: "ChatBox에서 APIMart 사용하기"
+description: "ChatBox 데스크톱 클라이언트에서 APIMart API 서비스를 구성하고 사용하는 방법에 대한 상세 가이드입니다. 이 가이드는 ChatBox에서 APIMart API를 구성하여 풍부한 AI 모델 리소스에 액세스하는 방법을 설명합니다."
+---
+
+
+
+## 준비 사항
+
+시작하기 전에 다음을 확인하세요:
+
+1. **ChatBox가 설치되어 있음**  
+   [ChatBox GitHub](https://github.com/Bin-Huang/chatbox)에서 운영 체제에 적합한 버전을 다운로드하여 설치하거나 [ChatBox 공식 웹사이트](https://chatboxai.app/)를 방문하세요
+
+2. **APIMart API 키 획득**  
+   [APIMart 콘솔](https://api.apimart.ai/console/token)에 로그인하여 API 키(`sk-`로 시작)를 획득하세요
+
+<Note>
+**팁:** APIMart 계정이 없는 경우, 먼저 [APIMart](https://api.apimart.ai)에서 등록하고 API 키를 획득하세요.
+</Note>
+
+## 1단계: ChatBox 실행 및 구성 시작
+
+ChatBox를 처음 실행하거나 새 AI 제공업체를 추가할 때:
+
+1. ChatBox 애플리케이션을 실행합니다
+2. 처음 사용하는 경우 구성 마법사가 자동으로 나타납니다
+3. **"자신의 API Key 또는 로컬 모델 사용"** 버튼을 클릭합니다
+4. 이미 구성된 경우 왼쪽 하단의 **⚙️ 설정** 아이콘을 클릭하거나 단축키 `Ctrl+,` (Windows/Linux) / `Cmd+,` (macOS)를 사용합니다
+
+<Frame>
+  <img src="/images/integrations/chatbox/main-interface.png" alt="ChatBox 구성 마법사" />
+</Frame>
+
+<caption>*ChatBox 구성 마법사, 자신의 API Key 사용 선택*</caption>
+
+## 2단계: APIMart API 구성
+
+### 2.1 AI 모델 제공업체 선택
+
+설정 페이지에서:
+
+1. **AI Provider** 설정을 찾습니다
+2. 드롭다운 메뉴에서 **OpenAI API**를 선택합니다
+
+<Frame>
+  <img src="/images/integrations/chatbox/settings-page.png" alt="ChatBox 설정 페이지" />
+</Frame>
+
+<caption>*ChatBox 설정 페이지, 제공업체로 OpenAI API 선택*</caption>
+
+### 2.2 API 정보 구성
+
+OpenAI API를 선택한 후 다음 구성을 입력합니다:
+
+| 필드 | 값 |
+|------|-----|
+| **API Key** | APIMart API 키 (`sk-xxxxxxxxxxxx`) |
+| **API Host** 또는 **API Domain** | `https://api.apimart.ai` |
+
+<Frame>
+  <img src="/images/integrations/chatbox/api-config.png" alt="API 구성" />
+</Frame>
+
+<caption>*APIMart의 API Key 및 API Host 입력*</caption>
+
+<Warning>
+**중요:**
+- API Host는 `https://api.apimart.ai`이어야 합니다 (`/v1` 접미사 없이)
+- API Key는 APIMart 콘솔에서 획득한 `sk-`로 시작하는 것이어야 합니다
+- API 키에 충분한 잔액이 있는지 확인하세요
+</Warning>
+
+### 2.3 모델 선택
+
+구성 완료 후 **Model** 드롭다운에서 사용할 모델을 선택합니다:
+
+**권장 모델:**
+
+| 모델명 | 모델 ID | 특징 |
+|--------|---------|------|
+| GPT-5 | `gpt-5` | 최신이며 가장 강력함 |
+| GPT-4o | `gpt-4o` 또는 `chatgpt-4o-latest` | 고품질 대화 |
+| GPT-4o Mini | `gpt-4o-mini` | 빠르고 경제적 |
+| Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` | 코드에 탁월함 |
+| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | 빠른 응답 |
+| Gemini 2.0 Flash | `gemini-2.0-flash-exp` | 멀티모달 지원 |
+
+<Frame>
+  <img src="/images/integrations/chatbox/model-selection.png" alt="모델 선택" />
+</Frame>
+
+<caption>*목록에서 원하는 AI 모델 선택*</caption>
+
+<Tip>
+**성능 권장 사항:**
+- 💰 **비용 효율적:** `gpt-4o-mini`, `claude-haiku-4-5-20251001`
+- 🚀 **고성능:** `gpt-5`, `gpt-4o`, `claude-sonnet-4-5-20250929`
+- ⚡ **빠른 응답:** `gemini-2.0-flash-exp`, `gpt-4o-mini`
+</Tip>
+
+## 3단계: 사용 시작
+
+구성이 완료되면 ChatBox로 AI와 대화를 시작할 수 있습니다:
+
+1. 메인 인터페이스로 돌아갑니다
+2. 입력 상자에 질문이나 요구 사항을 입력합니다
+3. `Enter` 키를 누르거나 전송 버튼을 클릭합니다
+4. AI가 APIMart의 모델을 사용하여 응답을 생성합니다
+
+<Frame>
+  <img src="/images/integrations/chatbox/chat-interface.png" alt="채팅 인터페이스" />
+</Frame>
+
+<caption>*ChatBox 채팅 인터페이스, AI와 대화 시작*</caption>
+
+### 모델 매개변수 조정 (선택 사항)
+
+필요에 따라 다음 매개변수를 조정할 수 있습니다:
+
+| 매개변수 | 설명 | 권장 값 |
+|---------|------|--------|
+| **Temperature** | 출력 무작위성 제어 | 0.7 (창의적) / 0.3 (정확) |
+| **Max Tokens** | 최대 출력 길이 | 2000-4000 |
+| **Top P** | 핵 샘플링 매개변수 | 0.9 |
+
+## 고급 기능
+
+### 다중 세션 관리
+
+ChatBox는 여러 대화 세션 생성을 지원합니다:
+
+1. **새 채팅** 버튼을 클릭합니다
+2. 다른 작업을 위한 독립적인 세션을 생성할 수 있습니다
+3. 왼쪽 세션 목록에서 대화를 전환합니다
+
+### 대화 저장 및 내보내기
+
+1. 대화 세션을 마우스 오른쪽 버튼으로 클릭합니다
+2. **내보내기** 옵션을 선택합니다
+3. Markdown, JSON 등의 형식으로 내보낼 수 있습니다
+
+### 프롬프트 템플릿 사용
+
+1. 설정 메뉴에서 **Prompts** 설정을 찾습니다
+2. 자주 사용하는 프롬프트 템플릿을 저장할 수 있습니다
+3. 대화에서 미리 설정된 프롬프트를 빠르게 호출합니다
+
+## FAQ
+
+### Q1: APIMart 서비스에 연결할 수 없습니까?
+
+**해결 방법:**
+
+1. **API Host 확인**:
+   - `https://api.apimart.ai`인지 확인
+   - `/v1` 또는 다른 경로를 추가하지 마세요
+
+2. **API Key 확인**:
+   - API Key가 `sk-`로 시작하는지 확인
+   - [APIMart 콘솔](https://api.apimart.ai/console/token)에서 키가 유효한지 확인하세요
+
+3. **네트워크 연결 확인**:
+   - `https://api.apimart.ai`에 액세스할 수 있는지 확인
+   - 중국 내에 있는 경우 프록시 구성이 필요할 수 있습니다
+
+### Q2: 모델 목록에 APIMart 모델이 표시되지 않습니까?
+
+**해결 방법:**
+
+1. **모델 이름 수동 입력**:
+   - 모델 입력 상자에 직접 모델 ID를 입력합니다
+   - 예: `gpt-4o`, `gpt-4o-mini`, `claude-sonnet-4-5-20250929`
+
+2. **모델 목록 새로 고침**:
+   - ChatBox 애플리케이션을 재시작합니다
+   - API 정보를 다시 구성합니다
+
+### Q3: 대화 중 오류 메시지가 나타납니까?
+
+**일반적인 오류 및 해결 방법:**
+
+| 오류 메시지 | 원인 | 해결 방법 |
+|-----------|------|---------|
+| `401 Unauthorized` | 유효하지 않거나 만료된 API Key | API Key를 다시 획득하고 구성 업데이트 |
+| `429 Too Many Requests` | 요청 속도 제한 초과 | 잠시 기다린 후 재시도 |
+| `500 Internal Server Error` | 임시 서버 문제 | 몇 분 기다린 후 재시도 |
+| `insufficient_quota` | 계정 잔액 부족 | 콘솔에서 충전 |
+
+### Q4: API 사용 현황 및 비용을 확인하는 방법은?
+
+[APIMart 콘솔](https://api.apimart.ai/console)에 로그인하여 확인:
+- 📊 API 호출 통계
+- 💰 비용 세부 정보
+- 📈 사용 추세 차트
+- 🔍 상세한 요청 로그
+
+### Q5: ChatBox는 어떤 플랫폼을 지원합니까?
+
+ChatBox는 여러 플랫폼을 지원합니다:
+- 🪟 **Windows** - Windows 10/11
+- 🍎 **macOS** - macOS 10.15+
+- 🐧 **Linux** - 주요 배포판
+- 🌐 **Web** - 브라우저 버전
+
+## 사용 팁
+
+### 1. 키보드 단축키
+
+효율성을 위해 ChatBox 키보드 단축키를 활용하세요:
+
+| 단축키 | 기능 |
+|--------|------|
+| `Ctrl/Cmd + Enter` | 메시지 전송 |
+| `Ctrl/Cmd + N` | 새 채팅 |
+| `Ctrl/Cmd + K` | 대화 검색 |
+| `Ctrl/Cmd + ,` | 설정 열기 |
+| `Ctrl/Cmd + /` | 키보드 도움말 표시 |
+
+### 2. 프롬프트 최적화
+
+더 나은 응답을 위해 더 나은 프롬프트를 작성하세요:
+
+**❌ 나쁜 프롬프트:**
+```
+코드 작성해줘
+```
+
+**✅ 좋은 프롬프트:**
+```
+다음 기능을 구현하는 Python 함수를 작성해주세요:
+1. 문자열 목록을 입력으로 받습니다
+2. 3자 미만의 문자열을 필터링합니다
+3. 알파벳순으로 정렬된 결과를 반환합니다
+자세한 주석과 사용 예제를 포함해주세요
+```
+
+### 3. 대화 기록 활용
+
+ChatBox는 대화 기록을 저장합니다:
+- AI는 현재 세션의 컨텍스트를 기억합니다
+- 이전 응답을 기반으로 계속 질문할 수 있습니다
+- 심도 있는 토론과 반복에 적합합니다
+
+### 4. 모델 전환
+
+다른 작업에 적합한 모델로 전환:
+- **작문 작업** - `gpt-4o` 또는 `claude-sonnet-4-5` 사용
+- **코딩 작업** - `claude-sonnet-4-5` 사용
+- **빠른 Q&A** - `gpt-4o-mini` 사용
+- **멀티모달** - `gemini-2.0-flash-exp` 사용
+
+## 기능
+
+ChatBox + APIMart를 사용하면:
+
+- 💬 **부드러운 대화** - 더 부드러운 경험을 위한 실시간 스트리밍 출력
+- 🎯 **다중 세션 관리** - 동시에 여러 독립 대화 관리
+- 💾 **로컬 저장** - 개인 정보 보호를 위해 대화 기록을 로컬에 저장
+- 📤 **대화 내보내기** - 여러 형식으로 내보내기 지원
+- 🎨 **깔끔한 인터페이스** - 간단하고 아름다운 사용자 인터페이스
+- 🔒 **오픈 소스 및 무료** - 완전한 오픈 소스이며 무료 사용
+- 🌍 **크로스 플랫폼** - Windows, macOS, Linux 지원
+- 🚀 **우수한 성능** - 가벼운 애플리케이션, 부드러운 실행
+
+## 지원 및 도움말
+
+문제가 발생한 경우:
+
+- 📚 [APIMart 문서](https://docs.apimart.ai)
+- 📚 [ChatBox GitHub](https://github.com/Bin-Huang/chatbox)
+- 💬 [Discord 커뮤니티](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 기술 지원: zhihong@apimart.ai
+
+---
+
+<Card title="APIMart 시작하기" icon="rocket" href="https://api.apimart.ai">
+  지금 APIMart에 등록하고 API 키를 받아 ChatBox에서 AI 여정을 시작하세요!
+</Card>
+
