@@ -1,0 +1,15 @@
+此目录用于存放 AnythingLLM 集成文档的截图。
+
+当前状态：已有 4 张核心截图
+
+已有的截图：
+✅ 1. main-interface.png - AnythingLLM 主界面（显示左下角 Open settings 按钮）
+✅ 2. llm-provider-selection.png - LLM 提供商选择（选择 Generic OpenAI）
+✅ 3. api-configuration.png - API 配置页面（填写 API Key、Base URL 和模型名称）
+✅ 4. model-selection.png - 配置完成后的界面展示
+
+这 4 张截图已足够展示 AnythingLLM 的核心配置流程。
+注意：在 API 配置页面直接填写模型名称，无需单独选择模型步骤。
+
+如需补充更多截图，可参考 README.md 中的完整列表。
+

@@ -1,0 +1,475 @@
+---
+title: "在 AnythingLLM 中使用 APIMart"
+description: "详细指导如何在 AnythingLLM 中配置和使用 APIMart API 服务，本指南将帮助您在 AnythingLLM 中配置 APIMart API，以便构建私有的 AI 知识库和对话系统。"
+---
+
+
+
+## 准备工作
+
+在开始之前，请确保：
+
+1. **已安装 AnythingLLM**  
+   从 [AnythingLLM 官网](https://anythingllm.com/) 下载并安装适合您操作系统的版本，或访问 [GitHub](https://github.com/Mintplex-Labs/anything-llm)
+
+2. **已获取 APIMart API 密钥**  
+   登录 [APIMart 控制台](https://api.apimart.ai/console/token) 获取您的 API 密钥（以 `sk-` 开头）
+
+<Note>
+**提示：** 如果还没有 APIMart 账户，请先在 [APIMart](https://api.apimart.ai) 注册并获取 API 密钥。
+</Note>
+
+## 第一步：启动 AnythingLLM 并进入设置
+
+### 1.1 启动应用
+
+1. 启动 AnythingLLM 桌面应用或访问 Web 版本
+2. 首次启动会显示欢迎界面
+3. 点击左下角的 **Open settings** 按钮（设置按钮）
+
+<Frame>
+  <img src="/images/integrations/anythingllm/main-interface.png" alt="AnythingLLM 主界面" />
+</Frame>
+
+<caption>*AnythingLLM 主界面，可以看到工作空间列表和设置入口*</caption>
+
+<Note>
+**说明：** AnythingLLM 支持桌面版（Windows、macOS、Linux）和 Docker 部署版本。
+</Note>
+
+### 1.2 进入 LLM 配置页面
+
+在设置页面中：
+
+1. 在左侧菜单中找到 **LLM Preference** 或 **LLM 偏好设置**
+2. 点击进入 LLM 配置页面
+
+## 第二步：配置 APIMart API
+
+### 2.1 选择 LLM 提供商
+
+在 LLM 配置页面：
+
+1. 找到 **LLM Provider** 或 **LLM 提供商** 下拉菜单
+2. 选择 **Generic OpenAI**
+
+<Frame>
+  <img src="/images/integrations/anythingllm/llm-provider-selection.png" alt="LLM 提供商选择" />
+</Frame>
+
+<caption>*选择 Generic OpenAI 作为 LLM 提供商*</caption>
+
+<Note>
+**为什么选择 Generic OpenAI？** APIMart 提供 OpenAI 兼容的 API 接口，因此在 AnythingLLM 中选择 Generic OpenAI 提供商即可使用。
+</Note>
+
+### 2.2 配置 API 信息
+
+选择 Generic OpenAI 后，填写以下配置信息：
+
+| 配置项 | 填写内容 |
+|--------|----------|
+| **API Key** | 您的 APIMart API 密钥（`sk-xxxxxxxxxxxx`） |
+| **Base URL** 或 **API Base Path** | `https://api.apimart.ai/v1` |
+| **Chat Model** 或 **模型名称** | 填入具体模型名（见下方推荐模型列表） |
+
+<Frame>
+  <img src="/images/integrations/anythingllm/api-configuration.png" alt="API 配置" />
+</Frame>
+
+<caption>*填写 APIMart 的 API Key、Base URL 和模型名称*</caption>
+
+<Warning>
+**重要提示：**
+- Base URL 必须包含 `/v1` 后缀：`https://api.apimart.ai/v1`
+- API Key 必须是从 APIMart 控制台获取的以 `sk-` 开头的密钥
+- 模型名称必须填写准确的模型 ID（如 `gpt-4o`、`claude-sonnet-4-5-20250929` 等）
+- 确保您的 API 密钥有足够的余额
+</Warning>
+
+**推荐模型：**
+
+| 模型名称 | 模型 ID | 特点 |
+|---------|---------|------|
+| GPT-5 | `gpt-5` | 最新最强大的模型 |
+| GPT-4o | `gpt-4o` 或 `chatgpt-4o-latest` | 高质量对话 |
+| GPT-4o Mini | `gpt-4o-mini` | 快速且经济 |
+| Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` | 擅长代码和推理 |
+| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | 快速响应 |
+| Gemini 2.0 Flash | `gemini-2.0-flash-exp` | 多模态支持 |
+
+<Tip>
+**性能建议：**
+- 💰 **高性价比：** `gpt-4o-mini`、`claude-haiku-4-5-20251001`
+- 🚀 **高性能：** `gpt-5`、`gpt-4o`、`claude-sonnet-4-5-20250929`
+- ⚡ **快速响应：** `gemini-2.0-flash-exp`、`gpt-4o-mini`
+</Tip>
+
+### 2.3 调整模型参数（可选）
+
+您可以根据需要调整以下参数：
+
+| 参数 | 说明 | 推荐值 |
+|------|------|--------|
+| **Temperature** | 控制输出随机性 | 0.7（创意）/ 0.3（精确） |
+| **Max Tokens** | 最大输出长度 | 2000-4000 |
+| **Top P** | 核采样参数 | 0.9 |
+
+### 2.4 保存配置
+
+1. 点击页面底部的 **Save** 或 **保存** 按钮
+2. 系统会自动测试连接
+3. 如果配置正确，会显示成功提示
+
+## 第三步：配置嵌入模型（可选）
+
+AnythingLLM 支持向量嵌入，用于文档检索和知识库功能。
+
+### 3.1 进入嵌入模型设置
+
+在设置页面：
+
+1. 在左侧菜单中找到 **Embedding Preference** 或 **嵌入偏好设置**
+2. 点击进入嵌入模型配置页面
+
+### 3.2 配置嵌入模型
+
+| 配置项 | 填写内容 |
+|--------|----------|
+| **Embedding Provider** | 选择 **Generic OpenAI** |
+| **API Key** | 您的 APIMart API 密钥（`sk-xxxxxxxxxxxx`） |
+| **Base URL** | `https://api.apimart.ai/v1` |
+| **Model** | `text-embedding-3-small` 或 `text-embedding-3-large` |
+
+<Tip>
+**模型选择建议：**
+- `text-embedding-3-small` - 快速且经济，适合大多数场景
+- `text-embedding-3-large` - 更高精度，适合对检索质量要求高的场景
+</Tip>
+
+## 第四步：创建工作空间和上传文档
+
+### 4.1 创建工作空间
+
+1. 返回主界面
+2. 点击 **+ New Workspace** 或 **+ 新建工作空间**
+3. 输入工作空间名称（如"技术文档助手"、"客服知识库"等）
+4. 点击创建
+
+### 4.2 上传文档
+
+AnythingLLM 支持多种文档格式：
+
+**支持的文档类型：**
+- 📄 **文本文档** - .txt, .md, .pdf, .docx
+- 💻 **代码文件** - .py, .js, .java, .cpp 等
+- 🌐 **网页** - 通过 URL 抓取
+- 📊 **数据文件** - .csv, .json, .xml
+
+**上传步骤：**
+
+1. 在工作空间页面，点击 **Upload Documents** 或 **上传文档**
+2. 选择文件或拖拽文件到上传区域
+3. 等待文档处理完成
+4. 文档会自动进行向量化处理
+
+<Note>
+**文档处理：** 上传的文档会被自动分割成块，并使用嵌入模型生成向量，存储在本地数据库中。
+</Note>
+
+### 4.3 管理文档
+
+在文档管理页面：
+
+1. 查看已上传的所有文档
+2. 可以删除不需要的文档
+3. 可以查看文档的分块情况
+4. 可以编辑文档的元数据
+
+## 第五步：开始对话
+
+配置完成后，您可以开始使用 AnythingLLM：
+
+### 5.1 基础对话
+
+1. 在工作空间中，找到对话输入框
+2. 输入您的问题或需求
+3. AI 会基于您上传的文档和 APIMart 的模型生成回复
+
+### 5.2 使用知识库功能
+
+AnythingLLM 会自动：
+1. 分析您的问题
+2. 在上传的文档中检索相关内容
+3. 结合检索到的内容和 AI 模型生成准确回答
+
+<Tip>
+**提升检索效果：**
+- 上传高质量、结构化的文档
+- 使用清晰、具体的问题
+- 定期更新和维护知识库
+</Tip>
+
+### 5.3 切换工作空间
+
+您可以创建多个工作空间，用于不同的项目或主题：
+
+1. 点击左上角的工作空间名称
+2. 选择其他工作空间或创建新的
+3. 每个工作空间有独立的文档和对话历史
+
+## 高级功能
+
+### 1. Agent 模式
+
+AnythingLLM 支持 Agent 功能，让 AI 能够：
+- 🔍 **搜索网络** - 实时获取最新信息
+- 🧮 **执行计算** - 处理数学和数据分析
+- 📊 **生成图表** - 可视化数据
+- 🔗 **调用 API** - 与外部服务交互
+
+**启用 Agent 模式：**
+1. 在工作空间设置中找到 **Agent Configuration**
+2. 选择启用的工具和功能
+3. 保存配置
+
+### 2. 对话历史管理
+
+- **导出对话** - 将对话导出为文本或 JSON 格式
+- **搜索历史** - 快速查找历史对话
+- **删除记录** - 清理不需要的对话历史
+
+### 3. 系统提示词自定义
+
+在工作空间设置中：
+1. 找到 **System Prompt** 或 **系统提示词**
+2. 自定义 AI 的角色和行为
+3. 示例：
+
+```
+你是一个专业的技术支持工程师，擅长解答关于产品的技术问题。
+回答时请：
+1. 保持专业和礼貌
+2. 提供详细的步骤说明
+3. 如果不确定，建议用户联系技术支持
+```
+
+### 4. 多用户管理（仅限 Docker 部署）
+
+如果使用 Docker 部署版本：
+- 创建多个用户账户
+- 设置不同的权限级别
+- 管理工作空间的访问权限
+
+### 5. API 访问
+
+AnythingLLM 提供 REST API，可以：
+- 程序化访问工作空间
+- 上传和管理文档
+- 发送对话请求
+- 集成到您的应用中
+
+## 常见问题
+
+### Q1: 无法连接到 APIMart 服务？
+
+**解决方案：**
+
+1. **检查 Base URL**：
+   - 确保是 `https://api.apimart.ai/v1`（包含 `/v1`）
+   - 不要添加额外的路径或遗漏 `/v1`
+
+2. **验证 API Key**：
+   - 确认 API Key 以 `sk-` 开头
+   - 在 [APIMart 控制台](https://api.apimart.ai/console/token) 检查密钥是否有效
+
+3. **检查网络连接**：
+   - 确保能够访问 `https://api.apimart.ai`
+   - 检查防火墙或代理设置
+
+### Q2: 文档上传后无法正常检索？
+
+**解决方案：**
+
+1. **检查嵌入模型配置**：
+   - 确认嵌入模型已正确配置
+   - 测试嵌入模型连接
+
+2. **重新处理文档**：
+   - 删除文档后重新上传
+   - 检查文档格式是否支持
+
+3. **调整检索参数**：
+   - 在工作空间设置中调整相似度阈值
+   - 增加返回的文档块数量
+
+### Q3: 对话响应速度慢？
+
+**解决方案：**
+
+1. **切换更快的模型**：
+   - 使用 `gpt-4o-mini` 代替 `gpt-4o`
+   - 使用 `gemini-2.0-flash-exp` 获得更快响应
+
+2. **优化文档数量**：
+   - 减少工作空间中的文档数量
+   - 删除不必要的大文件
+
+3. **调整 Max Tokens**：
+   - 减少最大输出长度
+   - 使用更简洁的提示词
+
+### Q4: 如何查看 API 使用情况和费用？
+
+登录 [APIMart 控制台](https://api.apimart.ai/console) 查看：
+- 📊 API 调用统计
+- 💰 费用明细
+- 📈 使用趋势图表
+- 🔍 详细的请求日志
+
+### Q5: AnythingLLM 支持哪些部署方式？
+
+AnythingLLM 支持多种部署方式：
+- 🖥️ **桌面应用** - Windows、macOS、Linux
+- 🐳 **Docker** - 自托管部署
+- ☁️ **云端版** - AnythingLLM Cloud（即将推出）
+
+## 使用场景示例
+
+### 1. 企业知识库
+
+**配置：**
+- 模型：`gpt-4o-mini`（高性价比）
+- 文档：公司内部文档、手册、FAQ
+- 功能：员工快速查询公司信息
+
+**示例用例：**
+- 新员工入职培训
+- 快速查找公司政策
+- 技术文档检索
+
+### 2. 技术文档助手
+
+**配置：**
+- 模型：`claude-sonnet-4-5-20250929`（擅长代码）
+- 文档：API 文档、技术规范、代码库
+- 功能：辅助开发人员查找技术信息
+
+**示例用例：**
+- API 使用说明查询
+- 代码示例检索
+- 技术问题解答
+
+### 3. 客户服务知识库
+
+**配置：**
+- 模型：`gpt-4o`（高质量对话）
+- 文档：产品手册、FAQ、解决方案
+- 功能：快速响应客户问题
+
+**示例用例：**
+- 常见问题自动回答
+- 产品使用指导
+- 故障排查建议
+
+### 4. 研究和学习助手
+
+**配置：**
+- 模型：`gpt-5`（强大的理解能力）
+- 文档：研究论文、教材、笔记
+- 功能：辅助学习和研究
+
+**示例用例：**
+- 论文总结和分析
+- 知识点解释
+- 学习路径规划
+
+## 功能特性
+
+使用 AnythingLLM + APIMart，您可以：
+
+- 📚 **私有知识库** - 在本地构建安全的私有知识库
+- 🔒 **数据隐私** - 所有数据存储在本地，保护隐私
+- 🤖 **多模型支持** - 灵活切换不同的 AI 模型
+- 📄 **多格式支持** - 支持各种文档格式
+- 🎯 **精准检索** - 基于向量的智能文档检索
+- 💬 **上下文对话** - 保持长对话的上下文
+- 🔧 **高度可定制** - 自定义提示词、参数等
+- 🌐 **跨平台** - 支持 Windows、macOS、Linux
+
+## 数据安全和隐私
+
+### 本地数据存储
+
+AnythingLLM 的数据存储方式：
+- 📁 **本地文件系统** - 文档存储在本地
+- 🗄️ **本地向量数据库** - 向量索引存储在本地
+- 💾 **对话历史** - 对话记录存储在本地
+
+### API 调用安全
+
+- 🔐 **加密传输** - 所有 API 调用使用 HTTPS 加密
+- 🔑 **密钥保护** - API Key 安全存储
+- 🚫 **无数据留存** - APIMart 不存储您的对话内容
+
+<Warning>
+**隐私提示：** 虽然文档存储在本地，但发送给 AI 的对话和检索内容会通过 API 传输到 APIMart 服务器进行处理。请注意不要上传或查询包含敏感信息的内容。
+</Warning>
+
+## 最佳实践
+
+### 1. 文档管理
+
+- **定期更新** - 保持文档内容最新
+- **结构化组织** - 使用清晰的文件夹结构
+- **命名规范** - 使用有意义的文件名
+- **删除过期** - 定期清理过期文档
+
+### 2. 提示词优化
+
+**❌ 不好的提示：**
+```
+你是助手
+```
+
+**✅ 好的提示：**
+```
+你是一个专业的技术支持助手，专门帮助用户解决产品相关的技术问题。
+
+回答时请遵循以下原则：
+1. 基于提供的文档内容回答，如果文档中没有相关信息，请明确告知
+2. 提供详细的步骤说明，必要时给出示例
+3. 使用清晰、易懂的语言
+4. 对于复杂问题，建议用户联系技术支持团队
+```
+
+### 3. 性能优化
+
+- **控制文档大小** - 避免上传过大的单个文件
+- **合理分块** - 使用默认的文档分块设置
+- **选择合适模型** - 根据任务复杂度选择模型
+- **监控使用量** - 定期检查 API 使用情况
+
+### 4. 工作空间规划
+
+- **按项目划分** - 为不同项目创建独立工作空间
+- **权限管理** - 合理设置工作空间权限（Docker 版）
+- **备份数据** - 定期备份重要工作空间
+
+## 支持与帮助
+
+如果您在使用过程中遇到任何问题：
+
+- 📚 [APIMart 文档中心](https://docs.apimart.ai)
+- 📚 [AnythingLLM 官方文档](https://docs.anythingllm.com/)
+- 📚 [AnythingLLM GitHub](https://github.com/Mintplex-Labs/anything-llm)
+- 💬 [Discord 社区](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 技术支持：zhihong@apimart.ai
+
+---
+
+<Card title="开始使用 APIMart" icon="rocket" href="https://api.apimart.ai">
+  立即注册 APIMart，获取您的 API 密钥，在 AnythingLLM 中构建私有知识库！
+</Card>
+

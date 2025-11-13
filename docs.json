@@ -133,7 +133,8 @@
                 "icon": "message",
                 "pages": [
                   "en/integrations/chatbox",
-                  "en/integrations/cherry-studio"
+                  "en/integrations/cherry-studio",
+                  "en/integrations/anythingllm"
                 ]
               },
               {
@@ -272,7 +273,8 @@
                 "icon": "message",
                 "pages": [
                   "cn/integrations/chatbox",
-                  "cn/integrations/cherry-studio"
+                  "cn/integrations/cherry-studio",
+                  "cn/integrations/anythingllm"
                 ]
               },
               {
@@ -411,7 +413,8 @@
                 "icon": "message",
                 "pages": [
                   "ja/integrations/chatbox",
-                  "ja/integrations/cherry-studio"
+                  "ja/integrations/cherry-studio",
+                  "ja/integrations/anythingllm"
                 ]
               },
               {
@@ -544,7 +547,8 @@
                 "icon": "message",
                 "pages": [
                   "ko/integrations/chatbox",
-                  "ko/integrations/cherry-studio"
+                  "ko/integrations/cherry-studio",
+                  "ko/integrations/anythingllm"
                 ]
               },
               {
