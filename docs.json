@@ -81,7 +81,7 @@
                     ]
                   },
                   {
-                    "group": "Gemini-2.5-Flash-Image (Nano banana)",
+                    "group": "Gemini-2.5-Flash-Image-preview (Nano banana)",
                     "icon": "image",
                     "pages": [
                       "en/api-reference/images/nano-banana/generation"
@@ -221,7 +221,7 @@
                     ]
                   },
                   {
-                    "group": "Gemini-2.5-Flash-Image（Nano banana）",
+                    "group": "Gemini-2.5-Flash-Image-preview（Nano banana）",
                     "icon": "image",
                     "pages": [
                       "cn/api-reference/images/nano-banana/generation"
@@ -361,7 +361,7 @@
                     ]
                   },
                   {
-                    "group": "Gemini-2.5-Flash-Image (Nano banana)",
+                    "group": "Gemini-2.5-Flash-Image-preview (Nano banana)",
                     "icon": "image",
                     "pages": [
                       "ja/api-reference/images/nano-banana/generation"
@@ -495,7 +495,7 @@
                     ]
                   },
                   {
-                    "group": "Gemini-2.5-Flash-Image (Nano banana)",
+                    "group": "Gemini-2.5-Flash-Image-preview (Nano banana)",
                     "icon": "image",
                     "pages": [
                       "ko/api-reference/images/nano-banana/generation"

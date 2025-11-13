@@ -3,18 +3,18 @@ title: "功能特性"
 description: "APIMart支持的功能和兼容性说明"
 ---
 
-## Q7: 支持哪些 AI 模型？
+## 支持哪些 AI 模型？
 
 APIMart 支持多种主流 AI 模型，包括：
 
 - **文本模型**：GPT-5, Claude, Gemini 等
-- **图像模型**：GPT-4o-image, Gemini-2.5-Flash-Image 等
+- **图像模型**：GPT-4o-image, Gemini-2.5-Flash-Image-preview 等
 - **视频模型**：Sora2, VEO3 等
 - **音频模型**：Whisper-1, TTS 等
 
 具体支持的模型请查看 [API 文档](/cn/index)。
 
-## Q8: 与 OpenAI API 的兼容性如何？
+## 与 OpenAI API 的兼容性如何？
 
 APIMart 完全兼容 OpenAI API 格式，您可以：
 
@@ -26,4 +26,25 @@ APIMart 完全兼容 OpenAI API 格式，您可以：
 <Info>
 只需将原有的 OpenAI API 端点 `https://api.openai.com` 替换为 `https://api.apimart.ai`，即可无缝迁移。
 </Info>
+
+## 为什么 API 返回的结果与官方网页版（如 ChatGPT、Claude）不同？
+
+虽然使用的是相同的底层模型，但官方网页版和 API 调用的体验存在差异：
+
+**官方网页版**采用了大量工程优化和增强功能：
+- 内置联网搜索能力，可获取实时信息
+- 对话记忆功能，自动关联上下文
+- 内置计算器和代码执行环境
+- 预设的系统提示词（System Prompt）
+- 优化的用户交互界面
+
+**API 调用**则提供原始的模型能力：
+- 仅提供核心推理和生成能力
+- 需要开发者自行管理对话历史
+- 需要手动配置系统提示词和上下文
+- 需要自行集成工具调用（Function Calling）
+
+<Tip>
+**开发建议**：通过 API 调用时，建议主动配置系统提示词（system message）、维护对话历史记录，并根据需要集成工具调用功能，以获得更接近网页版的体验。
+</Tip>
 

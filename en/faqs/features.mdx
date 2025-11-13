@@ -3,18 +3,18 @@ title: "Features & Capabilities"
 description: "APIMart supported features and compatibility information"
 ---
 
-## Q7: What AI models are supported?
+## What AI models are supported?
 
 APIMart supports various mainstream AI models, including:
 
 - **Text Models**: GPT-5, Claude, Gemini, etc.
-- **Image Models**: GPT-4o-image, Gemini-2.5-Flash-Image, etc.
+- **Image Models**: GPT-4o-image, Gemini-2.5-Flash-Image-preview, etc.
 - **Video Models**: Sora2, VEO3, etc.
 - **Audio Models**: Whisper-1, TTS, etc.
 
 Please check the [API Documentation](/en/index) for specific supported models.
 
-## Q8: How compatible is it with OpenAI API?
+## How compatible is it with OpenAI API?
 
 APIMart is fully compatible with OpenAI API format, allowing you to:
 
@@ -26,4 +26,25 @@ APIMart is fully compatible with OpenAI API format, allowing you to:
 <Info>
 Simply replace the original OpenAI API endpoint `https://api.openai.com` with `https://api.apimart.ai` for seamless migration.
 </Info>
+
+## Why do API responses differ from official web versions (like ChatGPT, Claude)?
+
+While using the same underlying models, there are differences between official web versions and API calls:
+
+**Official Web Versions** include extensive engineering optimizations and enhanced features:
+- Built-in internet search for real-time information
+- Conversation memory that automatically links context
+- Built-in calculator and code execution environment
+- Pre-configured system prompts
+- Optimized user interface
+
+**API Calls** provide raw model capabilities:
+- Only core reasoning and generation abilities
+- Developers must manually manage conversation history
+- Requires manual configuration of system prompts and context
+- Requires self-integration of tool calling (Function Calling)
+
+<Tip>
+**Development Tip**: When using the API, actively configure system prompts (system messages), maintain conversation history, and integrate tool calling features as needed to achieve an experience closer to the web version.
+</Tip>
 
