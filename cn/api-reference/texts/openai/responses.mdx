@@ -15,7 +15,7 @@ api: "POST https://api.apimart.ai/v1/responses"
 ```bash cURL
 curl https://api.apimart.ai/v1/responses \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Authorization: Bearer <token>" \
   -d '{
     "model": "gpt-5",
     "input": [
@@ -940,7 +940,7 @@ cat(content(response, "text"))
 ```bash cURL示例
 curl "https://api.apimart.ai/v1/responses" \
     -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $OPENAI_API_KEY" \
+    -H "Authorization: Bearer <token>" \
     -d '{
         "model": "gpt-5",
         "tools": [{"type": "web_search"}],
