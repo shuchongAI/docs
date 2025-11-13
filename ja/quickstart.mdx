@@ -18,13 +18,35 @@ APIサービスへようこそ！このガイドでは、画像と動画生成�
 
 複数のAIモデルから選択できます。
 
+### テキスト生成モデル
+- **GPT-4o**: 強力な対話とテキスト生成機能
+- **Claude**: Anthropicの高性能な対話モデル
+- **Gemini**: Googleのマルチモーダル大規模言語モデル
+
 ### 画像生成モデル
-- GPT-4o-image：高品質な画像生成
+- **GPT-4o-image**: 高品質な画像生成
 
 ### 動画生成モデル
-- Sora2：プロフェッショナルな動画生成
+- **Sora2**: プロフェッショナルな動画生成
 
 ## ステップ3：リクエストを送信する
+
+### テキスト生成の例
+
+```bash
+curl -X POST https://api.apimart.ai/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [
+      {
+        "role": "user",
+        "content": "こんにちは、自己紹介をしてください"
+      }
+    ]
+  }'
+```
 
 ### 画像生成の例
 

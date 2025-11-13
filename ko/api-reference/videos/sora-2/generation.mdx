@@ -630,6 +630,15 @@ cat(content(response, "text"))
   썸네일이 필요하지 않은 경우 이 매개변수를 생략할 수 있습니다
 </ParamField>
 
+<ParamField body="private" type="boolean" default="false">
+  개인정보 보호 모드 활성화 여부
+
+  - `true`：비디오가 게시되지 않으며 remix 작업(재편집)을 할 수 없습니다
+  - `false`：비디오를 게시하고 remix할 수 있습니다
+
+  기본값: `false`
+</ParamField>
+
 ## 응답
 
 <ResponseField name="code" type="integer">

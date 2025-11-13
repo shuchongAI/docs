@@ -18,13 +18,35 @@ Welcome to our API services! This guide helps you quickly get started with image
 
 We provide multiple AI models to choose from.
 
+### Text Generation Models
+- **GPT-4o**: Powerful dialogue and text generation capabilities
+- **Claude**: High-performance conversational model by Anthropic
+- **Gemini**: Google's multimodal large language model
+
 ### Image Generation Models
-- GPT-4o-image: High‑quality image generation
+- **GPT-4o-image**: High‑quality image generation
 
 ### Video Generation Models
-- Sora2: Professional video generation
+- **Sora2**: Professional video generation
 
 ## Step 3: Send a Request
+
+### Text generation example
+
+```bash
+curl -X POST https://api.apimart.ai/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hello, please introduce yourself"
+      }
+    ]
+  }'
+```
 
 ### Image generation example
 

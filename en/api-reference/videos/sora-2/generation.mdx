@@ -630,6 +630,15 @@ cat(content(response, "text"))
   If you don't need a thumbnail, you can omit this parameter
 </ParamField>
 
+<ParamField body="private" type="boolean" default="false">
+  Whether to enable privacy mode
+
+  - `true`: Video will not be published and cannot be remixed (re-edited)
+  - `false`: Video can be published and remixed
+
+  Default: `false`
+</ParamField>
+
 ## Response
 
 <ResponseField name="code" type="integer">

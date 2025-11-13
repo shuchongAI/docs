@@ -18,6 +18,11 @@ description: "快速开始使用我们的API服务"
 
 我们提供多种AI模型供您选择：
 
+### 文字生成模型
+- **GPT-4o**: 强大的对话和文本生成能力
+- **Claude**: Anthropic 的高性能对话模型
+- **Gemini**: Google 的多模态大语言模型
+
 ### 图像生成模型
 - **GPT-4o-image**: 高质量图像生成
 
@@ -25,6 +30,23 @@ description: "快速开始使用我们的API服务"
 - **Sora2**: 专业视频生成
 
 ## 第三步：发送请求
+
+### 文字生成示例
+
+```bash
+curl -X POST https://api.apimart.ai/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [
+      {
+        "role": "user",
+        "content": "你好，请介绍一下你自己"
+      }
+    ]
+  }'
+```
 
 ### 图像生成示例
 

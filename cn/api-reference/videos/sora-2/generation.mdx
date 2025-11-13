@@ -27,6 +27,7 @@ curl --request POST \
     "prompt": "瀑布倾泻而下形成彩虹",
     "duration": 10,
     "aspect_ratio": "16:9",
+    "private": false,
     "image_urls": ["https://cdn.apimart.ai/doc/9998238782946594-f62f70ce-348c-4b13-bb5f-15f17bee676b-image_task_01K88BEGZHVJWJ3ZV6HY99SWQR_0.png"]
   }'
 ```
@@ -41,6 +42,7 @@ payload = {
     "prompt": "瀑布倾泻而下形成彩虹",
     "duration": 10,
     "aspect_ratio": "16:9",
+    "private": False,
     "image_urls": ["https://cdn.apimart.ai/doc/9998238782946594-f62f70ce-348c-4b13-bb5f-15f17bee676b-image_task_01K88BEGZHVJWJ3ZV6HY99SWQR_0.png"]
 }
 
@@ -62,6 +64,7 @@ const payload = {
   prompt: "瀑布倾泻而下形成彩虹",
   duration: 15,
   aspect_ratio: "16:9",
+  private: false,
   image_urls: ["https://cdn.apimart.ai/doc/9998238782946594-f62f70ce-348c-4b13-bb5f-15f17bee676b-image_task_01K88BEGZHVJWJ3ZV6HY99SWQR_0.png"]
 };
 
@@ -637,6 +640,15 @@ cat(content(response, "text"))
   - `true`：生成视频缩略图，方便预览和展示
   
   如不需要生成缩略图，可省略此参数
+</ParamField>
+
+<ParamField body="private" type="boolean" default="false">
+  是否开启隐私模式
+
+  - `true`：视频不会发布，同时视频无法进行 remix 操作（二次编辑）
+  - `false`：视频可以发布和进行 remix 操作
+
+  默认值：`false`
 </ParamField>
 
 ## Response

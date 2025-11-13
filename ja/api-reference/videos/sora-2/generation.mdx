@@ -630,6 +630,15 @@ cat(content(response, "text"))
   サムネイルが不要な場合は、このパラメータを省略できます
 </ParamField>
 
+<ParamField body="private" type="boolean" default="false">
+  プライバシーモードを有効にするかどうか
+
+  - `true`：動画は公開されず、remix操作（再編集）もできません
+  - `false`：動画を公開およびremixできます
+
+  デフォルト: `false`
+</ParamField>
+
 ## レスポンス
 
 <ResponseField name="code" type="integer">

@@ -129,13 +129,25 @@
             "tab": "Integrations",
             "groups": [
               {
-                "group": "Integration Guides",
-                "icon": "plug",
+                "group": "Chat Applications",
+                "icon": "message",
                 "pages": [
                   "en/integrations/chatbox",
-                  "en/integrations/cherry-studio",
+                  "en/integrations/cherry-studio"
+                ]
+              },
+              {
+                "group": "Development Tools",
+                "icon": "code",
+                "pages": [
                   "en/integrations/cursor",
-                  "en/integrations/cline",
+                  "en/integrations/cline"
+                ]
+              },
+              {
+                "group": "Application Platforms",
+                "icon": "grid",
+                "pages": [
                   "en/integrations/dify",
                   "en/integrations/immersive-translate"
                 ]
@@ -150,6 +162,23 @@
                 "pages": [
                   "en/quickstart",
                   "en/development"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "FAQs",
+            "groups": [
+              {
+                "group": "Overview",
+                "icon": "circle-question",
+                "pages": [
+                  "en/faqs",
+                  "en/faqs/connection-usage",
+                  "en/faqs/account-management",
+                  "en/faqs/security-configuration",
+                  "en/faqs/features",
+                  "en/faqs/cost-optimization"
                 ]
               }
             ]
@@ -239,13 +268,25 @@
             "tab": "集成指南",
             "groups": [
               {
-                "group": "集成指南",
-                "icon": "plug",
+                "group": "聊天应用",
+                "icon": "message",
                 "pages": [
                   "cn/integrations/chatbox",
-                  "cn/integrations/cherry-studio",
+                  "cn/integrations/cherry-studio"
+                ]
+              },
+              {
+                "group": "开发工具",
+                "icon": "code",
+                "pages": [
                   "cn/integrations/cursor",
-                  "cn/integrations/cline",
+                  "cn/integrations/cline"
+                ]
+              },
+              {
+                "group": "应用平台",
+                "icon": "grid",
+                "pages": [
                   "cn/integrations/dify",
                   "cn/integrations/immersive-translate"
                 ]
@@ -260,6 +301,23 @@
                 "pages": [
                   "cn/quickstart",
                   "cn/development"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "常见问题",
+            "groups": [
+              {
+                "group": "概览",
+                "icon": "circle-question",
+                "pages": [
+                  "cn/faqs",
+                  "cn/faqs/connection-usage",
+                  "cn/faqs/account-management",
+                  "cn/faqs/security-configuration",
+                  "cn/faqs/features",
+                  "cn/faqs/cost-optimization"
                 ]
               }
             ]
@@ -349,13 +407,25 @@
             "tab": "統合ガイド",
             "groups": [
               {
-                "group": "統合ガイド",
-                "icon": "plug",
+                "group": "チャットアプリ",
+                "icon": "message",
                 "pages": [
                   "ja/integrations/chatbox",
-                  "ja/integrations/cherry-studio",
+                  "ja/integrations/cherry-studio"
+                ]
+              },
+              {
+                "group": "開発ツール",
+                "icon": "code",
+                "pages": [
                   "ja/integrations/cursor",
-                  "ja/integrations/cline",
+                  "ja/integrations/cline"
+                ]
+              },
+              {
+                "group": "アプリケーションプラットフォーム",
+                "icon": "grid",
+                "pages": [
                   "ja/integrations/dify",
                   "ja/integrations/immersive-translate"
                 ]
@@ -370,6 +440,18 @@
                 "pages": [
                   "ja/quickstart",
                   "ja/development"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "よくある質問",
+            "groups": [
+              {
+                "group": "よくある質問",
+                "icon": "circle-question",
+                "pages": [
+                  "ja/faqs"
                 ]
               }
             ]
@@ -458,13 +540,25 @@
             "tab": "통합 가이드",
             "groups": [
               {
-                "group": "통합 가이드",
-                "icon": "plug",
+                "group": "채팅 애플리케이션",
+                "icon": "message",
                 "pages": [
                   "ko/integrations/chatbox",
-                  "ko/integrations/cherry-studio",
+                  "ko/integrations/cherry-studio"
+                ]
+              },
+              {
+                "group": "개발 도구",
+                "icon": "code",
+                "pages": [
                   "ko/integrations/cursor",
-                  "ko/integrations/cline",
+                  "ko/integrations/cline"
+                ]
+              },
+              {
+                "group": "애플리케이션 플랫폼",
+                "icon": "grid",
+                "pages": [
                   "ko/integrations/dify",
                   "ko/integrations/immersive-translate"
                 ]
@@ -479,6 +573,18 @@
                 "pages": [
                   "ko/quickstart",
                   "ko/development"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "자주 묻는 질문",
+            "groups": [
+              {
+                "group": "자주 묻는 질문",
+                "icon": "circle-question",
+                "pages": [
+                  "ko/faqs"
                 ]
               }
             ]
