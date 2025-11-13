@@ -24,7 +24,8 @@ curl --request POST \
   --data '{
     "model": "sora-2",
     "prompt": "Add a puppy playing in the scene",
-    "duration": 15
+    "duration": 15,
+    "aspect_ratio": "16:9"
   }'
 ```
 
@@ -36,7 +37,8 @@ url = "https://api.apimart.ai/v1/videos/{video_id}/remix"
 payload = {
     "model": "sora-2",
     "prompt": "Add a puppy playing in the scene",
-    "duration": 15
+    "duration": 15,
+    "aspect_ratio": "16:9"
 }
 
 headers = {
@@ -55,7 +57,8 @@ const url = "https://api.apimart.ai/v1/videos/{video_id}/remix";
 const payload = {
   model: "sora-2",
   prompt: "Add a puppy playing in the scene",
-  duration: 15
+  duration: 15,
+  aspect_ratio: "16:9"
 };
 
 const headers = {
@@ -88,8 +91,10 @@ func main() {
     url := "https://api.apimart.ai/v1/videos/{video_id}/remix"
 
     payload := map[string]interface{}{
-        "model":  "sora-2",
-        "prompt": "Add a puppy playing in the scene",
+        "model":        "sora-2",
+        "prompt":       "Add a puppy playing in the scene",
+        "duration":     15,
+        "aspect_ratio": "16:9",
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -123,7 +128,9 @@ public class Main {
         String payload = """
         {
           "model": "sora-2",
-          "prompt": "Add a puppy playing in the scene"
+          "prompt": "Add a puppy playing in the scene",
+          "duration": 15,
+          "aspect_ratio": "16:9"
         }
         """;
 
@@ -150,7 +157,9 @@ $url = "https://api.apimart.ai/v1/videos/{video_id}/remix";
 
 $payload = [
     "model" => "sora-2",
-    "prompt" => "Add a puppy playing in the scene"
+    "prompt" => "Add a puppy playing in the scene",
+    "duration" => 15,
+    "aspect_ratio" => "16:9"
 ];
 
 $ch = curl_init($url);
@@ -178,7 +187,9 @@ url = URI("https://api.apimart.ai/v1/videos/{video_id}/remix")
 
 payload = {
   model: "sora-2",
-  prompt: "Add a puppy playing in the scene"
+  prompt: "Add a puppy playing in the scene",
+  duration: 15,
+  aspect_ratio: "16:9"
 }
 
 http = Net::HTTP.new(url.host, url.port)
@@ -200,7 +211,9 @@ let url = URL(string: "https://api.apimart.ai/v1/videos/{video_id}/remix")!
 
 let payload: [String: Any] = [
     "model": "sora-2",
-    "prompt": "Add a puppy playing in the scene"
+    "prompt": "Add a puppy playing in the scene",
+    "duration": 15,
+    "aspect_ratio": "16:9"
 ]
 
 var request = URLRequest(url: url)
@@ -237,7 +250,9 @@ class Program
 
         var payload = @"{
             ""model"": ""sora-2"",
-            ""prompt"": ""Add a puppy playing in the scene""
+            ""prompt"": ""Add a puppy playing in the scene"",
+            ""duration"": 15,
+            ""aspect_ratio"": ""16:9""
         }";
 
         using var client = new HttpClient();
@@ -267,7 +282,9 @@ int main(void) {
         const char *url = "https://api.apimart.ai/v1/videos/{video_id}/remix";
         const char *payload = "{"
             "\"model\":\"sora-2\","
-            "\"prompt\":\"Add a puppy playing in the scene\""
+            "\"prompt\":\"Add a puppy playing in the scene\","
+            "\"duration\":15,"
+            "\"aspect_ratio\":\"16:9\""
         "}";
 
         struct curl_slist *headers = NULL;
@@ -303,7 +320,9 @@ int main(int argc, const char * argv[]) {
         
         NSDictionary *payload = @{
             @"model": @"sora-2",
-            @"prompt": @"Add a puppy playing in the scene"
+            @"prompt": @"Add a puppy playing in the scene",
+            @"duration": @15,
+            @"aspect_ratio": @"16:9"
         };
         
         NSError *error;
@@ -346,7 +365,9 @@ let url = "https://api.apimart.ai/v1/videos/{video_id}/remix"
 
 let payload = {|{
   "model": "sora-2",
-  "prompt": "Add a puppy playing in the scene"
+  "prompt": "Add a puppy playing in the scene",
+  "duration": 15,
+  "aspect_ratio": "16:9"
 }|}
 
 let () =
@@ -372,7 +393,9 @@ void main() async {
   
   final payload = {
     'model': 'sora-2',
-    'prompt': 'Add a puppy playing in the scene'
+    'prompt': 'Add a puppy playing in the scene',
+    'duration': 15,
+    'aspect_ratio': '16:9'
   };
   
   final response = await http.post(
@@ -396,7 +419,9 @@ url <- "https://api.apimart.ai/v1/videos/{video_id}/remix"
 
 payload <- list(
   model = "sora-2",
-  prompt = "Add a puppy playing in the scene"
+  prompt = "Add a puppy playing in the scene",
+  duration = 15,
+  aspect_ratio = "16:9"
 )
 
 response <- POST(
@@ -559,6 +584,17 @@ cat(content(response, "text"))
   - `sora-2-pro`: Supports 15 seconds (HD) or 25 seconds
 
   Example: `15`
+</ParamField>
+
+<ParamField body="aspect_ratio" type="string">
+  Video aspect ratio
+
+  Supported ratios:
+  - `16:9` - Standard widescreen (recommended)
+  - `9:16` - Portrait mode
+  - `1:1` - Square
+
+  Example: `"16:9"`
 </ParamField>
 
 ## Response

@@ -23,7 +23,9 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "model": "sora-2",
-    "prompt": "シーンに遊んでいる子犬を追加"
+    "prompt": "シーンに遊んでいる子犬を追加",
+    "duration": 15,
+    "aspect_ratio": "16:9"
   }'
 ```
 
@@ -34,7 +36,9 @@ url = "https://api.apimart.ai/v1/videos/{video_id}/remix"
 
 payload = {
     "model": "sora-2",
-    "prompt": "シーンに遊んでいる子犬を追加"
+    "prompt": "シーンに遊んでいる子犬を追加",
+    "duration": 15,
+    "aspect_ratio": "16:9"
 }
 
 headers = {
@@ -52,7 +56,9 @@ const url = "https://api.apimart.ai/v1/videos/{video_id}/remix";
 
 const payload = {
   model: "sora-2",
-  prompt: "シーンに遊んでいる子犬を追加"
+  prompt: "シーンに遊んでいる子犬を追加",
+  duration: 15,
+  aspect_ratio: "16:9"
 };
 
 const headers = {
@@ -85,8 +91,10 @@ func main() {
     url := "https://api.apimart.ai/v1/videos/{video_id}/remix"
 
     payload := map[string]interface{}{
-        "model":  "sora-2",
-        "prompt": "シーンに遊んでいる子犬を追加",
+        "model":        "sora-2",
+        "prompt":       "シーンに遊んでいる子犬を追加",
+        "duration":     15,
+        "aspect_ratio": "16:9",
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -120,7 +128,9 @@ public class Main {
         String payload = """
         {
           "model": "sora-2",
-          "prompt": "シーンに遊んでいる子犬を追加"
+          "prompt": "シーンに遊んでいる子犬を追加",
+          "duration": 15,
+          "aspect_ratio": "16:9"
         }
         """;
 
@@ -147,7 +157,9 @@ $url = "https://api.apimart.ai/v1/videos/{video_id}/remix";
 
 $payload = [
     "model" => "sora-2",
-    "prompt" => "シーンに遊んでいる子犬を追加"
+    "prompt" => "シーンに遊んでいる子犬を追加",
+    "duration" => 15,
+    "aspect_ratio" => "16:9"
 ];
 
 $ch = curl_init($url);
@@ -175,7 +187,9 @@ url = URI("https://api.apimart.ai/v1/videos/{video_id}/remix")
 
 payload = {
   model: "sora-2",
-  prompt: "シーンに遊んでいる子犬を追加"
+  prompt: "シーンに遊んでいる子犬を追加",
+  duration: 15,
+  aspect_ratio: "16:9"
 }
 
 http = Net::HTTP.new(url.host, url.port)
@@ -197,7 +211,9 @@ let url = URL(string: "https://api.apimart.ai/v1/videos/{video_id}/remix")!
 
 let payload: [String: Any] = [
     "model": "sora-2",
-    "prompt": "シーンに遊んでいる子犬を追加"
+    "prompt": "シーンに遊んでいる子犬を追加",
+    "duration": 15,
+    "aspect_ratio": "16:9"
 ]
 
 var request = URLRequest(url: url)
@@ -234,7 +250,9 @@ class Program
 
         var payload = @"{
             ""model"": ""sora-2"",
-            ""prompt"": ""シーンに遊んでいる子犬を追加""
+            ""prompt"": ""シーンに遊んでいる子犬を追加"",
+            ""duration"": 15,
+            ""aspect_ratio"": ""16:9""
         }";
 
         using var client = new HttpClient();
@@ -264,7 +282,9 @@ int main(void) {
         const char *url = "https://api.apimart.ai/v1/videos/{video_id}/remix";
         const char *payload = "{"
             "\"model\":\"sora-2\","
-            "\"prompt\":\"シーンに遊んでいる子犬を追加\""
+            "\"prompt\":\"シーンに遊んでいる子犬を追加\","
+            "\"duration\":15,"
+            "\"aspect_ratio\":\"16:9\""
         "}";
 
         struct curl_slist *headers = NULL;
@@ -300,7 +320,9 @@ int main(int argc, const char * argv[]) {
         
         NSDictionary *payload = @{
             @"model": @"sora-2",
-            @"prompt": @"シーンに遊んでいる子犬を追加"
+            @"prompt": @"シーンに遊んでいる子犬を追加",
+            @"duration": @15,
+            @"aspect_ratio": @"16:9"
         };
         
         NSError *error;
@@ -343,7 +365,9 @@ let url = "https://api.apimart.ai/v1/videos/{video_id}/remix"
 
 let payload = {|{
   "model": "sora-2",
-  "prompt": "シーンに遊んでいる子犬を追加"
+  "prompt": "シーンに遊んでいる子犬を追加",
+  "duration": 15,
+  "aspect_ratio": "16:9"
 }|}
 
 let () =
@@ -369,7 +393,9 @@ void main() async {
   
   final payload = {
     'model': 'sora-2',
-    'prompt': 'シーンに遊んでいる子犬を追加'
+    'prompt': 'シーンに遊んでいる子犬を追加',
+    'duration': 15,
+    'aspect_ratio': '16:9'
   };
   
   final response = await http.post(
@@ -393,7 +419,9 @@ url <- "https://api.apimart.ai/v1/videos/{video_id}/remix"
 
 payload <- list(
   model = "sora-2",
-  prompt = "シーンに遊んでいる子犬を追加"
+  prompt = "シーンに遊んでいる子犬を追加",
+  duration = 15,
+  aspect_ratio = "16:9"
 )
 
 response <- POST(
@@ -556,6 +584,17 @@ cat(content(response, "text"))
   - `sora-2-pro`：15秒（HD）または25秒をサポート
 
   例：`15`
+</ParamField>
+
+<ParamField body="aspect_ratio" type="string">
+  ビデオのアスペクト比
+
+  サポートされている比率：
+  - `16:9` - 標準ワイドスクリーン（推奨）
+  - `9:16` - 縦向きモード
+  - `1:1` - 正方形
+
+  例：`"16:9"`
 </ParamField>
 
 ## レスポンス
