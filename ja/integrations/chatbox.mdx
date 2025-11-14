@@ -41,7 +41,7 @@ ChatBox を初めて起動するか、新しい AI プロバイダーを追加�
 設定ページで：
 
 1. **AI Provider** 設定を見つけます
-2. ドロップダウンメニューから **OpenAI API** を選択します
+2. ドロップダウンメニューから **OpenAI API**（GPT シリーズモデル用）、**Claude API**（Claude シリーズモデル用）、または **Gemini API**（Gemini シリーズモデル用）を選択します
 
 <Frame>
   <img src="/images/integrations/chatbox/settings-page.png" alt="ChatBox 設定ページ" />
@@ -61,12 +61,33 @@ OpenAI API を選択したら、以下の設定を入力します：
 <Frame>
   <img src="/images/integrations/chatbox/api-config.png" alt="API 設定" />
 </Frame>
+Claude API を選択したら、以下の設定を入力します：
+
+| 項目 | 値 |
+|------|-----|
+| **API Key** | APIMart API キー（`sk-xxxxxxxxxxxx`） |
+| **API Host** または **API Domain** | `https://api.apimart.ai/v1` |
+<Frame>
+  <img src="/images/integrations/chatbox/claude.png" alt="claude モデル" />
+</Frame>
+Gemini API を選択したら、以下の設定を入力します：
+
+| 項目 | 値 |
+|------|-----|
+| **API Key** | APIMart API キー（`sk-xxxxxxxxxxxx`） |
+| **API Host** または **API Domain** | `https://api.apimart.ai/` |
+
+
 
 <caption>*APIMart の API Key と API Host を入力*</caption>
-
+<Frame>
+  <img src="/images/integrations/chatbox/Gemini.png" alt="Gemini" />
+</Frame>
 <Warning>
 **重要：**
-- API Host は `https://api.apimart.ai` にしてください（`/v1` サフィックスなし）
+- OpenAI API を使用する場合、API Host は `https://api.apimart.ai` にしてください（`/v1` サフィックスなし）
+- Claude API を使用する場合、API Host は `https://api.apimart.ai/v1` にしてください（`/v1` サフィックス付き）
+- Gemini API を使用する場合、API Host は `https://api.apimart.ai/` にしてください（`/v1` サフィックスなし）
 - API Key は APIMart コンソールから取得した `sk-` で始まるものである必要があります
 - API キーに十分な残高があることを確認してください
 </Warning>
@@ -85,6 +106,23 @@ OpenAI API を選択したら、以下の設定を入力します：
 | Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` | コードに優れる |
 | Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | 高速応答 |
 | Gemini 2.0 Flash | `gemini-2.0-flash-exp` | マルチモーダル対応 |
+
+<Warning>
+**Claude モデル使用時の特別な手順：**
+
+Claude モデル（`claude-sonnet-4-5-20250929` や `claude-haiku-4-5-20251001` など）を使用する場合は、以下の追加設定が必要です：
+
+1. **Claude API プロバイダーに切り替え**：
+   - 設定で **AI プロバイダー** を **Claude API** に変更します
+   - API Host は `https://api.apimart.ai/v1` のままにします
+   - API Key は APIMart の API キー（`sk-xxxxxxxxxxxx`）を使用します
+
+2. **またはカスタムリクエストヘッダーを追加**（OpenAI API プロバイダーを使用する場合）：
+   - 一部のバージョンの ChatBox はカスタムヘッダーの追加に対応しています
+   - 詳細設定でリクエストヘッダーを追加：`anthropic-version: 2023-06-01`
+
+**推奨方法：** GPT シリーズモデルには **OpenAI API**、Claude シリーズモデルには **Claude API**、Gemini シリーズモデルには **Gemini API** を使用してください。
+</Warning>
 
 <Frame>
   <img src="/images/integrations/chatbox/model-selection.png" alt="モデル選択" />

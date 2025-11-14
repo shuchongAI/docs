@@ -41,7 +41,7 @@ description: "详细指导如何在 ChatBox 桌面客户端中配置和使用 AP
 在设置页面中：
 
 1. 找到 **AI 模型提供商** 或 **AI Provider** 设置项
-2. 在下拉菜单中选择 **OpenAI API**
+2. 在下拉菜单中选择 **OpenAI API**（使用 GPT 系列模型）、**Claude API**（使用 Claude 系列模型）或 **Gemini API**（使用 Gemini 系列模型）
 
 <Frame>
   <img src="/images/integrations/chatbox/settings-page.png" alt="ChatBox 设置页面" />
@@ -51,7 +51,7 @@ description: "详细指导如何在 ChatBox 桌面客户端中配置和使用 AP
 
 ### 2.2 配置 API 信息
 
-选择 OpenAI API 后，填写以下配置信息：
+选择 **OpenAI API** 后，填写以下配置信息：
 
 | 配置项 | 填写内容 |
 |--------|----------|
@@ -61,12 +61,33 @@ description: "详细指导如何在 ChatBox 桌面客户端中配置和使用 AP
 <Frame>
   <img src="/images/integrations/chatbox/api-config.png" alt="API 配置" />
 </Frame>
+选择 **Claude API** 后，填写以下配置信息：
+
+| 配置项 | 填写内容 |
+|--------|----------|
+| **API Key** | 您的 APIMart API 密钥（`sk-xxxxxxxxxxxx`） |
+| **API Host** 或 **API Domain** | `https://api.apimart.ai/v1` |
+<Frame>
+  <img src="/images/integrations/chatbox/claude.png" alt="claude模型" />
+</Frame>
+选择 **Gemini API** 后，填写以下配置信息：
+
+| 配置项 | 填写内容 |
+|--------|----------|
+| **API Key** | 您的 APIMart API 密钥（`sk-xxxxxxxxxxxx`） |
+| **API Host** 或 **API Domain** | `https://api.apimart.ai/` |
+
+
 
 <caption>*填写 APIMart 的 API Key 和 API Host*</caption>
-
+<Frame>
+  <img src="/images/integrations/chatbox/Gemini.png" alt="Gemini" />
+</Frame>
 <Warning>
 **重要提示：**
-- API Host 应填写 `https://api.apimart.ai`（不包含 `/v1` 后缀）
+- 使用 OpenAI API 时，API Host 应填写 `https://api.apimart.ai`（不包含 `/v1` 后缀）
+- 使用 Claude API 时，API Host 应填写 `https://api.apimart.ai/v1`（包含 `/v1` 后缀）
+- 使用 Gemini API 时，API Host 应填写 `https://api.apimart.ai/`（不包含 `/v1` 后缀）
 - API Key 必须是从 APIMart 控制台获取的以 `sk-` 开头的密钥
 - 确保您的 API 密钥有足够的余额
 </Warning>
@@ -86,9 +107,24 @@ description: "详细指导如何在 ChatBox 桌面客户端中配置和使用 AP
 | Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | 快速响应 |
 | Gemini 2.0 Flash | `gemini-2.0-flash-exp` | 多模态支持 |
 
-<Frame>
-  <img src="/images/integrations/chatbox/model-selection.png" alt="选择模型" />
-</Frame>
+<Warning>
+**使用 Claude 模型的特殊说明：**
+
+如果您选择使用 Claude 模型（如 `claude-sonnet-4-5-20250929` 或 `claude-haiku-4-5-20251001`），需要进行以下额外配置：
+
+1. **切换到 Claude API 提供商**：
+   - 在设置中将 **AI 模型提供商** 改为 **Claude API**
+   - API Host 保持填写 `https://api.apimart.ai/v1`
+   - API Key 使用您的 APIMart API 密钥（`sk-xxxxxxxxxxxx`）
+
+2. **或者添加自定义请求头**（如果使用 OpenAI API 提供商）：
+   - 某些版本的 ChatBox 支持添加自定义 Headers
+   - 在高级设置中添加请求头：`anthropic-version: 2023-06-01`
+
+**推荐方式：** 使用 GPT 系列模型时选择 **OpenAI API**，使用 Claude 系列模型时选择 **Claude API**，使用 Gemini 系列模型时选择 **Gemini API**。
+</Warning>
+
+
 
 <caption>*从模型列表中选择您需要使用的 AI 模型*</caption>
 

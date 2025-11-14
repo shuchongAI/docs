@@ -41,7 +41,7 @@ When launching ChatBox for the first time or adding a new AI provider:
 In the settings page:
 
 1. Find the **AI Provider** setting
-2. Select **OpenAI API** from the dropdown menu
+2. Select **OpenAI API** (for GPT series models), **Claude API** (for Claude series models), or **Gemini API** (for Gemini series models) from the dropdown menu
 
 <Frame>
   <img src="/images/integrations/chatbox/settings-page.png" alt="ChatBox Settings Page" />
@@ -61,12 +61,33 @@ After selecting OpenAI API, fill in the following configuration:
 <Frame>
   <img src="/images/integrations/chatbox/api-config.png" alt="API Configuration" />
 </Frame>
+After selecting Claude API, fill in the following configuration:
+
+| Field | Value |
+|-------|-------|
+| **API Key** | Your APIMart API key (`sk-xxxxxxxxxxxx`) |
+| **API Host** or **API Domain** | `https://api.apimart.ai/v1` |
+<Frame>
+  <img src="/images/integrations/chatbox/claude.png" alt="Claude Model" />
+</Frame>
+After selecting Gemini API, fill in the following configuration:
+
+| Field | Value |
+|-------|-------|
+| **API Key** | Your APIMart API key (`sk-xxxxxxxxxxxx`) |
+| **API Host** or **API Domain** | `https://api.apimart.ai/` |
+
+
 
 <caption>*Fill in APIMart's API Key and API Host*</caption>
-
+<Frame>
+  <img src="/images/integrations/chatbox/Gemini.png" alt="Gemini" />
+</Frame>
 <Warning>
 **Important:**
-- API Host should be `https://api.apimart.ai` (without `/v1` suffix)
+- When using OpenAI API, API Host should be `https://api.apimart.ai` (without `/v1` suffix)
+- When using Claude API, API Host should be `https://api.apimart.ai/v1` (with `/v1` suffix)
+- When using Gemini API, API Host should be `https://api.apimart.ai/` (without `/v1` suffix)
 - API Key must be obtained from APIMart console and start with `sk-`
 - Ensure your API key has sufficient balance
 </Warning>
@@ -85,6 +106,23 @@ After configuration, select the model you want to use from the **Model** dropdow
 | Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` | Excellent for code |
 | Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | Fast response |
 | Gemini 2.0 Flash | `gemini-2.0-flash-exp` | Multimodal support |
+
+<Warning>
+**Special Instructions for Using Claude Models:**
+
+If you choose to use Claude models (such as `claude-sonnet-4-5-20250929` or `claude-haiku-4-5-20251001`), you need the following additional configuration:
+
+1. **Switch to Claude API Provider**:
+   - Change the **AI Provider** to **Claude API** in settings
+   - Keep API Host as `https://api.apimart.ai/v1`
+   - Use your APIMart API key (`sk-xxxxxxxxxxxx`)
+
+2. **Or Add Custom Request Headers** (if using OpenAI API provider):
+   - Some versions of ChatBox support adding custom Headers
+   - Add the request header in advanced settings: `anthropic-version: 2023-06-01`
+
+**Recommended Approach:** Use **OpenAI API** for GPT series models, **Claude API** for Claude series models, and **Gemini API** for Gemini series models.
+</Warning>
 
 <Frame>
   <img src="/images/integrations/chatbox/model-selection.png" alt="Model Selection" />

@@ -41,7 +41,7 @@ ChatBox를 처음 실행하거나 새 AI 제공업체를 추가할 때:
 설정 페이지에서:
 
 1. **AI Provider** 설정을 찾습니다
-2. 드롭다운 메뉴에서 **OpenAI API**를 선택합니다
+2. 드롭다운 메뉴에서 **OpenAI API**（GPT 시리즈 모델용）、**Claude API**（Claude 시리즈 모델용）、또는 **Gemini API**（Gemini 시리즈 모델용）를 선택합니다
 
 <Frame>
   <img src="/images/integrations/chatbox/settings-page.png" alt="ChatBox 설정 페이지" />
@@ -61,12 +61,33 @@ OpenAI API를 선택한 후 다음 구성을 입력합니다:
 <Frame>
   <img src="/images/integrations/chatbox/api-config.png" alt="API 구성" />
 </Frame>
+Claude API를 선택한 후 다음 구성을 입력합니다:
+
+| 필드 | 값 |
+|------|-----|
+| **API Key** | APIMart API 키 (`sk-xxxxxxxxxxxx`) |
+| **API Host** 또는 **API Domain** | `https://api.apimart.ai/v1` |
+<Frame>
+  <img src="/images/integrations/chatbox/claude.png" alt="claude 모델" />
+</Frame>
+Gemini API를 선택한 후 다음 구성을 입력합니다:
+
+| 필드 | 값 |
+|------|-----|
+| **API Key** | APIMart API 키 (`sk-xxxxxxxxxxxx`) |
+| **API Host** 또는 **API Domain** | `https://api.apimart.ai/` |
+
+
 
 <caption>*APIMart의 API Key 및 API Host 입력*</caption>
-
+<Frame>
+  <img src="/images/integrations/chatbox/Gemini.png" alt="Gemini" />
+</Frame>
 <Warning>
 **중요:**
-- API Host는 `https://api.apimart.ai`이어야 합니다 (`/v1` 접미사 없이)
+- OpenAI API를 사용할 때 API Host는 `https://api.apimart.ai`이어야 합니다 (`/v1` 접미사 없이)
+- Claude API를 사용할 때 API Host는 `https://api.apimart.ai/v1`이어야 합니다 (`/v1` 접미사 포함)
+- Gemini API를 사용할 때 API Host는 `https://api.apimart.ai/`이어야 합니다 (`/v1` 접미사 없이)
 - API Key는 APIMart 콘솔에서 획득한 `sk-`로 시작하는 것이어야 합니다
 - API 키에 충분한 잔액이 있는지 확인하세요
 </Warning>
@@ -85,6 +106,23 @@ OpenAI API를 선택한 후 다음 구성을 입력합니다:
 | Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` | 코드에 탁월함 |
 | Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | 빠른 응답 |
 | Gemini 2.0 Flash | `gemini-2.0-flash-exp` | 멀티모달 지원 |
+
+<Warning>
+**Claude 모델 사용 시 특별 지침:**
+
+Claude 모델(`claude-sonnet-4-5-20250929` 또는 `claude-haiku-4-5-20251001` 등)을 사용하려는 경우 다음과 같은 추가 구성이 필요합니다:
+
+1. **Claude API 제공자로 전환**:
+   - 설정에서 **AI 제공자**를 **Claude API**로 변경합니다
+   - API Host는 `https://api.apimart.ai/v1`로 유지합니다
+   - API Key는 APIMart API 키(`sk-xxxxxxxxxxxx`)를 사용합니다
+
+2. **또는 사용자 정의 요청 헤더 추가** (OpenAI API 제공자를 사용하는 경우):
+   - 일부 버전의 ChatBox는 사용자 정의 헤더 추가를 지원합니다
+   - 고급 설정에서 요청 헤더 추가: `anthropic-version: 2023-06-01`
+
+**권장 방법:** GPT 시리즈 모델에는 **OpenAI API**、Claude 시리즈 모델에는 **Claude API**、Gemini 시리즈 모델에는 **Gemini API**를 사용하세요.
+</Warning>
 
 <Frame>
   <img src="/images/integrations/chatbox/model-selection.png" alt="모델 선택" />
