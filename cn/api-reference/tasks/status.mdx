@@ -313,25 +313,53 @@ cat(content(response, "text"))
 
 <ResponseExample>
 
-```json 200
+```json 200 - 图像生成任务
 {
   "code": 200,
   "data": {
-    "id": "task-unified-1757156493-k9m2xpvw",
+    "id": "task_01KA040M0HP1GJWBJYZMKX1XS1",
     "status": "completed",
     "progress": 100,
     "result": {
       "images": [
         {
-          "url": "https://example.com/generated-image.png",
-          "expires_at": 1757242893
+          "url": [
+            "https://upload.apimart.ai/f/image/9998236911693428-e8d7441f-f7b4-4130-97ad-9ef8a0dde2ce-image_task_01KA0413RT2GGNZJ9GWQ4PXF2F_0.png"
+          ],
+          "expires_at": 1763174708
         }
       ]
     },
-    "created": 1757156493,
-    "completed": 1757156593,
-    "estimated_time": 100,
-    "actual_time": 100
+    "created": 1763088289,
+    "completed": 1763088308,
+    "estimated_time": 60,
+    "actual_time": 19
+  }
+}
+```
+
+```json 200 - 视频生成任务（包含缩略图）
+{
+  "code": 200,
+  "data": {
+    "id": "task_01K9S419324DREZFBWNSVXYR6H",
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "thumbnail_url": "https://upload.apimart.ai/f/image/9998237146274576-da8a0eed-9229-4b31-97df-f3e9817d74c2-thumbnail_task_01K9S419324DREZFBWNSVXYR6H.jpg",
+      "videos": [
+        {
+          "url": [
+            "https://upload.apimart.ai/f/video/9998237146293438-170e0d9d-5d1d-421d-94fe-bcd0be7ae50a-video_task_01K9S419324DREZFBWNSVXYR6H.mp4"
+          ],
+          "expires_at": 1762940095
+        }
+      ]
+    },
+    "created": 1762853430,
+    "completed": 1762853695,
+    "estimated_time": 600,
+    "actual_time": 265
   }
 }
 ```
@@ -471,6 +499,14 @@ cat(content(response, "text"))
 
     <ResponseField name="videos" type="array">
       生成的视频对象数组（视频生成任务）
+    </ResponseField>
+
+    <ResponseField name="thumbnail_url" type="string">
+      视频缩略图 URL（视频生成任务）
+      
+      <Note>
+      **重要提示：** 此字段仅在创建任务时请求参数中明确指定生成缩略图时才会返回。如果请求时未指定生成缩略图，响应中将不包含此字段。
+      </Note>
     </ResponseField>
   </Expandable>
 </ResponseField>

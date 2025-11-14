@@ -313,25 +313,53 @@ cat(content(response, "text"))
 
 <ResponseExample>
 
-```json 200
+```json 200 - 이미지 생성 작업
 {
   "code": 200,
   "data": {
-    "id": "task-unified-1757156493-k9m2xpvw",
+    "id": "task_01KA040M0HP1GJWBJYZMKX1XS1",
     "status": "completed",
     "progress": 100,
     "result": {
       "images": [
         {
-          "url": "https://example.com/generated-image.png",
-          "expires_at": 1757242893
+          "url": [
+            "https://upload.apimart.ai/f/image/9998236911693428-e8d7441f-f7b4-4130-97ad-9ef8a0dde2ce-image_task_01KA0413RT2GGNZJ9GWQ4PXF2F_0.png"
+          ],
+          "expires_at": 1763174708
         }
       ]
     },
-    "created": 1757156493,
-    "completed": 1757156593,
-    "estimated_time": 100,
-    "actual_time": 100
+    "created": 1763088289,
+    "completed": 1763088308,
+    "estimated_time": 60,
+    "actual_time": 19
+  }
+}
+```
+
+```json 200 - 비디오 생성 작업 (썸네일 포함)
+{
+  "code": 200,
+  "data": {
+    "id": "task_01K9S419324DREZFBWNSVXYR6H",
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "thumbnail_url": "https://upload.apimart.ai/f/image/9998237146274576-da8a0eed-9229-4b31-97df-f3e9817d74c2-thumbnail_task_01K9S419324DREZFBWNSVXYR6H.jpg",
+      "videos": [
+        {
+          "url": [
+            "https://upload.apimart.ai/f/video/9998237146293438-170e0d9d-5d1d-421d-94fe-bcd0be7ae50a-video_task_01K9S419324DREZFBWNSVXYR6H.mp4"
+          ],
+          "expires_at": 1762940095
+        }
+      ]
+    },
+    "created": 1762853430,
+    "completed": 1762853695,
+    "estimated_time": 600,
+    "actual_time": 265
   }
 }
 ```
@@ -471,6 +499,14 @@ cat(content(response, "text"))
 
     <ResponseField name="videos" type="array">
       생성된 비디오 객체 배열 (비디오 생성 작업의 경우)
+    </ResponseField>
+
+    <ResponseField name="thumbnail_url" type="string">
+      비디오 썸네일 URL (비디오 생성 작업의 경우)
+      
+      <Note>
+      **중요:** 이 필드는 작업 생성 시 요청 매개변수에서 썸네일 생성을 명시적으로 지정한 경우에만 반환됩니다. 썸네일 생성이 요청되지 않은 경우 이 필드는 응답에 포함되지 않습니다.
+      </Note>
     </ResponseField>
   </Expandable>
 </ResponseField>
