@@ -142,7 +142,8 @@
                 "icon": "code",
                 "pages": [
                   "en/integrations/cursor",
-                  "en/integrations/cline"
+                  "en/integrations/cline",
+                  "en/integrations/gemini"
                 ]
               },
               {
@@ -282,7 +283,8 @@
                 "icon": "code",
                 "pages": [
                   "cn/integrations/cursor",
-                  "cn/integrations/cline"
+                  "cn/integrations/cline",
+                  "cn/integrations/gemini"
                 ]
               },
               {
@@ -422,7 +424,8 @@
                 "icon": "code",
                 "pages": [
                   "ja/integrations/cursor",
-                  "ja/integrations/cline"
+                  "ja/integrations/cline",
+                  "ja/integrations/gemini"
                 ]
               },
               {
@@ -556,7 +559,8 @@
                 "icon": "code",
                 "pages": [
                   "ko/integrations/cursor",
-                  "ko/integrations/cline"
+                  "ko/integrations/cline",
+                  "ko/integrations/gemini"
                 ]
               },
               {

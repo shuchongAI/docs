@@ -1,0 +1,397 @@
+---
+title: "Using APIMart with Gemini CLI"
+description: "Comprehensive guide on configuring APIMart API service in Gemini CLI command-line tool. This guide helps you use various AI models through APIMart via command line, including Gemini, GPT, and Claude series."
+---
+
+## Introduction
+
+Gemini CLI is Google's official command-line tool that allows developers to interact with Gemini AI models through the terminal. By configuring APIMart API, you can use various advanced AI models provided by APIMart in Gemini CLI, including GPT, Claude, and Gemini series.
+
+## Prerequisites
+
+Before getting started, ensure you have:
+
+1. **Node.js and npm installed**  
+   Download and install from [Node.js official website](https://nodejs.org/) (v16 or higher recommended)
+
+2. **APIMart API Key**  
+   Log in to [APIMart Console](https://api.apimart.ai/console/token) to obtain your API key (starts with `sk-`)
+
+<Note>
+**Tip:** If you don't have an APIMart account yet, register at [APIMart](https://api.apimart.ai) first and obtain an API key.
+</Note>
+
+## Step 1: Install Gemini CLI
+
+### 1.1 Global Installation
+
+Install Gemini CLI globally using npm:
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+### 1.2 Verify Installation
+
+Check if the installation was successful:
+
+```bash
+gemini --version
+```
+
+If it displays a version number, the installation was successful.
+
+## Step 2: Configure APIMart API
+
+### 2.1 Temporary Environment Variables
+
+For testing or one-time use, expires when terminal is closed:
+
+**Windows (PowerShell):**
+
+```powershell
+$env:GEMINI_API_KEY = "sk-xxxxxxxxxxxx"
+$env:GEMINI_BASE_URL = "https://api.apimart.ai/v1"
+```
+
+**macOS/Linux (Bash):**
+
+```bash
+export GEMINI_API_KEY="sk-xxxxxxxxxxxx"
+export GEMINI_BASE_URL="https://api.apimart.ai/v1"
+```
+
+### 2.2 Permanent Environment Variables (Recommended)
+
+Write configuration to system, automatically applies on every terminal session:
+
+**Windows (PowerShell):**
+
+1. Run PowerShell as Administrator
+2. Execute the following commands to set user-level environment variables:
+
+```powershell
+[System.Environment]::SetEnvironmentVariable('GEMINI_API_KEY', 'sk-xxxxxxxxxxxx', 'User')
+[System.Environment]::SetEnvironmentVariable('GEMINI_BASE_URL', 'https://api.apimart.ai/v1', 'User')
+```
+
+3. Restart PowerShell or execute the following commands to refresh environment variables:
+
+```powershell
+$env:GEMINI_API_KEY = [System.Environment]::GetEnvironmentVariable('GEMINI_API_KEY', 'User')
+$env:GEMINI_BASE_URL = [System.Environment]::GetEnvironmentVariable('GEMINI_BASE_URL', 'User')
+```
+
+**macOS/Linux (Bash):**
+
+1. Edit the configuration file (choose based on your shell):
+
+```bash
+# For Bash
+nano ~/.bashrc
+
+# For Zsh (macOS default)
+nano ~/.zshrc
+```
+
+2. Add the following at the end of the file:
+
+```bash
+# APIMart Gemini CLI Configuration
+export GEMINI_API_KEY="sk-xxxxxxxxxxxx"
+export GEMINI_BASE_URL="https://api.apimart.ai/v1"
+```
+
+3. Save the file and reload configuration:
+
+```bash
+# For Bash
+source ~/.bashrc
+
+# For Zsh
+source ~/.zshrc
+```
+
+### 2.3 Using .env File
+
+Create a `.env` file in your project directory:
+
+```bash
+# .env
+GEMINI_API_KEY=sk-xxxxxxxxxxxx
+GEMINI_BASE_URL=https://api.apimart.ai/v1
+```
+
+Then load environment variables before running commands:
+
+**macOS/Linux:**
+
+```bash
+export $(cat .env | xargs) && gemini chat
+```
+
+**Windows (PowerShell):**
+
+```powershell
+Get-Content .env | ForEach-Object {
+    $name, $value = $_.split('=')
+    Set-Content env:\$name $value
+}
+gemini chat
+```
+
+<Note>
+**Important:**
+- Replace `sk-xxxxxxxxxxxx` with your actual API key from [APIMart Console](https://api.apimart.ai/console/token)
+- Set `GEMINI_BASE_URL` to `https://api.apimart.ai/v1` to ensure Gemini CLI connects to APIMart
+- If using `.env` file, add it to `.gitignore` to avoid exposing your API key
+</Note>
+
+### 2.4 Verify Configuration
+
+Check if environment variables are set correctly:
+
+**macOS/Linux:**
+
+```bash
+echo $GEMINI_API_KEY
+echo $GEMINI_BASE_URL
+```
+
+**Windows (PowerShell):**
+
+```powershell
+echo $env:GEMINI_API_KEY
+echo $env:GEMINI_BASE_URL
+```
+
+If the correct values are displayed, the configuration is successful.
+
+## Step 3: Start Using Gemini CLI
+
+### 3.1 Basic Conversation
+
+Start interactive conversation:
+
+```bash
+gemini chat
+```
+
+Or send a one-time request:
+
+```bash
+gemini "Please explain the history of artificial intelligence"
+```
+
+### 3.2 Specify Model
+
+Chat with a specific model:
+
+```bash
+gemini chat --model gpt-4o
+```
+
+Or:
+
+```bash
+gemini "Write a Python quicksort algorithm" --model claude-sonnet-4-5-20250929
+```
+
+## Step 4: Using APIMart API with Code
+
+### 2.1 Using Python SDK
+
+```python
+import openai
+
+# Configure APIMart API
+openai.api_key = "sk-xxxxxxxxxxxx"  # Your APIMart API key
+openai.api_base = "https://api.apimart.ai/v1"
+
+# Use Gemini model
+response = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[
+        {"role": "user", "content": "Hello, please introduce yourself"}
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+### 2.2 Using JavaScript/TypeScript
+
+```javascript
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  apiKey: 'sk-xxxxxxxxxxxx', // Your APIMart API key
+  baseURL: 'https://api.apimart.ai/v1'
+});
+
+async function main() {
+  const completion = await client.chat.completions.create({
+    model: 'gemini-2.0-flash-exp',
+    messages: [
+      { role: 'user', content: 'Hello, please introduce yourself' }
+    ]
+  });
+  
+  console.log(completion.choices[0].message.content);
+}
+
+main();
+```
+
+### 2.3 Using cURL
+
+```bash
+curl https://api.apimart.ai/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-xxxxxxxxxxxx" \
+  -d '{
+    "model": "gemini-2.0-flash-exp",
+    "messages": [
+      {"role": "user", "content": "Hello, please introduce yourself"}
+    ]
+  }'
+```
+
+## Step 3: Choose the Right Model
+
+### Recommended Models
+
+**Gemini Series:**
+
+| Model Name | Model ID | Features | Use Cases |
+|-----------|----------|----------|-----------|
+| Gemini 2.0 Flash | `gemini-2.0-flash-exp` | Fast, multimodal | Quick response, image understanding |
+| Gemini 2.5 Pro | `gemini-2.5-pro` | Powerful performance | Complex tasks, professional analysis |
+| Gemini 2.5 Flash | `gemini-2.5-flash` | High-speed response | Real-time interaction, batch processing |
+
+**GPT Series:**
+
+| Model Name | Model ID | Features | Use Cases |
+|-----------|----------|----------|-----------|
+| GPT-5 | `gpt-5` | Latest and strongest | Complex reasoning, creative writing |
+| GPT-4o | `gpt-4o` | High quality | Daily conversation, content generation |
+| GPT-4o Mini | `gpt-4o-mini` | Cost-effective | Simple tasks, high-frequency use |
+
+**Claude Series:**
+
+| Model Name | Model ID | Features | Use Cases |
+|-----------|----------|----------|-----------|
+| Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` | Strong reasoning | Code generation, logical analysis |
+| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | Extremely fast | Quick Q&A, real-time chat |
+
+<Tip>
+**Model Selection Tips:**
+- 🚀 **Google Ecosystem:** `gemini-2.0-flash-exp`, `gemini-2.5-pro`
+- 💡 **Code Development:** `claude-sonnet-4-5-20250929`, `gpt-5`
+- 💰 **Cost Optimization:** `gpt-4o-mini`, `claude-haiku-4-5-20251001`
+- ⚡ **Fast Response:** `gemini-2.0-flash-exp`, `gpt-4o-mini`
+</Tip>
+
+## Advanced Features
+
+### Multimodal Support
+
+```python
+response = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": "What's in this image?"},
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": "https://example.com/image.jpg"
+                    }
+                }
+            ]
+        }
+    ]
+)
+```
+
+### Streaming Output
+
+```python
+stream = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[{"role": "user", "content": "Write a poem about spring"}],
+    stream=True
+)
+
+for chunk in stream:
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end='')
+```
+
+## FAQ
+
+### Q1: How to verify API configuration?
+
+```python
+import openai
+
+openai.api_key = "sk-xxxxxxxxxxxx"
+openai.api_base = "https://api.apimart.ai/v1"
+
+try:
+    response = openai.ChatCompletion.create(
+        model="gemini-2.0-flash-exp",
+        messages=[{"role": "user", "content": "test"}],
+        max_tokens=10
+    )
+    print("✅ API configuration successful!")
+    print(f"Response: {response.choices[0].message.content}")
+except Exception as e:
+    print(f"❌ API configuration failed: {e}")
+```
+
+### Q2: Supported Programming Languages?
+
+APIMart API supports all programming languages that can send HTTP requests:
+
+- ✅ **Python** - Recommended with OpenAI SDK
+- ✅ **JavaScript/TypeScript** - Node.js and browser
+- ✅ **Java** - HTTP client
+- ✅ **Go** - Standard library or third-party packages
+- ✅ **PHP** - cURL or Guzzle
+- ✅ **Ruby** - HTTP library
+- ✅ **C#/.NET** - HttpClient
+- ✅ **Swift** - URLSession
+- ✅ **Other languages** - Any language supporting HTTP
+
+## Features
+
+Using Google AI Studio + APIMart, you can:
+
+- 🤖 **Multi-model Support** - Access GPT, Claude, Gemini, and more
+- 🌍 **OpenAI Compatible** - Standard OpenAI API format
+- ⚡ **High Performance** - Low latency, high concurrency
+- 💰 **Transparent Pricing** - Clear pay-as-you-go pricing
+- 📊 **Usage Monitoring** - Real-time API call tracking
+- 🔒 **Secure & Reliable** - Enterprise-grade security
+- 🚀 **Quick Integration** - Simple API calls
+- 📚 **Complete Documentation** - Detailed development docs and examples
+
+## Support & Help
+
+If you encounter any issues:
+
+- 📚 [APIMart Documentation](https://docs.apimart.ai)
+- 📚 [Google AI Studio Documentation](https://ai.google.dev/docs)
+- 💬 [Discord Community](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 Technical Support: zhihong@apimart.ai
+
+---
+
+<Card title="Get Started with APIMart" icon="rocket" href="https://api.apimart.ai">
+  Sign up for APIMart now, get your API key, and use multiple AI models in Google AI Studio!
+</Card>
+

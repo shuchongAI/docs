@@ -1,0 +1,559 @@
+---
+title: "Gemini CLI で APIMart を使用する"
+description: "Gemini CLI コマンドラインツールで APIMart API サービスを設定する詳細ガイド。このガイドは、コマンドラインから Gemini、GPT、Claude シリーズを含む APIMart のさまざまな AI モデルを使用する方法を案内します。"
+---
+
+## はじめに
+
+Gemini CLI は Google が提供する公式コマンドラインツールで、開発者がターミナルから Gemini AI モデルと対話できるようにします。APIMart API を設定することで、GPT、Claude、Gemini シリーズを含む、APIMart が提供するさまざまな高度な AI モデルを Gemini CLI で使用できます。
+
+## 前提条件
+
+始める前に、以下を確認してください：
+
+1. **Node.js と npm がインストールされていること**  
+   [Node.js 公式サイト](https://nodejs.org/)からダウンロードしてインストール（v16 以上を推奨）
+
+2. **APIMart API キー**  
+   [APIMart コンソール](https://api.apimart.ai/console/token)にログインして API キーを取得（`sk-` で始まる）
+
+<Note>
+**ヒント：** APIMart アカウントをまだお持ちでない場合は、まず [APIMart](https://api.apimart.ai) で登録して API キーを取得してください。
+</Note>
+
+## ステップ 1: Gemini CLI をインストール
+
+### 1.1 グローバルインストール
+
+npm を使用して Gemini CLI をグローバルにインストールします：
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+### 1.2 インストールの確認
+
+インストールが成功したか確認します：
+
+```bash
+gemini --version
+```
+
+バージョン番号が表示されれば、インストールは成功です。
+
+<Note>
+**ヒント：** コマンドが使用できない場合は、ターミナルを再起動するか、npm のグローバルパス設定を確認してください。
+</Note>
+
+## ステップ 2: APIMart API を設定
+
+### 2.1 一時的な環境変数設定
+
+テストまたは一回限りの使用に適しています。ターミナルを閉じると無効になります：
+
+**Windows (PowerShell):**
+
+```powershell
+$env:GEMINI_API_KEY = "sk-xxxxxxxxxxxx"
+$env:GEMINI_BASE_URL = "https://api.apimart.ai/v1"
+```
+
+**macOS/Linux (Bash):**
+
+```bash
+export GEMINI_API_KEY="sk-xxxxxxxxxxxx"
+export GEMINI_BASE_URL="https://api.apimart.ai/v1"
+```
+
+### 2.2 恒久的な環境変数設定（推奨）
+
+システムに設定を書き込み、ターミナルを開くたびに自動的に適用されます：
+
+**Windows (PowerShell):**
+
+1. PowerShell を管理者として実行
+2. 以下のコマンドを実行してユーザーレベルの環境変数を設定：
+
+```powershell
+[System.Environment]::SetEnvironmentVariable('GEMINI_API_KEY', 'sk-xxxxxxxxxxxx', 'User')
+[System.Environment]::SetEnvironmentVariable('GEMINI_BASE_URL', 'https://api.apimart.ai/v1', 'User')
+```
+
+3. PowerShell を再起動するか、以下のコマンドを実行して環境変数を更新：
+
+```powershell
+$env:GEMINI_API_KEY = [System.Environment]::GetEnvironmentVariable('GEMINI_API_KEY', 'User')
+$env:GEMINI_BASE_URL = [System.Environment]::GetEnvironmentVariable('GEMINI_BASE_URL', 'User')
+```
+
+**macOS/Linux (Bash):**
+
+1. 設定ファイルを編集（使用しているシェルに応じて選択）：
+
+```bash
+# Bash の場合
+nano ~/.bashrc
+
+# Zsh の場合（macOS デフォルト）
+nano ~/.zshrc
+```
+
+2. ファイルの末尾に以下を追加：
+
+```bash
+# APIMart Gemini CLI 設定
+export GEMINI_API_KEY="sk-xxxxxxxxxxxx"
+export GEMINI_BASE_URL="https://api.apimart.ai/v1"
+```
+
+3. ファイルを保存して設定を再読み込み：
+
+```bash
+# Bash の場合
+source ~/.bashrc
+
+# Zsh の場合
+source ~/.zshrc
+```
+
+### 2.3 .env ファイルを使用した設定
+
+プロジェクトディレクトリに `.env` ファイルを作成：
+
+```bash
+# .env
+GEMINI_API_KEY=sk-xxxxxxxxxxxx
+GEMINI_BASE_URL=https://api.apimart.ai/v1
+```
+
+コマンドを実行する前に環境変数を読み込み：
+
+**macOS/Linux:**
+
+```bash
+export $(cat .env | xargs) && gemini chat
+```
+
+**Windows (PowerShell):**
+
+```powershell
+Get-Content .env | ForEach-Object {
+    $name, $value = $_.split('=')
+    Set-Content env:\$name $value
+}
+gemini chat
+```
+
+<Note>
+**重要な注意事項：**
+- `sk-xxxxxxxxxxxx` を [APIMart コンソール](https://api.apimart.ai/console/token)から取得した実際の API キーに置き換えてください
+- `GEMINI_BASE_URL` を `https://api.apimart.ai/v1` に設定して、Gemini CLI が APIMart に接続するようにします
+- `.env` ファイルを使用する場合は、API キーの漏洩を避けるため `.gitignore` に追加してください
+</Note>
+
+### 2.4 設定の確認
+
+環境変数が正しく設定されているか確認：
+
+**macOS/Linux:**
+
+```bash
+echo $GEMINI_API_KEY
+echo $GEMINI_BASE_URL
+```
+
+**Windows (PowerShell):**
+
+```powershell
+echo $env:GEMINI_API_KEY
+echo $env:GEMINI_BASE_URL
+```
+
+正しい値が表示されれば、設定は成功です。
+
+## ステップ 3: Gemini CLI の使用を開始
+
+### 3.1 基本的な会話
+
+対話型会話を開始：
+
+```bash
+gemini chat
+```
+
+または、単一のリクエストを直接送信：
+
+```bash
+gemini "人工知能の発展の歴史について教えてください"
+```
+
+### 3.2 モデルの指定
+
+特定のモデルで会話：
+
+```bash
+gemini chat --model gpt-4o
+```
+
+または：
+
+```bash
+gemini "Python のクイックソートアルゴリズムを書いて" --model claude-sonnet-4-5-20250929
+```
+
+### 3.3 ファイルからプロンプトを読み込む
+
+ファイルからプロンプトを読み込む：
+
+```bash
+gemini --input prompt.txt
+```
+
+またはパイプを使用：
+
+```bash
+cat prompt.txt | gemini
+```
+
+### 3.4 出力をファイルに保存
+
+AI の応答をファイルに保存：
+
+```bash
+gemini "React コンポーネントのコードを生成して" --output component.jsx
+```
+
+## ステップ 4: コードで APIMart を使用
+
+独自のコードで APIMart API を使用する場合：
+
+### 4.1 Python SDK を使用
+
+```python
+import openai
+
+# APIMart API を設定
+openai.api_key = "sk-xxxxxxxxxxxx"  # APIMart API キー
+openai.api_base = "https://api.apimart.ai/v1"
+
+# Gemini モデルを使用
+response = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[
+        {"role": "user", "content": "こんにちは、自己紹介してください"}
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+### 4.2 JavaScript/TypeScript を使用
+
+```javascript
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  apiKey: 'sk-xxxxxxxxxxxx', // APIMart API キー
+  baseURL: 'https://api.apimart.ai/v1'
+});
+
+async function main() {
+  const completion = await client.chat.completions.create({
+    model: 'gemini-2.0-flash-exp',
+    messages: [
+      { role: 'user', content: 'こんにちは、自己紹介してください' }
+    ]
+  });
+  
+  console.log(completion.choices[0].message.content);
+}
+
+main();
+```
+
+### 4.3 cURL を使用
+
+```bash
+curl https://api.apimart.ai/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-xxxxxxxxxxxx" \
+  -d '{
+    "model": "gemini-2.0-flash-exp",
+    "messages": [
+      {"role": "user", "content": "こんにちは、自己紹介してください"}
+    ]
+  }'
+```
+
+## ステップ 5: 適切なモデルの選択
+
+### 推奨モデル
+
+APIMart は多様なモデルをサポートしており、ニーズに応じて選択できます：
+
+**Gemini シリーズ：**
+
+| モデル名 | モデル ID | 特徴 | 適用シーン |
+|---------|---------|------|---------|
+| Gemini 2.0 Flash | `gemini-2.0-flash-exp` | 高速、マルチモーダル | 迅速な応答、画像とテキストの理解 |
+| Gemini 2.5 Pro | `gemini-2.5-pro` | 強力なパフォーマンス | 複雑なタスク、専門的な分析 |
+| Gemini 2.5 Flash | `gemini-2.5-flash` | 高速応答 | リアルタイム対話、バッチ処理 |
+
+**GPT シリーズ：**
+
+| モデル名 | モデル ID | 特徴 | 適用シーン |
+|---------|---------|------|---------|
+| GPT-5 | `gpt-5` | 最新最強 | 複雑な推論、創造的な執筆 |
+| GPT-4o | `gpt-4o` | 高品質 | 日常会話、コンテンツ生成 |
+| GPT-4o Mini | `gpt-4o-mini` | 経済的 | シンプルなタスク、高頻度使用 |
+
+**Claude シリーズ：**
+
+| モデル名 | モデル ID | 特徴 | 適用シーン |
+|---------|---------|------|---------|
+| Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` | 強力な推論能力 | コード生成、論理分析 |
+| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | 超高速 | 迅速な Q&A、リアルタイム対話 |
+
+<Tip>
+**モデル選択のアドバイス：**
+- 🚀 **Google エコシステム統合：** `gemini-2.0-flash-exp`、`gemini-2.5-pro`
+- 💡 **コード開発：** `claude-sonnet-4-5-20250929`、`gpt-5`
+- 💰 **コスト最適化：** `gpt-4o-mini`、`claude-haiku-4-5-20251001`
+- ⚡ **迅速な応答：** `gemini-2.0-flash-exp`、`gpt-4o-mini`
+</Tip>
+
+## 高度な機能
+
+### マルチモーダルサポート
+
+マルチモーダルをサポートするモデル（Gemini 2.0 Flash など）で画像を処理：
+
+```python
+response = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": "この画像には何がありますか？"},
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": "https://example.com/image.jpg"
+                    }
+                }
+            ]
+        }
+    ]
+)
+```
+
+### ストリーミング出力
+
+リアルタイムストリーミング応答を取得：
+
+```python
+stream = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[{"role": "user", "content": "春についての詩を書いて"}],
+    stream=True
+)
+
+for chunk in stream:
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end='')
+```
+
+### パラメータ調整
+
+モデル出力を最適化：
+
+```python
+response = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[{"role": "user", "content": "あなたの質問"}],
+    temperature=0.7,        # ランダム性を制御 (0-2)
+    max_tokens=2000,        # 最大出力長
+    top_p=0.9,             # ニュークリアスサンプリングパラメータ
+    presence_penalty=0,     # トピックの新鮮さ
+    frequency_penalty=0     # 繰り返しペナルティ
+)
+```
+
+## よくある質問
+
+### Q1: API キーが無効と表示される？
+
+**解決策：**
+
+1. **API Key フォーマットの確認**：
+   - API Key が `sk-` で始まることを確認
+   - 完全にコピーされ、余分なスペースがないことを確認
+
+2. **環境変数の確認**：
+   ```bash
+   # macOS/Linux
+   echo $GEMINI_API_KEY
+   echo $GEMINI_BASE_URL
+   
+   # Windows PowerShell
+   echo $env:GEMINI_API_KEY
+   echo $env:GEMINI_BASE_URL
+   ```
+
+3. **キーの有効性を確認**：
+   - [APIMart コンソール](https://api.apimart.ai/console/token)でキーの状態を確認
+   - アカウントに十分な残高があることを確認
+
+### Q2: API 設定が正しいか確認する方法は？
+
+**テスト方法：**
+
+```python
+import openai
+
+openai.api_key = "sk-xxxxxxxxxxxx"
+openai.api_base = "https://api.apimart.ai/v1"
+
+try:
+    response = openai.ChatCompletion.create(
+        model="gemini-2.0-flash-exp",
+        messages=[{"role": "user", "content": "テスト"}],
+        max_tokens=10
+    )
+    print("✅ API 設定成功！")
+    print(f"応答: {response.choices[0].message.content}")
+except Exception as e:
+    print(f"❌ API 設定失敗: {e}")
+```
+
+### Q3: どのプログラミング言語がサポートされていますか？
+
+APIMart API は HTTP リクエストを送信できるすべてのプログラミング言語をサポートしています：
+
+- ✅ **Python** - OpenAI SDK の使用を推奨
+- ✅ **JavaScript/TypeScript** - Node.js とブラウザ環境
+- ✅ **Java** - HTTP クライアントを使用
+- ✅ **Go** - 標準ライブラリまたはサードパーティパッケージ
+- ✅ **PHP** - cURL または Guzzle
+- ✅ **Ruby** - HTTP ライブラリ
+- ✅ **C#/.NET** - HttpClient
+- ✅ **Swift** - URLSession
+- ✅ **その他の言語** - HTTP をサポートする任意の言語
+
+### Q4: API 使用状況を確認する方法は？
+
+[APIMart コンソール](https://api.apimart.ai/console)にログインして確認：
+
+- 📊 リアルタイム呼び出し統計
+- 💰 費用詳細と請求書
+- 📈 使用トレンドチャート
+- 🔍 詳細なリクエストログ
+- ⚙️ API キー管理
+
+### Q5: API エラーが発生した場合は？
+
+**一般的なエラーと解決策：**
+
+| エラーコード | 原因 | 解決方法 |
+|---------|------|---------|
+| `401 Unauthorized` | API Key が無効 | API Key が正しいか確認 |
+| `429 Too Many Requests` | リクエストが頻繁すぎる | リクエスト頻度を下げるかプランをアップグレード |
+| `500 Internal Server Error` | サーバーエラー | 後で再試行するかサポートに連絡 |
+| `insufficient_quota` | 残高不足 | コンソールでチャージ |
+
+## ベストプラクティス
+
+### 1. エラー処理
+
+```python
+import openai
+import time
+
+def call_with_retry(max_retries=3):
+    for i in range(max_retries):
+        try:
+            response = openai.ChatCompletion.create(
+                model="gemini-2.0-flash-exp",
+                messages=[{"role": "user", "content": "あなたの質問"}]
+            )
+            return response
+        except openai.error.RateLimitError:
+            if i < max_retries - 1:
+                time.sleep(2 ** i)  # 指数バックオフ
+                continue
+            raise
+        except Exception as e:
+            print(f"エラー: {e}")
+            raise
+
+response = call_with_retry()
+```
+
+### 2. コスト最適化
+
+```python
+# タスクの複雑さに応じて適切なモデルを選択
+def choose_model(task_complexity):
+    if task_complexity == "simple":
+        return "gpt-4o-mini"  # 経済的
+    elif task_complexity == "medium":
+        return "gemini-2.0-flash-exp"  # パフォーマンスとコストのバランス
+    else:
+        return "gpt-5"  # 高性能
+
+model = choose_model("simple")
+response = openai.ChatCompletion.create(
+    model=model,
+    messages=[{"role": "user", "content": "あなたの質問"}],
+    max_tokens=500  # 出力長を制限してコストを管理
+)
+```
+
+### 3. プロンプト最適化
+
+```python
+# システムプロンプトを使用して出力品質を向上
+response = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[
+        {
+            "role": "system",
+            "content": "あなたはプロの Python プログラミングアシスタントで、明確で効率的なコードを書くことが得意です。"
+        },
+        {
+            "role": "user",
+            "content": "クイックソートアルゴリズムを書いてください"
+        }
+    ]
+)
+```
+
+## 機能特性
+
+Gemini CLI + APIMart を使用すると、以下が可能です：
+
+- 🤖 **多モデルサポート** - GPT、Claude、Gemini など複数のモデルにアクセス
+- 🌍 **OpenAI 互換** - 標準の OpenAI API フォーマットを使用
+- ⚡ **高性能** - 低レイテンシ、高並行性サポート
+- 💰 **透明な価格設定** - 明確な従量課金制
+- 📊 **使用状況モニタリング** - API 呼び出しをリアルタイムで表示
+- 🔒 **安全で信頼性が高い** - エンタープライズグレードのセキュリティ
+- 🚀 **迅速な統合** - シンプルな API 呼び出し方法
+- 📚 **完全なドキュメント** - 詳細な開発ドキュメントと例
+
+## サポートとヘルプ
+
+使用中に問題が発生した場合：
+
+- 📚 [APIMart ドキュメントセンター](https://docs.apimart.ai)
+- 📚 [Gemini CLI ドキュメント](https://ai.google.dev/docs)
+- 💬 [Discord コミュニティ](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 技術サポート：zhihong@apimart.ai
+
+---
+
+<Card title="APIMart を始める" icon="rocket" href="https://api.apimart.ai">
+  今すぐ APIMart に登録して、API キーを取得し、Gemini CLI でさまざまな AI モデルを使用しましょう！
+</Card>

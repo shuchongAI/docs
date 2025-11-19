@@ -1,0 +1,560 @@
+---
+title: "在 Gemini CLI 中使用 APIMart"
+description: "详细指导如何在 Gemini CLI 命令行工具中配置 APIMart API 服务。本指南将帮助您通过命令行使用 APIMart 的各种 AI 模型，包括 Gemini、GPT 和 Claude 系列。"
+---
+
+## 简介
+
+Gemini CLI 是 Google 提供的官方命令行工具，允许开发者通过终端与 Gemini AI 模型进行交互。通过配置 APIMart API，您可以在 Gemini CLI 中使用 APIMart 提供的多种先进 AI 模型，包括 GPT、Claude 和 Gemini 系列。
+
+## 准备工作
+
+在开始之前，请确保：
+
+1. **已安装 Node.js 和 npm**  
+   从 [Node.js 官网](https://nodejs.org/) 下载并安装（建议 v16 或更高版本）
+
+2. **已获取 APIMart API 密钥**  
+   登录 [APIMart 控制台](https://api.apimart.ai/console/token) 获取您的 API 密钥（以 `sk-` 开头）
+
+<Note>
+**提示：** 如果还没有 APIMart 账户，请先在 [APIMart](https://api.apimart.ai) 注册并获取 API 密钥。
+</Note>
+
+## 第一步：安装 Gemini CLI
+
+### 1.1 全局安装
+
+使用 npm 全局安装 Gemini CLI：
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+### 1.2 验证安装
+
+检查是否安装成功：
+
+```bash
+gemini --version
+```
+
+如果显示版本号，则说明安装成功。
+
+<Note>
+**提示：** 如果命令不可用，可能需要重启终端或检查 npm 全局路径配置。
+</Note>
+
+## 第二步：配置 APIMart API
+
+### 2.1 临时环境变量配置
+
+适用于测试或单次使用，关闭终端后失效：
+
+**Windows (PowerShell):**
+
+```powershell
+$env:GEMINI_API_KEY = "sk-xxxxxxxxxxxx"
+$env:GEMINI_BASE_URL = "https://api.apimart.ai/v1"
+```
+
+**macOS/Linux (Bash):**
+
+```bash
+export GEMINI_API_KEY="sk-xxxxxxxxxxxx"
+export GEMINI_BASE_URL="https://api.apimart.ai/v1"
+```
+
+### 2.2 永久环境变量配置（推荐）
+
+将配置写入系统，每次打开终端自动生效：
+
+**Windows (PowerShell):**
+
+1. 以管理员身份运行 PowerShell
+2. 执行以下命令设置用户级环境变量：
+
+```powershell
+[System.Environment]::SetEnvironmentVariable('GEMINI_API_KEY', 'sk-xxxxxxxxxxxx', 'User')
+[System.Environment]::SetEnvironmentVariable('GEMINI_BASE_URL', 'https://api.apimart.ai/v1', 'User')
+```
+
+3. 重启 PowerShell 或执行以下命令刷新环境变量：
+
+```powershell
+$env:GEMINI_API_KEY = [System.Environment]::GetEnvironmentVariable('GEMINI_API_KEY', 'User')
+$env:GEMINI_BASE_URL = [System.Environment]::GetEnvironmentVariable('GEMINI_BASE_URL', 'User')
+```
+
+**macOS/Linux (Bash):**
+
+1. 编辑配置文件（根据您使用的 shell 选择）：
+
+```bash
+# 对于 Bash
+nano ~/.bashrc
+
+# 对于 Zsh (macOS 默认)
+nano ~/.zshrc
+```
+
+2. 在文件末尾添加以下内容：
+
+```bash
+# APIMart Gemini CLI 配置
+export GEMINI_API_KEY="sk-xxxxxxxxxxxx"
+export GEMINI_BASE_URL="https://api.apimart.ai/v1"
+```
+
+3. 保存文件并重新加载配置：
+
+```bash
+# 对于 Bash
+source ~/.bashrc
+
+# 对于 Zsh
+source ~/.zshrc
+```
+
+### 2.3 使用 .env 文件配置
+
+在项目目录下创建 `.env` 文件：
+
+```bash
+# .env
+GEMINI_API_KEY=sk-xxxxxxxxxxxx
+GEMINI_BASE_URL=https://api.apimart.ai/v1
+```
+
+然后在运行命令前加载环境变量：
+
+**macOS/Linux:**
+
+```bash
+export $(cat .env | xargs) && gemini chat
+```
+
+**Windows (PowerShell):**
+
+```powershell
+Get-Content .env | ForEach-Object {
+    $name, $value = $_.split('=')
+    Set-Content env:\$name $value
+}
+gemini chat
+```
+
+<Note>
+**重要提示：**
+- 将 `sk-xxxxxxxxxxxx` 替换为您从 [APIMart 控制台](https://api.apimart.ai/console/token) 获取的实际 API 密钥
+- `GEMINI_BASE_URL` 设置为 `https://api.apimart.ai/v1`，确保 Gemini CLI 连接到 APIMart
+- 如果使用 `.env` 文件，请将其添加到 `.gitignore` 避免泄露 API 密钥
+</Note>
+
+### 2.4 验证配置
+
+检查环境变量是否设置成功：
+
+**macOS/Linux:**
+
+```bash
+echo $GEMINI_API_KEY
+echo $GEMINI_BASE_URL
+```
+
+**Windows (PowerShell):**
+
+```powershell
+echo $env:GEMINI_API_KEY
+echo $env:GEMINI_BASE_URL
+```
+
+如果显示了正确的值，说明配置成功。
+
+## 第三步：开始使用 Gemini CLI
+
+### 3.1 基本对话
+
+启动交互式对话：
+
+```bash
+gemini chat
+```
+
+或直接发送单次请求：
+
+```bash
+gemini "请介绍一下人工智能的发展历史"
+```
+
+### 3.2 指定模型
+
+使用特定模型进行对话：
+
+```bash
+gemini chat --model gpt-4o
+```
+
+或：
+
+```bash
+gemini "写一个 Python 快速排序算法" --model claude-sonnet-4-5-20250929
+```
+
+### 3.3 从文件读取提示词
+
+从文件中读取提示词：
+
+```bash
+gemini --input prompt.txt
+```
+
+或使用管道：
+
+```bash
+cat prompt.txt | gemini
+```
+
+### 3.4 保存输出到文件
+
+将 AI 响应保存到文件：
+
+```bash
+gemini "生成一个 React 组件代码" --output component.jsx
+```
+
+## 第四步：通过代码使用 APIMart
+
+如果您想在自己的代码中使用 APIMart API：
+
+### 4.1 使用 Python SDK
+
+```python
+import openai
+
+# 配置 APIMart API
+openai.api_key = "sk-xxxxxxxxxxxx"  # 您的 APIMart API 密钥
+openai.api_base = "https://api.apimart.ai/v1"
+
+# 使用 Gemini 模型
+response = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[
+        {"role": "user", "content": "你好，请介绍一下自己"}
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+### 4.2 使用 JavaScript/TypeScript
+
+```javascript
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  apiKey: 'sk-xxxxxxxxxxxx', // 您的 APIMart API 密钥
+  baseURL: 'https://api.apimart.ai/v1'
+});
+
+async function main() {
+  const completion = await client.chat.completions.create({
+    model: 'gemini-2.0-flash-exp',
+    messages: [
+      { role: 'user', content: '你好，请介绍一下自己' }
+    ]
+  });
+  
+  console.log(completion.choices[0].message.content);
+}
+
+main();
+```
+
+### 4.3 使用 cURL
+
+```bash
+curl https://api.apimart.ai/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-xxxxxxxxxxxx" \
+  -d '{
+    "model": "gemini-2.0-flash-exp",
+    "messages": [
+      {"role": "user", "content": "你好，请介绍一下自己"}
+    ]
+  }'
+```
+
+## 第五步：选择合适的模型
+
+### 推荐模型
+
+APIMart 支持多种模型，您可以根据需求选择：
+
+**Gemini 系列：**
+
+| 模型名称 | 模型 ID | 特点 | 适用场景 |
+|---------|---------|------|---------|
+| Gemini 2.0 Flash | `gemini-2.0-flash-exp` | 速度快，多模态 | 快速响应、图文理解 |
+| Gemini 2.5 Pro | `gemini-2.5-pro` | 性能强大 | 复杂任务、专业分析 |
+| Gemini 2.5 Flash | `gemini-2.5-flash` | 高速响应 | 实时交互、批量处理 |
+
+**GPT 系列：**
+
+| 模型名称 | 模型 ID | 特点 | 适用场景 |
+|---------|---------|------|---------|
+| GPT-5 | `gpt-5` | 最新最强 | 复杂推理、创意写作 |
+| GPT-4o | `gpt-4o` | 高质量 | 日常对话、内容生成 |
+| GPT-4o Mini | `gpt-4o-mini` | 经济实惠 | 简单任务、高频使用 |
+
+**Claude 系列：**
+
+| 模型名称 | 模型 ID | 特点 | 适用场景 |
+|---------|---------|------|---------|
+| Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` | 推理能力强 | 代码生成、逻辑分析 |
+| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | 速度极快 | 快速问答、实时对话 |
+
+<Tip>
+**模型选择建议：**
+- 🚀 **Google 生态整合：** `gemini-2.0-flash-exp`、`gemini-2.5-pro`
+- 💡 **代码开发：** `claude-sonnet-4-5-20250929`、`gpt-5`
+- 💰 **成本优化：** `gpt-4o-mini`、`claude-haiku-4-5-20251001`
+- ⚡ **快速响应：** `gemini-2.0-flash-exp`、`gpt-4o-mini`
+</Tip>
+
+## 高级功能
+
+### 多模态支持
+
+使用支持多模态的模型（如 Gemini 2.0 Flash）处理图像：
+
+```python
+response = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": "这张图片里有什么？"},
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": "https://example.com/image.jpg"
+                    }
+                }
+            ]
+        }
+    ]
+)
+```
+
+### 流式输出
+
+获取实时流式响应：
+
+```python
+stream = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[{"role": "user", "content": "写一首关于春天的诗"}],
+    stream=True
+)
+
+for chunk in stream:
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end='')
+```
+
+### 调整参数
+
+优化模型输出：
+
+```python
+response = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[{"role": "user", "content": "你的问题"}],
+    temperature=0.7,        # 控制随机性 (0-2)
+    max_tokens=2000,        # 最大输出长度
+    top_p=0.9,             # 核采样参数
+    presence_penalty=0,     # 话题新鲜度
+    frequency_penalty=0     # 重复惩罚
+)
+```
+
+## 常见问题
+
+### Q1: 提示 API 密钥无效？
+
+**解决方案：**
+
+1. **检查 API Key 格式**：
+   - 确认 API Key 以 `sk-` 开头
+   - 确保复制完整，没有多余的空格
+
+2. **检查环境变量**：
+   ```bash
+   # macOS/Linux
+   echo $GEMINI_API_KEY
+   echo $GEMINI_BASE_URL
+   
+   # Windows PowerShell
+   echo $env:GEMINI_API_KEY
+   echo $env:GEMINI_BASE_URL
+   ```
+
+3. **验证密钥有效性**：
+   - 在 [APIMart 控制台](https://api.apimart.ai/console/token) 检查密钥状态
+   - 确认账户有足够余额
+
+### Q2: 如何验证 API 配置是否正确？
+
+**测试方法：**
+
+```python
+import openai
+
+openai.api_key = "sk-xxxxxxxxxxxx"
+openai.api_base = "https://api.apimart.ai/v1"
+
+try:
+    response = openai.ChatCompletion.create(
+        model="gemini-2.0-flash-exp",
+        messages=[{"role": "user", "content": "测试"}],
+        max_tokens=10
+    )
+    print("✅ API 配置成功！")
+    print(f"响应: {response.choices[0].message.content}")
+except Exception as e:
+    print(f"❌ API 配置失败: {e}")
+```
+
+### Q3: 支持哪些编程语言？
+
+APIMart API 支持所有能够发送 HTTP 请求的编程语言：
+
+- ✅ **Python** - 推荐使用 OpenAI SDK
+- ✅ **JavaScript/TypeScript** - Node.js 和浏览器环境
+- ✅ **Java** - 使用 HTTP 客户端
+- ✅ **Go** - 使用标准库或第三方包
+- ✅ **PHP** - cURL 或 Guzzle
+- ✅ **Ruby** - HTTP 库
+- ✅ **C#/.NET** - HttpClient
+- ✅ **Swift** - URLSession
+- ✅ **其他语言** - 任何支持 HTTP 的语言
+
+### Q4: 如何查看 API 使用情况？
+
+登录 [APIMart 控制台](https://api.apimart.ai/console) 查看：
+
+- 📊 实时调用统计
+- 💰 费用明细和账单
+- 📈 使用趋势图表
+- 🔍 详细的请求日志
+- ⚙️ API 密钥管理
+
+### Q5: 遇到 API 错误怎么办？
+
+**常见错误及解决方案：**
+
+| 错误代码 | 原因 | 解决方法 |
+|---------|------|---------|
+| `401 Unauthorized` | API Key 无效 | 检查 API Key 是否正确 |
+| `429 Too Many Requests` | 请求过于频繁 | 降低请求频率或升级套餐 |
+| `500 Internal Server Error` | 服务器错误 | 稍后重试或联系支持 |
+| `insufficient_quota` | 余额不足 | 前往控制台充值 |
+
+## 最佳实践
+
+### 1. 错误处理
+
+```python
+import openai
+import time
+
+def call_with_retry(max_retries=3):
+    for i in range(max_retries):
+        try:
+            response = openai.ChatCompletion.create(
+                model="gemini-2.0-flash-exp",
+                messages=[{"role": "user", "content": "你的问题"}]
+            )
+            return response
+        except openai.error.RateLimitError:
+            if i < max_retries - 1:
+                time.sleep(2 ** i)  # 指数退避
+                continue
+            raise
+        except Exception as e:
+            print(f"错误: {e}")
+            raise
+
+response = call_with_retry()
+```
+
+### 2. 成本优化
+
+```python
+# 根据任务复杂度选择合适的模型
+def choose_model(task_complexity):
+    if task_complexity == "simple":
+        return "gpt-4o-mini"  # 经济实惠
+    elif task_complexity == "medium":
+        return "gemini-2.0-flash-exp"  # 平衡性能和成本
+    else:
+        return "gpt-5"  # 高性能
+
+model = choose_model("simple")
+response = openai.ChatCompletion.create(
+    model=model,
+    messages=[{"role": "user", "content": "你的问题"}],
+    max_tokens=500  # 限制输出长度以控制成本
+)
+```
+
+### 3. 提示词优化
+
+```python
+# 使用系统提示词提高输出质量
+response = openai.ChatCompletion.create(
+    model="gemini-2.0-flash-exp",
+    messages=[
+        {
+            "role": "system",
+            "content": "你是一个专业的 Python 编程助手，擅长编写清晰、高效的代码。"
+        },
+        {
+            "role": "user",
+            "content": "帮我写一个快速排序算法"
+        }
+    ]
+)
+```
+
+## 功能特性
+
+使用 Google AI Studio + APIMart，您可以：
+
+- 🤖 **多模型支持** - 访问 GPT、Claude、Gemini 等多种模型
+- 🌍 **OpenAI 兼容** - 使用标准 OpenAI API 格式
+- ⚡ **高性能** - 低延迟、高并发支持
+- 💰 **透明定价** - 清晰的按量计费
+- 📊 **使用监控** - 实时查看 API 调用情况
+- 🔒 **安全可靠** - 企业级安全保障
+- 🚀 **快速集成** - 简单的 API 调用方式
+- 📚 **完整文档** - 详细的开发文档和示例
+
+## 支持与帮助
+
+如果您在使用过程中遇到任何问题：
+
+- 📚 [APIMart 文档中心](https://docs.apimart.ai)
+- 📚 [Google AI Studio 文档](https://ai.google.dev/docs)
+- 💬 [Discord 社区](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 技术支持：zhihong@apimart.ai
+
+---
+
+<Card title="开始使用 APIMart" icon="rocket" href="https://api.apimart.ai">
+  立即注册 APIMart，获取您的 API 密钥，在 Google AI Studio 中使用多种 AI 模型！
+</Card>
+
