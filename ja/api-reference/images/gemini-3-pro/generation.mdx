@@ -1,0 +1,221 @@
+---
+title: "Gemini-3-Pro-Image-preview 画像生成"
+description: "
+- 非同期処理モード、後続のクエリのためのタスクIDを返します
+
+- 高品質な画像生成、プロフェッショナルグレードの画像作成
+
+- 生成された画像リンクは24時間有効です。お早めに保存してください
+"
+api: "POST https://api.apimart.ai/v1/images/generations"
+
+---
+
+
+
+
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/images/generations \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "gemini-3-pro-image-preview",
+    "prompt": "月明かりの下の竹林の小道",
+    "size": "1:1",
+    "n": 1
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/images/generations"
+
+payload = {
+    "model": "gemini-3-pro-image-preview",
+    "prompt": "月明かりの下の竹林の小道",
+    "size": "1:1",
+    "n": 1
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/images/generations";
+
+const payload = {
+  model: "gemini-3-pro-image-preview",
+  prompt: "月明かりの下の竹林の小道",
+  size: "1:1",
+  n: 1
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/images/generations"
+
+    payload := map[string]interface{}{
+        "model":  "gemini-3-pro-image-preview",
+        "prompt": "月明かりの下の竹林の小道",
+        "size":   "1:1",
+        "n":      1,
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "status": "submitted",
+      "task_id": "task_01K8SGYNNNVBQTXNR4MM964S7K"
+    }
+  ]
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "リクエストパラメータが無効です",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "認証に失敗しました。APIキーを確認してください",
+    "type": "authentication_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## Authorizations
+
+<ParamField header="Authorization" type="string" required>
+  すべてのAPIはBearer Tokenによる認証が必要です
+
+  APIキーの取得：
+
+  [APIキー管理ページ](https://api.apimart.ai/console/token)にアクセスしてAPIキーを取得してください
+
+  リクエストヘッダーに追加：
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Body
+
+<ParamField body="model" type="string" default="gemini-3-pro-image-preview" required>
+  画像生成モデル名
+
+  例: `"gemini-3-pro-image-preview"`
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  画像生成のテキスト説明
+</ParamField>
+
+<ParamField body="size" type="string">
+  画像生成のサイズ
+
+  サポートされている形式：
+  - 比率：`1:1`、`2:3`、`3:2`、`3:4`、`4:3`、`4:5`、`5:4`、`9:16`、`16:9`、`21:9`
+</ParamField>
+
+<ParamField body="n" type="integer">
+  生成する画像の数
+
+  1に固定
+  
+  **⚠️ 注意：** 純粋な数字（例：`1`）を入力してください。引用符を付けないでください。エラーになります
+</ParamField>
+
+## Response
+
+<ResponseField name="code" type="integer">
+  レスポンスステータスコード
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  レスポンスデータ配列
+
+  <Expandable title="プロパティ">
+    <ResponseField name="status" type="string">
+      タスクステータス
+
+      - `submitted` - 送信済み
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      一意のタスク識別子
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+

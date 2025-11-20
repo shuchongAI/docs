@@ -74,10 +74,10 @@
                 "icon": "image",
                 "pages": [
                   {
-                    "group": "GPT-4o-image",
+                    "group": "Gemini-3-Pro-Image-preview",
                     "icon": "image",
                     "pages": [
-                      "en/api-reference/images/gpt-4o/generation"
+                      "en/api-reference/images/gemini-3-pro/generation"
                     ]
                   },
                   {
@@ -85,6 +85,13 @@
                     "icon": "image",
                     "pages": [
                       "en/api-reference/images/nano-banana/generation"
+                    ]
+                  },
+                  {
+                    "group": "GPT-4o-image",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/gpt-4o/generation"
                     ]
                   }
                 ]
@@ -215,10 +222,10 @@
                 "icon": "image",
                 "pages": [
                   {
-                    "group": "GPT-4o-image",
+                    "group": "Gemini-3-Pro-Image-preview",
                     "icon": "image",
                     "pages": [
-                      "cn/api-reference/images/gpt-4o/generation"
+                      "cn/api-reference/images/gemini-3-pro/generation"
                     ]
                   },
                   {
@@ -226,6 +233,13 @@
                     "icon": "image",
                     "pages": [
                       "cn/api-reference/images/nano-banana/generation"
+                    ]
+                  },
+                  {
+                    "group": "GPT-4o-image",
+                    "icon": "image",
+                    "pages": [
+                      "cn/api-reference/images/gpt-4o/generation"
                     ]
                   }
                 ]
@@ -356,10 +370,10 @@
                 "icon": "image",
                 "pages": [
                   {
-                    "group": "GPT-4o-image",
+                    "group": "Gemini-3-Pro-Image-preview",
                     "icon": "image",
                     "pages": [
-                      "ja/api-reference/images/gpt-4o/generation"
+                      "ja/api-reference/images/gemini-3-pro/generation"
                     ]
                   },
                   {
@@ -367,6 +381,13 @@
                     "icon": "image",
                     "pages": [
                       "ja/api-reference/images/nano-banana/generation"
+                    ]
+                  },
+                  {
+                    "group": "GPT-4o-image",
+                    "icon": "image",
+                    "pages": [
+                      "ja/api-reference/images/gpt-4o/generation"
                     ]
                   }
                 ]
@@ -491,10 +512,10 @@
                 "icon": "image",
                 "pages": [
                   {
-                    "group": "GPT-4o-image",
+                    "group": "Gemini-3-Pro-Image-preview",
                     "icon": "image",
                     "pages": [
-                      "ko/api-reference/images/gpt-4o/generation"
+                      "ko/api-reference/images/gemini-3-pro/generation"
                     ]
                   },
                   {
@@ -502,6 +523,13 @@
                     "icon": "image",
                     "pages": [
                       "ko/api-reference/images/nano-banana/generation"
+                    ]
+                  },
+                  {
+                    "group": "GPT-4o-image",
+                    "icon": "image",
+                    "pages": [
+                      "ko/api-reference/images/gpt-4o/generation"
                     ]
                   }
                 ]
