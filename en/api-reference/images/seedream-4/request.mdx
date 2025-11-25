@@ -1,0 +1,48 @@
+---
+title: "Request Parameters"
+description: "SeeDream-4.0 image generation request parameters"
+---
+
+# Request Parameters
+
+## Request example
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "seedream-4.0",
+    "prompt": "An ancient castle under the starry sky",
+    "size": "1:1",
+    "n": 1
+  }'
+```
+
+</RequestExample>
+
+## Parameters
+
+<ParamField query="model" type="string" required>
+  Model name, fixed as "seedream-4.0"
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  Text description for image generation
+</ParamField>
+
+<ParamField query="size" type="string">
+  Image dimensions. Supported: "1:1", "1024x1536", "1536x1024"
+</ParamField>
+
+<ParamField query="n" type="integer">
+  Number of images to generate. Default: 1
+</ParamField>
+
+<ParamField query="image_urls" type="array">
+  Reference image URL list for image-to-image mode
+</ParamField>
+
+

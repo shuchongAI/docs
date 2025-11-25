@@ -1,0 +1,48 @@
+---
+title: "요청 파라미터"
+description: "SeeDream-4.0 이미지 생성 요청 파라미터"
+---
+
+# 요청 파라미터
+
+## 요청 예시
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "seedream-4.0",
+    "prompt": "별빛 아래의 고대 성",
+    "size": "1:1",
+    "n": 1
+  }'
+```
+
+</RequestExample>
+
+## 파라미터
+
+<ParamField query="model" type="string" required>
+  모델 이름, "seedream-4.0" 고정
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  이미지 생성을 위한 텍스트 설명
+</ParamField>
+
+<ParamField query="size" type="string">
+  생성 이미지 크기, "1:1", "1024x1536", "1536x1024" 지원
+</ParamField>
+
+<ParamField query="n" type="integer">
+  생성할 이미지 수, 기본값: 1
+</ParamField>
+
+<ParamField query="image_urls" type="array">
+  이미지-투-이미지 모드용 참조 이미지 URL 목록
+</ParamField>
+
+

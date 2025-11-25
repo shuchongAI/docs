@@ -93,6 +93,13 @@
                     "pages": [
                       "en/api-reference/images/gpt-4o/generation"
                     ]
+                  },
+                  {
+                    "group": "Seedream-4.0",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/seedream-4/generation"
+                    ]
                   }
                 ]
               },
@@ -240,6 +247,13 @@
                     "icon": "image",
                     "pages": [
                       "cn/api-reference/images/gpt-4o/generation"
+                    ]
+                  },
+                  {
+                    "group": "Seedream-4.0",
+                    "icon": "image",
+                    "pages": [
+                      "cn/api-reference/images/seedream-4/generation"
                     ]
                   }
                 ]
@@ -389,6 +403,13 @@
                     "pages": [
                       "ja/api-reference/images/gpt-4o/generation"
                     ]
+                  },
+                  {
+                    "group": "Seedream-4.0",
+                    "icon": "image",
+                    "pages": [
+                      "ja/api-reference/images/seedream-4/generation"
+                    ]
                   }
                 ]
               },
@@ -530,6 +551,13 @@
                     "icon": "image",
                     "pages": [
                       "ko/api-reference/images/gpt-4o/generation"
+                    ]
+                  },
+                  {
+                    "group": "Seedream-4.0",
+                    "icon": "image",
+                    "pages": [
+                      "ko/api-reference/images/seedream-4/generation"
                     ]
                   }
                 ]

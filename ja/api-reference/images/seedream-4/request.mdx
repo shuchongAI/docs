@@ -1,0 +1,48 @@
+---
+title: "リクエストパラメータ"
+description: "SeeDream-4.0 画像生成リクエストパラメータ"
+---
+
+# リクエストパラメータ
+
+## リクエスト例
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "seedream-4.0",
+    "prompt": "星空の下の古城",
+    "size": "1:1",
+    "n": 1
+  }'
+```
+
+</RequestExample>
+
+## パラメータ
+
+<ParamField query="model" type="string" required>
+  モデル名、"seedream-4.0" 固定
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  画像生成のテキスト説明
+</ParamField>
+
+<ParamField query="size" type="string">
+  生成画像のサイズ、"1:1"、"1024x1536"、"1536x1024" に対応
+</ParamField>
+
+<ParamField query="n" type="integer">
+  生成画像の数、デフォルトは 1
+</ParamField>
+
+<ParamField query="image_urls" type="array">
+  画像から画像へのモードに使用する参照画像URLリスト
+</ParamField>
+
+

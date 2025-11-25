@@ -23,7 +23,7 @@ curl --request POST \
   --header 'Authorization: Bearer <token>' \
   --header 'Content-Type: application/json' \
   --data '{
-    "model": "doubao-seedream-4-0-250828",
+    "model": "doubao-seedance-4-0",
     "prompt": "竹林で遊ぶかわいいパンダ",
     "size": "1:1",
     "n": 1,
@@ -39,7 +39,7 @@ import requests
 url = "https://api.apimart.ai/v1/images/generations"
 
 payload = {
-    "model": "doubao-seedream-4-0-250828",
+    "model": "doubao-seedance-4-0",
     "prompt": "竹林で遊ぶかわいいパンダ",
     "size": "1:1",
     "n": 1,
@@ -62,7 +62,7 @@ print(response.json())
 const url = "https://api.apimart.ai/v1/images/generations";
 
 const payload = {
-  model: "doubao-seedream-4-0-250828",
+  model: "doubao-seedance-4-0",
   prompt: "竹林で遊ぶかわいいパンダ",
   size: "1:1",
   n: 1,
@@ -101,7 +101,7 @@ func main() {
     url := "https://api.apimart.ai/v1/images/generations"
 
     payload := map[string]interface{}{
-        "model":  "doubao-seedream-4-0-250828",
+        "model":  "doubao-seedance-4-0",
         "prompt": "竹林で遊ぶかわいいパンダ",
         "size":   "1:1",
         "n":      1,
@@ -140,7 +140,7 @@ public class Main {
 
         String payload = """
         {
-          "model": "doubao-seedream-4-0-250828",
+          "model": "doubao-seedance-4-0",
           "prompt": "竹林で遊ぶかわいいパンダ",
           "size": "1:1",
           "n": 1,
@@ -172,7 +172,7 @@ public class Main {
 $url = "https://api.apimart.ai/v1/images/generations";
 
 $payload = [
-    "model" => "doubao-seedream-4-0-250828",
+    "model" => "doubao-seedance-4-0",
     "prompt" => "竹林で遊ぶかわいいパンダ",
     "size" => "1:1",
     "n" => 1,
@@ -205,7 +205,7 @@ require 'uri'
 url = URI("https://api.apimart.ai/v1/images/generations")
 
 payload = {
-  model: "doubao-seedream-4-0-250828",
+  model: "doubao-seedance-4-0",
   prompt: "竹林で遊ぶかわいいパンダ",
   size: "1:1",
   n: 1,
@@ -232,7 +232,7 @@ import Foundation
 let url = URL(string: "https://api.apimart.ai/v1/images/generations")!
 
 let payload: [String: Any] = [
-    "model": "doubao-seedream-4-0-250828",
+    "model": "doubao-seedance-4-0",
     "prompt": "竹林で遊ぶかわいいパンダ",
     "size": "1:1",
     "n": 1,
@@ -274,7 +274,7 @@ class Program
         var url = "https://api.apimart.ai/v1/images/generations";
 
         var payload = @"{
-            ""model"": ""doubao-seedream-4-0-250828"",
+            ""model"": ""doubao-seedance-4-0"",
             ""prompt"": ""竹林で遊ぶかわいいパンダ"",
             ""size"": ""1:1"",
             ""n"": 1,
@@ -309,7 +309,7 @@ int main(void) {
     if(curl) {
         const char *url = "https://api.apimart.ai/v1/images/generations";
         const char *payload = "{"
-            "\"model\":\"doubao-seedream-4-0-250828\","
+            "\"model\":\"doubao-seedance-4-0\","
             "\"prompt\":\"竹林で遊ぶかわいいパンダ\","
             "\"size\":\"1:1\","
             "\"n\":1,"
@@ -348,7 +348,7 @@ int main(int argc, const char * argv[]) {
         NSURL *url = [NSURL URLWithString:@"https://api.apimart.ai/v1/images/generations"];
         
         NSDictionary *payload = @{
-            @"model": @"doubao-seedream-4-0-250828",
+            @"model": @"doubao-seedance-4-0",
             @"prompt": @"竹林で遊ぶかわいいパンダ",
             @"size": @"1:1",
             @"n": @1,
@@ -396,7 +396,7 @@ open Cohttp_lwt_unix
 let url = "https://api.apimart.ai/v1/images/generations"
 
 let payload = {|{
-  "model": "doubao-seedream-4-0-250828",
+  "model": "doubao-seedance-4-0",
   "prompt": "A cute panda playing in a bamboo forest",
   "size": "1:1",
   "n": 1,
@@ -427,7 +427,7 @@ void main() async {
   final url = Uri.parse('https://api.apimart.ai/v1/images/generations');
   
   final payload = {
-    'model': 'doubao-seedream-4-0-250828',
+    'model': 'doubao-seedance-4-0',
     'prompt': '竹林で遊ぶかわいいパンダ',
     'size': '1:1',
     'n': 1,
@@ -456,7 +456,7 @@ library(jsonlite)
 url <- "https://api.apimart.ai/v1/images/generations"
 
 payload <- list(
-  model = "doubao-seedream-4-0-250828",
+  model = "doubao-seedance-4-0",
   prompt = "竹林で遊ぶかわいいパンダ",
   size = "1:1",
   n = 1,
@@ -584,10 +584,10 @@ cat(content(response, "text"))
 
 ## Body
 
-<ParamField body="model" type="string" default="doubao-seedream-4-0-250828" required>
+<ParamField body="model" type="string" default="doubao-seedance-4-0" required>
   画像生成モデル名
 
-  Example: `"doubao-seedream-4-0-250828"`
+  Example: `"doubao-seedance-4-0"`
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
@@ -642,6 +642,48 @@ cat(content(response, "text"))
   - `fast`：高速モード、処理時間が短く、通常の品質でコンテンツを生成します
 
   デフォルト値：`standard`
+</ParamField>
+
+<ParamField body="sequential_image_generation" type="string" default="disabled">
+  連続画像生成モード（Doubao固有の機能）
+
+  複数の画像を生成するかどうかを制御します：
+
+  - `disabled`：連続モード無効、複数の参照画像があっても1枚のみ生成（デフォルト）
+  - `auto`：連続モード有効、複数の画像を生成可能
+
+  **使用方法：**
+  - ✅ `image_urls` を提供する必要があります - 少なくとも1枚の参照画像が必要
+  - ✅ `n: 3` を設定するか、`sequential_image_generation: "auto"` + `max_images: 3` を使用
+  - ✅ これにより参照画像に基づいて3枚の異なる画像が生成されます
+  - ⚠️ `n > 1` の場合、自動的に `auto` に設定されます
+
+  **制限：**
+  - 純粋なテキストから画像への変換（`image_urls` なし）では複数の画像を生成できません - これはDoubao APIの制限です
+</ParamField>
+
+<ParamField body="sequential_image_generation_options" type="object">
+  連続画像生成オプション
+
+  `sequential_image_generation` が `auto` に設定されている場合に使用可能
+
+  **プロパティ：**
+  - `max_images` (integer): 生成する画像の数を指定、範囲：1-15
+
+  **例：**
+  ```json
+  "sequential_image_generation": "auto",
+  "sequential_image_generation_options": {
+    "max_images": 3
+  }
+  ```
+</ParamField>
+
+<ParamField body="watermark" type="boolean" default="false">
+  生成された画像に透かしを追加するかどうか
+
+  - `true`：透かしを追加
+  - `false`：透かしなし（デフォルト）
 </ParamField>
 
 ## Response
