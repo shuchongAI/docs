@@ -108,6 +108,13 @@
                 "icon": "video",
                 "pages": [
                   {
+                    "group": "doubao-seedance-1-0-pro",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/doubao/generation"
+                    ]
+                  },
+                  {
                     "group": "Sora2",
                     "icon": "video",
                     "pages": [
@@ -270,6 +277,13 @@
                 "group": "视频系列",
                 "icon": "video",
                 "pages": [
+                  {
+                    "group": "doubao-seedance-1-0-pro",
+                    "icon": "video",
+                    "pages": [
+                      "cn/api-reference/videos/doubao/generation"
+                    ]
+                  },
                   {
                     "group": "Sora2",
                     "icon": "video",
@@ -434,6 +448,13 @@
                 "icon": "video",
                 "pages": [
                   {
+                    "group": "doubao-seedance-1-0-pro",
+                    "icon": "video",
+                    "pages": [
+                      "ja/api-reference/videos/doubao/generation"
+                    ]
+                  },
+                  {
                     "group": "Sora2",
                     "icon": "video",
                     "pages": [
@@ -590,6 +611,13 @@
                 "group": "비디오 시리즈",
                 "icon": "video",
                 "pages": [
+                  {
+                    "group": "doubao-seedance-1-0-pro",
+                    "icon": "video",
+                    "pages": [
+                      "ko/api-reference/videos/doubao/generation"
+                    ]
+                  },
                   {
                     "group": "Sora2",
                     "icon": "video",
