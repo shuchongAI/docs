@@ -1,0 +1,319 @@
+---
+title: "トークン残高照会"
+description: "
+- 現在のAPIキーの残高と使用済みクレジットを照会
+
+- 単一トークンの使用状況を監視
+
+- CORSクロスオリジンリクエストをサポート
+
+- リアルタイム残高監視
+"
+api: "GET https://api.apimart.ai/v1/balance"
+
+---
+
+現在のAPIキー（トークン）の残高と使用済み残高を取得します。このエンドポイントは単一トークンの使用状況を監視するために使用されます。
+
+<RequestExample>
+
+```bash cURL
+curl --request GET \
+  --url 'https://api.apimart.ai/v1/balance' \
+  --header 'Authorization: Bearer <token>'
+```
+
+```python Python
+import requests
+
+API_BASE = 'https://api.apimart.ai'
+API_KEY = 'sk-xxxxxxxxxxxxxxxxxxxxxx'
+
+headers = {
+    'Authorization': f'Bearer {API_KEY}'
+}
+
+def get_token_balance():
+    response = requests.get(f'{API_BASE}/v1/balance', headers=headers)
+    data = response.json()
+    
+    if data.get('success'):
+        if data.get('unlimited_quota'):
+            print("クォータ: 無制限")
+        else:
+            print(f"残高: {data['remain_balance']}")
+        print(f"使用済み: {data['used_balance']}")
+    else:
+        print(f"照会失敗: {data.get('message')}")
+    
+    return data
+
+get_token_balance()
+```
+
+```javascript JavaScript
+const API_BASE = 'https://api.apimart.ai';
+const API_KEY = 'sk-xxxxxxxxxxxxxxxxxxxxxx';
+
+async function getTokenBalance() {
+  const response = await fetch(`${API_BASE}/v1/balance`, {
+    headers: {
+      'Authorization': `Bearer ${API_KEY}`
+    }
+  });
+  
+  const data = await response.json();
+  
+  if (data.success) {
+    if (data.unlimited_quota) {
+      console.log('クォータ: 無制限');
+    } else {
+      console.log(`残高: ${data.remain_balance}`);
+    }
+    console.log(`使用済み: ${data.used_balance}`);
+  } else {
+    console.error('照会失敗:', data.message);
+  }
+  
+  return data;
+}
+
+getTokenBalance();
+```
+
+```go Go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+type BalanceResponse struct {
+    Success        bool    `json:"success"`
+    Message        string  `json:"message,omitempty"`
+    RemainBalance  float64 `json:"remain_balance"`
+    UsedBalance    float64 `json:"used_balance"`
+    UnlimitedQuota bool    `json:"unlimited_quota"`
+}
+
+func main() {
+    url := "https://api.apimart.ai/v1/balance"
+
+    req, _ := http.NewRequest("GET", url, nil)
+    req.Header.Set("Authorization", "Bearer <token>")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    
+    var result BalanceResponse
+    json.Unmarshal(body, &result)
+    
+    if result.Success {
+        if result.UnlimitedQuota {
+            fmt.Println("クォータ: 無制限")
+        } else {
+            fmt.Printf("残高: %.2f\n", result.RemainBalance)
+        }
+        fmt.Printf("使用済み: %.2f\n", result.UsedBalance)
+    }
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/balance";
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .GET()
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$api_key = 'sk-xxxxxxxxxxxxxxxxxxxxxx';
+
+$ch = curl_init('https://api.apimart.ai/v1/balance');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer $api_key"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$data = json_decode($response, true);
+
+if ($data['success']) {
+    if ($data['unlimited_quota']) {
+        echo "クォータ: 無制限\n";
+    } else {
+        echo "残高: " . $data['remain_balance'] . "\n";
+    }
+    echo "使用済み: " . $data['used_balance'] . "\n";
+} else {
+    echo "照会失敗: " . $data['message'] . "\n";
+}
+?>
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 - 成功
+{
+  "success": true,
+  "remain_balance": 10.5,
+  "used_balance": 2.3,
+  "unlimited_quota": false
+}
+```
+
+```json 200 - 無制限トークン
+{
+  "success": true,
+  "remain_balance": -1,
+  "used_balance": 2.3,
+  "unlimited_quota": true
+}
+```
+
+```json 200 - トークンが見つかりません
+{
+  "success": false,
+  "message": "トークン情報の取得に失敗しました: record not found"
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "認証に失敗しました。APIキーを確認してください",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "リクエストが多すぎます。後でもう一度お試しください",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## 認証
+
+<ParamField header="Authorization" type="string" required>
+  すべてのAPIエンドポイントにはBearer Token認証が必要です
+
+  APIキーの取得：
+
+  [APIキー管理ページ](https://api.apimart.ai/console/token)にアクセスしてAPIキーを取得してください
+
+  リクエストヘッダーに追加：
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## エンドポイント
+
+```
+GET /v1/balance
+GET /balance
+```
+
+両方のエンドポイントは同じ機能を持っています。どちらでも使用できます。
+
+## レスポンス
+
+<ResponseField name="success" type="boolean">
+  リクエストが成功したかどうか
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  エラーメッセージ（失敗時のみ返却）
+</ResponseField>
+
+<ResponseField name="remain_balance" type="float">
+  トークン残高（成功時に返却）。`unlimited_quota` が `true` の場合、値は `-1` になります
+</ResponseField>
+
+<ResponseField name="used_balance" type="float">
+  トークン使用済み残高（成功時に返却）
+</ResponseField>
+
+<ResponseField name="unlimited_quota" type="boolean">
+  トークンが無制限かどうか。`true` は無制限、`false` は制限ありを意味します
+</ResponseField>
+
+## ユースケース
+
+- 単一APIキーの消費状況を監視
+- アプリケーションで現在のトークン残高を表示
+- 残高がしきい値を下回った時にアラートを設定
+
+<Note>
+**残高単位について**
+
+残高の単位はシステム設定によって異なります：
+- **USD** - 米ドル
+- **CNY** - 人民元
+- **Tokens** - トークン数
+</Note>
+
+<Tip>
+**無制限トークン**
+
+トークンが無制限に設定されている場合：
+- `unlimited_quota` フィールドは `true` を返します
+- `remain_balance` フィールドは `-1` を返します
+- そのトークンは制限なしで無制限に使用できます
+</Tip>
+
+## 一般的なエラー
+
+| エラーメッセージ | 原因 | 解決策 |
+|------------------|------|--------|
+| Authorizationヘッダーなし | Authorizationヘッダーが提供されていない | `Authorization: Bearer sk-xxxxx`ヘッダーを追加 |
+| トークン情報の取得に失敗 | トークンが存在しないか削除された | トークンキーが正しいか確認 |
+
+<Warning>
+**セキュリティに関する注意**
+
+APIキーはパスワードと同様です。安全に保管し、他人と共有しないでください。本番環境では必ずHTTPSを使用してください。
+</Warning>
+

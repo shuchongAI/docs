@@ -1,0 +1,336 @@
+---
+title: "사용자 잔액 조회"
+description: "
+- 사용자 계정의 전체 남은 크레딧과 사용된 크레딧 조회
+
+- 사용자 수준의 잔액 정보 조회
+
+- CORS 크로스 오리진 요청 지원
+
+- 실시간 잔액 모니터링
+"
+api: "GET https://api.apimart.ai/v1/user/balance"
+
+---
+
+현재 사용자 계정의 남은 잔액과 사용된 잔액을 조회합니다. 이 엔드포인트는 특정 토큰에 의존하지 않는 사용자 수준의 잔액 정보를 반환하며, 전체 계정 잔액을 확인하는 데 사용됩니다.
+
+<RequestExample>
+
+```bash cURL
+curl --request GET \
+  --url 'https://api.apimart.ai/v1/user/balance' \
+  --header 'Authorization: Bearer <token>'
+```
+
+```python Python
+import requests
+
+API_BASE = 'https://api.apimart.ai'
+API_KEY = 'sk-xxxxxxxxxxxxxxxxxxxxxx'
+
+headers = {
+    'Authorization': f'Bearer {API_KEY}'
+}
+
+def get_user_balance():
+    response = requests.get(f'{API_BASE}/v1/user/balance', headers=headers)
+    data = response.json()
+    
+    if data.get('success'):
+        if data.get('unlimited_quota'):
+            print("쿼터: 무제한")
+        else:
+            print(f"남은 잔액: {data['remain_balance']}")
+        print(f"사용된 잔액: {data['used_balance']}")
+    else:
+        print(f"조회 실패: {data.get('message')}")
+    
+    return data
+
+get_user_balance()
+```
+
+```javascript JavaScript
+const API_BASE = 'https://api.apimart.ai';
+const API_KEY = 'sk-xxxxxxxxxxxxxxxxxxxxxx';
+
+async function getUserBalance() {
+  const response = await fetch(`${API_BASE}/v1/user/balance`, {
+    headers: {
+      'Authorization': `Bearer ${API_KEY}`
+    }
+  });
+  
+  const data = await response.json();
+  
+  if (data.success) {
+    if (data.unlimited_quota) {
+      console.log('쿼터: 무제한');
+    } else {
+      console.log(`남은 잔액: ${data.remain_balance}`);
+    }
+    console.log(`사용된 잔액: ${data.used_balance}`);
+  } else {
+    console.error('조회 실패:', data.message);
+  }
+  
+  return data;
+}
+
+getUserBalance();
+```
+
+```go Go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+type BalanceResponse struct {
+    Success        bool    `json:"success"`
+    Message        string  `json:"message,omitempty"`
+    RemainBalance  float64 `json:"remain_balance"`
+    UsedBalance    float64 `json:"used_balance"`
+    UnlimitedQuota bool    `json:"unlimited_quota"`
+}
+
+func main() {
+    url := "https://api.apimart.ai/v1/user/balance"
+
+    req, _ := http.NewRequest("GET", url, nil)
+    req.Header.Set("Authorization", "Bearer <token>")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    
+    var result BalanceResponse
+    json.Unmarshal(body, &result)
+    
+    if result.Success {
+        if result.UnlimitedQuota {
+            fmt.Println("쿼터: 무제한")
+        } else {
+            fmt.Printf("남은 잔액: %.2f\n", result.RemainBalance)
+        }
+        fmt.Printf("사용된 잔액: %.2f\n", result.UsedBalance)
+    }
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/user/balance";
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .GET()
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$api_key = 'sk-xxxxxxxxxxxxxxxxxxxxxx';
+
+$ch = curl_init('https://api.apimart.ai/v1/user/balance');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer $api_key"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$data = json_decode($response, true);
+
+if ($data['success']) {
+    if ($data['unlimited_quota']) {
+        echo "쿼터: 무제한\n";
+    } else {
+        echo "남은 잔액: " . $data['remain_balance'] . "\n";
+    }
+    echo "사용된 잔액: " . $data['used_balance'] . "\n";
+} else {
+    echo "조회 실패: " . $data['message'] . "\n";
+}
+?>
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 - 성공
+{
+  "success": true,
+  "remain_balance": 100.0,
+  "used_balance": 25.5,
+  "unlimited_quota": false
+}
+```
+
+```json 200 - 무제한 사용자
+{
+  "success": true,
+  "remain_balance": -1,
+  "used_balance": 25.5,
+  "unlimited_quota": true
+}
+```
+
+```json 200 - 사용자 잔액 조회 실패
+{
+  "success": false,
+  "message": "사용자 잔액을 가져오지 못했습니다: record not found"
+}
+```
+
+```json 200 - 사용된 잔액 조회 실패
+{
+  "success": false,
+  "message": "사용된 잔액을 가져오지 못했습니다: record not found"
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "인증에 실패했습니다. API 키를 확인하세요",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "요청이 너무 많습니다. 나중에 다시 시도하세요",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## 인증
+
+<ParamField header="Authorization" type="string" required>
+  모든 API 엔드포인트에는 Bearer Token 인증이 필요합니다
+
+  API 키 받기:
+
+  [API 키 관리 페이지](https://api.apimart.ai/console/token)에서 API 키를 받으세요
+
+  요청 헤더에 추가:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## 엔드포인트
+
+```
+GET /v1/user/balance
+GET /user/balance
+```
+
+두 엔드포인트는 동일한 기능을 가지고 있습니다. 둘 중 하나를 사용할 수 있습니다.
+
+## 응답
+
+<ResponseField name="success" type="boolean">
+  요청 성공 여부
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  오류 메시지 (실패 시에만 반환)
+</ResponseField>
+
+<ResponseField name="remain_balance" type="float">
+  사용자 남은 잔액 (성공 시 반환). `unlimited_quota`가 `true`일 때 값은 `-1`입니다
+</ResponseField>
+
+<ResponseField name="used_balance" type="float">
+  사용자 사용된 잔액 (성공 시 반환)
+</ResponseField>
+
+<ResponseField name="unlimited_quota" type="boolean">
+  사용자가 무제한인지 여부. `true`는 무제한, `false`는 제한됨을 의미합니다
+</ResponseField>
+
+## 토큰 잔액 vs 사용자 잔액
+
+| 비교 항목 | 토큰 잔액 (`/v1/balance`) | 사용자 잔액 (`/v1/user/balance`) |
+|-----------|---------------------------|----------------------------------|
+| 범위 | 단일 토큰 | 전체 사용자 계정 |
+| 데이터 소스 | Token의 RemainQuota와 UsedQuota | User의 quota와 used_quota |
+| 사용 사례 | 단일 API 키 사용량 모니터링 | 전체 계정 잔액 확인 |
+| 제한 대상 | 토큰 수준 한도 | 사용자 수준 한도 |
+
+## 사용 사례
+
+- 사용자 계정의 전체 잔액 확인
+- 충전 알림 및 잔액 경고 설정
+- 사용자 대시보드에서 계정 잔액 표시
+
+<Note>
+**잔액 단위 정보**
+
+잔액 값의 단위는 시스템 설정에 따라 다릅니다:
+- **USD** - 미국 달러
+- **CNY** - 중국 위안
+- **Tokens** - 토큰 수
+</Note>
+
+<Tip>
+**무제한 사용자**
+
+사용자가 무제한으로 설정된 경우:
+- `unlimited_quota` 필드는 `true`를 반환합니다
+- `remain_balance` 필드는 `-1`을 반환합니다
+- 해당 사용자는 제한 없이 API를 무제한으로 사용할 수 있습니다
+</Tip>
+
+## 일반적인 오류
+
+| 오류 메시지 | 원인 | 해결 방법 |
+|-------------|------|-----------|
+| Authorization 헤더 없음 | Authorization 헤더가 제공되지 않음 | `Authorization: Bearer sk-xxxxx` 헤더 추가 |
+| 사용자 잔액 가져오기 실패 | 사용자가 존재하지 않음 | 토큰과 연결된 사용자가 존재하는지 확인 |
+| 사용된 잔액 가져오기 실패 | 데이터베이스 쿼리 오류 | 관리자에게 연락하여 시스템 상태 확인 |
+
+<Warning>
+**보안 참고 사항**
+
+API 키는 비밀번호와 같습니다. 안전하게 보관하고 다른 사람과 공유하지 마세요. 프로덕션에서는 항상 HTTPS를 사용하세요.
+</Warning>
+
