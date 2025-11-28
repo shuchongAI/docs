@@ -180,7 +180,7 @@ docs-main/
 ## 🔗 相关链接
 
 - APIMart 官网: https://api.apimart.ai
-- APIMart 控制台: https://api.apimart.ai/console/token
+- APIMart 控制台: https://apimart.ai/console/token
 - Dify 官网: https://dify.ai
 - Dify 文档: https://docs.dify.ai
 

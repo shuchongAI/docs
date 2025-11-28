@@ -739,7 +739,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://api.apimart.ai"
+      "href": "https://apimart.ai"
     }
   },
   "footer": {
