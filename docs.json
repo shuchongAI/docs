@@ -25,12 +25,12 @@
   "favicon": "./logo/logo.png",
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://api.apimart.ai"
+    "url": "https://apimart.ai"
   },
   "topbarLinks": [
     {
       "name": "Dashboard",
-      "url": "https://api.apimart.ai"
+      "url": "https://apimart.ai"
     }
   ],
   "contextual": {
