@@ -1,0 +1,83 @@
+---
+title: "MiniMax-Hailuo-02"
+description: "使用 MiniMax-Hailuo-02 模型进行视频生成"
+icon: "video"
+---
+
+# MiniMax-Hailuo-02 视频生成
+
+使用 MiniMax-Hailuo-02 模型进行高质量的视频生成。
+
+## 功能特点
+
+- **异步处理模式**：返回任务ID用于后续查询
+- **支持多种生成模式**：文本转视频、图生视频（首帧/尾帧）
+- **灵活的时长选择**：支持 6 秒和 10 秒时长
+- **多种分辨率**：512p、768p、1080p 可选
+- **智能 Prompt 优化**：自动优化提示词获得更好效果
+- **水印控制**：可选择是否添加水印
+
+## 请求示例
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/videos/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "MiniMax-Hailuo-02",
+    "prompt": "一只可爱的猫咪在草地上奔跑",
+    "duration": 5,
+    "metadata": {
+      "resolution": "768p",
+      "prompt_optimizer": true
+    }
+  }'
+```
+
+</RequestExample>
+
+## 参数说明
+
+<ParamField query="model" type="string" required>
+  模型名称，固定为 `MiniMax-Hailuo-02`
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  视频生成的文本描述
+</ParamField>
+
+<ParamField query="duration" type="integer">
+  视频时长（秒），支持 `5` 或 `10`，默认为 `5`
+</ParamField>
+
+<ParamField query="metadata.resolution" type="string">
+  视频分辨率
+  
+  支持的格式：
+  - `512p` - 标清
+  - `768p` - 高清（默认）
+  - `1080p` - 全高清（仅支持5秒）
+</ParamField>
+
+<ParamField query="metadata.prompt_optimizer" type="boolean">
+  是否自动优化 prompt，默认为 `true`
+</ParamField>
+
+<ParamField query="metadata.fast_pretreatment" type="boolean">
+  是否缩短 prompt 优化耗时，默认为 `false`
+</ParamField>
+
+<ParamField query="metadata.watermark" type="boolean">
+  是否添加水印，默认为 `false`
+</ParamField>
+
+<ParamField query="metadata.first_frame_image" type="string">
+  视频起始帧图片（URL 或 Base64）
+</ParamField>
+
+<ParamField query="metadata.last_frame_image" type="string">
+  视频结束帧图片（URL 或 Base64）
+</ParamField>
+

@@ -1,0 +1,83 @@
+---
+title: "MiniMax-Hailuo-02"
+description: "Use MiniMax-Hailuo-02 model for video generation"
+icon: "video"
+---
+
+# MiniMax-Hailuo-02 Video Generation
+
+Use the MiniMax-Hailuo-02 model for high-quality video generation.
+
+## Features
+
+- **Asynchronous Processing**: Returns task ID for subsequent queries
+- **Multiple Generation Modes**: Text-to-video, image-to-video (first frame/last frame)
+- **Flexible Duration Options**: Supports 6 and 10 second durations
+- **Multiple Resolutions**: 512p, 768p, 1080p available
+- **Smart Prompt Optimization**: Automatically optimizes prompts for better results
+- **Watermark Control**: Optional watermark addition
+
+## Request Example
+
+<RequestExample>
+
+```bash
+curl -X POST https://api.apimart.ai/v1/videos/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "MiniMax-Hailuo-02",
+    "prompt": "A cute cat running on the grass",
+    "duration": 5,
+    "metadata": {
+      "resolution": "768p",
+      "prompt_optimizer": true
+    }
+  }'
+```
+
+</RequestExample>
+
+## Parameters
+
+<ParamField query="model" type="string" required>
+  Model name, fixed as `MiniMax-Hailuo-02`
+</ParamField>
+
+<ParamField query="prompt" type="string" required>
+  Text description for video generation
+</ParamField>
+
+<ParamField query="duration" type="integer">
+  Video duration (seconds), supports `5` or `10`, default is `5`
+</ParamField>
+
+<ParamField query="metadata.resolution" type="string">
+  Video resolution
+  
+  Supported formats:
+  - `512p` - Standard definition
+  - `768p` - High definition (default)
+  - `1080p` - Full HD (only supports 5 seconds)
+</ParamField>
+
+<ParamField query="metadata.prompt_optimizer" type="boolean">
+  Whether to automatically optimize the prompt, default is `true`
+</ParamField>
+
+<ParamField query="metadata.fast_pretreatment" type="boolean">
+  Whether to reduce prompt optimization time, default is `false`
+</ParamField>
+
+<ParamField query="metadata.watermark" type="boolean">
+  Whether to add watermark, default is `false`
+</ParamField>
+
+<ParamField query="metadata.first_frame_image" type="string">
+  Video first frame image (URL or Base64)
+</ParamField>
+
+<ParamField query="metadata.last_frame_image" type="string">
+  Video last frame image (URL or Base64)
+</ParamField>
+

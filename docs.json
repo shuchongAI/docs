@@ -128,6 +128,13 @@
                     "pages": [
                       "en/api-reference/videos/veo3/generation"
                     ]
+                  },
+                  {
+                    "group": "MiniMax-Hailuo-02",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/minimax-hailuo/generation"
+                    ]
                   }
                 ]
               },
@@ -297,6 +304,13 @@
                     "icon": "video",
                     "pages": [
                       "cn/api-reference/videos/veo3/generation"
+                    ]
+                  },
+                  {
+                    "group": "MiniMax-Hailuo-02",
+                    "icon": "video",
+                    "pages": [
+                      "cn/api-reference/videos/minimax-hailuo/generation"
                     ]
                   }
                 ]
@@ -468,6 +482,13 @@
                     "pages": [
                       "ja/api-reference/videos/veo3/generation"
                     ]
+                  },
+                  {
+                    "group": "MiniMax-Hailuo-02",
+                    "icon": "video",
+                    "pages": [
+                      "ja/api-reference/videos/minimax-hailuo/generation"
+                    ]
                   }
                 ]
               },
@@ -631,6 +652,13 @@
                     "icon": "video",
                     "pages": [
                       "ko/api-reference/videos/veo3/generation"
+                    ]
+                  },
+                  {
+                    "group": "MiniMax-Hailuo-02",
+                    "icon": "video",
+                    "pages": [
+                      "ko/api-reference/videos/minimax-hailuo/generation"
                     ]
                   }
                 ]
