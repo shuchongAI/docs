@@ -592,8 +592,6 @@ cat(content(response, "text"))
 
 <ParamField body="prompt" type="string" required>
   图像生成的文本描述
-
-  最长 1000 个字符
 </ParamField>
 
 <ParamField body="size" type="string">
@@ -608,6 +606,10 @@ cat(content(response, "text"))
   - `3:2`
   - `2:3`
   - `21:9`
+
+  支持的分辨率：
+  - `2k`
+  - `4k`
 </ParamField>
 
 <ParamField body="n" type="integer">

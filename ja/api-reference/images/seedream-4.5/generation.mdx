@@ -592,8 +592,6 @@ cat(content(response, "text"))
 
 <ParamField body="prompt" type="string" required>
   画像生成のためのテキスト説明
-
-  最大1000文字
 </ParamField>
 
 <ParamField body="size" type="string">
@@ -608,6 +606,10 @@ cat(content(response, "text"))
   - `3:2`
   - `2:3`
   - `21:9`
+
+  サポートされている解像度:
+  - `2k`
+  - `4k`
 </ParamField>
 
 <ParamField body="n" type="integer">
