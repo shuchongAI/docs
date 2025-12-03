@@ -23,7 +23,7 @@ curl --request POST \
   --header 'Authorization: Bearer <token>' \
   --header 'Content-Type: application/json' \
   --data '{
-    "model": "doubao-seedream-4-5",
+    "model": "doubao-seedance-4-5",
     "prompt": "竹林で遊ぶかわいいパンダ",
     "size": "1:1",
     "n": 1,
@@ -39,7 +39,7 @@ import requests
 url = "https://api.apimart.ai/v1/images/generations"
 
 payload = {
-    "model": "doubao-seedream-4-5",
+    "model": "doubao-seedance-4-5",
     "prompt": "竹林で遊ぶかわいいパンダ",
     "size": "1:1",
     "n": 1,
@@ -62,7 +62,7 @@ print(response.json())
 const url = "https://api.apimart.ai/v1/images/generations";
 
 const payload = {
-  model: "doubao-seedream-4-5",
+  model: "doubao-seedance-4-5",
   prompt: "竹林で遊ぶかわいいパンダ",
   size: "1:1",
   n: 1,
@@ -101,7 +101,7 @@ func main() {
     url := "https://api.apimart.ai/v1/images/generations"
 
     payload := map[string]interface{}{
-        "model":  "doubao-seedream-4-5",
+        "model":  "doubao-seedance-4-5",
         "prompt": "竹林で遊ぶかわいいパンダ",
         "size":   "1:1",
         "n":      1,
@@ -140,7 +140,7 @@ public class Main {
 
         String payload = """
         {
-          "model": "doubao-seedream-4-5",
+          "model": "doubao-seedance-4-5",
           "prompt": "竹林で遊ぶかわいいパンダ",
           "size": "1:1",
           "n": 1,
@@ -172,7 +172,7 @@ public class Main {
 $url = "https://api.apimart.ai/v1/images/generations";
 
 $payload = [
-    "model" => "doubao-seedream-4-5",
+    "model" => "doubao-seedance-4-5",
     "prompt" => "竹林で遊ぶかわいいパンダ",
     "size" => "1:1",
     "n" => 1,
@@ -205,7 +205,7 @@ require 'uri'
 url = URI("https://api.apimart.ai/v1/images/generations")
 
 payload = {
-  model: "doubao-seedream-4-5",
+  model: "doubao-seedance-4-5",
   prompt: "竹林で遊ぶかわいいパンダ",
   size: "1:1",
   n: 1,
@@ -232,7 +232,7 @@ import Foundation
 let url = URL(string: "https://api.apimart.ai/v1/images/generations")!
 
 let payload: [String: Any] = [
-    "model": "doubao-seedream-4-5",
+    "model": "doubao-seedance-4-5",
     "prompt": "竹林で遊ぶかわいいパンダ",
     "size": "1:1",
     "n": 1,
@@ -274,7 +274,7 @@ class Program
         var url = "https://api.apimart.ai/v1/images/generations";
 
         var payload = @"{
-            ""model"": ""doubao-seedream-4-5"",
+            ""model"": ""doubao-seedance-4-5"",
             ""prompt"": ""竹林で遊ぶかわいいパンダ"",
             ""size"": ""1:1"",
             ""n"": 1,
@@ -309,7 +309,7 @@ int main(void) {
     if(curl) {
         const char *url = "https://api.apimart.ai/v1/images/generations";
         const char *payload = "{"
-            "\"model\":\"doubao-seedream-4-5\","
+            "\"model\":\"doubao-seedance-4-5\","
             "\"prompt\":\"竹林で遊ぶかわいいパンダ\","
             "\"size\":\"1:1\","
             "\"n\":1,"
@@ -348,7 +348,7 @@ int main(int argc, const char * argv[]) {
         NSURL *url = [NSURL URLWithString:@"https://api.apimart.ai/v1/images/generations"];
         
         NSDictionary *payload = @{
-            @"model": @"doubao-seedream-4-5",
+            @"model": @"doubao-seedance-4-5",
             @"prompt": @"竹林で遊ぶかわいいパンダ",
             @"size": @"1:1",
             @"n": @1,
@@ -396,7 +396,7 @@ open Cohttp_lwt_unix
 let url = "https://api.apimart.ai/v1/images/generations"
 
 let payload = {|{
-  "model": "doubao-seedream-4-5",
+  "model": "doubao-seedance-4-5",
   "prompt": "A cute panda playing in a bamboo forest",
   "size": "1:1",
   "n": 1,
@@ -427,7 +427,7 @@ void main() async {
   final url = Uri.parse('https://api.apimart.ai/v1/images/generations');
   
   final payload = {
-    'model': 'doubao-seedream-4-5',
+    'model': 'doubao-seedance-4-5',
     'prompt': '竹林で遊ぶかわいいパンダ',
     'size': '1:1',
     'n': 1,
@@ -456,7 +456,7 @@ library(jsonlite)
 url <- "https://api.apimart.ai/v1/images/generations"
 
 payload <- list(
-  model = "doubao-seedream-4-5",
+  model = "doubao-seedance-4-5",
   prompt = "竹林で遊ぶかわいいパンダ",
   size = "1:1",
   n = 1,
@@ -584,10 +584,10 @@ cat(content(response, "text"))
 
 ## Body
 
-<ParamField body="model" type="string" default="doubao-seedream-4-5" required>
+<ParamField body="model" type="string" default="doubao-seedance-4-5" required>
   画像生成モデル名
 
-  Example: `"doubao-seedream-4-5"`
+  Example: `"doubao-seedance-4-5"`
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
