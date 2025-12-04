@@ -26,7 +26,8 @@ curl --request POST \
     "model": "gemini-3-pro-image-preview",
     "prompt": "A bamboo forest path under moonlight",
     "size": "1:1",
-    "n": 1
+    "n": 1,
+    "resolution": "2K"
   }'
 ```
 
@@ -39,7 +40,8 @@ payload = {
     "model": "gemini-3-pro-image-preview",
     "prompt": "A bamboo forest path under moonlight",
     "size": "1:1",
-    "n": 1
+    "n": 1,
+    "resolution": "2K"
 }
 
 headers = {
@@ -59,7 +61,8 @@ const payload = {
   model: "gemini-3-pro-image-preview",
   prompt: "A bamboo forest path under moonlight",
   size: "1:1",
-  n: 1
+  n: 1,
+  resolution: "2K"
 };
 
 const headers = {
@@ -92,10 +95,11 @@ func main() {
     url := "https://api.apimart.ai/v1/images/generations"
 
     payload := map[string]interface{}{
-        "model":  "gemini-3-pro-image-preview",
-        "prompt": "A bamboo forest path under moonlight",
-        "size":   "1:1",
-        "n":      1,
+        "model":      "gemini-3-pro-image-preview",
+        "prompt":     "A bamboo forest path under moonlight",
+        "size":       "1:1",
+        "n":          1,
+        "resolution": "2K",
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -131,7 +135,8 @@ public class Main {
           "model": "gemini-3-pro-image-preview",
           "prompt": "A bamboo forest path under moonlight",
           "size": "1:1",
-          "n": 1
+          "n": 1,
+          "resolution": "2K"
         }
         """;
 
@@ -160,7 +165,8 @@ $payload = [
     "model" => "gemini-3-pro-image-preview",
     "prompt" => "A bamboo forest path under moonlight",
     "size" => "1:1",
-    "n" => 1
+    "n" => 1,
+    "resolution" => "2K"
 ];
 
 $ch = curl_init($url);
@@ -190,7 +196,8 @@ payload = {
   model: "gemini-3-pro-image-preview",
   prompt: "A bamboo forest path under moonlight",
   size: "1:1",
-  n: 1
+  n: 1,
+  resolution: "2K"
 }
 
 http = Net::HTTP.new(url.host, url.port)
@@ -214,7 +221,8 @@ let payload: [String: Any] = [
     "model": "gemini-3-pro-image-preview",
     "prompt": "A bamboo forest path under moonlight",
     "size": "1:1",
-    "n": 1
+    "n": 1,
+    "resolution": "2K"
 ]
 
 var request = URLRequest(url: url)
@@ -253,7 +261,8 @@ class Program
             ""model"": ""gemini-3-pro-image-preview"",
             ""prompt"": ""A bamboo forest path under moonlight"",
             ""size"": ""1:1"",
-            ""n"": 1
+            ""n"": 1,
+            ""resolution"": ""2K""
         }";
 
         using var client = new HttpClient();
@@ -285,7 +294,8 @@ int main(void) {
             "\"model\":\"gemini-3-pro-image-preview\","
             "\"prompt\":\"A bamboo forest path under moonlight\","
             "\"size\":\"1:1\","
-            "\"n\":1"
+            "\"n\":1,"
+            "\"resolution\":\"2K\""
         "}";
 
         struct curl_slist *headers = NULL;
@@ -323,7 +333,8 @@ int main(int argc, const char * argv[]) {
             @"model": @"gemini-3-pro-image-preview",
             @"prompt": @"A bamboo forest path under moonlight",
             @"size": @"1:1",
-            @"n": @1
+            @"n": @1,
+            @"resolution": @"2K"
         };
         
         NSError *error;
@@ -368,7 +379,8 @@ let payload = {|{
   "model": "gemini-3-pro-image-preview",
   "prompt": "A bamboo forest path under moonlight",
   "size": "1:1",
-  "n": 1
+  "n": 1,
+  "resolution": "2K"
 }|}
 
 let () =
@@ -396,7 +408,8 @@ void main() async {
     'model': 'gemini-3-pro-image-preview',
     'prompt': 'A bamboo forest path under moonlight',
     'size': '1:1',
-    'n': 1
+    'n': 1,
+    'resolution': '2K'
   };
   
   final response = await http.post(
@@ -422,7 +435,8 @@ payload <- list(
   model = "gemini-3-pro-image-preview",
   prompt = "A bamboo forest path under moonlight",
   size = "1:1",
-  n = 1
+  n = 1,
+  resolution = "2K"
 )
 
 response <- POST(
@@ -567,6 +581,16 @@ cat(content(response, "text"))
   Fixed at 1
   
   **⚠️ Note:** Must be a pure number (e.g. `1`), do not add quotes, otherwise it will error
+</ParamField>
+
+<ParamField body="resolution" type="string">
+  Output image resolution
+  
+  Supported values:
+  - `2K` - 2K resolution (default)
+  - `4K` - 4K resolution
+  
+  **⚠️ Note:** Generating 4K images with base64 format takes longer processing time
 </ParamField>
 
 <ParamField body="image_urls" type="array">
