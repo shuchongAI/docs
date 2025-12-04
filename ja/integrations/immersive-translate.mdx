@@ -1,0 +1,109 @@
+---
+title: "Immersive Translate で APIMart を使用する"
+description: "Immersive Translate ブラウザ拡張機能で APIMart API サービスを設定して使用する方法の詳細ガイド。"
+---
+
+## 事前準備
+
+始める前に、以下を確認してください：
+
+1. **Immersive Translate 拡張機能をインストール済み**  
+   以下からインストール：
+   - [Chrome ウェブストア](https://chrome.google.com/webstore/detail/immersive-translate/bpoadfkcbjbfhfodiogcnhhhpibjhbnh)
+   - [Edge アドオン](https://microsoftedge.microsoft.com/addons/detail/immersive-translate/amkbmndfnliijdhojkpoglbnaaahippg)
+   - [Firefox アドオン](https://addons.mozilla.org/firefox/addon/immersive-translate/)
+   - [公式サイト](https://immersivetranslate.com/)
+
+2. **APIMart API キーを取得済み**  
+   [APIMart コンソール](https://apimart.ai/console/token) にログインして API キー（`sk-` で始まる）を取得
+
+<Note>
+**ヒント：** APIMart アカウントをお持ちでない場合は、まず [APIMart](https://apimart.ai) で登録して API キーを取得してください。
+</Note>
+
+## ステップ 1: 拡張機能の設定を開く
+
+Immersive Translate 拡張機能をインストールした後：
+
+1. ブラウザツールバーの **Immersive Translate** アイコンをクリック
+2. ポップアップパネルの下部にある **設定** ボタンをクリック
+3. Immersive Translate の設定ページに入ります
+
+## ステップ 2: 翻訳サービスの設定
+
+### 2.1 翻訳サービス設定に入る
+
+設定ページで：
+
+1. 左側のメニューで **「翻訳サービス」** オプションを見つける
+2. クリックして翻訳サービス設定ページに入る
+
+### 2.2 カスタム翻訳サービスを追加
+
+翻訳サービス一覧ページで：
+
+1. 上部の **+ カスタム翻訳サービスを追加** ボタンをクリック
+2. 設定フォームに APIMart API 情報を入力
+
+### 2.3 APIMart API 情報を設定
+
+以下の設定情報を入力：
+
+| 設定項目 | 値 | 説明 |
+|---------|-----|------|
+| **カスタム翻訳サービス名** | `APIMart` | 識別しやすいようにカスタマイズ可能 |
+| **APIKEY** | `sk-xxxxxxxxxxxx` | あなたの APIMart API キー |
+| **モデル** | `gpt-4o-mini` など | ドロップダウンリストから選択 |
+| **カスタム API エンドポイント** | `https://api.apimart.ai/v1/chat/completions` | 完全な API エンドポイントアドレス |
+| **毎秒最大リクエスト数** | `5` | リクエスト頻度を制御、3-5 を推奨 |
+
+<Note>
+**設定メモ：**
+- **APIKEY**: [APIMart コンソール](https://apimart.ai/console/token) から取得し、`sk-` で始まる必要があります
+- **API エンドポイント**: 完全なパス `https://api.apimart.ai/v1/chat/completions` を使用する必要があります
+- **モデル選択**: `gpt-4o-mini`（コスパ良好）または `gpt-5`（最高品質）を推奨
+</Note>
+
+## ステップ 3: 保存して翻訳サービスを選択
+
+設定完了後：
+
+1. 設定ページ下部の **保存** ボタンをクリック
+2. 拡張機能パネルに戻り、**翻訳サービス** ドロップダウンメニューから **APIMart** を選択
+3. **AI エキスパート** で翻訳スタイル（「一般」など）を選択可能
+
+### 推奨モデル
+
+異なるモデルは異なる翻訳シナリオに適しています：
+
+- **gpt-5** - 最新モデル、最高の翻訳品質 ⭐ 推奨
+- **gpt-4o** - 高品質翻訳、高速
+- **gpt-4o-mini** - コスパ良好、大量翻訳に最適 💰 ベストバリュー
+- **claude-sonnet-4-5-20250929** - 文学翻訳に適している
+- **claude-haiku-4-5-20251001** - 高速翻訳、コスパ良好
+
+## 機能
+
+Immersive Translate + APIMart を使用すると：
+
+- 🌐 **ウェブページ翻訳** - バイリンガル比較表示、元のレイアウトを維持
+- 📄 **PDF 翻訳** - オンライン PDF ドキュメント翻訳をサポート
+- 🎬 **ビデオ字幕** - YouTube、Netflix などのバイリンガル字幕
+- ✍️ **単語選択翻訳** - 選択して翻訳、素早い理解
+- 📱 **全プラットフォームサポート** - Chrome、Edge、Firefox、Safari など
+
+## サポートとヘルプ
+
+使用中に問題が発生した場合：
+
+- 📚 [APIMart ドキュメントセンター](https://docs.apimart.ai)
+- 📚 [Immersive Translate ドキュメント](https://immersivetranslate.com/docs/)
+- 💬 [Discord コミュニティ](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+
+---
+
+<Card title="APIMart を始める" icon="rocket" href="https://apimart.ai">
+  今すぐ APIMart に登録して、API キーを取得し、高品質な翻訳サービスをお楽しみください！
+</Card>
+
