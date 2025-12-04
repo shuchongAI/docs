@@ -637,6 +637,47 @@ cat(content(response, "text"))
   デフォルト: `false`
 </ParamField>
 
+<ParamField body="style" type="string">
+  動画のスタイル
+
+  サポートされる値:
+  - `thanksgiving` - 感謝祭スタイル
+  - `comic` - コミックスタイル
+  - `news` - ニューススタイル
+  - `selfie` - セルフィースタイル
+  - `nostalgic` - ノスタルジック/レトロスタイル
+  - `anime` - アニメスタイル
+
+  例：`"anime"`
+</ParamField>
+
+<ParamField body="storyboard" type="boolean">
+  ストーリーボードを使用して動画生成の詳細をより細かく制御するかどうか
+
+  - `true`：ストーリーボード機能を有効にする
+  - `false`：ストーリーボードを使用しない
+
+  例：`true`
+</ParamField>
+
+<ParamField body="character_url" type="string">
+  キャラクター抽出用の参照動画URL
+
+  参照動画からキャラクターを抽出し、生成された動画で再利用します
+
+  例：`"https://filesystem.site/cdn/20251030/javYrU4etHVFDqg8by7mViTWHlMOZy.mp4"`
+</ParamField>
+
+<ParamField body="character_timestamps" type="string">
+  キャラクター出現タイムスタンプ
+
+  参照動画内でキャラクターが出現する時間範囲を指定します。2秒のセグメントのみサポート
+
+  フォーマット：`"開始秒,終了秒"`
+
+  例：`"1,3"` は参照動画の1秒から3秒までのキャラクターを意味します
+</ParamField>
+
 ## レスポンス
 
 <ResponseField name="code" type="integer">

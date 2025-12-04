@@ -51,3 +51,4 @@ git checkout <commit-hash> -- <file-path>
 - All 4 language versions (Chinese, English, Japanese, Korean) have been deleted
 - Last commit before deletion: check via git log
 
+
