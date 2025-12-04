@@ -27,7 +27,7 @@ curl --request POST \
     "prompt": "달빛 아래 대나무 숲 길",
     "size": "1:1",
     "n": 1,
-    "resolution": "2K"
+    "resolution": "1K"
   }'
 ```
 
@@ -41,7 +41,7 @@ payload = {
     "prompt": "달빛 아래 대나무 숲 길",
     "size": "1:1",
     "n": 1,
-    "resolution": "2K"
+    "resolution": "1K"
 }
 
 headers = {
@@ -99,7 +99,7 @@ func main() {
         "prompt":     "달빛 아래 대나무 숲 길",
         "size":       "1:1",
         "n":          1,
-        "resolution": "2K",
+        "resolution": "1K",
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -205,7 +205,8 @@ func main() {
   출력 이미지 해상도
   
   지원되는 값:
-  - `2K` - 2K 해상도 (기본값)
+  - `1K` - 1K 해상도 (기본값)
+  - `2K` - 2K 해상도
   - `4K` - 4K 해상도
   
   **⚠️ 참고:** base64 형식으로 4K 이미지를 생성할 때 처리 시간이 더 오래 걸립니다

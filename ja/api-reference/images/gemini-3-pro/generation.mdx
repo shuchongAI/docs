@@ -27,7 +27,7 @@ curl --request POST \
     "prompt": "月明かりの下の竹林の小道",
     "size": "1:1",
     "n": 1,
-    "resolution": "2K"
+    "resolution": "1K"
   }'
 ```
 
@@ -41,7 +41,7 @@ payload = {
     "prompt": "月明かりの下の竹林の小道",
     "size": "1:1",
     "n": 1,
-    "resolution": "2K"
+    "resolution": "1K"
 }
 
 headers = {
@@ -99,7 +99,7 @@ func main() {
         "prompt":     "月明かりの下の竹林の小道",
         "size":       "1:1",
         "n":          1,
-        "resolution": "2K",
+        "resolution": "1K",
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -205,7 +205,8 @@ func main() {
   出力画像の解像度
   
   サポートされる値：
-  - `2K` - 2K解像度（デフォルト）
+  - `1K` - 1K解像度（デフォルト）
+  - `2K` - 2K解像度
   - `4K` - 4K解像度
   
   **⚠️ 注意：** base64形式で4K画像を生成する場合、処理時間が長くなります

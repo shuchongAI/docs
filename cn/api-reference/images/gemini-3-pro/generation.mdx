@@ -27,7 +27,7 @@ curl --request POST \
     "prompt": "月光下的竹林小径",
     "size": "1:1",
     "n": 1,
-    "resolution": "2K"
+    "resolution": "1K"
   }'
 ```
 
@@ -41,7 +41,7 @@ payload = {
     "prompt": "月光下的竹林小径",
     "size": "1:1",
     "n": 1,
-    "resolution": "2K"
+    "resolution": "1K"
 }
 
 headers = {
@@ -99,7 +99,7 @@ func main() {
         "prompt":     "月光下的竹林小径",
         "size":       "1:1",
         "n":          1,
-        "resolution": "2K",
+        "resolution": "1K",
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -136,7 +136,7 @@ public class Main {
           "prompt": "月光下的竹林小径",
           "size": "1:1",
           "n": 1,
-          "resolution": "2K"
+          "resolution": "1K"
         }
         """;
 
@@ -222,7 +222,7 @@ let payload: [String: Any] = [
     "prompt": "月光下的竹林小径",
     "size": "1:1",
     "n": 1,
-    "resolution": "2K"
+    "resolution": "1K"
 ]
 
 var request = URLRequest(url: url)
@@ -380,7 +380,7 @@ let payload = {|{
   "prompt": "月光下的竹林小径",
   "size": "1:1",
   "n": 1,
-  "resolution": "2K"
+  "resolution": "1K"
 }|}
 
 let () =
@@ -409,7 +409,7 @@ void main() async {
     'prompt': '月光下的竹林小径',
     'size': '1:1',
     'n': 1,
-    'resolution': '2K'
+    'resolution': '1K'
   };
   
   final response = await http.post(
@@ -436,7 +436,7 @@ payload <- list(
   prompt = "月光下的竹林小径",
   size = "1:1",
   n = 1,
-  resolution = "2K"
+  resolution = "1K"
 )
 
 response <- POST(
@@ -587,7 +587,8 @@ cat(content(response, "text"))
   输出图像分辨率
   
   支持的值：
-  - `2K` - 2K 分辨率（默认）
+  - `1K` - 1K 分辨率（默认）
+  - `2K` - 2K 分辨率
   - `4K` - 4K 分辨率
   
   **⚠️ 注意：** 使用 base64 格式生成 4K 图像时，处理时间会较长

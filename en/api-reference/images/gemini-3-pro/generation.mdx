@@ -27,7 +27,7 @@ curl --request POST \
     "prompt": "A bamboo forest path under moonlight",
     "size": "1:1",
     "n": 1,
-    "resolution": "2K"
+    "resolution": "1K"
   }'
 ```
 
@@ -41,7 +41,7 @@ payload = {
     "prompt": "A bamboo forest path under moonlight",
     "size": "1:1",
     "n": 1,
-    "resolution": "2K"
+    "resolution": "1K"
 }
 
 headers = {
@@ -99,7 +99,7 @@ func main() {
         "prompt":     "A bamboo forest path under moonlight",
         "size":       "1:1",
         "n":          1,
-        "resolution": "2K",
+        "resolution": "1K",
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -136,7 +136,7 @@ public class Main {
           "prompt": "A bamboo forest path under moonlight",
           "size": "1:1",
           "n": 1,
-          "resolution": "2K"
+          "resolution": "1K"
         }
         """;
 
@@ -222,7 +222,7 @@ let payload: [String: Any] = [
     "prompt": "A bamboo forest path under moonlight",
     "size": "1:1",
     "n": 1,
-    "resolution": "2K"
+    "resolution": "1K"
 ]
 
 var request = URLRequest(url: url)
@@ -380,7 +380,7 @@ let payload = {|{
   "prompt": "A bamboo forest path under moonlight",
   "size": "1:1",
   "n": 1,
-  "resolution": "2K"
+  "resolution": "1K"
 }|}
 
 let () =
@@ -409,7 +409,7 @@ void main() async {
     'prompt': 'A bamboo forest path under moonlight',
     'size': '1:1',
     'n': 1,
-    'resolution': '2K'
+    'resolution': '1K'
   };
   
   final response = await http.post(
@@ -436,7 +436,7 @@ payload <- list(
   prompt = "A bamboo forest path under moonlight",
   size = "1:1",
   n = 1,
-  resolution = "2K"
+  resolution = "1K"
 )
 
 response <- POST(
@@ -587,7 +587,8 @@ cat(content(response, "text"))
   Output image resolution
   
   Supported values:
-  - `2K` - 2K resolution (default)
+  - `1K` - 1K resolution (default)
+  - `2K` - 2K resolution
   - `4K` - 4K resolution
   
   **⚠️ Note:** Generating 4K images with base64 format takes longer processing time
