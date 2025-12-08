@@ -573,6 +573,15 @@ cat(content(response, "text"))
 
 <ParamField body="prompt" type="string" required>
   视频生成的文本描述
+
+  **💡 @角色引用功能：**
+  
+  可以在 prompt 中使用 `@username` 格式引用已创建的角色，让该角色出现在生成的视频中。
+  
+  - 角色的 `username` 可通过[查询角色接口](/cn/api-reference/videos/sora-2/query-character)获取
+  - 支持同时引用多个角色
+  
+  示例：`"小猫和小狗一起开汽车 @duksvfkf.cruisingki @zdqwahgj.baronbarki"`
 </ParamField>
 
 <ParamField body="duration" type="integer">

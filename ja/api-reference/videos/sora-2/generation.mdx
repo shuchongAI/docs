@@ -570,6 +570,15 @@ cat(content(response, "text"))
 
 <ParamField body="prompt" type="string" required>
   動画生成用のテキスト記述
+
+  **💡 @キャラクター参照機能：**
+  
+  プロンプトで `@username` 形式を使用して、作成済みのキャラクターを参照し、生成される動画に含めることができます。
+  
+  - キャラクターの `username` は[キャラクタークエリAPI](/ja/api-reference/videos/sora-2/query-character)で取得できます
+  - 複数のキャラクターを同時に参照可能
+  
+  例：`"猫と犬が一緒に車を運転している @duksvfkf.cruisingki @zdqwahgj.baronbarki"`
 </ParamField>
 
 <ParamField body="duration" type="integer">

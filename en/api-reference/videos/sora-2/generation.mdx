@@ -570,6 +570,15 @@ cat(content(response, "text"))
 
 <ParamField body="prompt" type="string" required>
   Text description for video generation
+
+  **💡 @Character Reference Feature:**
+  
+  You can use `@username` format in the prompt to reference previously created characters and include them in the generated video.
+  
+  - The character's `username` can be obtained via the [Query Character API](/en/api-reference/videos/sora-2/query-character)
+  - Supports referencing multiple characters at once
+  
+  Example: `"A cat and a dog driving a car together @duksvfkf.cruisingki @zdqwahgj.baronbarki"`
 </ParamField>
 
 <ParamField body="duration" type="integer">
