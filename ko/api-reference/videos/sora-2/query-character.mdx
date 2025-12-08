@@ -1,0 +1,150 @@
+---
+title: "Sora2 캐릭터 조회"
+description: "
+- 캐릭터 생성 작업의 상태와 결과 조회
+
+- 생성된 캐릭터의 상세 정보 가져오기
+
+- 후속 비디오 생성에 사용할 캐릭터 ID 반환
+"
+api: "GET https://api.apimart.ai/v1/characters_tasks/{task_id}"
+
+---
+
+
+
+
+<RequestExample>
+
+```bash cURL
+curl --request GET \
+  --url https://api.apimart.ai/v1/characters_tasks/task_01KBZ0TZZ7C7M3WS1TJM0PH8J4 \
+  --header 'Authorization: Bearer <token>'
+```
+
+```python Python
+import requests
+
+task_id = "task_01KBZ0TZZ7C7M3WS1TJM0PH8J4"
+url = f"https://api.apimart.ai/v1/characters_tasks/{task_id}"
+
+headers = {
+    "Authorization": "Bearer <token>"
+}
+
+response = requests.get(url, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const taskId = "task_01KBZ0TZZ7C7M3WS1TJM0PH8J4";
+const url = `https://api.apimart.ai/v1/characters_tasks/${taskId}`;
+
+const headers = {
+  "Authorization": "Bearer <token>"
+};
+
+fetch(url, {
+  method: "GET",
+  headers: headers
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "display_name": "Miles Whiskerson",
+      "id": "ch_6936cc06e19c8191aa8bc579cb1c3b84",
+      "profile_picture_url": "https://upload.apimart.ai/f/image/9998234801069804-4d533898-f37d-43b3-a076-21b16d739449-character_task_01KBZ0TZZ7C7M3WS1TJM0PH8J4.jpg",
+      "username": "duksvfkf.cruisingki"
+    }
+  ]
+}
+```
+
+```json 404
+{
+  "error": {
+    "code": 404,
+    "message": "작업을 찾을 수 없습니다",
+    "type": "not_found_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## 경로 매개변수
+
+<ParamField path="task_id" type="string" required>
+  캐릭터 생성 작업 ID
+
+  캐릭터 생성 API에서 반환된 작업 ID
+
+  예시: `"task_01KBZ0TZZ7C7M3WS1TJM0PH8J4"`
+</ParamField>
+
+## 인증
+
+<ParamField header="Authorization" type="string" required>
+  모든 API 엔드포인트는 Bearer Token 인증이 필요합니다
+
+  API 키 받기:
+
+  [API 키 관리 페이지](https://apimart.ai/console/token)에서 API 키를 받으세요
+
+  요청 헤더에 추가:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Response
+
+<ResponseField name="code" type="integer">
+  응답 상태 코드, 성공 시 200
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  응답 데이터 배열
+
+  <Expandable title="배열 요소">
+    <ResponseField name="id" type="string">
+      캐릭터 고유 식별자
+      
+      이 ID는 비디오 생성 시 `character_url` 매개변수로 캐릭터를 참조하는 데 사용할 수 있습니다
+
+      예시: `"ch_6936cc06e19c8191aa8bc579cb1c3b84"`
+    </ResponseField>
+
+    <ResponseField name="display_name" type="string">
+      캐릭터 표시 이름
+
+      예시: `"Miles Whiskerson"`
+    </ResponseField>
+
+    <ResponseField name="profile_picture_url" type="string">
+      캐릭터 프로필 사진 URL
+
+      예시: `"https://upload.apimart.ai/f/image/...character_task_xxx.jpg"`
+    </ResponseField>
+
+    <ResponseField name="username" type="string">
+      캐릭터 사용자 이름
+
+      예시: `"duksvfkf.cruisingki"`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+

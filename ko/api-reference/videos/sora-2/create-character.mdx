@@ -1,0 +1,197 @@
+---
+title: "Sora2 캐릭터 생성"
+description: "
+- 비디오에서 캐릭터를 추출하여 후속 비디오 생성에 사용
+
+- 비동기 처리 모드, 후속 쿼리를 위한 작업 ID 반환
+
+- 비디오에는 사운드와 캐릭터가 포함되어야 함
+"
+api: "POST https://api.apimart.ai/v1/videos/generations"
+
+---
+
+
+
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/videos/generations \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "sora-2",
+    "url": "https://upload.apimart.ai/f/video/9998234807907072-ad4c2656-94a4-44d4-9eaa-5be2855a7798-video_task_01KBYT63R1TGZNT4EHAD495ZJ3.mp4",
+    "timestamps": "1,3"
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/videos/generations"
+
+payload = {
+    "model": "sora-2",
+    "url": "https://upload.apimart.ai/f/video/9998234807907072-ad4c2656-94a4-44d4-9eaa-5be2855a7798-video_task_01KBYT63R1TGZNT4EHAD495ZJ3.mp4",
+    "timestamps": "1,3"
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/videos/generations";
+
+const payload = {
+  model: "sora-2",
+  url: "https://upload.apimart.ai/f/video/9998234807907072-ad4c2656-94a4-44d4-9eaa-5be2855a7798-video_task_01KBYT63R1TGZNT4EHAD495ZJ3.mp4",
+  timestamps: "1,3"
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "status": "submitted",
+      "task_id": "task_01KBYT59JDHB4A3KDDR9N9JVWP"
+    }
+  ]
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "잘못된 요청 매개변수",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "인증에 실패했습니다. API 키를 확인하세요",
+    "type": "authentication_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## 인증
+
+<ParamField header="Authorization" type="string" required>
+  모든 API 엔드포인트는 Bearer Token 인증이 필요합니다
+
+  API 키 받기:
+
+  [API 키 관리 페이지](https://apimart.ai/console/token)에서 API 키를 받으세요
+
+  요청 헤더에 추가:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Body
+
+<ParamField body="model" type="string" default="sora-2" required>
+  비디오 생성 모델 이름
+
+  지원 모델:
+  - `sora-2` - 표준 버전
+  - `sora-2-pro` - 프로 버전
+
+  예시: `"sora-2"` 또는 `"sora-2-pro"`
+</ParamField>
+
+<ParamField body="timestamps" type="string" required>
+  캐릭터 등장 타임스탬프 범위
+
+  초 단위, 형식: `"시작초,종료초"`
+
+  **⚠️ 제한:**
+  - 시간 범위 차이 최소 1초
+  - 시간 범위 차이 최대 3초
+
+  예시: `"1,3"` 은 비디오의 1초에서 3초까지 등장하는 캐릭터를 의미합니다
+</ParamField>
+
+<ParamField body="url" type="string">
+  생성할 캐릭터가 포함된 비디오 URL
+
+  **⚠️ 요구사항:**
+  - 비디오에 사운드가 포함되어야 함
+  - 비디오에 캐릭터가 포함되어야 함
+
+  **💡 설명:**
+  - `url` 또는 `from_task` 중 하나를 설정해야 합니다
+
+  예시: `"https://upload.apimart.ai/f/video/..."`
+</ParamField>
+
+<ParamField body="from_task" type="string">
+  생성된 비디오 작업 ID
+
+  이미 생성된 작업 ID에서 캐릭터를 생성할 수 있습니다
+
+  **💡 설명:**
+  - `url` 또는 `from_task` 중 하나를 설정해야 합니다
+
+  예시: `"task_01KBYT59JDHB4A3KDDR9N9JVWP"`
+</ParamField>
+
+## Response
+
+<ResponseField name="code" type="integer">
+  응답 상태 코드, 성공 시 200
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  응답 데이터 배열
+
+  <Expandable title="배열 요소">
+    <ResponseField name="status" type="string">
+      작업 상태, 초기 제출 시 `submitted`
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      작업 고유 식별자, 작업 상태 및 결과 조회에 사용
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+

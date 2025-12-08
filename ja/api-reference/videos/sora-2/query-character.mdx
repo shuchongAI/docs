@@ -1,0 +1,150 @@
+---
+title: "Sora2 キャラクタークエリ"
+description: "
+- キャラクター作成タスクのステータスと結果をクエリ
+
+- 作成されたキャラクターの詳細情報を取得
+
+- 後続の動画生成に使用できるキャラクターIDを返す
+"
+api: "GET https://api.apimart.ai/v1/characters_tasks/{task_id}"
+
+---
+
+
+
+
+<RequestExample>
+
+```bash cURL
+curl --request GET \
+  --url https://api.apimart.ai/v1/characters_tasks/task_01KBZ0TZZ7C7M3WS1TJM0PH8J4 \
+  --header 'Authorization: Bearer <token>'
+```
+
+```python Python
+import requests
+
+task_id = "task_01KBZ0TZZ7C7M3WS1TJM0PH8J4"
+url = f"https://api.apimart.ai/v1/characters_tasks/{task_id}"
+
+headers = {
+    "Authorization": "Bearer <token>"
+}
+
+response = requests.get(url, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const taskId = "task_01KBZ0TZZ7C7M3WS1TJM0PH8J4";
+const url = `https://api.apimart.ai/v1/characters_tasks/${taskId}`;
+
+const headers = {
+  "Authorization": "Bearer <token>"
+};
+
+fetch(url, {
+  method: "GET",
+  headers: headers
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "display_name": "Miles Whiskerson",
+      "id": "ch_6936cc06e19c8191aa8bc579cb1c3b84",
+      "profile_picture_url": "https://upload.apimart.ai/f/image/9998234801069804-4d533898-f37d-43b3-a076-21b16d739449-character_task_01KBZ0TZZ7C7M3WS1TJM0PH8J4.jpg",
+      "username": "duksvfkf.cruisingki"
+    }
+  ]
+}
+```
+
+```json 404
+{
+  "error": {
+    "code": 404,
+    "message": "タスクが見つかりません",
+    "type": "not_found_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## パスパラメータ
+
+<ParamField path="task_id" type="string" required>
+  キャラクター作成タスクID
+
+  キャラクター作成APIから返されたタスクID
+
+  例：`"task_01KBZ0TZZ7C7M3WS1TJM0PH8J4"`
+</ParamField>
+
+## 認証
+
+<ParamField header="Authorization" type="string" required>
+  すべてのAPIエンドポイントはBearer Token認証が必要です
+
+  APIキーの取得：
+
+  [APIキー管理ページ](https://apimart.ai/console/token)でAPIキーを取得してください
+
+  リクエストヘッダーに追加：
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Response
+
+<ResponseField name="code" type="integer">
+  レスポンスステータスコード、成功時は200
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  レスポンスデータ配列
+
+  <Expandable title="配列要素">
+    <ResponseField name="id" type="string">
+      キャラクターの一意識別子
+      
+      このIDは動画生成時に `character_url` パラメータでキャラクターを参照するために使用できます
+
+      例：`"ch_6936cc06e19c8191aa8bc579cb1c3b84"`
+    </ResponseField>
+
+    <ResponseField name="display_name" type="string">
+      キャラクターの表示名
+
+      例：`"Miles Whiskerson"`
+    </ResponseField>
+
+    <ResponseField name="profile_picture_url" type="string">
+      キャラクターのプロフィール画像URL
+
+      例：`"https://upload.apimart.ai/f/image/...character_task_xxx.jpg"`
+    </ResponseField>
+
+    <ResponseField name="username" type="string">
+      キャラクターのユーザー名
+
+      例：`"duksvfkf.cruisingki"`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
