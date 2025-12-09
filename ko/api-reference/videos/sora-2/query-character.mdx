@@ -61,14 +61,25 @@ fetch(url, {
 ```json 200
 {
   "code": 200,
-  "data": [
-    {
-      "display_name": "Miles Whiskerson",
-      "id": "ch_6936cc06e19c8191aa8bc579cb1c3b84",
-      "profile_picture_url": "https://upload.apimart.ai/f/image/9998234801069804-4d533898-f37d-43b3-a076-21b16d739449-character_task_01KBZ0TZZ7C7M3WS1TJM0PH8J4.jpg",
-      "username": "duksvfkf.cruisingki"
-    }
-  ]
+  "data": {
+    "actual_time": 46,
+    "completed": 1765251507,
+    "created": 1765251461,
+    "estimated_time": 30,
+    "id": "task_01KC0JZCMTMQ70D68XTM56Q5D0",
+    "progress": 100,
+    "result": {
+      "characters": [
+        {
+          "display_name": "Turbo Whiskers",
+          "id": "ch_6937998961208191a45ef08447a554df",
+          "profile_picture_url": "https://upload.apimart.ai/f/image/9998234748474202-d5305f13-3dec-4420-9cae-2f5a6a809719-character_task_01KC0JZCMTMQ70D68XTM56Q5D0.jpg",
+          "username": "duksvfkf.turbo_whis"
+        }
+      ]
+    },
+    "status": "completed"
+  }
 }
 ```
 
@@ -116,34 +127,94 @@ fetch(url, {
   응답 상태 코드, 성공 시 200
 </ResponseField>
 
-<ResponseField name="data" type="array">
-  응답 데이터 배열
+<ResponseField name="data" type="object">
+  응답 데이터 객체
 
-  <Expandable title="배열 요소">
+  <Expandable title="필드 상세">
     <ResponseField name="id" type="string">
-      캐릭터 고유 식별자
-      
-      이 ID는 비디오 생성 시 `character_url` 매개변수로 캐릭터를 참조하는 데 사용할 수 있습니다
+      작업 고유 식별자
 
-      예시: `"ch_6936cc06e19c8191aa8bc579cb1c3b84"`
+      예시: `"task_01KC0JZCMTMQ70D68XTM56Q5D0"`
     </ResponseField>
 
-    <ResponseField name="display_name" type="string">
-      캐릭터 표시 이름
+    <ResponseField name="status" type="string">
+      작업 상태
 
-      예시: `"Miles Whiskerson"`
+      가능한 값:
+      - `pending` - 처리 대기 중
+      - `processing` - 처리 중
+      - `completed` - 완료
+      - `failed` - 실패
+
+      예시: `"completed"`
     </ResponseField>
 
-    <ResponseField name="profile_picture_url" type="string">
-      캐릭터 프로필 사진 URL
+    <ResponseField name="progress" type="integer">
+      작업 완료 진행률 (0-100)
 
-      예시: `"https://upload.apimart.ai/f/image/...character_task_xxx.jpg"`
+      예시: `100`
     </ResponseField>
 
-    <ResponseField name="username" type="string">
-      캐릭터 사용자 이름
+    <ResponseField name="created" type="integer">
+      작업 생성 타임스탬프 (Unix 타임스탬프)
 
-      예시: `"duksvfkf.cruisingki"`
+      예시: `1765251461`
+    </ResponseField>
+
+    <ResponseField name="completed" type="integer">
+      작업 완료 타임스탬프 (Unix 타임스탬프)
+
+      예시: `1765251507`
+    </ResponseField>
+
+    <ResponseField name="estimated_time" type="integer">
+      예상 처리 시간 (초)
+
+      예시: `30`
+    </ResponseField>
+
+    <ResponseField name="actual_time" type="integer">
+      실제 처리 시간 (초)
+
+      예시: `46`
+    </ResponseField>
+
+    <ResponseField name="result" type="object">
+      작업 결과
+
+      <Expandable title="result 필드">
+        <ResponseField name="characters" type="array">
+          캐릭터 배열
+
+          <Expandable title="캐릭터 객체">
+            <ResponseField name="id" type="string">
+              캐릭터 고유 식별자
+              
+              이 ID는 비디오 생성 시 `character_url` 매개변수로 캐릭터를 참조하는 데 사용할 수 있습니다
+
+              예시: `"ch_6937998961208191a45ef08447a554df"`
+            </ResponseField>
+
+            <ResponseField name="display_name" type="string">
+              캐릭터 표시 이름
+
+              예시: `"Turbo Whiskers"`
+            </ResponseField>
+
+            <ResponseField name="profile_picture_url" type="string">
+              캐릭터 프로필 사진 URL
+
+              예시: `"https://upload.apimart.ai/f/image/...character_task_xxx.jpg"`
+            </ResponseField>
+
+            <ResponseField name="username" type="string">
+              캐릭터 사용자 이름, 프롬프트에서 `@username`으로 참조 가능
+
+              예시: `"duksvfkf.turbo_whis"`
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+      </Expandable>
     </ResponseField>
   </Expandable>
 </ResponseField>
