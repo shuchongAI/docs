@@ -594,22 +594,63 @@ cat(content(response, "text"))
   Text description for image generation
 </ParamField>
 
-<ParamField body="size" type="string">
-  Image generation size
+<ParamField body="size" type="string" default="1:1">
+  Image aspect ratio
 
   Supported aspect ratios:
-  - `1:1`
-  - `4:3`
-  - `3:4`
-  - `16:9`
-  - `9:16`
-  - `3:2`
-  - `2:3`
-  - `21:9`
+  - `1:1` - Square (default)
+  - `4:3` - Landscape 4:3
+  - `3:4` - Portrait 3:4
+  - `16:9` - Landscape widescreen
+  - `9:16` - Portrait vertical
+  - `3:2` - Landscape 3:2
+  - `2:3` - Portrait 2:3
+  - `21:9` - Ultra-wide
+  - `9:21` - Ultra-tall
+</ParamField>
+
+<ParamField body="resolution" type="string" default="2K">
+  Image resolution
 
   Supported resolutions:
-  - `2k`
-  - `4k`
+  - `2K` - Standard resolution (default)
+  - `4K` - High definition
+
+  > **Note:** Seedream-4.5 does not support 1K resolution
+
+  **Resolution reference sizes:**
+  | Resolution | 1:1 Size | 16:9 Size |
+  |------------|----------|-----------|
+  | 2K | 2048x2048 | 2560x1440 |
+  | 4K | 4096x4096 | 5404x3040 |
+
+  <Expandable title="Complete pixel mapping table">
+    **2K Resolution**
+    | Ratio | Pixels |
+    |-------|--------|
+    | 1:1 | 2048x2048 |
+    | 4:3 | 2304x1728 |
+    | 3:4 | 1728x2304 |
+    | 16:9 | 2560x1440 |
+    | 9:16 | 1440x2560 |
+    | 3:2 | 2496x1664 |
+    | 2:3 | 1664x2496 |
+    | 21:9 | 3024x1296 |
+    | 9:21 | 1296x3024 |
+
+    **4K Resolution**
+    | Ratio | Pixels |
+    |-------|--------|
+    | 1:1 | 4096x4096 |
+    | 4:3 | 4694x3520 |
+    | 3:4 | 3520x4694 |
+    | 16:9 | 5404x3040 |
+    | 9:16 | 3040x5404 |
+    | 3:2 | 4992x3328 |
+    | 2:3 | 3328x4992 |
+    | 21:9 | 6198x2656 |
+    | 9:21 | 2656x6198 |
+  </Expandable>
 </ParamField>
 
 <ParamField body="n" type="integer">
