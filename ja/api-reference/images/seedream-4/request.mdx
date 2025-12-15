@@ -1,6 +1,6 @@
 ---
 title: "リクエストパラメータ"
-description: "SeeDream-4.0 画像生成リクエストパラメータ"
+description: "Seedream-4.0 画像生成リクエストパラメータ"
 ---
 
 # リクエストパラメータ
@@ -14,9 +14,10 @@ curl -X POST https://api.apimart.ai/v1/images/generations \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "seedream-4.0",
+    "model": "doubao-seedance-4-0",
     "prompt": "星空の下の古城",
     "size": "1:1",
+    "resolution": "2K",
     "n": 1
   }'
 ```
@@ -26,23 +27,38 @@ curl -X POST https://api.apimart.ai/v1/images/generations \
 ## パラメータ
 
 <ParamField query="model" type="string" required>
-  モデル名、"seedream-4.0" 固定
+  モデル名、`doubao-seedance-4-0` 固定
 </ParamField>
 
 <ParamField query="prompt" type="string" required>
-  画像生成のテキスト説明
+  画像生成のテキスト説明、最大 1000 文字
 </ParamField>
 
-<ParamField query="size" type="string">
-  生成画像のサイズ、"1:1"、"1024x1536"、"1536x1024" に対応
+<ParamField query="size" type="string" default="1:1">
+  画像のアスペクト比
+
+  サポートされている比率：`1:1`、`4:3`、`3:4`、`16:9`、`9:16`、`3:2`、`2:3`、`21:9`、`9:21`
 </ParamField>
 
-<ParamField query="n" type="integer">
-  生成画像の数、デフォルトは 1
+<ParamField query="resolution" type="string" default="2K">
+  画像解像度
+
+  サポートされている解像度：`1K`、`2K`（デフォルト）、`4K`
+</ParamField>
+
+<ParamField query="n" type="integer" default="1">
+  生成画像の数、範囲 1-15
 </ParamField>
 
 <ParamField query="image_urls" type="array">
-  画像から画像へのモードに使用する参照画像URLリスト
+  画像から画像へのモードに使用する参照画像 URL リスト、最大 10 枚
 </ParamField>
 
+<ParamField query="watermark" type="boolean" default="false">
+  透かしを追加するかどうか
+</ParamField>
+
+<ParamField query="optimize_prompt_options" type="string" default="standard">
+  プロンプト最適化モード：`standard`（標準）または `fast`（高速）
+</ParamField>
 

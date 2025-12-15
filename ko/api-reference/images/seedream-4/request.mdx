@@ -1,6 +1,6 @@
 ---
 title: "요청 파라미터"
-description: "SeeDream-4.0 이미지 생성 요청 파라미터"
+description: "Seedream-4.0 이미지 생성 요청 파라미터"
 ---
 
 # 요청 파라미터
@@ -14,9 +14,10 @@ curl -X POST https://api.apimart.ai/v1/images/generations \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "seedream-4.0",
+    "model": "doubao-seedance-4-0",
     "prompt": "별빛 아래의 고대 성",
     "size": "1:1",
+    "resolution": "2K",
     "n": 1
   }'
 ```
@@ -26,23 +27,38 @@ curl -X POST https://api.apimart.ai/v1/images/generations \
 ## 파라미터
 
 <ParamField query="model" type="string" required>
-  모델 이름, "seedream-4.0" 고정
+  모델 이름, `doubao-seedance-4-0` 고정
 </ParamField>
 
 <ParamField query="prompt" type="string" required>
-  이미지 생성을 위한 텍스트 설명
+  이미지 생성을 위한 텍스트 설명, 최대 1000자
 </ParamField>
 
-<ParamField query="size" type="string">
-  생성 이미지 크기, "1:1", "1024x1536", "1536x1024" 지원
+<ParamField query="size" type="string" default="1:1">
+  이미지 가로세로 비율
+
+  지원되는 비율: `1:1`, `4:3`, `3:4`, `16:9`, `9:16`, `3:2`, `2:3`, `21:9`, `9:21`
 </ParamField>
 
-<ParamField query="n" type="integer">
-  생성할 이미지 수, 기본값: 1
+<ParamField query="resolution" type="string" default="2K">
+  이미지 해상도
+
+  지원되는 해상도: `1K`, `2K` (기본값), `4K`
+</ParamField>
+
+<ParamField query="n" type="integer" default="1">
+  생성할 이미지 수, 범위 1-15
 </ParamField>
 
 <ParamField query="image_urls" type="array">
-  이미지-투-이미지 모드용 참조 이미지 URL 목록
+  이미지-투-이미지 모드용 참조 이미지 URL 목록, 최대 10개
 </ParamField>
 
+<ParamField query="watermark" type="boolean" default="false">
+  워터마크 추가 여부
+</ParamField>
+
+<ParamField query="optimize_prompt_options" type="string" default="standard">
+  프롬프트 최적화 모드: `standard` (표준) 또는 `fast` (빠름)
+</ParamField>
 
