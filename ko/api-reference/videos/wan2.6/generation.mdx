@@ -1,0 +1,575 @@
+---
+title: "Wan2.6 비디오 생성"
+description: "
+- Alibaba Cloud 만상 비디오 생성 모델
+
+- 텍스트-비디오 (Text-to-Video) 및 이미지-비디오 (Image-to-Video) 지원
+
+- 720p/1080p 해상도, 5/10/15초 길이 지원
+
+- 자동 프롬프트 확장 및 오디오 생성 지원
+"
+api: "POST https://api.apimart.ai/v1/videos/generations"
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/videos/generations \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "wan2.6",
+    "prompt": "잔디밭에서 뛰어다니는 귀여운 고양이",
+    "size": "16:9",
+    "resolution": "720p",
+    "duration": 5
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/videos/generations"
+
+payload = {
+    "model": "wan2.6",
+    "prompt": "잔디밭에서 뛰어다니는 귀여운 고양이",
+    "size": "16:9",
+    "resolution": "720p",
+    "duration": 5
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/videos/generations";
+
+const payload = {
+  model: "wan2.6",
+  prompt: "잔디밭에서 뛰어다니는 귀여운 고양이",
+  size: "16:9",
+  resolution: "720p",
+  duration: 5
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/videos/generations"
+
+    payload := map[string]interface{}{
+        "model":      "wan2.6",
+        "prompt":     "잔디밭에서 뛰어다니는 귀여운 고양이",
+        "size":       "16:9",
+        "resolution": "720p",
+        "duration":   5,
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/videos/generations";
+
+        String payload = """
+        {
+          "model": "wan2.6",
+          "prompt": "잔디밭에서 뛰어다니는 귀여운 고양이",
+          "size": "16:9",
+          "resolution": "720p",
+          "duration": 5
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/videos/generations";
+
+$payload = [
+    "model" => "wan2.6",
+    "prompt" => "잔디밭에서 뛰어다니는 귀여운 고양이",
+    "size" => "16:9",
+    "resolution" => "720p",
+    "duration" => 5
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1/videos/generations")
+
+payload = {
+  model: "wan2.6",
+  prompt: "잔디밭에서 뛰어다니는 귀여운 고양이",
+  size: "16:9",
+  resolution: "720p",
+  duration: 5
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/videos/generations")!
+
+let payload: [String: Any] = [
+    "model": "wan2.6",
+    "prompt": "잔디밭에서 뛰어다니는 귀여운 고양이",
+    "size": "16:9",
+    "resolution": "720p",
+    "duration": 5
+]
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+
+    if let data = data, let responseString = String(data: data, encoding: .utf8) {
+        print(responseString)
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/videos/generations";
+
+        var payload = @"{
+            ""model"": ""wan2.6"",
+            ""prompt"": ""잔디밭에서 뛰어다니는 귀여운 고양이"",
+            ""size"": ""16:9"",
+            ""resolution"": ""720p"",
+            ""duration"": 5
+        }";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
+
+        var content = new StringContent(payload, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(url, content);
+        var result = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(result);
+    }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "status": "submitted",
+      "task_id": "task_01J9HA7JPQ9A0Z6JZ3V8M9W6PZ"
+    }
+  ]
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "요청 매개변수가 유효하지 않습니다",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "인증에 실패했습니다. API 키를 확인해 주세요",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "잔액이 부족합니다. 충전해 주세요",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "서버 내부 오류. 잠시 후 다시 시도해 주세요",
+    "type": "server_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## 인증
+
+<ParamField header="Authorization" type="string" required>
+  모든 API 엔드포인트는 Bearer Token 인증이 필요합니다
+
+  API 키 받기:
+
+  [API 키 관리 페이지](https://apimart.ai/console/token)에서 API 키를 받으세요
+
+  요청 헤더에 추가:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## 요청 매개변수
+
+<ParamField body="model" type="string" required>
+  비디오 생성 모델 이름, `wan2.6`으로 고정
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  비디오 내용 설명
+
+  텍스트-비디오 모드에서 필수. 장면, 동작, 스타일을 자세히 설명해 주세요
+
+  예시: `"햇빛 아래서 기지개 펴는 귀여운 고양이"`
+</ParamField>
+
+<ParamField body="image_urls" type="array">
+  참조 이미지 URL 배열 (1장만 지원)
+
+  이미지-비디오 모드에서 필수. 공개 접근 가능한 URL 또는 Base64 인코딩 지원
+
+  예시: `["https://example.com/image.jpg"]` 또는 `["data:image/png;base64,iVBORw0KGgo..."]`
+
+  <Note>
+  시스템은 `image_urls` 포함 여부에 따라 텍스트-비디오 또는 이미지-비디오 모드를 자동 선택합니다
+  </Note>
+</ParamField>
+
+<ParamField body="negative_prompt" type="string">
+  네거티브 프롬프트, 원하지 않는 내용 설명
+
+  예시: `"흐릿함, 저품질, 왜곡"`
+</ParamField>
+
+<ParamField body="size" type="string" default="16:9">
+  비디오 화면 비율
+
+  옵션:
+  - `16:9` - 가로 (기본값)
+  - `9:16` - 세로
+  - `1:1` - 정사각형
+  - `4:3` - 가로
+  - `3:4` - 세로
+
+  기본값: `16:9`
+</ParamField>
+
+<ParamField body="resolution" type="string" default="720p">
+  비디오 해상도
+
+  옵션:
+  - `720p` - 표준 (기본값)
+  - `1080p` - 고화질
+
+  기본값: `720p`
+
+  <Warning>
+  480p 해상도는 지원되지 않습니다
+  </Warning>
+</ParamField>
+
+<ParamField body="duration" type="integer" default="5">
+  비디오 길이 (초)
+
+  지원 값: `5`, `10`, `15`초만 가능
+
+  기본값: `5`
+</ParamField>
+
+<ParamField body="seed" type="integer">
+  재현 가능한 결과를 위한 랜덤 시드
+
+  예시: `12345`
+</ParamField>
+
+<ParamField body="prompt_extend" type="boolean">
+  프롬프트 자동 확장 여부
+
+  활성화하면 시스템이 프롬프트를 자동으로 최적화하고 풍부하게 합니다
+</ParamField>
+
+<ParamField body="audio" type="boolean">
+  오디오 자동 추가 여부
+
+  활성화하면 시스템이 비디오에 맞는 오디오를 생성합니다
+</ParamField>
+
+<ParamField body="audio_url" type="string">
+  지정 오디오 URL
+
+  `audio` 매개변수보다 우선합니다
+</ParamField>
+
+<ParamField body="shot_type" type="string">
+  샷 유형
+
+  옵션:
+  - `single` - 싱글 샷
+  - `multi` - 멀티 샷
+</ParamField>
+
+<ParamField body="watermark" type="boolean">
+  워터마크 추가 여부
+</ParamField>
+
+<ParamField body="template" type="string">
+  이미지-비디오 템플릿 이름
+
+  이미지-비디오 모드에서만 사용 가능
+</ParamField>
+
+## 해상도 및 화면 비율 조합
+
+| 화면 비율 | 설명 | 720p 크기 | 1080p 크기 |
+|-----------|------|-----------|------------|
+| `16:9` | 가로 (기본값) | 1280×720 | 1920×1080 |
+| `9:16` | 세로 | 720×1280 | 1080×1920 |
+| `1:1` | 정사각형 | 960×960 | 1440×1440 |
+| `4:3` | 가로 | 1088×832 | 1632×1248 |
+| `3:4` | 세로 | 832×1088 | 1248×1632 |
+
+## 응답
+
+<ResponseField name="code" type="integer">
+  응답 상태 코드, 성공 시 200
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  응답 데이터 배열
+
+  <Expandable title="배열 요소">
+    <ResponseField name="status" type="string">
+      작업 상태, 제출 시 `submitted`
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      작업 고유 식별자, 작업 상태 및 결과 조회에 사용
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## 사용 시나리오
+
+### 시나리오 1: 텍스트-비디오 (간단한 요청)
+
+```json
+{
+  "model": "wan2.6",
+  "prompt": "햇빛 아래서 기지개 펴는 귀여운 고양이"
+}
+```
+
+### 시나리오 2: 텍스트-비디오 (전체 매개변수)
+
+```json
+{
+  "model": "wan2.6",
+  "prompt": "잔디밭에서 뛰어다니는 귀여운 고양이",
+  "negative_prompt": "흐릿함, 저품질, 왜곡",
+  "size": "16:9",
+  "resolution": "720p",
+  "duration": 5,
+  "seed": 12345,
+  "prompt_extend": true,
+  "audio": true,
+  "shot_type": "single",
+  "watermark": false
+}
+```
+
+### 시나리오 3: 이미지-비디오
+
+```json
+{
+  "model": "wan2.6",
+  "prompt": "이미지 속 인물이 손을 흔들게 하기",
+  "image_urls": ["https://example.com/image.jpg"],
+  "resolution": "1080p",
+  "duration": 10
+}
+```
+
+### 시나리오 4: 이미지-비디오 (Base64 이미지)
+
+```json
+{
+  "model": "wan2.6",
+  "prompt": "고양이를 일어서서 걷게 하기",
+  "image_urls": ["data:image/png;base64,iVBORw0KGgo..."],
+  "duration": 5
+}
+```
+
+## 모드 설명
+
+### 텍스트-비디오 (Text-to-Video)
+
+- 업스트림 모델: `wan2.6-t2v`
+- `prompt` 매개변수 필수
+- `image_urls` 매개변수 불필요
+
+### 이미지-비디오 (Image-to-Video)
+
+- 업스트림 모델: `wan2.6-i2v`
+- `image_urls` 매개변수 필수 (1장만 지원)
+- `prompt` 매개변수 선택 사항, 원하는 동작 설명에 사용
+
+<Note>
+시스템은 요청에 `image_urls`가 포함되어 있는지에 따라 모드를 자동 선택합니다
+</Note>
+
+<Note>
+**작업 결과 조회**
+
+비디오 생성은 비동기 작업으로 제출 시 `task_id`를 반환합니다. [작업 상태 조회](/ko/api-reference/tasks/status) 엔드포인트를 사용하여 생성 진행 상황과 결과를 조회하세요.
+</Note>
