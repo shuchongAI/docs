@@ -474,6 +474,34 @@ class Program
   ウォーターマークを追加するかどうか
 </ParamField>
 
+<ParamField body="template" type="string">
+  画像から動画への特殊効果モード用のエフェクトテンプレート名
+
+  <Note>
+  エフェクトモード使用時：
+  - 画像は1枚のみ必要（`image_urls`で渡す）
+  - プロンプトは不要（モデルは`prompt`フィールドを無視します）
+  </Note>
+
+  **汎用エフェクト：**
+  - `squish` - スクイッシュ
+  - `rotation` - 回転
+  - `poke` - つんつん
+  - `inflate` - 風船膨張
+  - `dissolve` - 分子拡散
+  - `melt` - 熱波融解
+  - `icecream` - アイスクリーム惑星
+  - `flying` - マジック浮遊
+
+  **シングルパーソンエフェクト：**
+  - `carousel` - タイムカルーセル
+  - `singleheart` - ラブユー
+  - `dance1` - スウィングモーメント
+  - `dance2` - ダンスムーブ
+
+  その他のエフェクトについては[アリババ万相テンプレートドキュメント](https://help.aliyun.com/zh/model-studio/special-effects-video-generation)を参照してください
+</ParamField>
+
 ## 解像度とアスペクト比の組み合わせ
 
 | アスペクト比 | 説明 | 720p サイズ | 1080p サイズ |

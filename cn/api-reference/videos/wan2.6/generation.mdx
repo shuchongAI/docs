@@ -474,6 +474,34 @@ class Program
   是否添加水印
 </ParamField>
 
+<ParamField body="template" type="string">
+  特效模板名称，用于图生视频特效模式
+
+  <Note>
+  使用特效模式时：
+  - 仅需一张图像（通过 `image_urls` 传入）
+  - 无需提示词（模型会忽略 `prompt` 字段）
+  </Note>
+
+  **通用特效：**
+  - `squish` - 解压捏捏
+  - `rotation` - 转圈圈
+  - `poke` - 戳戳乐
+  - `inflate` - 气球膨胀
+  - `dissolve` - 分子扩散
+  - `melt` - 热浪融化
+  - `icecream` - 冰淇淋星球
+  - `flying` - 魔法悬浮
+
+  **单人特效：**
+  - `carousel` - 时光木马
+  - `singleheart` - 爱你哟
+  - `dance1` - 摇摆时刻
+  - `dance2` - 头号甩舞
+
+  更多特效请参考[阿里云万相模板文档](https://help.aliyun.com/zh/model-studio/special-effects-video-generation)
+</ParamField>
+
 ## 分辨率与宽高比组合
 
 | 宽高比 | 说明 | 720p 尺寸 | 1080p 尺寸 |

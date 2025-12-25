@@ -474,6 +474,34 @@ class Program
   Whether to add watermark
 </ParamField>
 
+<ParamField body="template" type="string">
+  Effect template name for image-to-video special effects mode
+
+  <Note>
+  When using effects mode:
+  - Only one image is required (passed via `image_urls`)
+  - No prompt is needed (model ignores the `prompt` field)
+  </Note>
+
+  **General Effects:**
+  - `squish` - Squish & Squeeze
+  - `rotation` - Rotation
+  - `poke` - Poke
+  - `inflate` - Balloon Inflate
+  - `dissolve` - Molecular Dissolve
+  - `melt` - Heat Wave Melt
+  - `icecream` - Ice Cream Planet
+  - `flying` - Magic Levitation
+
+  **Single Person Effects:**
+  - `carousel` - Time Carousel
+  - `singleheart` - Love You
+  - `dance1` - Swing Moment
+  - `dance2` - Dance Move
+
+  For more effects, refer to [Alibaba Wanxiang Template Documentation](https://help.aliyun.com/zh/model-studio/special-effects-video-generation)
+</ParamField>
+
 ## Resolution and Aspect Ratio Combinations
 
 | Aspect Ratio | Description | 720p Size | 1080p Size |
