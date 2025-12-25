@@ -93,11 +93,11 @@ func main() {
     url := "https://api.apimart.ai/v1/videos/generations"
 
     payload := map[string]interface{}{
-        "model":      "wan2.6",
-        "prompt":     "草原を走るかわいい猫",
-        "size":       "16:9",
-        "resolution": "720p",
-        "duration":   5,
+        "model":        "wan2.6",
+        "prompt":       "草原を走るかわいい猫",
+        "aspect_ratio": "16:9",
+        "resolution":   "720p",
+        "duration":     5,
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -162,7 +162,7 @@ $url = "https://api.apimart.ai/v1/videos/generations";
 $payload = [
     "model" => "wan2.6",
     "prompt" => "草原を走るかわいい猫",
-    "size" => "16:9",
+    "aspect_ratio" => "16:9",
     "resolution" => "720p",
     "duration" => 5
 ];
@@ -258,7 +258,7 @@ class Program
         var payload = @"{
             ""model"": ""wan2.6"",
             ""prompt"": ""草原を走るかわいい猫"",
-            ""size"": ""16:9"",
+            ""aspect_ratio"": ""16:9"",
             ""resolution"": ""720p"",
             ""duration"": 5
         }";
@@ -391,7 +391,7 @@ class Program
   例：`"ぼやけ, 低品質, 歪み"`
 </ParamField>
 
-<ParamField body="size" type="string" default="16:9">
+<ParamField body="aspect_ratio" type="string" default="16:9">
   動画のアスペクト比
 
   オプション：
