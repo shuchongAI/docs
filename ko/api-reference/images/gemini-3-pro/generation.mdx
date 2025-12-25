@@ -212,6 +212,47 @@ func main() {
   **⚠️ 참고:** base64 형식으로 4K 이미지를 생성할 때 처리 시간이 더 오래 걸립니다
 </ParamField>
 
+<ParamField body="image_urls" type="array">
+  이미지 투 이미지 또는 이미지 편집을 위한 참조 이미지 URL 목록
+
+  **💡 빠른 입력 (Try it 영역):**
+  1. "+ Add an item"을 클릭하여 이미지 URL 추가
+  2. 완전한 이미지 URL 주소 또는 base64 데이터 입력
+
+  <Expandable title="상세 필드 설명">
+    <ParamField body="url" type="string" required>
+      이미지 URL 주소
+
+      두 가지 형식 지원:
+
+      **1. 완전한 이미지 URL 주소**
+      - 공개적으로 접근 가능한 이미지 URL (http:// 또는 https://)
+      - 예: `https://example.com/image.jpg`
+
+      **2. Base64 인코딩 형식**
+      - **완전한 Data URI 형식을 사용해야 합니다**
+      - 형식: `data:image/{형식};base64,{base64데이터}`
+      - 지원되는 이미지 형식: jpeg, png, webp 등
+      - 예: `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
+      - ⚠️ 참고: `data:image/jpeg;base64,` 접두사를 포함해야 합니다
+
+      **제한:**
+      - 단일 이미지는 10MB를 초과할 수 없음
+      - 지원 형식: .jpeg, .jpg, .png, .webp
+    </ParamField>
+  </Expandable>
+
+  **제한:** 최대 14개 이미지
+</ParamField>
+
+<ParamField body="mask_url" type="string">
+  마스크 이미지 URL
+
+  - PNG 형식이어야 함
+  - 크기는 참조 이미지와 일치해야 함
+  - 4MB를 초과할 수 없음
+</ParamField>
+
 ## Response
 
 <ResponseField name="code" type="integer">

@@ -212,6 +212,47 @@ func main() {
   **⚠️ 注意：** base64形式で4K画像を生成する場合、処理時間が長くなります
 </ParamField>
 
+<ParamField body="image_urls" type="array">
+  画像から画像への変換や画像編集用の参照画像URLリスト
+
+  **💡 クイック入力（Try itエリア）：**
+  1. 「+ Add an item」をクリックして画像URLを追加
+  2. 完全な画像URLアドレスまたはbase64データを入力
+
+  <Expandable title="詳細フィールド説明">
+    <ParamField body="url" type="string" required>
+      画像URLアドレス
+
+      2つの形式をサポート：
+
+      **1. 完全な画像URLアドレス**
+      - 公開アクセス可能な画像URL（http:// または https://）
+      - 例：`https://example.com/image.jpg`
+
+      **2. Base64エンコード形式**
+      - **完全なData URI形式を使用する必要があります**
+      - 形式：`data:image/{形式};base64,{base64データ}`
+      - サポートされる画像形式：jpeg、png、webpなど
+      - 例：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
+      - ⚠️ 注意：`data:image/jpeg;base64,` プレフィックスを含める必要があります
+
+      **制限：**
+      - 単一画像は10MBを超えないこと
+      - サポート形式：.jpeg、.jpg、.png、.webp
+    </ParamField>
+  </Expandable>
+
+  **制限：** 最大14枚の画像
+</ParamField>
+
+<ParamField body="mask_url" type="string">
+  マスク画像のURL
+
+  - PNG形式である必要があります
+  - サイズは参照画像と一致する必要があります
+  - 4MBを超えないこと
+</ParamField>
+
 ## Response
 
 <ResponseField name="code" type="integer">
