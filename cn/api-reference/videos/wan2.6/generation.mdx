@@ -23,7 +23,7 @@ curl --request POST \
   --data '{
     "model": "wan2.6",
     "prompt": "一只可爱的猫咪在草地上奔跑",
-    "size": "16:9",
+    "aspect_ratio": "16:9",
     "resolution": "720p",
     "duration": 5
   }'
@@ -37,7 +37,7 @@ url = "https://api.apimart.ai/v1/videos/generations"
 payload = {
     "model": "wan2.6",
     "prompt": "一只可爱的猫咪在草地上奔跑",
-    "size": "16:9",
+    "aspect_ratio": "16:9",
     "resolution": "720p",
     "duration": 5
 }
@@ -58,7 +58,7 @@ const url = "https://api.apimart.ai/v1/videos/generations";
 const payload = {
   model: "wan2.6",
   prompt: "一只可爱的猫咪在草地上奔跑",
-  size: "16:9",
+  aspect_ratio: "16:9",
   resolution: "720p",
   duration: 5
 };
@@ -132,7 +132,7 @@ public class Main {
         {
           "model": "wan2.6",
           "prompt": "一只可爱的猫咪在草地上奔跑",
-          "size": "16:9",
+          "aspect_ratio": "16:9",
           "resolution": "720p",
           "duration": 5
         }
@@ -193,7 +193,7 @@ url = URI("https://api.apimart.ai/v1/videos/generations")
 payload = {
   model: "wan2.6",
   prompt: "一只可爱的猫咪在草地上奔跑",
-  size: "16:9",
+  aspect_ratio: "16:9",
   resolution: "720p",
   duration: 5
 }
@@ -218,7 +218,7 @@ let url = URL(string: "https://api.apimart.ai/v1/videos/generations")!
 let payload: [String: Any] = [
     "model": "wan2.6",
     "prompt": "一只可爱的猫咪在草地上奔跑",
-    "size": "16:9",
+    "aspect_ratio": "16:9",
     "resolution": "720p",
     "duration": 5
 ]
@@ -522,7 +522,7 @@ class Program
   "model": "wan2.6",
   "prompt": "一只可爱的猫咪在草地上奔跑",
   "negative_prompt": "模糊, 低质量, 变形",
-  "size": "16:9",
+  "aspect_ratio": "16:9",
   "resolution": "720p",
   "duration": 5,
   "seed": 12345,
