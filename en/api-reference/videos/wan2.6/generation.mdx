@@ -456,6 +456,10 @@ class Program
   Specified audio URL
 
   Takes priority over the `audio` parameter
+
+  <Warning>
+  Audio duration cannot exceed video duration. If audio is shorter than video duration, the first part of the video will have sound while the rest will be silent.
+  </Warning>
 </ParamField>
 
 <ParamField body="shot_type" type="string">

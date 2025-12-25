@@ -456,6 +456,10 @@ class Program
   指定音频 URL
 
   优先级高于 `audio` 参数
+
+  <Warning>
+  音频时长不能超过视频时长。如果音频时长小于视频时长，视频前半部分有声音，后半部分将无声音。
+  </Warning>
 </ParamField>
 
 <ParamField body="shot_type" type="string">

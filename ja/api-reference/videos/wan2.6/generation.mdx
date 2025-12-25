@@ -456,6 +456,10 @@ class Program
   指定オーディオURL
 
   `audio` パラメータより優先されます
+
+  <Warning>
+  オーディオの長さは動画の長さを超えることはできません。オーディオが動画より短い場合、動画の前半には音声がありますが、後半は無音になります。
+  </Warning>
 </ParamField>
 
 <ParamField body="shot_type" type="string">
