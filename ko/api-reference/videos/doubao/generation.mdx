@@ -342,12 +342,13 @@ echo $response;
 <ParamField body="image_urls" type="array">
   이미지-비디오 생성을 위한 첫 프레임 이미지 URL 배열
 
-  비디오의 시작 프레임을 지정하는 데 사용
+  비디오의 시작 프레임을 지정하는 데 사용, 이미지 1장만 지원
 
   예: `["https://example.com/cat.png"]`
 
   <Warning>
-  `image_urls`와 `image_with_roles`는 함께 사용할 수 없습니다
+  - 첫 프레임 이미지는 1장만 지원
+  - `image_urls`와 `image_with_roles`는 함께 사용할 수 없습니다
   </Warning>
 </ParamField>
 
@@ -363,9 +364,9 @@ echo $response;
       이미지 역할
 
       옵션:
-      - `first_frame` - 첫 프레임 이미지, 비디오 시작 프레임으로
-      - `last_frame` - 마지막 프레임 이미지, 비디오 종료 프레임으로 (quality 버전만 지원)
-      - `reference` - 참조 이미지, 비디오 스타일 가이드용
+      - `first_frame` - 첫 프레임 이미지, 비디오 시작 프레임으로 (1장만 지원)
+      - `last_frame` - 마지막 프레임 이미지, 비디오 종료 프레임으로 (quality 버전만 지원, 1장만 지원)
+      - `reference` - 참조 이미지, 비디오 스타일 가이드용 (1장만 지원)
     </ParamField>
   </Expandable>
 
@@ -379,6 +380,7 @@ echo $response;
 
   <Warning>
   - `image_urls`와 `image_with_roles`는 함께 사용할 수 없습니다
+  - 각 역할의 이미지는 1장만 지원
   - `last_frame`(마지막 프레임 이미지)은 `doubao-seedance-1-0-pro-quality` 버전만 지원하며, fast 버전은 첫 프레임과 마지막 프레임을 함께 사용할 수 없습니다
   </Warning>
 </ParamField>

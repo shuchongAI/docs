@@ -434,12 +434,13 @@ class Program
 <ParamField body="image_urls" type="array">
   First frame image URL array for image-to-video generation
 
-  Used to specify the starting frame of the video
+  Used to specify the starting frame of the video, only one image is supported
 
   Example: `["https://example.com/cat.png"]`
 
   <Warning>
-  `image_urls` and `image_with_roles` cannot be used together
+  - Only one first frame image is supported
+  - `image_urls` and `image_with_roles` cannot be used together
   </Warning>
 </ParamField>
 
@@ -455,9 +456,9 @@ class Program
       Image role
 
       Options:
-      - `first_frame` - First frame image, as video starting frame
-      - `last_frame` - Last frame image, as video ending frame (quality version only)
-      - `reference` - Reference image, for guiding video style
+      - `first_frame` - First frame image, as video starting frame (only one supported)
+      - `last_frame` - Last frame image, as video ending frame (quality version only, only one supported)
+      - `reference` - Reference image, for guiding video style (only one supported)
     </ParamField>
   </Expandable>
 
@@ -471,6 +472,7 @@ class Program
 
   <Warning>
   - `image_urls` and `image_with_roles` cannot be used together
+  - Only one image per role is supported
   - `last_frame` is only supported by `doubao-seedance-1-0-pro-quality` version, fast version does not support first and last frame together
   </Warning>
 </ParamField>

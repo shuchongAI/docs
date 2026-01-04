@@ -342,12 +342,13 @@ echo $response;
 <ParamField body="image_urls" type="array">
   画像から動画生成用の最初のフレーム画像URL配列
 
-  動画の開始フレームを指定するために使用
+  動画の開始フレームを指定するために使用、1枚の画像のみ対応
 
   例：`["https://example.com/cat.png"]`
 
   <Warning>
-  `image_urls` と `image_with_roles` は同時に使用できません
+  - 最初のフレーム画像は1枚のみ対応
+  - `image_urls` と `image_with_roles` は同時に使用できません
   </Warning>
 </ParamField>
 
@@ -363,9 +364,9 @@ echo $response;
       画像の役割
 
       選択肢：
-      - `first_frame` - 最初のフレーム画像、動画の開始フレームとして
-      - `last_frame` - 最後のフレーム画像、動画の終了フレームとして（quality版のみ対応）
-      - `reference` - 参照画像、動画スタイルのガイド用
+      - `first_frame` - 最初のフレーム画像、動画の開始フレームとして（1枚のみ対応）
+      - `last_frame` - 最後のフレーム画像、動画の終了フレームとして（quality版のみ対応、1枚のみ対応）
+      - `reference` - 参照画像、動画スタイルのガイド用（1枚のみ対応）
     </ParamField>
   </Expandable>
 
@@ -379,6 +380,7 @@ echo $response;
 
   <Warning>
   - `image_urls` と `image_with_roles` は同時に使用できません
+  - 各ロールの画像は1枚のみ対応
   - `last_frame`（最終フレーム画像）は `doubao-seedance-1-0-pro-quality` 版のみ対応、fast版は最初と最後のフレームの同時使用に対応していません
   </Warning>
 </ParamField>
