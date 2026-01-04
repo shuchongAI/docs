@@ -412,6 +412,17 @@ class Program
   </Warning>
 </ParamField>
 
+<ParamField body="seed" type="integer">
+  Seed integer for controlling the randomness of generated content
+
+  Value range: Integer between `-1` and `2^32-1`
+
+  <Note>
+  - With the same request, if the model receives different seed values (e.g., not specifying seed or setting seed to -1, which will use a random number), different results will be generated
+  - With the same request, if the model receives the same seed value, similar results will be generated, but not guaranteed to be identical
+  </Note>
+</ParamField>
+
 ## Resolution and Aspect Ratio Combinations
 
 | Resolution | Supported Aspect Ratios | Notes |

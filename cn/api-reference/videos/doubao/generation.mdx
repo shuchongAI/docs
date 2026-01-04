@@ -412,6 +412,17 @@ class Program
   </Warning>
 </ParamField>
 
+<ParamField body="seed" type="integer">
+  种子整数，用于控制生成内容的随机性
+
+  取值范围：`-1` ~ `2^32-1` 之间的整数
+
+  <Note>
+  - 相同的请求下，模型收到不同的 seed 值（如：不指定 seed 值或令 seed 取值为 -1，会使用随机数替代），将生成不同的结果
+  - 相同的请求下，模型收到相同的 seed 值，会生成类似的结果，但不保证完全一致
+  </Note>
+</ParamField>
+
 ## 分辨率与宽高比组合
 
 | 分辨率 | 支持的宽高比 | 备注 |
