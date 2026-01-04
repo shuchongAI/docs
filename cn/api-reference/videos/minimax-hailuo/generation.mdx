@@ -24,12 +24,10 @@ curl --request POST \
     "model": "MiniMax-Hailuo-02",
     "prompt": "一只可爱的猫咪在草地上奔跑",
     "duration": 5,
-    "metadata": {
-      "resolution": "768p",
-      "prompt_optimizer": true,
-      "fast_pretreatment": false,
-      "watermark": false
-    }
+    "resolution": "768p",
+    "prompt_optimizer": true,
+    "fast_pretreatment": false,
+    "watermark": false
   }'
 ```
 
@@ -42,12 +40,10 @@ payload = {
     "model": "MiniMax-Hailuo-02",
     "prompt": "一只可爱的猫咪在草地上奔跑",
     "duration": 5,
-    "metadata": {
-        "resolution": "768p",
-        "prompt_optimizer": True,
-        "fast_pretreatment": False,
-        "watermark": False
-    }
+    "resolution": "768p",
+    "prompt_optimizer": True,
+    "fast_pretreatment": False,
+    "watermark": False
 }
 
 headers = {
@@ -67,12 +63,10 @@ const payload = {
   model: "MiniMax-Hailuo-02",
   prompt: "一只可爱的猫咪在草地上奔跑",
   duration: 6,
-  metadata: {
-    resolution: "768p",
-    prompt_optimizer: true,
-    fast_pretreatment: false,
-    watermark: false
-  }
+  resolution: "768p",
+  prompt_optimizer: true,
+  fast_pretreatment: false,
+  watermark: false
 };
 
 const headers = {
@@ -105,15 +99,13 @@ func main() {
     url := "https://api.apimart.ai/v1/videos/generations"
 
     payload := map[string]interface{}{
-        "model":    "MiniMax-Hailuo-02",
-        "prompt":   "一只可爱的猫咪在草地上奔跑",
-        "duration": 5,
-        "metadata": map[string]interface{}{
-            "resolution":        "768p",
-            "prompt_optimizer":  true,
-            "fast_pretreatment": false,
-            "watermark":         false,
-        },
+        "model":              "MiniMax-Hailuo-02",
+        "prompt":             "一只可爱的猫咪在草地上奔跑",
+        "duration":           5,
+        "resolution":         "768p",
+        "prompt_optimizer":   true,
+        "fast_pretreatment":  false,
+        "watermark":          false,
     }
 
     jsonData, _ := json.Marshal(payload)
@@ -149,12 +141,10 @@ public class Main {
           "model": "MiniMax-Hailuo-02",
           "prompt": "一只可爱的猫咪在草地上奔跑",
           "duration": 5,
-          "metadata": {
-            "resolution": "768p",
-            "prompt_optimizer": true,
-            "fast_pretreatment": false,
-            "watermark": false
-          }
+          "resolution": "768p",
+          "prompt_optimizer": true,
+          "fast_pretreatment": false,
+          "watermark": false
         }
         """;
 
@@ -183,12 +173,10 @@ $payload = [
     "model" => "MiniMax-Hailuo-02",
     "prompt" => "一只可爱的猫咪在草地上奔跑",
     "duration" => 6,
-    "metadata" => [
-        "resolution" => "768p",
-        "prompt_optimizer" => true,
-        "fast_pretreatment" => false,
-        "watermark" => false
-    ]
+    "resolution" => "768p",
+    "prompt_optimizer" => true,
+    "fast_pretreatment" => false,
+    "watermark" => false
 ];
 
 $ch = curl_init($url);
@@ -218,12 +206,10 @@ payload = {
   model: "MiniMax-Hailuo-02",
   prompt: "一只可爱的猫咪在草地上奔跑",
   duration: 6,
-  metadata: {
-    resolution: "768p",
-    prompt_optimizer: true,
-    fast_pretreatment: false,
-    watermark: false
-  }
+  resolution: "768p",
+  prompt_optimizer: true,
+  fast_pretreatment: false,
+  watermark: false
 }
 
 http = Net::HTTP.new(url.host, url.port)
@@ -247,12 +233,10 @@ let payload: [String: Any] = [
     "model": "MiniMax-Hailuo-02",
     "prompt": "一只可爱的猫咪在草地上奔跑",
     "duration": 5,
-    "metadata": [
-        "resolution": "768p",
-        "prompt_optimizer": true,
-        "fast_pretreatment": false,
-        "watermark": false
-    ]
+    "resolution": "768p",
+    "prompt_optimizer": true,
+    "fast_pretreatment": false,
+    "watermark": false
 ]
 
 var request = URLRequest(url: url)
@@ -291,12 +275,10 @@ class Program
             ""model"": ""MiniMax-Hailuo-02"",
             ""prompt"": ""一只可爱的猫咪在草地上奔跑"",
             ""duration"": 6,
-            ""metadata"": {
-                ""resolution"": ""768p"",
-                ""prompt_optimizer"": true,
-                ""fast_pretreatment"": false,
-                ""watermark"": false
-            }
+            ""resolution"": ""768p"",
+            ""prompt_optimizer"": true,
+            ""fast_pretreatment"": false,
+            ""watermark"": false
         }";
 
         using var client = new HttpClient();
@@ -425,63 +407,57 @@ class Program
   </Warning>
 </ParamField>
 
-<ParamField body="metadata" type="object">
-  视频生成的高级配置选项
+<ParamField body="resolution" type="string" default="768p">
+  视频分辨率
 
-  <Expandable title="metadata 字段说明">
-    <ParamField body="metadata.resolution" type="string" default="768p">
-      视频分辨率
+  可选值：
+  - `512p` - 标清
+  - `768p` - 高清
+  - `1080p` - 全高清（仅支持 6 秒时长）
 
-      可选值：
-      - `512p` - 标清
-      - `768p` - 高清
-      - `1080p` - 全高清（仅支持 6 秒时长）
+  默认值：`768p`
+</ParamField>
 
-      默认值：`768p`
-    </ParamField>
+<ParamField body="prompt_optimizer" type="boolean" default="true">
+  是否自动优化 prompt
 
-    <ParamField body="metadata.prompt_optimizer" type="boolean" default="true">
-      是否自动优化 prompt
+  启用后，系统会自动优化您的提示词以获得更好的生成效果
 
-      启用后，系统会自动优化您的提示词以获得更好的生成效果
+  默认值：`true`
+</ParamField>
 
-      默认值：`true`
-    </ParamField>
+<ParamField body="fast_pretreatment" type="boolean" default="false">
+  是否缩短 prompt 优化耗时
 
-    <ParamField body="metadata.fast_pretreatment" type="boolean" default="false">
-      是否缩短 prompt 优化耗时
+  启用后可加快处理速度，但可能略微影响优化效果
 
-      启用后可加快处理速度，但可能略微影响优化效果
+  默认值：`false`
+</ParamField>
 
-      默认值：`false`
-    </ParamField>
+<ParamField body="watermark" type="boolean" default="false">
+  是否添加水印
 
-    <ParamField body="metadata.watermark" type="boolean" default="false">
-      是否添加水印
+  默认值：`false`
+</ParamField>
 
-      默认值：`false`
-    </ParamField>
+<ParamField body="first_frame_image" type="string">
+  视频起始帧图片
 
-    <ParamField body="metadata.first_frame_image" type="string">
-      视频起始帧图片
+  支持两种格式：
+  - **公网 URL**：`https://example.com/start.jpg`
+  - **Base64 编码**：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
 
-      支持两种格式：
-      - **公网 URL**：`https://example.com/start.jpg`
-      - **Base64 编码**：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
+  用于指定视频的起始画面
+</ParamField>
 
-      用于指定视频的起始画面
-    </ParamField>
+<ParamField body="last_frame_image" type="string">
+  视频结束帧图片
 
-    <ParamField body="metadata.last_frame_image" type="string">
-      视频结束帧图片
+  支持两种格式：
+  - **公网 URL**：`https://example.com/end.jpg`
+  - **Base64 编码**：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
 
-      支持两种格式：
-      - **公网 URL**：`https://example.com/end.jpg`
-      - **Base64 编码**：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
-
-      用于指定视频的结束画面
-    </ParamField>
-  </Expandable>
+  用于指定视频的结束画面
 </ParamField>
 
 ## 参数限制
@@ -538,11 +514,9 @@ class Program
   "model": "MiniMax-Hailuo-02",
   "prompt": "城市夜景，霓虹灯闪烁，车流穿梭",
   "duration": 5,
-  "metadata": {
-    "resolution": "1080p",
-    "prompt_optimizer": true,
-    "watermark": false
-  }
+  "resolution": "1080p",
+  "prompt_optimizer": true,
+  "watermark": false
 }
 ```
 
@@ -553,10 +527,8 @@ class Program
   "model": "MiniMax-Hailuo-02",
   "prompt": "人物缓缓转身，面带微笑",
   "duration": 5,
-  "metadata": {
-    "resolution": "768p",
-    "first_frame_image": "https://example.com/portrait.jpg"
-  }
+  "resolution": "768p",
+  "first_frame_image": "https://example.com/portrait.jpg"
 }
 ```
 
@@ -567,12 +539,10 @@ class Program
   "model": "MiniMax-Hailuo-02",
   "prompt": "画面从白天逐渐过渡到夜晚，天空渐变",
   "duration": 10,
-  "metadata": {
-    "resolution": "768p",
-    "first_frame_image": "https://example.com/day.jpg",
-    "last_frame_image": "https://example.com/night.jpg",
-    "prompt_optimizer": true
-  }
+  "resolution": "768p",
+  "first_frame_image": "https://example.com/day.jpg",
+  "last_frame_image": "https://example.com/night.jpg",
+  "prompt_optimizer": true
 }
 ```
 
@@ -583,11 +553,9 @@ class Program
   "model": "MiniMax-Hailuo-02",
   "prompt": "海浪拍打沙滩，日落时分",
   "duration": 5,
-  "metadata": {
-    "resolution": "768p",
-    "prompt_optimizer": true,
-    "fast_pretreatment": true
-  }
+  "resolution": "768p",
+  "prompt_optimizer": true,
+  "fast_pretreatment": true
 }
 ```
 

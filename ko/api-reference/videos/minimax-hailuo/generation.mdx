@@ -24,12 +24,10 @@ curl --request POST \
     "model": "MiniMax-Hailuo-02",
     "prompt": "잔디밭에서 뛰어다니는 귀여운 고양이",
     "duration": 5,
-    "metadata": {
-      "resolution": "768p",
-      "prompt_optimizer": true,
-      "fast_pretreatment": false,
-      "watermark": false
-    }
+    "resolution": "768p",
+    "prompt_optimizer": true,
+    "fast_pretreatment": false,
+    "watermark": false
   }'
 ```
 
@@ -42,12 +40,10 @@ payload = {
     "model": "MiniMax-Hailuo-02",
     "prompt": "잔디밭에서 뛰어다니는 귀여운 고양이",
     "duration": 5,
-    "metadata": {
-        "resolution": "768p",
-        "prompt_optimizer": True,
-        "fast_pretreatment": False,
-        "watermark": False
-    }
+    "resolution": "768p",
+    "prompt_optimizer": True,
+    "fast_pretreatment": False,
+    "watermark": False
 }
 
 headers = {
@@ -67,12 +63,10 @@ const payload = {
   model: "MiniMax-Hailuo-02",
   prompt: "잔디밭에서 뛰어다니는 귀여운 고양이",
   duration: 6,
-  metadata: {
-    resolution: "768p",
-    prompt_optimizer: true,
-    fast_pretreatment: false,
-    watermark: false
-  }
+  resolution: "768p",
+  prompt_optimizer: true,
+  fast_pretreatment: false,
+  watermark: false
 };
 
 const headers = {
@@ -204,63 +198,57 @@ fetch(url, {
   </Warning>
 </ParamField>
 
-<ParamField body="metadata" type="object">
-  비디오 생성을 위한 고급 구성 옵션
+<ParamField body="resolution" type="string" default="768p">
+  비디오 해상도
 
-  <Expandable title="metadata 필드">
-    <ParamField body="metadata.resolution" type="string" default="768p">
-      비디오 해상도
+  옵션:
+  - `512p` - 표준 화질
+  - `768p` - 고화질
+  - `1080p` - 풀 HD (5초 길이만 지원)
 
-      옵션:
-      - `512p` - 표준 화질
-      - `768p` - 고화질
-      - `1080p` - 풀 HD (5초 길이만 지원)
+  기본값: `768p`
+</ParamField>
 
-      기본값: `768p`
-    </ParamField>
+<ParamField body="prompt_optimizer" type="boolean" default="true">
+  프롬프트를 자동으로 최적화할지 여부
 
-    <ParamField body="metadata.prompt_optimizer" type="boolean" default="true">
-      프롬프트를 자동으로 최적화할지 여부
+  활성화하면 시스템이 더 나은 생성 결과를 위해 프롬프트를 자동으로 최적화합니다
 
-      활성화하면 시스템이 더 나은 생성 결과를 위해 프롬프트를 자동으로 최적화합니다
+  기본값: `true`
+</ParamField>
 
-      기본값: `true`
-    </ParamField>
+<ParamField body="fast_pretreatment" type="boolean" default="false">
+  프롬프트 최적화 시간을 줄일지 여부
 
-    <ParamField body="metadata.fast_pretreatment" type="boolean" default="false">
-      프롬프트 최적화 시간을 줄일지 여부
+  활성화하면 처리 속도를 높일 수 있지만 최적화 품질에 약간 영향을 줄 수 있습니다
 
-      활성화하면 처리 속도를 높일 수 있지만 최적화 품질에 약간 영향을 줄 수 있습니다
+  기본값: `false`
+</ParamField>
 
-      기본값: `false`
-    </ParamField>
+<ParamField body="watermark" type="boolean" default="false">
+  워터마크를 추가할지 여부
 
-    <ParamField body="metadata.watermark" type="boolean" default="false">
-      워터마크를 추가할지 여부
+  기본값: `false`
+</ParamField>
 
-      기본값: `false`
-    </ParamField>
+<ParamField body="first_frame_image" type="string">
+  비디오 첫 프레임 이미지
 
-    <ParamField body="metadata.first_frame_image" type="string">
-      비디오 첫 프레임 이미지
+  두 가지 형식 지원:
+  - **공개 URL**: `https://example.com/start.jpg`
+  - **Base64 인코딩**: `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
 
-      두 가지 형식 지원:
-      - **공개 URL**: `https://example.com/start.jpg`
-      - **Base64 인코딩**: `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
+  비디오의 시작 프레임을 지정하는 데 사용
+</ParamField>
 
-      비디오의 시작 프레임을 지정하는 데 사용
-    </ParamField>
+<ParamField body="last_frame_image" type="string">
+  비디오 마지막 프레임 이미지
 
-    <ParamField body="metadata.last_frame_image" type="string">
-      비디오 마지막 프레임 이미지
+  두 가지 형식 지원:
+  - **공개 URL**: `https://example.com/end.jpg`
+  - **Base64 인코딩**: `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
 
-      두 가지 형식 지원:
-      - **공개 URL**: `https://example.com/end.jpg`
-      - **Base64 인코딩**: `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
-
-      비디오의 끝 프레임을 지정하는 데 사용
-    </ParamField>
-  </Expandable>
+  비디오의 끝 프레임을 지정하는 데 사용
 </ParamField>
 
 ## 매개변수 제한
@@ -317,11 +305,9 @@ fetch(url, {
   "model": "MiniMax-Hailuo-02",
   "prompt": "도시 야경, 네온 불빛 깜빡임, 교통 흐름",
   "duration": 5,
-  "metadata": {
-    "resolution": "1080p",
-    "prompt_optimizer": true,
-    "watermark": false
-  }
+  "resolution": "1080p",
+  "prompt_optimizer": true,
+  "watermark": false
 }
 ```
 
@@ -332,10 +318,8 @@ fetch(url, {
   "model": "MiniMax-Hailuo-02",
   "prompt": "사람이 천천히 돌아서며 미소 짓는다",
   "duration": 5,
-  "metadata": {
-    "resolution": "768p",
-    "first_frame_image": "https://example.com/portrait.jpg"
-  }
+  "resolution": "768p",
+  "first_frame_image": "https://example.com/portrait.jpg"
 }
 ```
 

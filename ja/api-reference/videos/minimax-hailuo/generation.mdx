@@ -24,12 +24,10 @@ curl --request POST \
     "model": "MiniMax-Hailuo-02",
     "prompt": "草原を走るかわいい猫",
     "duration": 5,
-    "metadata": {
-      "resolution": "768p",
-      "prompt_optimizer": true,
-      "fast_pretreatment": false,
-      "watermark": false
-    }
+    "resolution": "768p",
+    "prompt_optimizer": true,
+    "fast_pretreatment": false,
+    "watermark": false
   }'
 ```
 
@@ -42,12 +40,10 @@ payload = {
     "model": "MiniMax-Hailuo-02",
     "prompt": "草原を走るかわいい猫",
     "duration": 5,
-    "metadata": {
-        "resolution": "768p",
-        "prompt_optimizer": True,
-        "fast_pretreatment": False,
-        "watermark": False
-    }
+    "resolution": "768p",
+    "prompt_optimizer": True,
+    "fast_pretreatment": False,
+    "watermark": False
 }
 
 headers = {
@@ -67,12 +63,10 @@ const payload = {
   model: "MiniMax-Hailuo-02",
   prompt: "草原を走るかわいい猫",
   duration: 6,
-  metadata: {
-    resolution: "768p",
-    prompt_optimizer: true,
-    fast_pretreatment: false,
-    watermark: false
-  }
+  resolution: "768p",
+  prompt_optimizer: true,
+  fast_pretreatment: false,
+  watermark: false
 };
 
 const headers = {
@@ -204,63 +198,57 @@ fetch(url, {
   </Warning>
 </ParamField>
 
-<ParamField body="metadata" type="object">
-  動画生成の詳細設定オプション
+<ParamField body="resolution" type="string" default="768p">
+  動画解像度
 
-  <Expandable title="metadata フィールド">
-    <ParamField body="metadata.resolution" type="string" default="768p">
-      動画解像度
+  オプション：
+  - `512p` - 標準解像度
+  - `768p` - 高解像度
+  - `1080p` - フルHD（5秒の長さのみサポート）
 
-      オプション：
-      - `512p` - 標準解像度
-      - `768p` - 高解像度
-      - `1080p` - フルHD（5秒の長さのみサポート）
+  デフォルト：`768p`
+</ParamField>
 
-      デフォルト：`768p`
-    </ParamField>
+<ParamField body="prompt_optimizer" type="boolean" default="true">
+  プロンプトを自動的に最適化するかどうか
 
-    <ParamField body="metadata.prompt_optimizer" type="boolean" default="true">
-      プロンプトを自動的に最適化するかどうか
+  有効にすると、システムがより良い生成結果を得るためにプロンプトを自動的に最適化します
 
-      有効にすると、システムがより良い生成結果を得るためにプロンプトを自動的に最適化します
+  デフォルト：`true`
+</ParamField>
 
-      デフォルト：`true`
-    </ParamField>
+<ParamField body="fast_pretreatment" type="boolean" default="false">
+  プロンプト最適化時間を短縮するかどうか
 
-    <ParamField body="metadata.fast_pretreatment" type="boolean" default="false">
-      プロンプト最適化時間を短縮するかどうか
+  有効にすると処理を高速化できますが、最適化の品質に若干影響する場合があります
 
-      有効にすると処理を高速化できますが、最適化の品質に若干影響する場合があります
+  デフォルト：`false`
+</ParamField>
 
-      デフォルト：`false`
-    </ParamField>
+<ParamField body="watermark" type="boolean" default="false">
+  透かしを追加するかどうか
 
-    <ParamField body="metadata.watermark" type="boolean" default="false">
-      透かしを追加するかどうか
+  デフォルト：`false`
+</ParamField>
 
-      デフォルト：`false`
-    </ParamField>
+<ParamField body="first_frame_image" type="string">
+  動画の最初のフレーム画像
 
-    <ParamField body="metadata.first_frame_image" type="string">
-      動画の最初のフレーム画像
+  2つの形式をサポート：
+  - **公開URL**：`https://example.com/start.jpg`
+  - **Base64エンコード**：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
 
-      2つの形式をサポート：
-      - **公開URL**：`https://example.com/start.jpg`
-      - **Base64エンコード**：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
+  動画の開始フレームを指定するために使用
+</ParamField>
 
-      動画の開始フレームを指定するために使用
-    </ParamField>
+<ParamField body="last_frame_image" type="string">
+  動画の最後のフレーム画像
 
-    <ParamField body="metadata.last_frame_image" type="string">
-      動画の最後のフレーム画像
+  2つの形式をサポート：
+  - **公開URL**：`https://example.com/end.jpg`
+  - **Base64エンコード**：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
 
-      2つの形式をサポート：
-      - **公開URL**：`https://example.com/end.jpg`
-      - **Base64エンコード**：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
-
-      動画の終了フレームを指定するために使用
-    </ParamField>
-  </Expandable>
+  動画の終了フレームを指定するために使用
 </ParamField>
 
 ## パラメータ制限
@@ -317,11 +305,9 @@ fetch(url, {
   "model": "MiniMax-Hailuo-02",
   "prompt": "都市の夜景、ネオンライトが点滅、交通が流れる",
   "duration": 5,
-  "metadata": {
-    "resolution": "1080p",
-    "prompt_optimizer": true,
-    "watermark": false
-  }
+  "resolution": "1080p",
+  "prompt_optimizer": true,
+  "watermark": false
 }
 ```
 
@@ -332,10 +318,8 @@ fetch(url, {
   "model": "MiniMax-Hailuo-02",
   "prompt": "人物がゆっくりと振り返り、微笑む",
   "duration": 5,
-  "metadata": {
-    "resolution": "768p",
-    "first_frame_image": "https://example.com/portrait.jpg"
-  }
+  "resolution": "768p",
+  "first_frame_image": "https://example.com/portrait.jpg"
 }
 ```
 
