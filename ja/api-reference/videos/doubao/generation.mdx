@@ -353,7 +353,7 @@ echo $response;
 
       選択肢：
       - `first_frame` - 最初のフレーム画像、動画の開始フレームとして
-      - `last_frame` - 最後のフレーム画像、動画の終了フレームとして
+      - `last_frame` - 最後のフレーム画像、動画の終了フレームとして（quality版のみ対応）
       - `reference` - 参照画像、動画スタイルのガイド用
     </ParamField>
   </Expandable>
@@ -367,7 +367,8 @@ echo $response;
   ```
 
   <Warning>
-  `image_urls` と `image_with_roles` は同時に使用できません
+  - `image_urls` と `image_with_roles` は同時に使用できません
+  - `last_frame`（最終フレーム画像）は `doubao-seedance-1-0-pro-quality` 版のみ対応、fast版は最初と最後のフレームの同時使用に対応していません
   </Warning>
 </ParamField>
 

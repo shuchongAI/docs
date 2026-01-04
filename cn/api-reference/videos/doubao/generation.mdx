@@ -445,7 +445,7 @@ class Program
 
       可选值：
       - `first_frame` - 首帧图，作为视频起始画面
-      - `last_frame` - 尾帧图，作为视频结束画面
+      - `last_frame` - 尾帧图，作为视频结束画面（仅 quality 版本支持）
       - `reference` - 参考图，用于指导视频风格
     </ParamField>
   </Expandable>
@@ -459,7 +459,8 @@ class Program
   ```
 
   <Warning>
-  `image_urls` 和 `image_with_roles` 不能同时使用
+  - `image_urls` 和 `image_with_roles` 不能同时使用
+  - `last_frame`（尾帧图）仅 `doubao-seedance-1-0-pro-quality` 版本支持，fast 版本不支持首尾帧同时使用
   </Warning>
 </ParamField>
 

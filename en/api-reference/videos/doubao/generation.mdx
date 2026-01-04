@@ -445,7 +445,7 @@ class Program
 
       Options:
       - `first_frame` - First frame image, as video starting frame
-      - `last_frame` - Last frame image, as video ending frame
+      - `last_frame` - Last frame image, as video ending frame (quality version only)
       - `reference` - Reference image, for guiding video style
     </ParamField>
   </Expandable>
@@ -459,7 +459,8 @@ class Program
   ```
 
   <Warning>
-  `image_urls` and `image_with_roles` cannot be used together
+  - `image_urls` and `image_with_roles` cannot be used together
+  - `last_frame` is only supported by `doubao-seedance-1-0-pro-quality` version, fast version does not support first and last frame together
   </Warning>
 </ParamField>
 
