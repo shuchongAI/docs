@@ -5,8 +5,6 @@ description: "
 
 - 支持文本转视频、图生视频（首帧/尾帧/参考图）
 
-- 快速版（40-90秒）和高质量版（90-300秒）可选
-
 - 支持横屏、竖屏、方形多种比例
 "
 api: "POST https://api.apimart.ai/v1/videos/generations"
@@ -365,8 +363,8 @@ class Program
   视频生成模型名称
 
   支持的模型：
-  - `doubao-seedance-1-0-pro-fast` - 快速版，生成速度快（40-90秒），适合预览和迭代
-  - `doubao-seedance-1-0-pro-quality` - 高质量版，生成时间较长（90-300秒），画质更优
+  - `doubao-seedance-1-0-pro-fast` - 快速版，生成速度快，适合预览和迭代
+  - `doubao-seedance-1-0-pro-quality` - 高质量版，生成时间较长，画质更优
 </ParamField>
 
 <ParamField body="prompt" type="string" required>

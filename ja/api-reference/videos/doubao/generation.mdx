@@ -5,8 +5,6 @@ description: "
 
 - テキストから動画、画像から動画（最初のフレーム/最後のフレーム/参照画像）をサポート
 
-- 高速版（40-90秒）と高品質版（90-300秒）から選択可能
-
 - 横向き、縦向き、正方形の複数のアスペクト比をサポート
 "
 api: "POST https://api.apimart.ai/v1/videos/generations"
@@ -273,8 +271,8 @@ echo $response;
   動画生成モデル名
 
   サポートされているモデル：
-  - `doubao-seedance-1-0-pro-fast` - 高速版、素早い生成（40-90秒）、プレビューや反復に適しています
-  - `doubao-seedance-1-0-pro-quality` - 高品質版、生成時間が長い（90-300秒）、画質がより良い
+  - `doubao-seedance-1-0-pro-fast` - 高速版、素早い生成、プレビューや反復に適しています
+  - `doubao-seedance-1-0-pro-quality` - 高品質版、生成時間が長い、画質がより良い
 </ParamField>
 
 <ParamField body="prompt" type="string" required>

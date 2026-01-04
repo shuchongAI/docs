@@ -5,8 +5,6 @@ description: "
 
 - 텍스트-비디오, 이미지-비디오 (첫 프레임/마지막 프레임/참조 이미지) 지원
 
-- 빠른 버전(40-90초) 및 고품질 버전(90-300초) 선택 가능
-
 - 가로, 세로, 정사각형 여러 비율 지원
 "
 api: "POST https://api.apimart.ai/v1/videos/generations"
@@ -273,8 +271,8 @@ echo $response;
   비디오 생성 모델 이름
 
   지원되는 모델:
-  - `doubao-seedance-1-0-pro-fast` - 빠른 버전, 빠른 생성(40-90초), 미리보기 및 반복에 적합
-  - `doubao-seedance-1-0-pro-quality` - 고품질 버전, 생성 시간이 더 길지만(90-300초), 더 좋은 품질
+  - `doubao-seedance-1-0-pro-fast` - 빠른 버전, 빠른 생성, 미리보기 및 반복에 적합
+  - `doubao-seedance-1-0-pro-quality` - 고품질 버전, 생성 시간이 더 길지만, 더 좋은 품질
 </ParamField>
 
 <ParamField body="prompt" type="string" required>

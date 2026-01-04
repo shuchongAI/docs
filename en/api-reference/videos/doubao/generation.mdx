@@ -5,8 +5,6 @@ description: "
 
 - Supports text-to-video, image-to-video (first frame/last frame/reference)
 
-- Fast version (40-90s) and high-quality version (90-300s) available
-
 - Supports landscape, portrait, and square aspect ratios
 "
 api: "POST https://api.apimart.ai/v1/videos/generations"
@@ -365,8 +363,8 @@ class Program
   Video generation model name
 
   Supported models:
-  - `doubao-seedance-1-0-pro-fast` - Fast version, quick generation (40-90s), suitable for preview and iteration
-  - `doubao-seedance-1-0-pro-quality` - High-quality version, longer generation time (90-300s), better quality
+  - `doubao-seedance-1-0-pro-fast` - Fast version, quick generation, suitable for preview and iteration
+  - `doubao-seedance-1-0-pro-quality` - High-quality version, longer generation time, better quality
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
