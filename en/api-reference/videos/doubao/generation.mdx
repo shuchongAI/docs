@@ -23,7 +23,7 @@ curl --request POST \
     "prompt": "A cute kitten playing in the sunlight, fluffy fur, bright eyes",
     "duration": 5,
     "aspect_ratio": "16:9",
-    "resolution": "720p"
+    "resolution": "1080p"
   }'
 ```
 
@@ -37,7 +37,7 @@ payload = {
     "prompt": "A cute kitten playing in the sunlight, fluffy fur, bright eyes",
     "duration": 5,
     "aspect_ratio": "16:9",
-    "resolution": "720p"
+    "resolution": "1080p"
 }
 
 headers = {
@@ -132,7 +132,7 @@ public class Main {
           "prompt": "A cute kitten playing in the sunlight, fluffy fur, bright eyes",
           "duration": 5,
           "aspect_ratio": "16:9",
-          "resolution": "720p"
+          "resolution": "1080p"
         }
         """;
 
@@ -218,7 +218,7 @@ let payload: [String: Any] = [
     "prompt": "A cute kitten playing in the sunlight, fluffy fur, bright eyes",
     "duration": 5,
     "aspect_ratio": "16:9",
-    "resolution": "720p"
+    "resolution": "1080p"
 ]
 
 var request = URLRequest(url: url)
@@ -397,7 +397,7 @@ class Program
   Default: `16:9`
 </ParamField>
 
-<ParamField body="resolution" type="string" default="720p">
+<ParamField body="resolution" type="string" default="1080p">
   Video resolution
 
   Options:
@@ -405,7 +405,7 @@ class Program
   - `720p` - High definition
   - `1080p` - Full HD
 
-  Default: `720p`
+  Default: `1080p`
 
   <Warning>
   **1080p Limitation**: When using reference images (`role: reference` in `image_with_roles`), 1080p resolution is not supported

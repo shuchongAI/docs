@@ -23,7 +23,7 @@ curl --request POST \
     "prompt": "햇빛 아래에서 노는 귀여운 새끼 고양이, 푹신한 털, 밝은 눈",
     "duration": 5,
     "aspect_ratio": "16:9",
-    "resolution": "720p"
+    "resolution": "1080p"
   }'
 ```
 
@@ -37,7 +37,7 @@ payload = {
     "prompt": "햇빛 아래에서 노는 귀여운 새끼 고양이, 푹신한 털, 밝은 눈",
     "duration": 5,
     "aspect_ratio": "16:9",
-    "resolution": "720p"
+    "resolution": "1080p"
 }
 
 headers = {
@@ -132,7 +132,7 @@ public class Main {
           "prompt": "햇빛 아래에서 노는 귀여운 새끼 고양이, 푹신한 털, 밝은 눈",
           "duration": 5,
           "aspect_ratio": "16:9",
-          "resolution": "720p"
+          "resolution": "1080p"
         }
         """;
 
@@ -305,7 +305,7 @@ echo $response;
   기본값: `16:9`
 </ParamField>
 
-<ParamField body="resolution" type="string" default="720p">
+<ParamField body="resolution" type="string" default="1080p">
   비디오 해상도
 
   옵션:
@@ -313,7 +313,7 @@ echo $response;
   - `720p` - HD
   - `1080p` - Full HD
 
-  기본값: `720p`
+  기본값: `1080p`
 
   <Warning>
   **1080p 제한**: 참조 이미지(`image_with_roles`의 `role: reference`)를 사용할 때 1080p 해상도는 지원되지 않습니다

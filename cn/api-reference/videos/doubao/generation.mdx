@@ -23,7 +23,7 @@ curl --request POST \
     "prompt": "一只可爱的小猫在阳光下玩耍，毛发蓬松，眼睛明亮",
     "duration": 5,
     "aspect_ratio": "16:9",
-    "resolution": "720p"
+    "resolution": "1080p"
   }'
 ```
 
@@ -37,7 +37,7 @@ payload = {
     "prompt": "一只可爱的小猫在阳光下玩耍，毛发蓬松，眼睛明亮",
     "duration": 5,
     "aspect_ratio": "16:9",
-    "resolution": "720p"
+    "resolution": "1080p"
 }
 
 headers = {
@@ -132,7 +132,7 @@ public class Main {
           "prompt": "一只可爱的小猫在阳光下玩耍，毛发蓬松，眼睛明亮",
           "duration": 5,
           "aspect_ratio": "16:9",
-          "resolution": "720p"
+          "resolution": "1080p"
         }
         """;
 
@@ -218,7 +218,7 @@ let payload: [String: Any] = [
     "prompt": "一只可爱的小猫在阳光下玩耍，毛发蓬松，眼睛明亮",
     "duration": 5,
     "aspect_ratio": "16:9",
-    "resolution": "720p"
+    "resolution": "1080p"
 ]
 
 var request = URLRequest(url: url)
@@ -397,7 +397,7 @@ class Program
   默认值：`16:9`
 </ParamField>
 
-<ParamField body="resolution" type="string" default="720p">
+<ParamField body="resolution" type="string" default="1080p">
   视频分辨率
 
   可选值：
@@ -405,7 +405,7 @@ class Program
   - `720p` - 高清
   - `1080p` - 全高清
 
-  默认值：`720p`
+  默认值：`1080p`
 
   <Warning>
   **1080p 限制**：使用参考图（`image_with_roles` 中 `role: reference`）场景时，不支持 1080p 分辨率

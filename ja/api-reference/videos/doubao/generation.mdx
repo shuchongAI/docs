@@ -23,7 +23,7 @@ curl --request POST \
     "prompt": "太陽の光の中で遊ぶかわいい子猫、ふわふわの毛、明るい目",
     "duration": 5,
     "aspect_ratio": "16:9",
-    "resolution": "720p"
+    "resolution": "1080p"
   }'
 ```
 
@@ -37,7 +37,7 @@ payload = {
     "prompt": "太陽の光の中で遊ぶかわいい子猫、ふわふわの毛、明るい目",
     "duration": 5,
     "aspect_ratio": "16:9",
-    "resolution": "720p"
+    "resolution": "1080p"
 }
 
 headers = {
@@ -132,7 +132,7 @@ public class Main {
           "prompt": "太陽の光の中で遊ぶかわいい子猫、ふわふわの毛、明るい目",
           "duration": 5,
           "aspect_ratio": "16:9",
-          "resolution": "720p"
+          "resolution": "1080p"
         }
         """;
 
@@ -305,7 +305,7 @@ echo $response;
   デフォルト：`16:9`
 </ParamField>
 
-<ParamField body="resolution" type="string" default="720p">
+<ParamField body="resolution" type="string" default="1080p">
   動画の解像度
 
   選択肢：
@@ -313,7 +313,7 @@ echo $response;
   - `720p` - HD
   - `1080p` - フルHD
 
-  デフォルト：`720p`
+  デフォルト：`1080p`
 
   <Warning>
   **1080p の制限**：参照画像（`image_with_roles` の `role: reference`）を使用する場合、1080p 解像度はサポートされていません
