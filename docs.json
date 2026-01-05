@@ -118,6 +118,13 @@
                     ]
                   },
                   {
+                    "group": "doubao-seedance-1-5-pro",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/doubao-seedance-1-5-pro/generation"
+                    ]
+                  },
+                  {
                     "group": "Sora2",
                     "icon": "video",
                     "pages": [
@@ -308,6 +315,13 @@
                     "icon": "video",
                     "pages": [
                       "cn/api-reference/videos/doubao/generation"
+                    ]
+                  },
+                  {
+                    "group": "doubao-seedance-1-5-pro",
+                    "icon": "video",
+                    "pages": [
+                      "cn/api-reference/videos/doubao-seedance-1-5-pro/generation"
                     ]
                   },
                   {
@@ -504,6 +518,13 @@
                     ]
                   },
                   {
+                    "group": "doubao-seedance-1-5-pro",
+                    "icon": "video",
+                    "pages": [
+                      "ja/api-reference/videos/doubao-seedance-1-5-pro/generation"
+                    ]
+                  },
+                  {
                     "group": "Sora2",
                     "icon": "video",
                     "pages": [
@@ -688,6 +709,13 @@
                     "icon": "video",
                     "pages": [
                       "ko/api-reference/videos/doubao/generation"
+                    ]
+                  },
+                  {
+                    "group": "doubao-seedance-1-5-pro",
+                    "icon": "video",
+                    "pages": [
+                      "ko/api-reference/videos/doubao-seedance-1-5-pro/generation"
                     ]
                   },
                   {
