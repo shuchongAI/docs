@@ -586,26 +586,16 @@ cat(content(response, "text"))
   - `9:16` (縦向き)
 </ParamField>
 
-<ParamField body="image_urls" type="array">
+<ParamField body="image_urls" type="array<url>">
   動画生成に使用する参考画像URLの配列
 
-  **💡 クイック入力（Try itエリア）：**
-  1. "+ Add an item" をクリックして画像URLを追加
-  2. 画像の完全なURLアドレスを入力
+  公開アクセス可能な画像URL（http:// または https://）をサポート
 
-  <Expandable title="フィールド詳細">
-    <ParamField body="url" type="string" required>
-      画像URLアドレス
-      
-      以下が可能：
-      - 公開アクセス可能な画像URL（http:// または https://）
-      - Base64エンコードされた画像データ
-      
-      **制限：**
-      - 最大ファイルサイズ：10MB
-      - サポート形式：.jpeg、.jpg、.png、.webp
-    </ParamField>
-  </Expandable>
+  例：`["https://example.com/image.jpg"]`
+
+  **制限：**
+  - 最大ファイルサイズ：10MB
+  - サポート形式：.jpeg、.jpg、.png、.webp
 </ParamField>
 
 ## レスポンス

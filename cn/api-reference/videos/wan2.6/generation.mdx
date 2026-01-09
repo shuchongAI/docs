@@ -373,12 +373,12 @@ class Program
   示例：`"一只可爱的猫咪在阳光下伸懒腰"`
 </ParamField>
 
-<ParamField body="image_urls" type="array">
+<ParamField body="image_urls" type="array<url>">
   参考图片 URL 数组（仅支持 1 张图片）
 
-  图生视频模式下必填，支持公网可访问的 URL 或 Base64 编码
+  图生视频模式下必填，支持公网可访问的图片 URL
 
-  示例：`["https://example.com/image.jpg"]` 或 `["data:image/png;base64,iVBORw0KGgo..."]`
+  示例：`["https://example.com/image.jpg"]`
 
   <Note>
   系统会根据请求中是否包含 `image_urls` 自动选择文生视频或图生视频模式

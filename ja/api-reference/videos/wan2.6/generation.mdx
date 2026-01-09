@@ -373,12 +373,12 @@ class Program
   例：`"日差しの中で伸びをするかわいい猫"`
 </ParamField>
 
-<ParamField body="image_urls" type="array">
+<ParamField body="image_urls" type="array<url>">
   参照画像URL配列（1枚のみサポート）
 
-  画像から動画モードでは必須。公開アクセス可能なURLまたはBase64エンコーディングをサポート
+  画像から動画モードでは必須。公開アクセス可能な画像URLをサポート
 
-  例：`["https://example.com/image.jpg"]` または `["data:image/png;base64,iVBORw0KGgo..."]`
+  例：`["https://example.com/image.jpg"]`
 
   <Note>
   システムは `image_urls` の有無に基づいてテキストから動画または画像から動画モードを自動選択します

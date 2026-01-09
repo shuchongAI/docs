@@ -373,12 +373,12 @@ class Program
   Example: `"A cute cat stretching in the sunlight"`
 </ParamField>
 
-<ParamField body="image_urls" type="array">
+<ParamField body="image_urls" type="array<url>">
   Reference image URL array (only 1 image supported)
 
-  Required for image-to-video mode. Supports publicly accessible URLs or Base64 encoding
+  Required for image-to-video mode. Supports publicly accessible image URLs
 
-  Example: `["https://example.com/image.jpg"]` or `["data:image/png;base64,iVBORw0KGgo..."]`
+  Example: `["https://example.com/image.jpg"]`
 
   <Note>
   The system automatically selects text-to-video or image-to-video mode based on whether `image_urls` is included

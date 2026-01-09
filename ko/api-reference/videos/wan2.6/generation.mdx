@@ -373,12 +373,12 @@ class Program
   예시: `"햇빛 아래서 기지개 펴는 귀여운 고양이"`
 </ParamField>
 
-<ParamField body="image_urls" type="array">
+<ParamField body="image_urls" type="array<url>">
   참조 이미지 URL 배열 (1장만 지원)
 
-  이미지-비디오 모드에서 필수. 공개 접근 가능한 URL 또는 Base64 인코딩 지원
+  이미지-비디오 모드에서 필수. 공개 접근 가능한 이미지 URL 지원
 
-  예시: `["https://example.com/image.jpg"]` 또는 `["data:image/png;base64,iVBORw0KGgo..."]`
+  예시: `["https://example.com/image.jpg"]`
 
   <Note>
   시스템은 `image_urls` 포함 여부에 따라 텍스트-비디오 또는 이미지-비디오 모드를 자동 선택합니다

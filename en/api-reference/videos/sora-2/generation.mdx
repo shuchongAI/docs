@@ -598,26 +598,16 @@ cat(content(response, "text"))
   - `9:16` (Portrait)
 </ParamField>
 
-<ParamField body="image_urls" type="array">
+<ParamField body="image_urls" type="array<url>">
   Array of reference image URLs for image-to-video generation
 
-  **💡 Quick fill (Try it area):**
-  1. Click "+ Add an item" to add an image URL
-  2. Enter the complete image URL address
+  Supports publicly accessible image URLs (http:// or https://)
 
-  <Expandable title="Field details">
-    <ParamField body="url" type="string" required>
-      Image URL address
-      
-      Can be:
-      - Publicly accessible image URL (http:// or https://)
-      - Base64 encoded image data
-      
-      **Limitations:**
-      - Maximum file size: 10MB
-      - Supported formats: .jpeg, .jpg, .png, .webp
-    </ParamField>
-  </Expandable>
+  Example: `["https://example.com/image.jpg"]`
+
+  **Limitations:**
+  - Maximum file size: 10MB
+  - Supported formats: .jpeg, .jpg, .png, .webp
 </ParamField>
 
 <ParamField body="watermark" type="boolean" default="false">
