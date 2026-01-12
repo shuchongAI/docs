@@ -586,6 +586,14 @@ cat(content(response, "text"))
   - `9:16` (竖屏)
 </ParamField>
 
+<ParamField body="generation_type" type="string">
+  视频生成类型
+
+  支持的类型：
+  - `frame` - 帧转视频（FL模式）
+  - `reference` - 参考图生视频
+</ParamField>
+
 <ParamField body="image_urls" type="array<url>">
   用于图生视频的参考图像 URL 数组
 
@@ -594,6 +602,8 @@ cat(content(response, "text"))
   示例：`["https://example.com/image.jpg"]`
 
   **限制：**
+  - 最多 3 张图片
+  - 帧转视频模式：第一张为首帧，第二张为尾帧
   - 最大文件大小：10MB
   - 支持格式：.jpeg、.jpg、.png、.webp
 </ParamField>

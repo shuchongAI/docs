@@ -586,6 +586,14 @@ cat(content(response, "text"))
   - `9:16` (縦向き)
 </ParamField>
 
+<ParamField body="generation_type" type="string">
+  動画生成タイプ
+
+  サポートされているタイプ：
+  - `frame` - フレームから動画へ（FLモード）
+  - `reference` - 参照画像から動画へ
+</ParamField>
+
 <ParamField body="image_urls" type="array<url>">
   動画生成に使用する参考画像URLの配列
 
@@ -594,6 +602,8 @@ cat(content(response, "text"))
   例：`["https://example.com/image.jpg"]`
 
   **制限：**
+  - 最大3枚
+  - フレームから動画モードの場合：1枚目が開始フレーム、2枚目が終了フレーム
   - 最大ファイルサイズ：10MB
   - サポート形式：.jpeg、.jpg、.png、.webp
 </ParamField>

@@ -586,6 +586,14 @@ cat(content(response, "text"))
   - `9:16` (Portrait)
 </ParamField>
 
+<ParamField body="generation_type" type="string">
+  Video generation type
+
+  Supported types:
+  - `frame` - Frame-to-video (FL mode)
+  - `reference` - Reference image-to-video
+</ParamField>
+
 <ParamField body="image_urls" type="array<url>">
   Array of reference image URLs for image-to-video generation
 
@@ -594,6 +602,8 @@ cat(content(response, "text"))
   Example: `["https://example.com/image.jpg"]`
 
   **Limitations:**
+  - Maximum 3 images
+  - For frame-to-video mode: first image is the start frame, second image is the end frame
   - Maximum file size: 10MB
   - Supported formats: .jpeg, .jpg, .png, .webp
 </ParamField>
