@@ -610,6 +610,20 @@ cat(content(response, "text"))
   - 支持格式：.jpeg、.jpg、.png、.webp
 </ParamField>
 
+<ParamField body="resolution" type="string">
+  视频分辨率
+
+  支持的值：
+  - `720p`（默认）
+  - `1080p`（仅支持 16:9 比例）
+</ParamField>
+
+<ParamField body="enable_gif" type="boolean">
+  启用 GIF 输出格式。默认：false
+
+  注意：GIF 和 1080p 分辨率不能同时使用
+</ParamField>
+
 ## Response
 
 <ResponseField name="code" type="integer">
