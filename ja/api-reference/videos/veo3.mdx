@@ -48,9 +48,25 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
 
 <ParamField query="aspect_ratio" type="string">
   動画解像度
-  
+
   サポートされている形式：
   - `16:9` (横向き)
   - `9:16` (縦向き)
+</ParamField>
+
+<ParamField query="generation_type" type="string">
+  動画生成タイプ
+
+  サポートされているタイプ：
+  - `frame` - フレームから動画へ（FLモード）
+  - `reference` - 参照画像から動画へ
+</ParamField>
+
+<ParamField query="image_urls" type="array">
+  画像から動画生成のための参照画像URLリスト
+
+  - 最大3枚
+  - フレームから動画モードの場合：1枚目が開始フレーム、2枚目が終了フレーム
+  - サポートされている形式: .jpeg, .jpg, .png, .webp
 </ParamField>
 

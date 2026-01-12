@@ -48,9 +48,25 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
 
 <ParamField query="aspect_ratio" type="string">
   Video aspect_ratio
-  
+
   Supported formats:
   - `16:9` (Landscape)
   - `9:16` (Portrait)
+</ParamField>
+
+<ParamField query="generation_type" type="string">
+  Video generation type
+
+  Supported types:
+  - `frame` - Frame-to-video (FL mode)
+  - `reference` - Reference image-to-video
+</ParamField>
+
+<ParamField query="image_urls" type="array">
+  URL list of reference images for image-to-video generation
+
+  - Maximum 3 images
+  - For frame-to-video mode: first image is the start frame, second image is the end frame
+  - Supported formats: .jpeg, .jpg, .png, .webp
 </ParamField>
 
