@@ -70,3 +70,17 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
   - Supported formats: .jpeg, .jpg, .png, .webp
 </ParamField>
 
+<ParamField query="resolution" type="string">
+  Video resolution
+
+  Supported values:
+  - `720p` (Default)
+  - `1080p` (Only supports 16:9 aspect ratio)
+</ParamField>
+
+<ParamField query="enable_gif" type="boolean">
+  Enable GIF output format. Default: false.
+
+  Note: GIF and 1080p resolution cannot be used together.
+</ParamField>
+

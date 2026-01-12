@@ -70,3 +70,17 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
   - 지원 형식: .jpeg, .jpg, .png, .webp
 </ParamField>
 
+<ParamField query="resolution" type="string">
+  비디오 해상도
+
+  지원 값:
+  - `720p` (기본값)
+  - `1080p` (16:9 비율만 지원)
+</ParamField>
+
+<ParamField query="enable_gif" type="boolean">
+  GIF 출력 형식 활성화. 기본값: false.
+
+  주의: GIF와 1080p 해상도는 동시에 사용할 수 없습니다.
+</ParamField>
+

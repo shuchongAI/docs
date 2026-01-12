@@ -70,3 +70,17 @@ curl -X POST https://api.apimart.ai/v1/videos/generations \
   - サポートされている形式: .jpeg, .jpg, .png, .webp
 </ParamField>
 
+<ParamField query="resolution" type="string">
+  動画の解像度
+
+  サポートされている値：
+  - `720p` (デフォルト)
+  - `1080p` (16:9アスペクト比のみサポート)
+</ParamField>
+
+<ParamField query="enable_gif" type="boolean">
+  GIF出力形式を有効にする。デフォルト: false。
+
+  注意: GIFと1080p解像度は同時に使用できません。
+</ParamField>
+
