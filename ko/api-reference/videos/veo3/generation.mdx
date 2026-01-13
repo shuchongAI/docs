@@ -610,6 +610,20 @@ cat(content(response, "text"))
   - 지원 형식：.jpeg、.jpg、.png、.webp
 </ParamField>
 
+<ParamField body="resolution" type="string">
+  비디오 해상도
+
+  지원되는 값:
+  - `720p` (기본값)
+  - `1080p` (16:9 비율만 지원)
+</ParamField>
+
+<ParamField body="enable_gif" type="boolean">
+  GIF 출력 형식을 활성화합니다. 기본값: false
+
+  주의: GIF와 1080p 해상도는 동시에 사용할 수 없습니다
+</ParamField>
+
 ## 응답
 
 <ResponseField name="code" type="integer">

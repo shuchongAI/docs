@@ -610,6 +610,20 @@ cat(content(response, "text"))
   - Supported formats: .jpeg, .jpg, .png, .webp
 </ParamField>
 
+<ParamField body="resolution" type="string">
+  Video resolution
+
+  Supported values:
+  - `720p` (Default)
+  - `1080p` (Only supports 16:9 aspect ratio)
+</ParamField>
+
+<ParamField body="enable_gif" type="boolean">
+  Enable GIF output format. Default: false
+
+  Note: GIF and 1080p resolution cannot be used simultaneously
+</ParamField>
+
 ## Response
 
 <ResponseField name="code" type="integer">

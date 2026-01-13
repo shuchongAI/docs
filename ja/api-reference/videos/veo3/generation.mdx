@@ -610,6 +610,20 @@ cat(content(response, "text"))
   - サポート形式：.jpeg、.jpg、.png、.webp
 </ParamField>
 
+<ParamField body="resolution" type="string">
+  動画解像度
+
+  サポートされる値：
+  - `720p`（デフォルト）
+  - `1080p`（16:9 アスペクト比のみサポート）
+</ParamField>
+
+<ParamField body="enable_gif" type="boolean">
+  GIF出力形式を有効にする。デフォルト：false
+
+  注意：GIFと1080p解像度は同時に使用できません
+</ParamField>
+
 ## レスポンス
 
 <ResponseField name="code" type="integer">
