@@ -1,0 +1,253 @@
+---
+title: "Flux Kontext 画像生成"
+description: "
+- 非同期処理モード、後続のクエリ用にタスクIDを返します
+
+- テキストから画像、画像編集をサポート
+
+- 生成された画像リンクの有効期限は24時間です、お早めに保存してください
+"
+api: "POST https://api.apimart.ai/v1/images/generations"
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/images/generations \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "flux-kontext-pro",
+    "prompt": "髪の色を青に変える",
+    "image_urls": ["https://example.com/input.png"],
+    "size": "16:9"
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/images/generations"
+
+payload = {
+    "model": "flux-kontext-pro",
+    "prompt": "髪の色を青に変える",
+    "image_urls": ["https://example.com/input.png"],
+    "size": "16:9"
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/images/generations";
+
+const payload = {
+  model: "flux-kontext-pro",
+  prompt: "髪の色を青に変える",
+  image_urls: ["https://example.com/input.png"],
+  size: "16:9"
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "status": "submitted",
+      "task_id": "task_01KFG5BBFNK1YQDTJDZY0P0QT2"
+    }
+  ]
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "リクエストパラメータが無効です",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "認証に失敗しました、APIキーを確認してください",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "残高不足です、チャージしてください",
+    "type": "payment_required"
+  }
+}
+```
+
+</ResponseExample>
+
+## サポートされているモデル
+
+| モデル名 | 説明 | 課金方式 |
+|----------|------|----------|
+| `flux-kontext-pro` | Flux Kontext Pro 画像編集モデル | 固定価格 |
+| `flux-kontext-max` | Flux Kontext Max 画像編集モデル（より高品質） | 固定価格 |
+
+## 認証
+
+<ParamField header="Authorization" type="string" required>
+  すべてのエンドポイントはBearer Token認証が必要です
+
+  API Keyの取得：
+
+  [API Key管理ページ](https://apimart.ai/console/token)でAPI Keyを取得してください
+
+  リクエストヘッダーに追加：
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Body
+
+<ParamField body="model" type="string" required>
+  モデル名
+
+  - `flux-kontext-pro` - Kontext Proモデル
+  - `flux-kontext-max` - Kontext Maxモデル（より高品質）
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  画像生成のテキスト説明
+</ParamField>
+
+<ParamField body="image_urls" type="array">
+  入力画像URLリスト
+
+  **制限：**
+  - 1枚のみサポート
+  - 公開アクセス可能なURLである必要があります
+  - Base64形式はサポートされていません
+</ParamField>
+
+<ParamField body="size" type="string" default="画像あり: match_input_image、なし: 16:9">
+  画像のアスペクト比
+
+  サポートされているアスペクト比:
+  - `match_input_image` - 入力画像の比率に合わせる（画像提供時のデフォルト）
+  - `auto` - `match_input_image`と同じ
+  - `1:1` - 正方形
+  - `4:3` - 横向き 4:3
+  - `3:4` - 縦向き 3:4
+  - `16:9` - 横向きワイドスクリーン（画像なしの場合のデフォルト）
+  - `9:16` - 縦向き
+  - `3:2` - 横向き 3:2
+  - `2:3` - 縦向き 2:3
+  - `21:9` - ウルトラワイド
+  - `9:21` - ウルトラトール
+</ParamField>
+
+<ParamField body="response_format" type="string" default="png">
+  出力画像形式
+
+  - `png` - PNG形式（デフォルト）
+  - `jpg` - JPEG形式
+</ParamField>
+
+<ParamField body="safety_tolerance" type="integer" default="2">
+  安全許容度
+
+  範囲：0-6、値が高いほど寛容
+</ParamField>
+
+<ParamField body="prompt_upsampling" type="boolean" default="false">
+  プロンプト強化を有効にする
+
+  - `true` - 有効
+  - `false` - 無効（デフォルト）
+</ParamField>
+
+## 使用例
+
+**画像編集（入力画像あり）**
+```json
+{
+    "model": "flux-kontext-pro",
+    "prompt": "背景をビーチに変更",
+    "image_urls": ["https://example.com/photo.jpg"]
+}
+```
+
+**テキストから画像（入力画像なし）**
+```json
+{
+    "model": "flux-kontext-pro",
+    "prompt": "青い猫",
+    "size": "16:9"
+}
+```
+
+## Response
+
+<ResponseField name="code" type="integer">
+  レスポンスステータスコード
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  レスポンスデータ配列
+
+  <Expandable title="属性">
+    <ResponseField name="status" type="string">
+      タスクステータス
+
+      - `submitted` - 送信済み
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      タスク一意識別子
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## 注意事項
+
+1. **画像URL要件**：入力画像は公開アクセス可能なURLである必要があります、base64はサポートされていません
+2. **結果保存**：生成された画像は自動的に保存され、URLは24時間有効です
+3. **タスクポーリング**：タスクは非同期で処理されます、結果を取得するには `/v1/tasks/{task_id}` をポーリングしてください
+4. **入力画像制限**：1枚のみサポート

@@ -103,6 +103,20 @@
                     "pages": [
                       "en/api-reference/images/seedream-4.5/generation"
                     ]
+                  },
+                  {
+                    "group": "Flux Kontext",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/flux-kontext/generation"
+                    ]
+                  },
+                  {
+                    "group": "Flux 2.0",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/flux-2/generation"
+                    ]
                   }
                 ]
               },
@@ -302,6 +316,20 @@
                     "icon": "image",
                     "pages": [
                       "cn/api-reference/images/seedream-4.5/generation"
+                    ]
+                  },
+                  {
+                    "group": "Flux Kontext",
+                    "icon": "image",
+                    "pages": [
+                      "cn/api-reference/images/flux-kontext/generation"
+                    ]
+                  },
+                  {
+                    "group": "Flux 2.0",
+                    "icon": "image",
+                    "pages": [
+                      "cn/api-reference/images/flux-2/generation"
                     ]
                   }
                 ]
@@ -503,6 +531,20 @@
                     "pages": [
                       "ja/api-reference/images/seedream-4.5/generation"
                     ]
+                  },
+                  {
+                    "group": "Flux Kontext",
+                    "icon": "image",
+                    "pages": [
+                      "ja/api-reference/images/flux-kontext/generation"
+                    ]
+                  },
+                  {
+                    "group": "Flux 2.0",
+                    "icon": "image",
+                    "pages": [
+                      "ja/api-reference/images/flux-2/generation"
+                    ]
                   }
                 ]
               },
@@ -696,6 +738,20 @@
                     "icon": "image",
                     "pages": [
                       "ko/api-reference/images/seedream-4.5/generation"
+                    ]
+                  },
+                  {
+                    "group": "Flux Kontext",
+                    "icon": "image",
+                    "pages": [
+                      "ko/api-reference/images/flux-kontext/generation"
+                    ]
+                  },
+                  {
+                    "group": "Flux 2.0",
+                    "icon": "image",
+                    "pages": [
+                      "ko/api-reference/images/flux-2/generation"
                     ]
                   }
                 ]
