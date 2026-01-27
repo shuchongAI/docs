@@ -602,26 +602,22 @@ cat(content(response, "text"))
   2. 输入图像的完整 URL 地址或base64数据
 
   <Expandable title="详细字段说明">
-    <ParamField body="url" type="string" required>
-      图像URL地址
-      
-      支持两种格式：
-      
-      **1. 完整的图像URL地址**
-      - 公开可访问的图像URL（http:// 或 https://）
-      - 示例：`https://example.com/image.jpg`
-      
-      **2. Base64 编码格式**
-      - **必须使用完整的 Data URI 格式**
-      - 格式：`data:image/{格式};base64,{base64数据}`
-      - 支持的图片格式：jpeg、png、webp 等
-      - 示例：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
-      - ⚠️ 注意：必须包含 `data:image/jpeg;base64,` 前缀部分
-      
-      **限制：**
-      - 单张图片不超过 10MB
-      - 支持格式：.jpeg、.jpg、.png、.webp
-    </ParamField>
+  数组中的每个元素为字符串，支持两种格式：
+
+  **1. 完整的图像URL地址**
+  - 公开可访问的图像URL（http:// 或 https://）
+  - 示例：`"https://example.com/image.jpg"`
+
+  **2. Base64 编码格式**
+  - **必须使用完整的 Data URI 格式**
+  - 格式：`data:image/{格式};base64,{base64数据}`
+  - 支持的图片格式：jpeg、png、webp 等
+  - 示例：`"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg..."`
+  - ⚠️ 注意：必须包含 `data:image/jpeg;base64,` 前缀部分
+
+  **限制：**
+  - 单张图片不超过 10MB
+  - 支持格式：.jpeg、.jpg、.png、.webp
   </Expandable>
 
   **限制：** 最多 14 张图片

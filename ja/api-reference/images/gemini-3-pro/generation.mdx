@@ -220,26 +220,22 @@ func main() {
   2. 完全な画像URLアドレスまたはbase64データを入力
 
   <Expandable title="詳細フィールド説明">
-    <ParamField body="url" type="string" required>
-      画像URLアドレス
+  配列の各要素は文字列で、2つの形式をサポート：
 
-      2つの形式をサポート：
+  **1. 完全な画像URLアドレス**
+  - 公開アクセス可能な画像URL（http:// または https://）
+  - 例：`"https://example.com/image.jpg"`
 
-      **1. 完全な画像URLアドレス**
-      - 公開アクセス可能な画像URL（http:// または https://）
-      - 例：`https://example.com/image.jpg`
+  **2. Base64エンコード形式**
+  - **完全なData URI形式を使用する必要があります**
+  - 形式：`data:image/{形式};base64,{base64データ}`
+  - サポートされる画像形式：jpeg、png、webpなど
+  - 例：`"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg..."`
+  - ⚠️ 注意：`data:image/jpeg;base64,` プレフィックスを含める必要があります
 
-      **2. Base64エンコード形式**
-      - **完全なData URI形式を使用する必要があります**
-      - 形式：`data:image/{形式};base64,{base64データ}`
-      - サポートされる画像形式：jpeg、png、webpなど
-      - 例：`data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
-      - ⚠️ 注意：`data:image/jpeg;base64,` プレフィックスを含める必要があります
-
-      **制限：**
-      - 単一画像は10MBを超えないこと
-      - サポート形式：.jpeg、.jpg、.png、.webp
-    </ParamField>
+  **制限：**
+  - 単一画像は10MBを超えないこと
+  - サポート形式：.jpeg、.jpg、.png、.webp
   </Expandable>
 
   **制限：** 最大14枚の画像

@@ -601,20 +601,25 @@ cat(content(response, "text"))
 
   **💡 クイック入力（Try itエリア）：**
   1. "+ Add an item" をクリックして画像URLを追加
-  2. 画像の完全なURL アドレスを入力
+  2. 画像の完全なURLアドレスまたはbase64データを入力
 
   <Expandable title="フィールド詳細">
-    <ParamField body="url" type="string" required>
-      画像URLアドレス
-      
-      以下が可能：
-      - 公開アクセス可能な画像URL（http:// または https://）
-      - Base64エンコードされた画像データ
-      
-      **制限：**
-      - 単一画像は最大 10MB
-      - 対応形式：.jpeg、.jpg、.png、.webp
-    </ParamField>
+  配列の各要素は文字列で、2つの形式をサポート：
+
+  **1. 完全な画像URL**
+  - 公開アクセス可能な画像URL（http:// または https://）
+  - 例：`"https://example.com/image.jpg"`
+
+  **2. Base64エンコード形式**
+  - **完全なData URI形式を使用する必要があります**
+  - 形式：`data:image/{フォーマット};base64,{base64データ}`
+  - 対応画像形式：jpeg、png、webp など
+  - 例：`"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg..."`
+  - ⚠️ 注意：`data:image/jpeg;base64,` プレフィックスを含める必要があります
+
+  **制限：**
+  - 単一画像は最大 10MB
+  - 対応形式：.jpeg、.jpg、.png、.webp
   </Expandable>
 
   **制限：** 最大 5 枚の画像

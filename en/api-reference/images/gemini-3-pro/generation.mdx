@@ -602,26 +602,22 @@ cat(content(response, "text"))
   2. Enter the complete image URL address or base64 data
 
   <Expandable title="Detailed field description">
-    <ParamField body="url" type="string" required>
-      Image URL address
-      
-      Supports two formats:
-      
-      **1. Complete image URL address**
-      - Publicly accessible image URL (http:// or https://)
-      - Example: `https://example.com/image.jpg`
-      
-      **2. Base64 encoded format**
-      - **Must use complete Data URI format**
-      - Format: `data:image/{format};base64,{base64data}`
-      - Supported image formats: jpeg, png, webp, etc.
-      - Example: `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg...`
-      - ⚠️ Note: Must include the `data:image/jpeg;base64,` prefix
-      
-      **Limitations:**
-      - Single image must not exceed 10MB
-      - Supported formats: .jpeg, .jpg, .png, .webp
-    </ParamField>
+  Each element in the array is a string, supporting two formats:
+
+  **1. Complete image URL address**
+  - Publicly accessible image URL (http:// or https://)
+  - Example: `"https://example.com/image.jpg"`
+
+  **2. Base64 encoded format**
+  - **Must use complete Data URI format**
+  - Format: `data:image/{format};base64,{base64data}`
+  - Supported image formats: jpeg, png, webp, etc.
+  - Example: `"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg..."`
+  - ⚠️ Note: Must include the `data:image/jpeg;base64,` prefix
+
+  **Limitations:**
+  - Single image must not exceed 10MB
+  - Supported formats: .jpeg, .jpg, .png, .webp
   </Expandable>
 
   **Limit:** Maximum 14 images

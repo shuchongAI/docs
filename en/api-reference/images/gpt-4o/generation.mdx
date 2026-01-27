@@ -606,20 +606,25 @@ cat(content(response, "text"))
 
   **💡 Quick fill (Try it area):**
   1. Click "+ Add an item" to add an image URL
-  2. Enter the complete image URL address
+  2. Enter the complete image URL address or base64 data
 
   <Expandable title="Field details">
-    <ParamField body="url" type="string" required>
-      Image URL address
-      
-      Can be:
-      - Publicly accessible image URL (http:// or https://)
-      - Base64 encoded image data
-      
-      **Limitations:**
-      - Single image up to 10MB
-      - Supported formats: .jpeg, .jpg, .png, .webp
-    </ParamField>
+  Each element in the array is a string, supporting two formats:
+
+  **1. Complete image URL**
+  - Publicly accessible image URL (http:// or https://)
+  - Example: `"https://example.com/image.jpg"`
+
+  **2. Base64 encoded format**
+  - **Must use complete Data URI format**
+  - Format: `data:image/{format};base64,{base64data}`
+  - Supported image formats: jpeg, png, webp, etc.
+  - Example: `"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABg..."`
+  - ⚠️ Note: Must include the `data:image/jpeg;base64,` prefix
+
+  **Limitations:**
+  - Single image up to 10MB
+  - Supported formats: .jpeg, .jpg, .png, .webp
   </Expandable>
 
   **Limitation:** Maximum 5 images
