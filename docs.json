@@ -143,6 +143,7 @@
                     "icon": "video",
                     "pages": [
                       "en/api-reference/videos/sora-2/generation",
+                      "en/api-reference/videos/sora-2/generation-preview",
                       "en/api-reference/videos/sora-2/create-character",
                       "en/api-reference/videos/sora-2/query-character",
                       "en/api-reference/videos/sora2/remix"
@@ -357,6 +358,7 @@
                     "icon": "video",
                     "pages": [
                       "cn/api-reference/videos/sora-2/generation",
+                      "cn/api-reference/videos/sora-2/generation-preview",
                       "cn/api-reference/videos/sora-2/create-character",
                       "cn/api-reference/videos/sora-2/query-character",
                       "cn/api-reference/videos/sora2/remix"
@@ -571,6 +573,7 @@
                     "icon": "video",
                     "pages": [
                       "ja/api-reference/videos/sora-2/generation",
+                      "ja/api-reference/videos/sora-2/generation-preview",
                       "ja/api-reference/videos/sora-2/create-character",
                       "ja/api-reference/videos/sora-2/query-character",
                       "ja/api-reference/videos/sora2/remix"
@@ -779,6 +782,7 @@
                     "icon": "video",
                     "pages": [
                       "ko/api-reference/videos/sora-2/generation",
+                      "ko/api-reference/videos/sora-2/generation-preview",
                       "ko/api-reference/videos/sora-2/create-character",
                       "ko/api-reference/videos/sora-2/query-character",
                       "ko/api-reference/videos/sora2/remix"

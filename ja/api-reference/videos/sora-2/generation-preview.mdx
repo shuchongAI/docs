@@ -1,0 +1,486 @@
+---
+title: "Sora2 Preview 動画生成"
+description: "
+- 非同期処理モード、タスクIDを返して後続のクエリに使用
+
+- テキストから動画、画像から動画など複数の生成モードをサポート
+
+- 生成された動画リンクは72時間有効です、お早めに保存してください
+"
+api: "POST https://api.apimart.ai/v1/videos/generations"
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/videos/generations \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "sora-2-preview",
+    "prompt": "A majestic waterfall cascading down rocky cliffs, creating a beautiful rainbow in the mist",
+    "duration": 8,
+    "aspect_ratio": "landscape",
+    "image_urls": ["https://example.com/reference-image.jpg"]
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/videos/generations"
+
+payload = {
+    "model": "sora-2-preview",
+    "prompt": "A majestic waterfall cascading down rocky cliffs, creating a beautiful rainbow in the mist",
+    "duration": 8,
+    "aspect_ratio": "landscape",
+    "image_urls": ["https://example.com/reference-image.jpg"]
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/videos/generations";
+
+const payload = {
+  model: "sora-2-preview",
+  prompt: "A majestic waterfall cascading down rocky cliffs, creating a beautiful rainbow in the mist",
+  duration: 8,
+  aspect_ratio: "landscape",
+  image_urls: ["https://example.com/reference-image.jpg"]
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/videos/generations"
+
+    payload := map[string]interface{}{
+        "model":        "sora-2-preview",
+        "prompt":       "A majestic waterfall cascading down rocky cliffs, creating a beautiful rainbow in the mist",
+        "duration":     8,
+        "aspect_ratio": "landscape",
+        "image_urls":   []string{"https://example.com/reference-image.jpg"},
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/videos/generations";
+
+        String payload = """
+        {
+          "model": "sora-2-preview",
+          "prompt": "A majestic waterfall cascading down rocky cliffs, creating a beautiful rainbow in the mist",
+          "duration": 8,
+          "aspect_ratio": "landscape",
+          "image_urls": ["https://example.com/reference-image.jpg"]
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/videos/generations";
+
+$payload = [
+    "model" => "sora-2-preview",
+    "prompt" => "A majestic waterfall cascading down rocky cliffs, creating a beautiful rainbow in the mist",
+    "duration" => 8,
+    "aspect_ratio" => "landscape",
+    "image_urls" => ["https://example.com/reference-image.jpg"]
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1/videos/generations")
+
+payload = {
+  model: "sora-2-preview",
+  prompt: "A majestic waterfall cascading down rocky cliffs, creating a beautiful rainbow in the mist",
+  duration: 8,
+  aspect_ratio: "landscape",
+  image_urls: ["https://example.com/reference-image.jpg"]
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/videos/generations")!
+
+let payload: [String: Any] = [
+    "model": "sora-2-preview",
+    "prompt": "A majestic waterfall cascading down rocky cliffs, creating a beautiful rainbow in the mist",
+    "duration": 8,
+    "aspect_ratio": "landscape",
+    "image_urls": ["https://example.com/reference-image.jpg"]
+]
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+
+    if let data = data, let responseString = String(data: data, encoding: .utf8) {
+        print(responseString)
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/videos/generations";
+
+        var payload = @"{
+            ""model"": ""sora-2-preview"",
+            ""prompt"": ""A majestic waterfall cascading down rocky cliffs, creating a beautiful rainbow in the mist"",
+            ""duration"": 8,
+            ""aspect_ratio"": ""landscape"",
+            ""image_urls"": [""https://example.com/reference-image.jpg""]
+        }";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
+
+        var content = new StringContent(payload, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(url, content);
+        var result = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(result);
+    }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "status": "submitted",
+      "task_id": "task_01KG1Q38PBV1RJ2C033ZS9RYF7"
+    }
+  ]
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "リクエストパラメータが無効です",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "認証に失敗しました、APIキーを確認してください",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "アカウント残高が不足しています、チャージしてください",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 403
+{
+  "error": {
+    "code": 403,
+    "message": "アクセスが禁止されています、このリソースにアクセスする権限がありません",
+    "type": "permission_error"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "リクエストが多すぎます、後でもう一度お試しください",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "サーバー内部エラー、後でもう一度お試しください",
+    "type": "server_error"
+  }
+}
+```
+
+```json 502
+{
+  "error": {
+    "code": 502,
+    "message": "ゲートウェイエラー、サーバーが一時的に利用できません",
+    "type": "bad_gateway"
+  }
+}
+```
+
+</ResponseExample>
+
+## 認証
+
+<ParamField header="Authorization" type="string" required>
+  すべてのインターフェースはBearer Token認証が必要です
+
+  API Keyの取得：
+
+  [API Key管理ページ](https://apimart.ai/console/token)にアクセスしてAPI Keyを取得してください
+
+  リクエストヘッダーに追加：
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Body
+
+<ParamField body="model" type="string" default="sora-2-preview" required>
+  動画生成モデル名
+
+  サポートされているモデル：
+  - `sora-2-preview` - スタンダード版
+  - `sora-2-pro-preview` - Pro版（より高い解像度をサポート）
+
+  例：`"sora-2-preview"` または `"sora-2-pro-preview"`
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  動画生成のテキスト説明
+
+  生成したい動画の内容を詳細に説明してください。シーン、アクション、雰囲気などを含めます。
+
+  例：`"A majestic waterfall cascading down rocky cliffs, creating a beautiful rainbow in the mist"`
+</ParamField>
+
+<ParamField body="duration" type="integer" default="4">
+  動画の長さ（秒）
+
+  **以下の長さの値のみサポート**：
+  - `4` - 4秒動画
+  - `8` - 8秒動画
+  - `12` - 12秒動画
+
+  その他の長さの値はエラーを返します。
+
+  例：`8`
+</ParamField>
+
+<ParamField body="aspect_ratio" type="string" default="landscape">
+  動画のアスペクト比
+
+  サポートされている形式：
+  - `landscape` または `16:9` - 横向き (16:9)
+  - `portrait` または `9:16` - 縦向き (9:16)
+
+  `square` (1:1) 動画は**サポートされていません**。
+
+  例：`"landscape"`
+</ParamField>
+
+<ParamField body="size" type="string">
+  動画サイズ（`aspect_ratio`と同じ）
+
+  サポートされている形式：
+  - `16:9` または `landscape` - 横向き
+  - `9:16` または `portrait` - 縦向き
+
+  このパラメータは`aspect_ratio`と同じ機能を持ち、どちらか一方を使用してください。
+</ParamField>
+
+<ParamField body="resolution" type="string" default="standard">
+  動画解像度（`sora-2-pro-preview`のみサポート）
+
+  サポートされている値：
+  - `standard` - 標準解像度（縦向き 720x1280、横向き 1280x720）
+  - `high` - 高解像度（縦向き 1024x1792、横向き 1792x1024）
+
+  例：`"high"`
+</ParamField>
+
+<ParamField body="image_urls" type="array<url>">
+  画像から動画生成用の参照画像URL配列
+
+  **重要な制限**：最初の画像のみが参照として使用されます
+
+  参照画像を使用すると、APIは**画像のアスペクト比を自動的に検出し、ユーザーが提供した`aspect_ratio`パラメータを上書きします**。
+
+  **解決策**：
+  - 出力動画のアスペクト比を正確に制御するには、**参照画像を使用しないでください**（純粋なテキストから動画）
+  - 参照画像を使用する必要がある場合は、参照画像自体が目標のアスペクト比であることを確認してください
+
+  例：`["https://example.com/reference-image.jpg"]`
+
+  **制限：**
+  - 最大ファイルサイズ：10MB
+  - サポート形式：.jpeg、.jpg、.png、.webp
+</ParamField>
+
+## Response
+
+<ResponseField name="code" type="integer">
+  レスポンスステータスコード、成功時は200
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  レスポンスデータ配列
+
+  <Expandable title="配列要素">
+    <ResponseField name="status" type="string">
+      タスクステータス、初回送信時は`submitted`
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      タスクステータスと結果をクエリするための一意のタスク識別子
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## 料金
+
+- **課金方式**：動画の長さ（秒）ごとに課金
+- **具体的な価格**：[料金ページ](https://apimart.ai/model/sora-2)をご参照ください
