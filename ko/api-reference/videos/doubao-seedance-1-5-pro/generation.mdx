@@ -3,7 +3,7 @@ title: "doubao-seedance-1-5-pro 영상 생성"
 description: "
 - 비동기 처리 모드, 후속 쿼리를 위한 작업 ID 반환
 
-- 텍스트에서 영상, 이미지에서 영상(첫 프레임/마지막 프레임/다중 참조 이미지) 지원
+- 텍스트에서 영상, 이미지에서 영상(첫 프레임/마지막 프레임) 지원
 
 - 오디오 생성 지원
 
@@ -374,7 +374,7 @@ class Program
   영상 생성 모델 이름
 
   지원되는 모델:
-  - `doubao-seedance-1-5-pro` - 1.5 Pro 버전, 오디오 생성 및 다중 참조 이미지 지원
+  - `doubao-seedance-1-5-pro` - 1.5 Pro 버전, 오디오 생성 지원
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
@@ -463,7 +463,6 @@ class Program
   자동 역할 할당 규칙:
   - 1장 = 첫 프레임
   - 2장 = 첫 프레임 + 마지막 프레임
-  - 3장 이상 = 첫 프레임 + 마지막 프레임 + 참조 이미지
 
   예: `["https://example.com/first.png", "https://example.com/last.png"]`
 
@@ -486,7 +485,6 @@ class Program
       옵션:
       - `first_frame` - 첫 프레임 이미지, 영상 시작 프레임으로 사용(1장만 지원)
       - `last_frame` - 마지막 프레임 이미지, 영상 종료 프레임으로 사용(1장만 지원)
-      - `reference_image` - 참조 이미지, 영상 스타일 가이드용(1-4장 지원)
     </ParamField>
   </Expandable>
 
@@ -494,16 +492,13 @@ class Program
   ```json
   [
     {"url": "https://example.com/start.png", "role": "first_frame"},
-    {"url": "https://example.com/end.png", "role": "last_frame"},
-    {"url": "https://example.com/ref1.png", "role": "reference_image"},
-    {"url": "https://example.com/ref2.png", "role": "reference_image"}
+    {"url": "https://example.com/end.png", "role": "last_frame"}
   ]
   ```
 
   <Warning>
   - `image_urls`와 `image_with_roles`는 동시에 사용할 수 없습니다
   - 첫 프레임과 마지막 프레임은 각각 1장만 지원
-  - 참조 이미지는 1-4장 지원, `reference_image` 역할 사용(참고: 1.0 버전은 `reference` 사용, 1.5 Pro는 `reference_image` 사용)
   </Warning>
 </ParamField>
 
@@ -578,22 +573,6 @@ class Program
 }
 ```
 
-### 사례 5: 다중 참조 스타일 제어
-
-```json
-{
-  "model": "doubao-seedance-1-5-pro",
-  "prompt": "참조 이미지 스타일로 영상 생성, 일관된 시각 효과 유지",
-  "audio": true,
-  "image_with_roles": [
-    {"url": "https://example.com/first.png", "role": "first_frame"},
-    {"url": "https://example.com/ref1.png", "role": "reference_image"},
-    {"url": "https://example.com/ref2.png", "role": "reference_image"},
-    {"url": "https://example.com/ref3.png", "role": "reference_image"}
-  ]
-}
-```
-
 <Note>
 **작업 결과 조회**
 
@@ -608,4 +587,4 @@ class Program
 | 지원 해상도 | 480p/720p/1080p | **480p/720p/1080p** |
 | 길이 범위 | 2-12초 | **4-12초** |
 | 오디오 생성 | 미지원 | **지원** |
-| 참조 이미지 역할 | `reference` (1장) | **`reference_image` (1-4장)** |
+| 참조 이미지 | `reference` (1장) | **미지원** |

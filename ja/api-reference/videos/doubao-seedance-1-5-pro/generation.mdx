@@ -3,7 +3,7 @@ title: "doubao-seedance-1-5-pro 動画生成"
 description: "
 - 非同期処理モード、後続のクエリ用にタスクIDを返却
 
-- テキストから動画、画像から動画（最初のフレーム/最後のフレーム/複数参照画像）をサポート
+- テキストから動画、画像から動画（最初のフレーム/最後のフレーム）をサポート
 
 - 音声生成をサポート
 
@@ -374,7 +374,7 @@ class Program
   動画生成モデル名
 
   サポートされるモデル：
-  - `doubao-seedance-1-5-pro` - 1.5 Pro版、音声生成と複数参照画像をサポート
+  - `doubao-seedance-1-5-pro` - 1.5 Pro版、音声生成をサポート
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
@@ -463,7 +463,6 @@ class Program
   自動ロール割り当てルール：
   - 1枚 = 最初のフレーム
   - 2枚 = 最初のフレーム + 最後のフレーム
-  - 3枚以上 = 最初のフレーム + 最後のフレーム + 参照画像
 
   例：`["https://example.com/first.png", "https://example.com/last.png"]`
 
@@ -486,7 +485,6 @@ class Program
       オプション：
       - `first_frame` - 最初のフレーム画像、動画の開始フレームとして（1枚のみサポート）
       - `last_frame` - 最後のフレーム画像、動画の終了フレームとして（1枚のみサポート）
-      - `reference_image` - 参照画像、動画スタイルのガイド用（1-4枚サポート）
     </ParamField>
   </Expandable>
 
@@ -494,16 +492,13 @@ class Program
   ```json
   [
     {"url": "https://example.com/start.png", "role": "first_frame"},
-    {"url": "https://example.com/end.png", "role": "last_frame"},
-    {"url": "https://example.com/ref1.png", "role": "reference_image"},
-    {"url": "https://example.com/ref2.png", "role": "reference_image"}
+    {"url": "https://example.com/end.png", "role": "last_frame"}
   ]
   ```
 
   <Warning>
   - `image_urls` と `image_with_roles` を同時に使用することはできません
   - 最初のフレームと最後のフレームはそれぞれ1枚のみサポート
-  - 参照画像は1-4枚サポート、`reference_image` ロールを使用（注意：1.0バージョンは `reference` を使用、1.5 Proは `reference_image` を使用）
   </Warning>
 </ParamField>
 
@@ -578,22 +573,6 @@ class Program
 }
 ```
 
-### ケース 5：マルチ参照スタイル制御
-
-```json
-{
-  "model": "doubao-seedance-1-5-pro",
-  "prompt": "参照画像のスタイルで動画を生成、一貫したビジュアル効果を維持",
-  "audio": true,
-  "image_with_roles": [
-    {"url": "https://example.com/first.png", "role": "first_frame"},
-    {"url": "https://example.com/ref1.png", "role": "reference_image"},
-    {"url": "https://example.com/ref2.png", "role": "reference_image"},
-    {"url": "https://example.com/ref3.png", "role": "reference_image"}
-  ]
-}
-```
-
 <Note>
 **タスク結果の照会**
 
@@ -608,4 +587,4 @@ class Program
 | サポート解像度 | 480p/720p/1080p | **480p/720p/1080p** |
 | 長さの範囲 | 2-12秒 | **4-12秒** |
 | 音声生成 | 非サポート | **サポート** |
-| 参照画像ロール | `reference` (1枚) | **`reference_image` (1-4枚)** |
+| 参照画像ロール | `reference` (1枚) | **非サポート** |

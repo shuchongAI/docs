@@ -3,7 +3,7 @@ title: "doubao-seedance-1-5-pro 视频生成"
 description: "
 - 异步处理模式，返回任务ID用于后续查询
 
-- 支持文本转视频、图生视频（首帧/尾帧/多参考图）
+- 支持文本转视频、图生视频（首帧/尾帧）
 
 - 支持音频生成
 
@@ -374,7 +374,7 @@ class Program
   视频生成模型名称
 
   支持的模型：
-  - `doubao-seedance-1-5-pro` - 1.5 Pro 版，支持音频生成和多参考图
+  - `doubao-seedance-1-5-pro` - 1.5 Pro 版，支持音频生成和首尾帧
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
@@ -463,7 +463,6 @@ class Program
   自动分配角色规则：
   - 1张 = 首帧
   - 2张 = 首帧 + 尾帧
-  - 3+张 = 首帧 + 尾帧 + 参考图
 
   示例：`["https://example.com/first.png", "https://example.com/last.png"]`
 
@@ -486,7 +485,6 @@ class Program
       可选值：
       - `first_frame` - 首帧图，作为视频起始画面（仅支持一张）
       - `last_frame` - 尾帧图，作为视频结束画面（仅支持一张）
-      - `reference_image` - 参考图，用于指导视频风格（支持 1-4 张）
     </ParamField>
   </Expandable>
 
@@ -494,16 +492,13 @@ class Program
   ```json
   [
     {"url": "https://example.com/start.png", "role": "first_frame"},
-    {"url": "https://example.com/end.png", "role": "last_frame"},
-    {"url": "https://example.com/ref1.png", "role": "reference_image"},
-    {"url": "https://example.com/ref2.png", "role": "reference_image"}
+    {"url": "https://example.com/end.png", "role": "last_frame"}
   ]
   ```
 
   <Warning>
   - `image_urls` 和 `image_with_roles` 不能同时使用
   - 首帧和尾帧仅支持各一张
-  - 参考图支持 1-4 张，使用 `reference_image` 角色（注意：1.0 版本使用 `reference`，1.5 Pro 使用 `reference_image`）
   </Warning>
 </ParamField>
 
@@ -578,22 +573,6 @@ class Program
 }
 ```
 
-### 场景 5：多参考图风格控制
-
-```json
-{
-  "model": "doubao-seedance-1-5-pro",
-  "prompt": "参考图片风格生成视频，保持一致的视觉效果",
-  "audio": true,
-  "image_with_roles": [
-    {"url": "https://example.com/first.png", "role": "first_frame"},
-    {"url": "https://example.com/ref1.png", "role": "reference_image"},
-    {"url": "https://example.com/ref2.png", "role": "reference_image"},
-    {"url": "https://example.com/ref3.png", "role": "reference_image"}
-  ]
-}
-```
-
 <Note>
 **查询任务结果**
 
@@ -608,4 +587,4 @@ class Program
 | 支持分辨率 | 480p/720p/1080p | **480p/720p/1080p** |
 | 时长范围 | 2-12秒 | **4-12秒** |
 | 音频生成 | 不支持 | **支持** |
-| 参考图角色 | `reference` (1张) | **`reference_image` (1-4张)** |
+| 参考图 | `reference` (1张) | 不支持 |

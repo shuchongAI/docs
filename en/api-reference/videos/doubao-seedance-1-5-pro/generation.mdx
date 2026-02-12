@@ -3,7 +3,7 @@ title: "doubao-seedance-1-5-pro Video Generation"
 description: "
 - Async processing mode, returns task ID for subsequent queries
 
-- Supports text-to-video, image-to-video (first frame/last frame/multiple references)
+- Supports text-to-video, image-to-video (first frame/last frame)
 
 - Supports audio generation
 
@@ -374,7 +374,7 @@ class Program
   Video generation model name
 
   Supported models:
-  - `doubao-seedance-1-5-pro` - 1.5 Pro version, supports audio generation and multiple reference images
+  - `doubao-seedance-1-5-pro` - 1.5 Pro version, supports audio generation and first/last frame
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
@@ -463,7 +463,6 @@ class Program
   Auto role assignment rules:
   - 1 image = first frame
   - 2 images = first frame + last frame
-  - 3+ images = first frame + last frame + reference images
 
   Example: `["https://example.com/first.png", "https://example.com/last.png"]`
 
@@ -486,7 +485,6 @@ class Program
       Options:
       - `first_frame` - First frame image, as video starting frame (only one supported)
       - `last_frame` - Last frame image, as video ending frame (only one supported)
-      - `reference_image` - Reference image, for guiding video style (supports 1-4 images)
     </ParamField>
   </Expandable>
 
@@ -494,16 +492,13 @@ class Program
   ```json
   [
     {"url": "https://example.com/start.png", "role": "first_frame"},
-    {"url": "https://example.com/end.png", "role": "last_frame"},
-    {"url": "https://example.com/ref1.png", "role": "reference_image"},
-    {"url": "https://example.com/ref2.png", "role": "reference_image"}
+    {"url": "https://example.com/end.png", "role": "last_frame"}
   ]
   ```
 
   <Warning>
   - `image_urls` and `image_with_roles` cannot be used together
   - First frame and last frame only support one each
-  - Reference images support 1-4 images, using `reference_image` role (Note: 1.0 version uses `reference`, 1.5 Pro uses `reference_image`)
   </Warning>
 </ParamField>
 
@@ -578,22 +573,6 @@ class Program
 }
 ```
 
-### Case 5: Multi-Reference Style Control
-
-```json
-{
-  "model": "doubao-seedance-1-5-pro",
-  "prompt": "Generate video with reference image styles, maintaining consistent visual effects",
-  "audio": true,
-  "image_with_roles": [
-    {"url": "https://example.com/first.png", "role": "first_frame"},
-    {"url": "https://example.com/ref1.png", "role": "reference_image"},
-    {"url": "https://example.com/ref2.png", "role": "reference_image"},
-    {"url": "https://example.com/ref3.png", "role": "reference_image"}
-  ]
-}
-```
-
 <Note>
 **Query Task Results**
 
@@ -608,4 +587,4 @@ Video generation is an async task that returns a `task_id` upon submission. Use 
 | Supported resolutions | 480p/720p/1080p | **480p/720p/1080p** |
 | Duration range | 2-12s | **4-12s** |
 | Audio generation | Not supported | **Supported** |
-| Reference image role | `reference` (1 image) | **`reference_image` (1-4 images)** |
+| Reference image | `reference` (1 image) | Not supported |
