@@ -373,14 +373,7 @@ class Program
 
   Describe scenes, actions, styles in detail for better generation results
 
-  **Voice reference syntax**: Use `<<<voice_1>>>` in the prompt to reference voices from the `voice_list` array. The number corresponds to the order in the `voice_list` array (starting from 1). Keep the syntax structure as simple as possible.
-
-  Example: `"A man<<<voice_1>>> says: \"Hello\""`
-
-  <Warning>
-  - When using `<<<voice_1>>>` to reference voices, the `audio` parameter must be `true`
-  - When `voice_list` is not empty and the prompt references voices, billing is charged at the **"specified voice"** rate
-  </Warning>
+  Example: `"A golden cat running on a sunlit meadow, slow motion, cinematic quality"`
 </ParamField>
 
 <ParamField body="mode" type="string" default="std">
@@ -388,12 +381,12 @@ class Program
 
   Options:
   - `std` - Standard mode (720P, silent video only)
-  - `pro` - Professional mode (1080P, supports audio generation and voice control)
+  - `pro` - Professional mode (1080P, supports automatic audio generation)
 
   Default: `std`
 
   <Warning>
-  **Standard mode limitation**: `std` mode only supports silent video. `audio` and `voice_list` parameters require `pro` mode.
+  **Standard mode limitation**: `std` mode only supports silent video. `audio` parameter requires `pro` mode.
   </Warning>
 </ParamField>
 
@@ -451,41 +444,6 @@ class Program
   </Warning>
 </ParamField>
 
-<ParamField body="voice_list" type="array">
-  Voice selection list, **up to 2 voices**
-
-  <Expandable title="Field Description">
-    <ParamField body="voice_id" type="string" required>
-      Preset voice ID, obtainable via the voice query API
-    </ParamField>
-  </Expandable>
-
-  Example:
-  ```json
-  [{"voice_id": "829824295735410756"}]
-  ```
-
-  Reference voices in the `prompt` using `<<<voice_N>>>`:
-
-  ```json
-  {
-    "prompt": "A man<<<voice_1>>> says: \"Hello\", a woman<<<voice_2>>> says: \"Hi there\"",
-    "audio": true,
-    "voice_list": [
-      {"voice_id": "829826792415842333"},
-      {"voice_id": "829826751244537879"}
-    ]
-  }
-  ```
-
-  <Warning>
-  - Requires both `mode: "pro"` and `audio: true` to be set
-  - Maximum **2** voices per video generation task
-  - When referencing voices in the prompt, `audio` must be `true`
-  - When `voice_list` is not empty and the prompt references voices, billing is charged at the **"specified voice"** rate
-  </Warning>
-</ParamField>
-
 <ParamField body="watermark" type="boolean">
   Whether to add watermark
 </ParamField>
@@ -495,10 +453,11 @@ class Program
 | Type | Feature | std 5s | std 10s | pro 5s | pro 10s |
 |------|---------|--------|---------|--------|---------|
 | Text-to-Video | Generation | ✅ (silent only) | ✅ (silent only) | ✅ | ✅ |
+| Text-to-Video | Auto Audio | - | - | ✅ | ✅ |
 | Image-to-Video | Generation | ✅ (silent only) | ✅ (silent only) | ✅ | ✅ |
 | Image-to-Video | First Frame | ✅ | ✅ | ✅ | ✅ |
 | Image-to-Video | Last Frame | - | - | ✅ | ✅ |
-| Image-to-Video | Audio Control | - | - | ✅ | ✅ |
+| Image-to-Video | Auto Audio | - | - | ✅ | ✅ |
 
 > **Note**: In `pro` mode, last frame and audio control are mutually exclusive and cannot be used together.
 
@@ -514,34 +473,8 @@ The system automatically determines the mode based on whether `image_urls` is pr
 | `mode` | ✅ Optional | ✅ Optional |
 | `duration` | ✅ Optional | ✅ Optional |
 | `aspect_ratio` | ✅ Optional | ⚠️ May be overridden by image ratio |
-| `audio` / `voice_list` | ✅ Optional (needs `pro`) | ✅ Optional (needs `pro`) |
+| `audio` | ✅ Optional (needs `pro`) | ✅ Optional (needs `pro`) |
 | `watermark` | ✅ Optional | ✅ Optional |
-
-## Query Available Voices
-
-Use the following API to query Kling's preset voice IDs:
-
-```bash
-curl -X GET 'https://api.apimart.ai/v1/kling/general/presets-voices?pageNum=1&pageSize=10' \
-  -H 'Authorization: Bearer YOUR_API_KEY'
-```
-
-**Response example**:
-
-```json
-{
-  "code": 0,
-  "message": "SUCCEED",
-  "request_id": "31a72582-cce3-48ca-ab72-9eab256dc322",
-  "data": [
-    { "voice_id": "829824295735410756", "voice_name": "钓系女友", "trial_url": "https://..." },
-    { "voice_id": "829826751244537879", "voice_name": "温柔女声", "trial_url": "https://..." },
-    { "voice_id": "829826792415842333", "voice_name": "播报男声", "trial_url": "https://..." },
-    { "voice_id": "829826834144964676", "voice_name": "盐系少年", "trial_url": "https://..." },
-    { "voice_id": "829826884271091753", "voice_name": "撒娇女友", "trial_url": "https://..." }
-  ]
-}
-```
 
 ## Response
 
@@ -624,21 +557,6 @@ curl -X GET 'https://api.apimart.ai/v1/kling/general/presets-voices?pageNum=1&pa
   "mode": "pro",
   "duration": 10,
   "audio": true,
-  "aspect_ratio": "16:9"
-}
-```
-
-### Case 6: Pro Mode + Selected Voice
-
-```json
-{
-  "model": "kling-v2-6",
-  "prompt": "A news anchor<<<voice_1>>> speaking to the camera",
-  "image_urls": ["https://example.com/anchor.jpg"],
-  "mode": "pro",
-  "duration": 10,
-  "audio": true,
-  "voice_list": [{"voice_id": "829826792415842333"}],
   "aspect_ratio": "16:9"
 }
 ```

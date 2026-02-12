@@ -373,14 +373,7 @@ class Program
 
   シーン、アクション、スタイルなどを詳しく記述すると、より良い生成結果が得られます
 
-  **ボイス参照構文**：プロンプト内で `<<<voice_1>>>` を使用して `voice_list` 配列のボイスを参照できます。番号は `voice_list` 配列の順序に対応します（1から開始）。構文構造はできるだけシンプルにしてください。
-
-  例：`"男性<<<voice_1>>>が言う：「こんにちは」"`
-
-  <Warning>
-  - `<<<voice_1>>>` でボイスを参照する場合、`audio` パラメータは `true` でなければなりません
-  - `voice_list` が空でなくプロンプトでボイスを参照した場合、**「ボイス指定あり」**の料金で課金されます
-  </Warning>
+  例：`"金色の猫が日差しの中の草原を走る、スローモーション、映画的な質感"`
 </ParamField>
 
 <ParamField body="mode" type="string" default="std">
@@ -388,12 +381,12 @@ class Program
 
   オプション：
   - `std` - スタンダードモード（720P、無音動画のみ）
-  - `pro` - プロフェッショナルモード（1080P、音声生成とボイス制御をサポート）
+  - `pro` - プロフェッショナルモード（1080P、自動音声生成をサポート）
 
   デフォルト：`std`
 
   <Warning>
-  **スタンダードモードの制限**：`std` モードは無音動画のみサポートします。`audio`、`voice_list` パラメータは `pro` モードで使用する必要があります。
+  **スタンダードモードの制限**：`std` モードは無音動画のみサポートします。`audio` パラメータは `pro` モードで使用する必要があります。
   </Warning>
 </ParamField>
 
@@ -451,41 +444,6 @@ class Program
   </Warning>
 </ParamField>
 
-<ParamField body="voice_list" type="array">
-  ボイス選択リスト、**最大2つ**
-
-  <Expandable title="フィールド説明">
-    <ParamField body="voice_id" type="string" required>
-      プリセットボイスID、ボイス照会APIで取得可能
-    </ParamField>
-  </Expandable>
-
-  例：
-  ```json
-  [{"voice_id": "829824295735410756"}]
-  ```
-
-  `prompt` 内で `<<<voice_N>>>` を使って対応するボイスを参照：
-
-  ```json
-  {
-    "prompt": "男性<<<voice_1>>>が言う：「こんにちは」、女性<<<voice_2>>>が言う：「こんにちは！」",
-    "audio": true,
-    "voice_list": [
-      {"voice_id": "829826792415842333"},
-      {"voice_id": "829826751244537879"}
-    ]
-  }
-  ```
-
-  <Warning>
-  - `mode: "pro"` と `audio: true` の両方が設定されている必要があります
-  - 1回の動画生成タスクで最大 **2つ**のボイスを参照可能
-  - プロンプトでボイスを参照する場合、`audio` は `true` でなければなりません
-  - `voice_list` が空でなくプロンプトでボイスを参照した場合、**「ボイス指定あり」**の料金で課金されます
-  </Warning>
-</ParamField>
-
 <ParamField body="watermark" type="boolean">
   ウォーターマークを追加するかどうか
 </ParamField>
@@ -495,10 +453,11 @@ class Program
 | タイプ | 機能 | std 5秒 | std 10秒 | pro 5秒 | pro 10秒 |
 |--------|------|---------|----------|---------|----------|
 | テキストから動画 | 動画生成 | ✅（無音のみ） | ✅（無音のみ） | ✅ | ✅ |
+| テキストから動画 | 自動音声 | - | - | ✅ | ✅ |
 | 画像から動画 | 動画生成 | ✅（無音のみ） | ✅（無音のみ） | ✅ | ✅ |
 | 画像から動画 | 先頭フレーム | ✅ | ✅ | ✅ | ✅ |
 | 画像から動画 | 末尾フレーム | - | - | ✅ | ✅ |
-| 画像から動画 | 音声制御 | - | - | ✅ | ✅ |
+| 画像から動画 | 自動音声 | - | - | ✅ | ✅ |
 
 > **注意**：`pro` モードで末尾フレームと音声制御は排他的で、同時に使用できません。
 
@@ -514,34 +473,8 @@ class Program
 | `mode` | ✅ 任意 | ✅ 任意 |
 | `duration` | ✅ 任意 | ✅ 任意 |
 | `aspect_ratio` | ✅ 任意 | ⚠️ 画像比率で上書きされる場合あり |
-| `audio` / `voice_list` | ✅ 任意（`pro` が必要） | ✅ 任意（`pro` が必要） |
+| `audio` | ✅ 任意（`pro` が必要） | ✅ 任意（`pro` が必要） |
 | `watermark` | ✅ 任意 | ✅ 任意 |
-
-## 利用可能なボイスの照会
-
-以下のAPIでKlingのプリセットボイスIDを照会できます：
-
-```bash
-curl -X GET 'https://api.apimart.ai/v1/kling/general/presets-voices?pageNum=1&pageSize=10' \
-  -H 'Authorization: Bearer YOUR_API_KEY'
-```
-
-**レスポンス例**：
-
-```json
-{
-  "code": 0,
-  "message": "SUCCEED",
-  "request_id": "31a72582-cce3-48ca-ab72-9eab256dc322",
-  "data": [
-    { "voice_id": "829824295735410756", "voice_name": "钓系女友", "trial_url": "https://..." },
-    { "voice_id": "829826751244537879", "voice_name": "温柔女声", "trial_url": "https://..." },
-    { "voice_id": "829826792415842333", "voice_name": "播报男声", "trial_url": "https://..." },
-    { "voice_id": "829826834144964676", "voice_name": "盐系少年", "trial_url": "https://..." },
-    { "voice_id": "829826884271091753", "voice_name": "撒娇女友", "trial_url": "https://..." }
-  ]
-}
-```
 
 ## レスポンス
 
@@ -624,21 +557,6 @@ curl -X GET 'https://api.apimart.ai/v1/kling/general/presets-voices?pageNum=1&pa
   "mode": "pro",
   "duration": 10,
   "audio": true,
-  "aspect_ratio": "16:9"
-}
-```
-
-### シーン 6：プロモード + ボイス指定
-
-```json
-{
-  "model": "kling-v2-6",
-  "prompt": "ニュースキャスター<<<voice_1>>>がカメラに向かってニュースを伝える",
-  "image_urls": ["https://example.com/anchor.jpg"],
-  "mode": "pro",
-  "duration": 10,
-  "audio": true,
-  "voice_list": [{"voice_id": "829826792415842333"}],
   "aspect_ratio": "16:9"
 }
 ```

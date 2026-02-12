@@ -373,14 +373,7 @@ class Program
 
   建议详细描述场景、动作、风格等，以获得更好的生成效果
 
-  **指定音色语法**：在 prompt 中使用 `<<<voice_1>>>` 来引用 `voice_list` 中的音色，序号对应 `voice_list` 数组的排列顺序（从 1 开始）。语法结构越简单越好。
-
-  示例：`"男人<<<voice_1>>>说："你好""`
-
-  <Warning>
-  - 使用 `<<<voice_1>>>` 引用音色时，`audio` 参数必须为 `true`
-  - 当 `voice_list` 不为空且 prompt 中引用了音色时，按**"有指定音色"**计量计费
-  </Warning>
+  示例：`"一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感"`
 </ParamField>
 
 <ParamField body="mode" type="string" default="std">
@@ -388,12 +381,12 @@ class Program
 
   可选值：
   - `std` - 标准模式（720P，仅支持无声视频）
-  - `pro` - 专业模式（1080P，支持音频生成和音色控制）
+  - `pro` - 专业模式（1080P，支持自动音频生成）
 
   默认值：`std`
 
   <Warning>
-  **标准模式限制**：`std` 模式仅支持无声视频，`audio`、`voice_list` 参数需在 `pro` 模式下使用。
+  **标准模式限制**：`std` 模式仅支持无声视频，`audio` 参数需在 `pro` 模式下使用。
   </Warning>
 </ParamField>
 
@@ -451,41 +444,6 @@ class Program
   </Warning>
 </ParamField>
 
-<ParamField body="voice_list" type="array">
-  指定音色列表，**最多 2 个音色**
-
-  <Expandable title="字段说明">
-    <ParamField body="voice_id" type="string" required>
-      预设音色 ID，可通过音色查询接口获取
-    </ParamField>
-  </Expandable>
-
-  示例：
-  ```json
-  [{"voice_id": "829824295735410756"}]
-  ```
-
-  在 `prompt` 中通过 `<<<voice_N>>>` 引用对应音色：
-
-  ```json
-  {
-    "prompt": "男人<<<voice_1>>>说："你好"，女人<<<voice_2>>>说："你好呀"",
-    "audio": true,
-    "voice_list": [
-      {"voice_id": "829826792415842333"},
-      {"voice_id": "829826751244537879"}
-    ]
-  }
-  ```
-
-  <Warning>
-  - 需要同时满足 `mode: "pro"` 和 `audio: true` 才能使用
-  - 一次视频生成任务最多引用 **2 个**音色
-  - 在 prompt 中引用音色时，`audio` 必须为 `true`
-  - 当 `voice_list` 不为空且 prompt 中引用了音色时，按**"有指定音色"**计量计费
-  </Warning>
-</ParamField>
-
 <ParamField body="watermark" type="boolean">
   是否添加水印
 </ParamField>
@@ -495,10 +453,11 @@ class Program
 | 类型 | 功能 | std 5s | std 10s | pro 5s | pro 10s |
 |------|------|--------|---------|--------|---------|
 | 文生视频 | 视频生成 | ✅（仅无声） | ✅（仅无声） | ✅ | ✅ |
+| 文生视频 | 自动音频 | - | - | ✅ | ✅ |
 | 图生视频 | 视频生成 | ✅（仅无声） | ✅（仅无声） | ✅ | ✅ |
 | 图生视频 | 首帧 | ✅ | ✅ | ✅ | ✅ |
 | 图生视频 | 尾帧 | - | - | ✅ | ✅ |
-| 图生视频 | 声音控制 | - | - | ✅ | ✅ |
+| 图生视频 | 自动音频 | - | - | ✅ | ✅ |
 
 > **注意**：在 `pro` 模式下，尾帧和声音控制不能同时使用，二者互斥。
 
@@ -514,34 +473,8 @@ class Program
 | `mode` | ✅ 可选 | ✅ 可选 |
 | `duration` | ✅ 可选 | ✅ 可选 |
 | `aspect_ratio` | ✅ 可选 | ⚠️ 可能被图片比例覆盖 |
-| `audio` / `voice_list` | ✅ 可选（需 `pro`） | ✅ 可选（需 `pro`） |
+| `audio` | ✅ 可选（需 `pro`） | ✅ 可选（需 `pro`） |
 | `watermark` | ✅ 可选 | ✅ 可选 |
-
-## 查询可用音色
-
-通过以下接口查询可灵支持的预设音色 ID：
-
-```bash
-curl -X GET 'https://api.apimart.ai/v1/kling/general/presets-voices?pageNum=1&pageSize=10' \
-  -H 'Authorization: Bearer YOUR_API_KEY'
-```
-
-**响应示例**：
-
-```json
-{
-  "code": 0,
-  "message": "SUCCEED",
-  "request_id": "31a72582-cce3-48ca-ab72-9eab256dc322",
-  "data": [
-    { "voice_id": "829824295735410756", "voice_name": "钓系女友", "trial_url": "https://..." },
-    { "voice_id": "829826751244537879", "voice_name": "温柔女声", "trial_url": "https://..." },
-    { "voice_id": "829826792415842333", "voice_name": "播报男声", "trial_url": "https://..." },
-    { "voice_id": "829826834144964676", "voice_name": "盐系少年", "trial_url": "https://..." },
-    { "voice_id": "829826884271091753", "voice_name": "撒娇女友", "trial_url": "https://..." }
-  ]
-}
-```
 
 ## 响应
 
@@ -624,21 +557,6 @@ curl -X GET 'https://api.apimart.ai/v1/kling/general/presets-voices?pageNum=1&pa
   "mode": "pro",
   "duration": 10,
   "audio": true,
-  "aspect_ratio": "16:9"
-}
-```
-
-### 场景 6：专业模式 + 指定音色
-
-```json
-{
-  "model": "kling-v2-6",
-  "prompt": "一位主持人<<<voice_1>>>面对镜头播报新闻",
-  "image_urls": ["https://example.com/anchor.jpg"],
-  "mode": "pro",
-  "duration": 10,
-  "audio": true,
-  "voice_list": [{"voice_id": "829826792415842333"}],
   "aspect_ratio": "16:9"
 }
 ```
