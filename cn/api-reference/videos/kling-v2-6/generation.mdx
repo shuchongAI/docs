@@ -369,11 +369,18 @@ class Program
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
-  视频内容描述
+  正向文本提示词，不能超过 **2500 个字符**
 
   建议详细描述场景、动作、风格等，以获得更好的生成效果
 
-  示例：`"一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感"`
+  **指定音色语法**：在 prompt 中使用 `<<<voice_1>>>` 来引用 `voice_list` 中的音色，序号对应 `voice_list` 数组的排列顺序（从 1 开始）。语法结构越简单越好。
+
+  示例：`"男人<<<voice_1>>>说："你好""`
+
+  <Warning>
+  - 使用 `<<<voice_1>>>` 引用音色时，`audio` 参数必须为 `true`
+  - 当 `voice_list` 不为空且 prompt 中引用了音色时，按**"有指定音色"**计量计费
+  </Warning>
 </ParamField>
 
 <ParamField body="mode" type="string" default="std">
@@ -445,7 +452,7 @@ class Program
 </ParamField>
 
 <ParamField body="voice_list" type="array">
-  指定音色列表，最多 2 个音色
+  指定音色列表，**最多 2 个音色**
 
   <Expandable title="字段说明">
     <ParamField body="voice_id" type="string" required>
@@ -458,8 +465,24 @@ class Program
   [{"voice_id": "829824295735410756"}]
   ```
 
+  在 `prompt` 中通过 `<<<voice_N>>>` 引用对应音色：
+
+  ```json
+  {
+    "prompt": "男人<<<voice_1>>>说："你好"，女人<<<voice_2>>>说："你好呀"",
+    "audio": true,
+    "voice_list": [
+      {"voice_id": "829826792415842333"},
+      {"voice_id": "829826751244537879"}
+    ]
+  }
+  ```
+
   <Warning>
-  需要同时满足 `mode: "pro"` 和 `audio: true` 才能使用
+  - 需要同时满足 `mode: "pro"` 和 `audio: true` 才能使用
+  - 一次视频生成任务最多引用 **2 个**音色
+  - 在 prompt 中引用音色时，`audio` 必须为 `true`
+  - 当 `voice_list` 不为空且 prompt 中引用了音色时，按**"有指定音色"**计量计费
   </Warning>
 </ParamField>
 

@@ -369,11 +369,18 @@ class Program
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
-  Video content description
+  Text prompt, maximum **2500 characters**
 
   Describe scenes, actions, styles in detail for better generation results
 
-  Example: `"A golden cat running on a sunlit meadow, slow motion, cinematic quality"`
+  **Voice reference syntax**: Use `<<<voice_1>>>` in the prompt to reference voices from the `voice_list` array. The number corresponds to the order in the `voice_list` array (starting from 1). Keep the syntax structure as simple as possible.
+
+  Example: `"A man<<<voice_1>>> says: \"Hello\""`
+
+  <Warning>
+  - When using `<<<voice_1>>>` to reference voices, the `audio` parameter must be `true`
+  - When `voice_list` is not empty and the prompt references voices, billing is charged at the **"specified voice"** rate
+  </Warning>
 </ParamField>
 
 <ParamField body="mode" type="string" default="std">
@@ -445,7 +452,7 @@ class Program
 </ParamField>
 
 <ParamField body="voice_list" type="array">
-  Voice selection list, up to 2 voices
+  Voice selection list, **up to 2 voices**
 
   <Expandable title="Field Description">
     <ParamField body="voice_id" type="string" required>
@@ -458,8 +465,24 @@ class Program
   [{"voice_id": "829824295735410756"}]
   ```
 
+  Reference voices in the `prompt` using `<<<voice_N>>>`:
+
+  ```json
+  {
+    "prompt": "A man<<<voice_1>>> says: \"Hello\", a woman<<<voice_2>>> says: \"Hi there\"",
+    "audio": true,
+    "voice_list": [
+      {"voice_id": "829826792415842333"},
+      {"voice_id": "829826751244537879"}
+    ]
+  }
+  ```
+
   <Warning>
-  Requires both `mode: "pro"` and `audio: true` to be set
+  - Requires both `mode: "pro"` and `audio: true` to be set
+  - Maximum **2** voices per video generation task
+  - When referencing voices in the prompt, `audio` must be `true`
+  - When `voice_list` is not empty and the prompt references voices, billing is charged at the **"specified voice"** rate
   </Warning>
 </ParamField>
 

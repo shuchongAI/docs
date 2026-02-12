@@ -369,11 +369,18 @@ class Program
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
-  動画コンテンツの説明
+  テキストプロンプト、最大 **2500 文字**
 
   シーン、アクション、スタイルなどを詳しく記述すると、より良い生成結果が得られます
 
-  例：`"金色の猫が日差しの中の草原を走る、スローモーション、映画的な質感"`
+  **ボイス参照構文**：プロンプト内で `<<<voice_1>>>` を使用して `voice_list` 配列のボイスを参照できます。番号は `voice_list` 配列の順序に対応します（1から開始）。構文構造はできるだけシンプルにしてください。
+
+  例：`"男性<<<voice_1>>>が言う：「こんにちは」"`
+
+  <Warning>
+  - `<<<voice_1>>>` でボイスを参照する場合、`audio` パラメータは `true` でなければなりません
+  - `voice_list` が空でなくプロンプトでボイスを参照した場合、**「ボイス指定あり」**の料金で課金されます
+  </Warning>
 </ParamField>
 
 <ParamField body="mode" type="string" default="std">
@@ -445,7 +452,7 @@ class Program
 </ParamField>
 
 <ParamField body="voice_list" type="array">
-  ボイス選択リスト、最大2つ
+  ボイス選択リスト、**最大2つ**
 
   <Expandable title="フィールド説明">
     <ParamField body="voice_id" type="string" required>
@@ -458,8 +465,24 @@ class Program
   [{"voice_id": "829824295735410756"}]
   ```
 
+  `prompt` 内で `<<<voice_N>>>` を使って対応するボイスを参照：
+
+  ```json
+  {
+    "prompt": "男性<<<voice_1>>>が言う：「こんにちは」、女性<<<voice_2>>>が言う：「こんにちは！」",
+    "audio": true,
+    "voice_list": [
+      {"voice_id": "829826792415842333"},
+      {"voice_id": "829826751244537879"}
+    ]
+  }
+  ```
+
   <Warning>
-  `mode: "pro"` と `audio: true` の両方が設定されている必要があります
+  - `mode: "pro"` と `audio: true` の両方が設定されている必要があります
+  - 1回の動画生成タスクで最大 **2つ**のボイスを参照可能
+  - プロンプトでボイスを参照する場合、`audio` は `true` でなければなりません
+  - `voice_list` が空でなくプロンプトでボイスを参照した場合、**「ボイス指定あり」**の料金で課金されます
   </Warning>
 </ParamField>
 

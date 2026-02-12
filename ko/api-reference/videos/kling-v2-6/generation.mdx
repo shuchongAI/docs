@@ -369,11 +369,18 @@ class Program
 </ParamField>
 
 <ParamField body="prompt" type="string" required>
-  비디오 콘텐츠 설명
+  텍스트 프롬프트, 최대 **2500자**
 
   장면, 동작, 스타일 등을 자세히 설명하면 더 나은 생성 결과를 얻을 수 있습니다
 
-  예시: `"금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감"`
+  **음성 참조 구문**: 프롬프트에서 `<<<voice_1>>>`을 사용하여 `voice_list` 배열의 음성을 참조할 수 있습니다. 번호는 `voice_list` 배열의 순서에 해당합니다 (1부터 시작). 구문 구조는 가능한 한 간단하게 유지하세요.
+
+  예시: `"남자<<<voice_1>>>가 말한다: "안녕하세요""`
+
+  <Warning>
+  - `<<<voice_1>>>`로 음성을 참조할 때 `audio` 매개변수는 `true`여야 합니다
+  - `voice_list`가 비어있지 않고 프롬프트에서 음성을 참조한 경우 **"지정 음성"** 요금으로 과금됩니다
+  </Warning>
 </ParamField>
 
 <ParamField body="mode" type="string" default="std">
@@ -445,7 +452,7 @@ class Program
 </ParamField>
 
 <ParamField body="voice_list" type="array">
-  음성 선택 목록, 최대 2개
+  음성 선택 목록, **최대 2개**
 
   <Expandable title="필드 설명">
     <ParamField body="voice_id" type="string" required>
@@ -458,8 +465,24 @@ class Program
   [{"voice_id": "829824295735410756"}]
   ```
 
+  `prompt`에서 `<<<voice_N>>>`을 사용하여 해당 음성 참조:
+
+  ```json
+  {
+    "prompt": "남자<<<voice_1>>>가 말한다: \"안녕하세요\", 여자<<<voice_2>>>가 말한다: \"안녕!\"",
+    "audio": true,
+    "voice_list": [
+      {"voice_id": "829826792415842333"},
+      {"voice_id": "829826751244537879"}
+    ]
+  }
+  ```
+
   <Warning>
-  `mode: "pro"`와 `audio: true` 모두 설정되어야 합니다
+  - `mode: "pro"`와 `audio: true` 모두 설정되어야 합니다
+  - 한 번의 비디오 생성 작업당 최대 **2개** 음성 참조 가능
+  - 프롬프트에서 음성을 참조할 때 `audio`는 `true`여야 합니다
+  - `voice_list`가 비어있지 않고 프롬프트에서 음성을 참조한 경우 **"지정 음성"** 요금으로 과금됩니다
   </Warning>
 </ParamField>
 
