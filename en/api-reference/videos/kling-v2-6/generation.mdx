@@ -428,6 +428,7 @@ class Program
   <Warning>
   - Maximum 2 images supported
   - Last frame (2 images) requires `pro` mode only; `std` mode only supports first frame (1 image)
+  - **Last frame and audio are mutually exclusive**: In `pro` mode, last frame (2 images) and audio (`audio: true`) cannot be used together
   - In image-to-video mode, `aspect_ratio` may be overridden by the actual image ratio
   </Warning>
 </ParamField>
@@ -438,7 +439,8 @@ class Program
   Default: `false`
 
   <Warning>
-  Only available in `mode: "pro"`
+  - Only available in `mode: "pro"`
+  - **Mutually exclusive with last frame**: Audio cannot be used together with last frame (2 images)
   </Warning>
 </ParamField>
 
@@ -474,6 +476,8 @@ class Program
 | Image-to-Video | First Frame | ✅ | ✅ | ✅ | ✅ |
 | Image-to-Video | Last Frame | - | - | ✅ | ✅ |
 | Image-to-Video | Audio Control | - | - | ✅ | ✅ |
+
+> **Note**: In `pro` mode, last frame and audio control are mutually exclusive and cannot be used together.
 
 ## Text-to-Video vs Image-to-Video
 
