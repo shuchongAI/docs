@@ -1,0 +1,621 @@
+---
+title: "Kling 2.6 Video Generation"
+description: "
+- Async processing mode, returns task ID for subsequent queries
+
+- Supports text-to-video, image-to-video (first frame/first-last frame control)
+
+- Supports standard mode (720P) and professional mode (1080P)
+
+- Professional mode supports automatic audio generation and voice selection
+"
+api: "POST https://api.apimart.ai/v1/videos/generations"
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/videos/generations \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "kling-v2-6",
+    "prompt": "A golden cat running on a sunlit meadow, slow motion, cinematic quality",
+    "mode": "std",
+    "duration": 5,
+    "aspect_ratio": "16:9"
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/videos/generations"
+
+payload = {
+    "model": "kling-v2-6",
+    "prompt": "A golden cat running on a sunlit meadow, slow motion, cinematic quality",
+    "mode": "std",
+    "duration": 5,
+    "aspect_ratio": "16:9"
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/videos/generations";
+
+const payload = {
+  model: "kling-v2-6",
+  prompt: "A golden cat running on a sunlit meadow, slow motion, cinematic quality",
+  mode: "std",
+  duration: 5,
+  aspect_ratio: "16:9"
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/videos/generations"
+
+    payload := map[string]interface{}{
+        "model":        "kling-v2-6",
+        "prompt":       "A golden cat running on a sunlit meadow, slow motion, cinematic quality",
+        "mode":         "std",
+        "duration":     5,
+        "aspect_ratio": "16:9",
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/videos/generations";
+
+        String payload = """
+        {
+          "model": "kling-v2-6",
+          "prompt": "A golden cat running on a sunlit meadow, slow motion, cinematic quality",
+          "mode": "std",
+          "duration": 5,
+          "aspect_ratio": "16:9"
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/videos/generations";
+
+$payload = [
+    "model" => "kling-v2-6",
+    "prompt" => "A golden cat running on a sunlit meadow, slow motion, cinematic quality",
+    "mode" => "std",
+    "duration" => 5,
+    "aspect_ratio" => "16:9"
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1/videos/generations")
+
+payload = {
+  model: "kling-v2-6",
+  prompt: "A golden cat running on a sunlit meadow, slow motion, cinematic quality",
+  mode: "std",
+  duration: 5,
+  aspect_ratio: "16:9"
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/videos/generations")!
+
+let payload: [String: Any] = [
+    "model": "kling-v2-6",
+    "prompt": "A golden cat running on a sunlit meadow, slow motion, cinematic quality",
+    "mode": "std",
+    "duration": 5,
+    "aspect_ratio": "16:9"
+]
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+    
+    if let data = data, let responseString = String(data: data, encoding: .utf8) {
+        print(responseString)
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/videos/generations";
+
+        var payload = @"{
+            ""model"": ""kling-v2-6"",
+            ""prompt"": ""A golden cat running on a sunlit meadow, slow motion, cinematic quality"",
+            ""mode"": ""std"",
+            ""duration"": 5,
+            ""aspect_ratio"": ""16:9""
+        }";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
+
+        var content = new StringContent(payload, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(url, content);
+        var result = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(result);
+    }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "status": "submitted",
+      "task_id": "task_xxxxxxxxxx"
+    }
+  ]
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "Invalid request parameters",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "Invalid authentication credentials",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "Insufficient balance. Please top up your account",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "Rate limit exceeded. Please try again later",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "Internal server error. Please try again later",
+    "type": "server_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## Authorization
+
+<ParamField header="Authorization" type="string" required>
+  All API endpoints require Bearer Token authentication
+
+  Get your API Key:
+
+  Visit the [API Key Management Page](https://apimart.ai/console/token) to get your API Key
+
+  Add it to the request header:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Request Parameters
+
+<ParamField body="model" type="string" required>
+  Video generation model name
+
+  Supported models:
+  - `kling-v2-6` - Kling v2.6 (recommended)
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  Video content description
+
+  Describe scenes, actions, styles in detail for better generation results
+
+  Example: `"A golden cat running on a sunlit meadow, slow motion, cinematic quality"`
+</ParamField>
+
+<ParamField body="mode" type="string" default="std">
+  Generation mode
+
+  Options:
+  - `std` - Standard mode (720P, silent video only)
+  - `pro` - Professional mode (1080P, supports audio generation and voice control)
+
+  Default: `std`
+
+  <Warning>
+  **Standard mode limitation**: `std` mode only supports silent video. `audio` and `voice_list` parameters require `pro` mode.
+  </Warning>
+</ParamField>
+
+<ParamField body="duration" type="integer" default="5">
+  Video duration (seconds)
+
+  Options: `5` or `10`
+
+  Default: `5`
+</ParamField>
+
+<ParamField body="aspect_ratio" type="string" default="16:9">
+  Video aspect ratio
+
+  Options:
+  - `16:9` - Landscape
+  - `9:16` - Portrait
+  - `1:1` - Square
+
+  Default: `16:9`
+</ParamField>
+
+<ParamField body="negative_prompt" type="string">
+  Negative prompt to exclude unwanted content
+
+  Example: `"blurry, low quality, distorted"`
+</ParamField>
+
+<ParamField body="image_urls" type="array<url>">
+  Image URL array for image-to-video generation
+
+  - Pass **1 image**: used as first frame
+  - Pass **2 images**: automatically assigned as first frame + last frame
+
+  Maximum 2 images supported
+
+  Example: `["https://example.com/first.jpg"]`
+
+  <Warning>
+  - Maximum 2 images supported
+  - In image-to-video mode, `aspect_ratio` may be overridden by the actual image ratio
+  </Warning>
+</ParamField>
+
+<ParamField body="audio" type="boolean" default="false">
+  Whether to automatically generate audio
+
+  Default: `false`
+
+  <Warning>
+  Only available in `mode: "pro"`
+  </Warning>
+</ParamField>
+
+<ParamField body="voice_list" type="array">
+  Voice selection list, up to 2 voices
+
+  <Expandable title="Field Description">
+    <ParamField body="voice_id" type="string" required>
+      Preset voice ID, obtainable via the voice query API
+    </ParamField>
+  </Expandable>
+
+  Example:
+  ```json
+  [{"voice_id": "829824295735410756"}]
+  ```
+
+  <Warning>
+  Requires both `mode: "pro"` and `audio: true` to be set
+  </Warning>
+</ParamField>
+
+<ParamField body="watermark" type="boolean">
+  Whether to add watermark
+</ParamField>
+
+## Feature Support Matrix
+
+| Type | Feature | std 5s | std 10s | pro 5s | pro 10s |
+|------|---------|--------|---------|--------|---------|
+| Text-to-Video | Generation | ✅ (silent only) | ✅ (silent only) | ✅ | ✅ |
+| Image-to-Video | Generation | ✅ (silent only) | ✅ (silent only) | ✅ | ✅ |
+| Image-to-Video | First/Last Frame | ✅ | ✅ | ✅ | ✅ |
+| Image-to-Video | Audio Control | - | - | ✅ | ✅ |
+
+## Text-to-Video vs Image-to-Video
+
+The system automatically determines the mode based on whether `image_urls` is provided: no images means text-to-video, with images means image-to-video.
+
+| Parameter | Text-to-Video | Image-to-Video |
+|-----------|--------------|----------------|
+| `prompt` | ✅ Required | ✅ Required |
+| `image_urls` | ❌ Not used | ✅ Required (1-2 images) |
+| `negative_prompt` | ✅ Optional | ✅ Optional |
+| `mode` | ✅ Optional | ✅ Optional |
+| `duration` | ✅ Optional | ✅ Optional |
+| `aspect_ratio` | ✅ Optional | ⚠️ May be overridden by image ratio |
+| `audio` / `voice_list` | ✅ Optional (needs `pro`) | ✅ Optional (needs `pro`) |
+| `watermark` | ✅ Optional | ✅ Optional |
+
+## Query Available Voices
+
+Use the following API to query Kling's preset voice IDs:
+
+```bash
+curl -X GET 'https://api.apimart.ai/v1/kling/general/presets-voices?pageNum=1&pageSize=10' \
+  -H 'Authorization: Bearer YOUR_API_KEY'
+```
+
+**Response example**:
+
+```json
+{
+  "code": 0,
+  "message": "SUCCEED",
+  "request_id": "31a72582-cce3-48ca-ab72-9eab256dc322",
+  "data": [
+    { "voice_id": "829824295735410756", "voice_name": "钓系女友", "trial_url": "https://..." },
+    { "voice_id": "829826751244537879", "voice_name": "温柔女声", "trial_url": "https://..." },
+    { "voice_id": "829826792415842333", "voice_name": "播报男声", "trial_url": "https://..." },
+    { "voice_id": "829826834144964676", "voice_name": "盐系少年", "trial_url": "https://..." },
+    { "voice_id": "829826884271091753", "voice_name": "撒娇女友", "trial_url": "https://..." }
+  ]
+}
+```
+
+## Response
+
+<ResponseField name="code" type="integer">
+  Response status code, 200 on success
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Response data array
+
+  <Expandable title="Array Elements">
+    <ResponseField name="status" type="string">
+      Task status, `submitted` when initially submitted
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      Unique task identifier for querying task status and results
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Use Cases
+
+### Case 1: Text-to-Video (Standard Mode)
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "A golden cat running on a sunlit meadow, slow motion, cinematic quality",
+  "mode": "std",
+  "duration": 5,
+  "aspect_ratio": "16:9"
+}
+```
+
+### Case 2: Text-to-Video (Pro Mode + Negative Prompt)
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "Tokyo Shibuya crossing at night, neon lights reflected on wet ground, people walking with umbrellas",
+  "negative_prompt": "blurry, low quality, distorted",
+  "mode": "pro",
+  "duration": 10,
+  "aspect_ratio": "16:9"
+}
+```
+
+### Case 3: Image-to-Video (First Frame)
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "The person in the frame turns and smiles",
+  "image_urls": ["https://example.com/portrait.jpg"],
+  "mode": "std",
+  "duration": 5,
+  "aspect_ratio": "16:9"
+}
+```
+
+### Case 4: Image-to-Video (First + Last Frame Control)
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "City timelapse transitioning from day to night",
+  "image_urls": ["https://example.com/day-city.jpg", "https://example.com/night-city.jpg"],
+  "mode": "pro",
+  "duration": 5
+}
+```
+
+### Case 5: Pro Mode + Auto Audio
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "Waves crashing against rocks, seagulls circling in the sky, lighthouse in the distance",
+  "mode": "pro",
+  "duration": 10,
+  "audio": true,
+  "aspect_ratio": "16:9"
+}
+```
+
+### Case 6: Pro Mode + Selected Voice
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "A news anchor speaking to the camera",
+  "image_urls": ["https://example.com/anchor.jpg"],
+  "mode": "pro",
+  "duration": 10,
+  "audio": true,
+  "voice_list": [{"voice_id": "829826792415842333"}],
+  "aspect_ratio": "16:9"
+}
+```
+
+<Note>
+**Query Task Results**
+
+Video generation is an async task that returns a `task_id` upon submission. Use the [Get Task Status](/en/api-reference/tasks/status) endpoint to query generation progress and results.
+</Note>

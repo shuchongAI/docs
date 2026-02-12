@@ -1,0 +1,621 @@
+---
+title: "Kling 2.6 비디오 생성"
+description: "
+- 비동기 처리 모드, 후속 조회를 위한 작업 ID 반환
+
+- 텍스트-비디오, 이미지-비디오(첫 프레임/첫-끝 프레임 제어) 지원
+
+- 표준 모드(720P)와 프로페셔널 모드(1080P) 지원
+
+- 프로페셔널 모드에서 자동 오디오 생성 및 음성 선택 지원
+"
+api: "POST https://api.apimart.ai/v1/videos/generations"
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/videos/generations \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "kling-v2-6",
+    "prompt": "금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감",
+    "mode": "std",
+    "duration": 5,
+    "aspect_ratio": "16:9"
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/videos/generations"
+
+payload = {
+    "model": "kling-v2-6",
+    "prompt": "금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감",
+    "mode": "std",
+    "duration": 5,
+    "aspect_ratio": "16:9"
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/videos/generations";
+
+const payload = {
+  model: "kling-v2-6",
+  prompt: "금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감",
+  mode: "std",
+  duration: 5,
+  aspect_ratio: "16:9"
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/videos/generations"
+
+    payload := map[string]interface{}{
+        "model":        "kling-v2-6",
+        "prompt":       "금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감",
+        "mode":         "std",
+        "duration":     5,
+        "aspect_ratio": "16:9",
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/videos/generations";
+
+        String payload = """
+        {
+          "model": "kling-v2-6",
+          "prompt": "금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감",
+          "mode": "std",
+          "duration": 5,
+          "aspect_ratio": "16:9"
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/videos/generations";
+
+$payload = [
+    "model" => "kling-v2-6",
+    "prompt" => "금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감",
+    "mode" => "std",
+    "duration" => 5,
+    "aspect_ratio" => "16:9"
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1/videos/generations")
+
+payload = {
+  model: "kling-v2-6",
+  prompt: "금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감",
+  mode: "std",
+  duration: 5,
+  aspect_ratio: "16:9"
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/videos/generations")!
+
+let payload: [String: Any] = [
+    "model": "kling-v2-6",
+    "prompt": "금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감",
+    "mode": "std",
+    "duration": 5,
+    "aspect_ratio": "16:9"
+]
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+    
+    if let data = data, let responseString = String(data: data, encoding: .utf8) {
+        print(responseString)
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/videos/generations";
+
+        var payload = @"{
+            ""model"": ""kling-v2-6"",
+            ""prompt"": ""금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감"",
+            ""mode"": ""std"",
+            ""duration"": 5,
+            ""aspect_ratio"": ""16:9""
+        }";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
+
+        var content = new StringContent(payload, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(url, content);
+        var result = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(result);
+    }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "status": "submitted",
+      "task_id": "task_xxxxxxxxxx"
+    }
+  ]
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "잘못된 요청 매개변수입니다",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "인증에 실패했습니다. API 키를 확인해주세요",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "잔액이 부족합니다. 충전 후 다시 시도해주세요",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "요청이 너무 많습니다. 잠시 후 다시 시도해주세요",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "서버 내부 오류입니다. 잠시 후 다시 시도해주세요",
+    "type": "server_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## 인증
+
+<ParamField header="Authorization" type="string" required>
+  모든 API 엔드포인트는 Bearer Token 인증이 필요합니다
+
+  API 키 받기:
+
+  [API 키 관리 페이지](https://apimart.ai/console/token)에서 API 키를 받으세요
+
+  요청 헤더에 추가:
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## 요청 매개변수
+
+<ParamField body="model" type="string" required>
+  비디오 생성 모델 이름
+
+  지원 모델:
+  - `kling-v2-6` - Kling v2.6 (권장)
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  비디오 콘텐츠 설명
+
+  장면, 동작, 스타일 등을 자세히 설명하면 더 나은 생성 결과를 얻을 수 있습니다
+
+  예시: `"금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감"`
+</ParamField>
+
+<ParamField body="mode" type="string" default="std">
+  생성 모드
+
+  옵션:
+  - `std` - 표준 모드 (720P, 무음 비디오만 지원)
+  - `pro` - 프로페셔널 모드 (1080P, 오디오 생성 및 음성 제어 지원)
+
+  기본값: `std`
+
+  <Warning>
+  **표준 모드 제한**: `std` 모드는 무음 비디오만 지원합니다. `audio`, `voice_list` 매개변수는 `pro` 모드에서 사용해야 합니다.
+  </Warning>
+</ParamField>
+
+<ParamField body="duration" type="integer" default="5">
+  비디오 길이 (초)
+
+  옵션: `5` 또는 `10`
+
+  기본값: `5`
+</ParamField>
+
+<ParamField body="aspect_ratio" type="string" default="16:9">
+  비디오 화면 비율
+
+  옵션:
+  - `16:9` - 가로
+  - `9:16` - 세로
+  - `1:1` - 정사각형
+
+  기본값: `16:9`
+</ParamField>
+
+<ParamField body="negative_prompt" type="string">
+  부정 프롬프트, 원하지 않는 콘텐츠를 제외하는 데 사용
+
+  예시: `"흐림, 저화질, 왜곡"`
+</ParamField>
+
+<ParamField body="image_urls" type="array<url>">
+  이미지-비디오 생성을 위한 이미지 URL 배열
+
+  - **1장**: 첫 프레임으로 사용
+  - **2장**: 자동으로 첫 프레임 + 끝 프레임으로 할당
+
+  최대 2장까지 지원
+
+  예시: `["https://example.com/first.jpg"]`
+
+  <Warning>
+  - 최대 2장까지 지원
+  - 이미지-비디오 모드에서는 `aspect_ratio`가 실제 이미지 비율로 대체될 수 있습니다
+  </Warning>
+</ParamField>
+
+<ParamField body="audio" type="boolean" default="false">
+  오디오 자동 생성 여부
+
+  기본값: `false`
+
+  <Warning>
+  `mode: "pro"`에서만 사용 가능
+  </Warning>
+</ParamField>
+
+<ParamField body="voice_list" type="array">
+  음성 선택 목록, 최대 2개
+
+  <Expandable title="필드 설명">
+    <ParamField body="voice_id" type="string" required>
+      프리셋 음성 ID, 음성 조회 API를 통해 얻을 수 있음
+    </ParamField>
+  </Expandable>
+
+  예시:
+  ```json
+  [{"voice_id": "829824295735410756"}]
+  ```
+
+  <Warning>
+  `mode: "pro"`와 `audio: true` 모두 설정되어야 합니다
+  </Warning>
+</ParamField>
+
+<ParamField body="watermark" type="boolean">
+  워터마크 추가 여부
+</ParamField>
+
+## 기능 지원 매트릭스
+
+| 유형 | 기능 | std 5초 | std 10초 | pro 5초 | pro 10초 |
+|------|------|---------|----------|---------|----------|
+| 텍스트-비디오 | 비디오 생성 | ✅ (무음만) | ✅ (무음만) | ✅ | ✅ |
+| 이미지-비디오 | 비디오 생성 | ✅ (무음만) | ✅ (무음만) | ✅ | ✅ |
+| 이미지-비디오 | 첫/끝 프레임 | ✅ | ✅ | ✅ | ✅ |
+| 이미지-비디오 | 오디오 제어 | - | - | ✅ | ✅ |
+
+## 텍스트-비디오 vs 이미지-비디오
+
+`image_urls` 전달 여부에 따라 시스템이 자동으로 모드를 판단합니다: 이미지 없음은 텍스트-비디오, 이미지 있음은 이미지-비디오.
+
+| 매개변수 | 텍스트-비디오 | 이미지-비디오 |
+|----------|-------------|-------------|
+| `prompt` | ✅ 필수 | ✅ 필수 |
+| `image_urls` | ❌ 불필요 | ✅ 필수 (1-2장) |
+| `negative_prompt` | ✅ 선택 | ✅ 선택 |
+| `mode` | ✅ 선택 | ✅ 선택 |
+| `duration` | ✅ 선택 | ✅ 선택 |
+| `aspect_ratio` | ✅ 선택 | ⚠️ 이미지 비율로 대체될 수 있음 |
+| `audio` / `voice_list` | ✅ 선택 (`pro` 필요) | ✅ 선택 (`pro` 필요) |
+| `watermark` | ✅ 선택 | ✅ 선택 |
+
+## 사용 가능한 음성 조회
+
+다음 API로 Kling의 프리셋 음성 ID를 조회할 수 있습니다:
+
+```bash
+curl -X GET 'https://api.apimart.ai/v1/kling/general/presets-voices?pageNum=1&pageSize=10' \
+  -H 'Authorization: Bearer YOUR_API_KEY'
+```
+
+**응답 예시**:
+
+```json
+{
+  "code": 0,
+  "message": "SUCCEED",
+  "request_id": "31a72582-cce3-48ca-ab72-9eab256dc322",
+  "data": [
+    { "voice_id": "829824295735410756", "voice_name": "钓系女友", "trial_url": "https://..." },
+    { "voice_id": "829826751244537879", "voice_name": "温柔女声", "trial_url": "https://..." },
+    { "voice_id": "829826792415842333", "voice_name": "播报男声", "trial_url": "https://..." },
+    { "voice_id": "829826834144964676", "voice_name": "盐系少年", "trial_url": "https://..." },
+    { "voice_id": "829826884271091753", "voice_name": "撒娇女友", "trial_url": "https://..." }
+  ]
+}
+```
+
+## 응답
+
+<ResponseField name="code" type="integer">
+  응답 상태 코드, 성공 시 200
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  응답 데이터 배열
+
+  <Expandable title="배열 요소">
+    <ResponseField name="status" type="string">
+      작업 상태, 초기 제출 시 `submitted`
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      작업 고유 식별자, 작업 상태 및 결과 조회에 사용
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## 사용 시나리오
+
+### 시나리오 1: 텍스트-비디오 (표준 모드)
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "금빛 고양이가 햇살 가득한 초원을 달리는 모습, 슬로우 모션, 영화적 질감",
+  "mode": "std",
+  "duration": 5,
+  "aspect_ratio": "16:9"
+}
+```
+
+### 시나리오 2: 텍스트-비디오 (프로 모드 + 부정 프롬프트)
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "도쿄 시부야 스크램블 교차로, 비 오는 밤 네온 불빛이 젖은 바닥에 비치고, 사람들이 우산을 들고 지나감",
+  "negative_prompt": "흐림, 저화질, 왜곡",
+  "mode": "pro",
+  "duration": 10,
+  "aspect_ratio": "16:9"
+}
+```
+
+### 시나리오 3: 이미지-비디오 (첫 프레임)
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "화면 속 인물이 고개를 돌려 미소짓는다",
+  "image_urls": ["https://example.com/portrait.jpg"],
+  "mode": "std",
+  "duration": 5,
+  "aspect_ratio": "16:9"
+}
+```
+
+### 시나리오 4: 이미지-비디오 (첫 + 끝 프레임 제어)
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "낮에서 밤으로 전환되는 도시 타임랩스",
+  "image_urls": ["https://example.com/day-city.jpg", "https://example.com/night-city.jpg"],
+  "mode": "pro",
+  "duration": 5
+}
+```
+
+### 시나리오 5: 프로 모드 + 자동 오디오
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "파도가 바위에 부딪히고, 갈매기가 하늘을 선회하며, 멀리 등대가 보인다",
+  "mode": "pro",
+  "duration": 10,
+  "audio": true,
+  "aspect_ratio": "16:9"
+}
+```
+
+### 시나리오 6: 프로 모드 + 음성 지정
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "뉴스 앵커가 카메라를 향해 뉴스를 전하는 모습",
+  "image_urls": ["https://example.com/anchor.jpg"],
+  "mode": "pro",
+  "duration": 10,
+  "audio": true,
+  "voice_list": [{"voice_id": "829826792415842333"}],
+  "aspect_ratio": "16:9"
+}
+```
+
+<Note>
+**작업 결과 조회**
+
+비디오 생성은 비동기 작업으로, 제출 시 `task_id`가 반환됩니다. [작업 상태 가져오기](/ko/api-reference/tasks/status) 엔드포인트를 사용하여 생성 진행 상황과 결과를 조회할 수 있습니다.
+</Note>

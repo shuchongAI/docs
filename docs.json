@@ -169,6 +169,13 @@
                     "pages": [
                       "en/api-reference/videos/wan2.6/generation"
                     ]
+                  },
+                  {
+                    "group": "Kling 2.6",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/kling-v2-6/generation"
+                    ]
                   }
                 ]
               },
@@ -383,6 +390,13 @@
                     "icon": "video",
                     "pages": [
                       "cn/api-reference/videos/wan2.6/generation"
+                    ]
+                  },
+                  {
+                    "group": "Kling 2.6",
+                    "icon": "video",
+                    "pages": [
+                      "cn/api-reference/videos/kling-v2-6/generation"
                     ]
                   }
                 ]
@@ -599,6 +613,13 @@
                     "pages": [
                       "ja/api-reference/videos/wan2.6/generation"
                     ]
+                  },
+                  {
+                    "group": "Kling 2.6",
+                    "icon": "video",
+                    "pages": [
+                      "ja/api-reference/videos/kling-v2-6/generation"
+                    ]
                   }
                 ]
               },
@@ -807,6 +828,13 @@
                     "icon": "video",
                     "pages": [
                       "ko/api-reference/videos/wan2.6/generation"
+                    ]
+                  },
+                  {
+                    "group": "Kling 2.6",
+                    "icon": "video",
+                    "pages": [
+                      "ko/api-reference/videos/kling-v2-6/generation"
                     ]
                   }
                 ]

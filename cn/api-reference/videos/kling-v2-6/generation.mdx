@@ -1,0 +1,621 @@
+---
+title: "Kling 2.6 视频生成"
+description: "
+- 异步处理模式，返回任务ID用于后续查询
+
+- 支持文本转视频、图生视频（首帧/首尾帧控制）
+
+- 支持标准模式（720P）和专业模式（1080P）
+
+- 专业模式支持自动音频生成和指定音色
+"
+api: "POST https://api.apimart.ai/v1/videos/generations"
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/videos/generations \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "kling-v2-6",
+    "prompt": "一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感",
+    "mode": "std",
+    "duration": 5,
+    "aspect_ratio": "16:9"
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/videos/generations"
+
+payload = {
+    "model": "kling-v2-6",
+    "prompt": "一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感",
+    "mode": "std",
+    "duration": 5,
+    "aspect_ratio": "16:9"
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/videos/generations";
+
+const payload = {
+  model: "kling-v2-6",
+  prompt: "一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感",
+  mode: "std",
+  duration: 5,
+  aspect_ratio: "16:9"
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/videos/generations"
+
+    payload := map[string]interface{}{
+        "model":        "kling-v2-6",
+        "prompt":       "一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感",
+        "mode":         "std",
+        "duration":     5,
+        "aspect_ratio": "16:9",
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/videos/generations";
+
+        String payload = """
+        {
+          "model": "kling-v2-6",
+          "prompt": "一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感",
+          "mode": "std",
+          "duration": 5,
+          "aspect_ratio": "16:9"
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+```php PHP
+<?php
+
+$url = "https://api.apimart.ai/v1/videos/generations";
+
+$payload = [
+    "model" => "kling-v2-6",
+    "prompt" => "一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感",
+    "mode" => "std",
+    "duration" => 5,
+    "aspect_ratio" => "16:9"
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer <token>",
+    "Content-Type: application/json"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+```
+
+```ruby Ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+url = URI("https://api.apimart.ai/v1/videos/generations")
+
+payload = {
+  model: "kling-v2-6",
+  prompt: "一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感",
+  mode: "std",
+  duration: 5,
+  aspect_ratio: "16:9"
+}
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request["Content-Type"] = "application/json"
+request.body = payload.to_json
+
+response = http.request(request)
+puts response.body
+```
+
+```swift Swift
+import Foundation
+
+let url = URL(string: "https://api.apimart.ai/v1/videos/generations")!
+
+let payload: [String: Any] = [
+    "model": "kling-v2-6",
+    "prompt": "一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感",
+    "mode": "std",
+    "duration": 5,
+    "aspect_ratio": "16:9"
+]
+
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let error = error {
+        print("Error: \(error)")
+        return
+    }
+    
+    if let data = data, let responseString = String(data: data, encoding: .utf8) {
+        print(responseString)
+    }
+}
+
+task.resume()
+```
+
+```csharp C#
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var url = "https://api.apimart.ai/v1/videos/generations";
+
+        var payload = @"{
+            ""model"": ""kling-v2-6"",
+            ""prompt"": ""一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感"",
+            ""mode"": ""std"",
+            ""duration"": 5,
+            ""aspect_ratio"": ""16:9""
+        }";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer <token>");
+
+        var content = new StringContent(payload, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(url, content);
+        var result = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(result);
+    }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "status": "submitted",
+      "task_id": "task_xxxxxxxxxx"
+    }
+  ]
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "请求参数无效",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "身份验证失败，请检查您的API密钥",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "账户余额不足，请充值后再试",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "请求过于频繁，请稍后再试",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "服务器内部错误，请稍后重试",
+    "type": "server_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## 认证
+
+<ParamField header="Authorization" type="string" required>
+  所有接口均需要使用 Bearer Token 进行认证
+
+  获取 API Key：
+
+  访问 [API Key 管理页面](https://apimart.ai/console/token) 获取您的 API Key
+
+  使用时在请求头中添加：
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## 请求参数
+
+<ParamField body="model" type="string" required>
+  视频生成模型名称
+
+  支持的模型：
+  - `kling-v2-6` - 可灵 v2.6（推荐）
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  视频内容描述
+
+  建议详细描述场景、动作、风格等，以获得更好的生成效果
+
+  示例：`"一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感"`
+</ParamField>
+
+<ParamField body="mode" type="string" default="std">
+  生成模式
+
+  可选值：
+  - `std` - 标准模式（720P，仅支持无声视频）
+  - `pro` - 专业模式（1080P，支持音频生成和音色控制）
+
+  默认值：`std`
+
+  <Warning>
+  **标准模式限制**：`std` 模式仅支持无声视频，`audio`、`voice_list` 参数需在 `pro` 模式下使用。
+  </Warning>
+</ParamField>
+
+<ParamField body="duration" type="integer" default="5">
+  视频时长（秒）
+
+  可选值：`5` 或 `10`
+
+  默认值：`5`
+</ParamField>
+
+<ParamField body="aspect_ratio" type="string" default="16:9">
+  视频宽高比
+
+  可选值：
+  - `16:9` - 横屏
+  - `9:16` - 竖屏
+  - `1:1` - 方形
+
+  默认值：`16:9`
+</ParamField>
+
+<ParamField body="negative_prompt" type="string">
+  负面提示词，用于排除不想要的内容
+
+  示例：`"模糊, 低画质, 变形"`
+</ParamField>
+
+<ParamField body="image_urls" type="array<url>">
+  图片 URL 数组，用于图生视频
+
+  - 传 **1 张**：作为首帧图片
+  - 传 **2 张**：自动分配为首帧 + 尾帧
+
+  最多支持 2 张图片
+
+  示例：`["https://example.com/first.jpg"]`
+
+  <Warning>
+  - 最多支持 2 张图片
+  - 图生视频时，`aspect_ratio` 可能被图片实际比例覆盖
+  </Warning>
+</ParamField>
+
+<ParamField body="audio" type="boolean" default="false">
+  是否自动生成音频
+
+  默认值：`false`
+
+  <Warning>
+  仅在 `mode: "pro"` 下可用
+  </Warning>
+</ParamField>
+
+<ParamField body="voice_list" type="array">
+  指定音色列表，最多 2 个音色
+
+  <Expandable title="字段说明">
+    <ParamField body="voice_id" type="string" required>
+      预设音色 ID，可通过音色查询接口获取
+    </ParamField>
+  </Expandable>
+
+  示例：
+  ```json
+  [{"voice_id": "829824295735410756"}]
+  ```
+
+  <Warning>
+  需要同时满足 `mode: "pro"` 和 `audio: true` 才能使用
+  </Warning>
+</ParamField>
+
+<ParamField body="watermark" type="boolean">
+  是否添加水印
+</ParamField>
+
+## 功能支持矩阵
+
+| 类型 | 功能 | std 5s | std 10s | pro 5s | pro 10s |
+|------|------|--------|---------|--------|---------|
+| 文生视频 | 视频生成 | ✅（仅无声） | ✅（仅无声） | ✅ | ✅ |
+| 图生视频 | 视频生成 | ✅（仅无声） | ✅（仅无声） | ✅ | ✅ |
+| 图生视频 | 首尾帧 | ✅ | ✅ | ✅ | ✅ |
+| 图生视频 | 声音控制 | - | - | ✅ | ✅ |
+
+## 文生视频 vs 图生视频
+
+系统通过是否传入 `image_urls` 自动判断模式：不传图片为文生视频，传图片为图生视频。
+
+| 参数 | 文生视频 | 图生视频 |
+|------|---------|---------|
+| `prompt` | ✅ 必填 | ✅ 必填 |
+| `image_urls` | ❌ 不传 | ✅ 必填（1-2 张） |
+| `negative_prompt` | ✅ 可选 | ✅ 可选 |
+| `mode` | ✅ 可选 | ✅ 可选 |
+| `duration` | ✅ 可选 | ✅ 可选 |
+| `aspect_ratio` | ✅ 可选 | ⚠️ 可能被图片比例覆盖 |
+| `audio` / `voice_list` | ✅ 可选（需 `pro`） | ✅ 可选（需 `pro`） |
+| `watermark` | ✅ 可选 | ✅ 可选 |
+
+## 查询可用音色
+
+通过以下接口查询可灵支持的预设音色 ID：
+
+```bash
+curl -X GET 'https://api.apimart.ai/v1/kling/general/presets-voices?pageNum=1&pageSize=10' \
+  -H 'Authorization: Bearer YOUR_API_KEY'
+```
+
+**响应示例**：
+
+```json
+{
+  "code": 0,
+  "message": "SUCCEED",
+  "request_id": "31a72582-cce3-48ca-ab72-9eab256dc322",
+  "data": [
+    { "voice_id": "829824295735410756", "voice_name": "钓系女友", "trial_url": "https://..." },
+    { "voice_id": "829826751244537879", "voice_name": "温柔女声", "trial_url": "https://..." },
+    { "voice_id": "829826792415842333", "voice_name": "播报男声", "trial_url": "https://..." },
+    { "voice_id": "829826834144964676", "voice_name": "盐系少年", "trial_url": "https://..." },
+    { "voice_id": "829826884271091753", "voice_name": "撒娇女友", "trial_url": "https://..." }
+  ]
+}
+```
+
+## 响应
+
+<ResponseField name="code" type="integer">
+  响应状态码，成功时为 200
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  返回数据数组
+
+  <Expandable title="数组元素">
+    <ResponseField name="status" type="string">
+      任务状态，初始提交时为 `submitted`
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      任务唯一标识符，用于查询任务状态和结果
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## 使用场景
+
+### 场景 1：文生视频（标准模式）
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "一只金色的猫咪在阳光下的草地上奔跑，慢动作，电影质感",
+  "mode": "std",
+  "duration": 5,
+  "aspect_ratio": "16:9"
+}
+```
+
+### 场景 2：文生视频（专业模式 + 负面提示词）
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "东京涩谷十字路口，雨夜霓虹灯倒映在湿漉漉的地面上，行人撑伞穿行",
+  "negative_prompt": "模糊, 低画质, 变形",
+  "mode": "pro",
+  "duration": 10,
+  "aspect_ratio": "16:9"
+}
+```
+
+### 场景 3：图生视频（首帧图片）
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "让画面中的人物转头微笑",
+  "image_urls": ["https://example.com/portrait.jpg"],
+  "mode": "std",
+  "duration": 5,
+  "aspect_ratio": "16:9"
+}
+```
+
+### 场景 4：图生视频（首帧 + 尾帧控制）
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "从白天过渡到黑夜的城市延时摄影",
+  "image_urls": ["https://example.com/day-city.jpg", "https://example.com/night-city.jpg"],
+  "mode": "pro",
+  "duration": 5
+}
+```
+
+### 场景 5：专业模式 + 自动音频
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "海浪拍打礁石，海鸥在空中盘旋，远处有灯塔",
+  "mode": "pro",
+  "duration": 10,
+  "audio": true,
+  "aspect_ratio": "16:9"
+}
+```
+
+### 场景 6：专业模式 + 指定音色
+
+```json
+{
+  "model": "kling-v2-6",
+  "prompt": "一位主持人面对镜头播报新闻",
+  "image_urls": ["https://example.com/anchor.jpg"],
+  "mode": "pro",
+  "duration": 10,
+  "audio": true,
+  "voice_list": [{"voice_id": "829826792415842333"}],
+  "aspect_ratio": "16:9"
+}
+```
+
+<Note>
+**查询任务结果**
+
+视频生成为异步任务，提交后会返回 `task_id`。使用 [获取任务状态](/cn/api-reference/tasks/status) 接口查询生成进度和结果。
+</Note>
