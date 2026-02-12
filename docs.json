@@ -164,6 +164,13 @@
                     ]
                   },
                   {
+                    "group": "MiniMax-Hailuo-2.3",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/minimax-hailuo-2.3/generation"
+                    ]
+                  },
+                  {
                     "group": "Wan2.6",
                     "icon": "video",
                     "pages": [
@@ -383,6 +390,13 @@
                     "icon": "video",
                     "pages": [
                       "cn/api-reference/videos/minimax-hailuo/generation"
+                    ]
+                  },
+                  {
+                    "group": "MiniMax-Hailuo-2.3",
+                    "icon": "video",
+                    "pages": [
+                      "cn/api-reference/videos/minimax-hailuo-2.3/generation"
                     ]
                   },
                   {
@@ -608,6 +622,13 @@
                     ]
                   },
                   {
+                    "group": "MiniMax-Hailuo-2.3",
+                    "icon": "video",
+                    "pages": [
+                      "ja/api-reference/videos/minimax-hailuo-2.3/generation"
+                    ]
+                  },
+                  {
                     "group": "Wan2.6",
                     "icon": "video",
                     "pages": [
@@ -821,6 +842,13 @@
                     "icon": "video",
                     "pages": [
                       "ko/api-reference/videos/minimax-hailuo/generation"
+                    ]
+                  },
+                  {
+                    "group": "MiniMax-Hailuo-2.3",
+                    "icon": "video",
+                    "pages": [
+                      "ko/api-reference/videos/minimax-hailuo-2.3/generation"
                     ]
                   },
                   {
