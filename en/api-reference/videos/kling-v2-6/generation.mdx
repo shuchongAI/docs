@@ -419,7 +419,7 @@ class Program
   Image URL array for image-to-video generation
 
   - Pass **1 image**: used as first frame
-  - Pass **2 images**: automatically assigned as first frame + last frame
+  - Pass **2 images**: automatically assigned as first frame + last frame (requires `mode: "pro"`)
 
   Maximum 2 images supported
 
@@ -427,6 +427,7 @@ class Program
 
   <Warning>
   - Maximum 2 images supported
+  - Last frame (2 images) requires `pro` mode only; `std` mode only supports first frame (1 image)
   - In image-to-video mode, `aspect_ratio` may be overridden by the actual image ratio
   </Warning>
 </ParamField>
@@ -470,7 +471,8 @@ class Program
 |------|---------|--------|---------|--------|---------|
 | Text-to-Video | Generation | ✅ (silent only) | ✅ (silent only) | ✅ | ✅ |
 | Image-to-Video | Generation | ✅ (silent only) | ✅ (silent only) | ✅ | ✅ |
-| Image-to-Video | First/Last Frame | ✅ | ✅ | ✅ | ✅ |
+| Image-to-Video | First Frame | ✅ | ✅ | ✅ | ✅ |
+| Image-to-Video | Last Frame | - | - | ✅ | ✅ |
 | Image-to-Video | Audio Control | - | - | ✅ | ✅ |
 
 ## Text-to-Video vs Image-to-Video
@@ -480,7 +482,7 @@ The system automatically determines the mode based on whether `image_urls` is pr
 | Parameter | Text-to-Video | Image-to-Video |
 |-----------|--------------|----------------|
 | `prompt` | ✅ Required | ✅ Required |
-| `image_urls` | ❌ Not used | ✅ Required (1-2 images) |
+| `image_urls` | ❌ Not used | ✅ Required (1-2 images, last frame needs `pro`) |
 | `negative_prompt` | ✅ Optional | ✅ Optional |
 | `mode` | ✅ Optional | ✅ Optional |
 | `duration` | ✅ Optional | ✅ Optional |
