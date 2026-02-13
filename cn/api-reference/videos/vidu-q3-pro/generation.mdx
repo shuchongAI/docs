@@ -424,7 +424,7 @@ class Program
   <Warning>
   - 最多支持 2 张图片
   - 首尾帧模式必须传恰好 2 张图片
-  - 图生视频模式下不支持 `aspect_ratio` 参数
+  - 只要传入 `image_urls`（无论 1 张还是 2 张），就不能同时设置 `aspect_ratio` 参数，视频比例将由图片自动决定
   </Warning>
 </ParamField>
 

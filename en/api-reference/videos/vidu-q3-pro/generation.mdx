@@ -424,7 +424,7 @@ class Program
   <Warning>
   - Maximum 2 images supported
   - For first-last frame mode, exactly 2 images must be provided
-  - In image-to-video modes, `aspect_ratio` parameter is not supported
+  - When `image_urls` is provided (whether 1 or 2 images), the `aspect_ratio` parameter cannot be used — the video aspect ratio will be automatically determined by the image
   </Warning>
 </ParamField>
 
