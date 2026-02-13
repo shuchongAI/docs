@@ -183,6 +183,13 @@
                     "pages": [
                       "en/api-reference/videos/kling-v2-6/generation"
                     ]
+                  },
+                  {
+                    "group": "Vidu Q3 Pro",
+                    "icon": "video",
+                    "pages": [
+                      "en/api-reference/videos/vidu-q3-pro/generation"
+                    ]
                   }
                 ]
               },
@@ -411,6 +418,13 @@
                     "icon": "video",
                     "pages": [
                       "cn/api-reference/videos/kling-v2-6/generation"
+                    ]
+                  },
+                  {
+                    "group": "Vidu Q3 Pro",
+                    "icon": "video",
+                    "pages": [
+                      "cn/api-reference/videos/vidu-q3-pro/generation"
                     ]
                   }
                 ]
@@ -641,6 +655,13 @@
                     "pages": [
                       "ja/api-reference/videos/kling-v2-6/generation"
                     ]
+                  },
+                  {
+                    "group": "Vidu Q3 Pro",
+                    "icon": "video",
+                    "pages": [
+                      "ja/api-reference/videos/vidu-q3-pro/generation"
+                    ]
                   }
                 ]
               },
@@ -863,6 +884,13 @@
                     "icon": "video",
                     "pages": [
                       "ko/api-reference/videos/kling-v2-6/generation"
+                    ]
+                  },
+                  {
+                    "group": "Vidu Q3 Pro",
+                    "icon": "video",
+                    "pages": [
+                      "ko/api-reference/videos/vidu-q3-pro/generation"
                     ]
                   }
                 ]
