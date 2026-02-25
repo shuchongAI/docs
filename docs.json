@@ -105,6 +105,13 @@
                     ]
                   },
                   {
+                    "group": "Seedream-5.0-Lite",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/seedream-5-lite/generation"
+                    ]
+                  },
+                  {
                     "group": "Flux Kontext",
                     "icon": "image",
                     "pages": [
@@ -338,6 +345,13 @@
                     "icon": "image",
                     "pages": [
                       "cn/api-reference/images/seedream-4.5/generation"
+                    ]
+                  },
+                  {
+                    "group": "Seedream-5.0-Lite",
+                    "icon": "image",
+                    "pages": [
+                      "cn/api-reference/images/seedream-5-lite/generation"
                     ]
                   },
                   {
@@ -577,6 +591,13 @@
                     ]
                   },
                   {
+                    "group": "Seedream-5.0-Lite",
+                    "icon": "image",
+                    "pages": [
+                      "ja/api-reference/images/seedream-5-lite/generation"
+                    ]
+                  },
+                  {
                     "group": "Flux Kontext",
                     "icon": "image",
                     "pages": [
@@ -804,6 +825,13 @@
                     "icon": "image",
                     "pages": [
                       "ko/api-reference/images/seedream-4.5/generation"
+                    ]
+                  },
+                  {
+                    "group": "Seedream-5.0-Lite",
+                    "icon": "image",
+                    "pages": [
+                      "ko/api-reference/images/seedream-5-lite/generation"
                     ]
                   },
                   {
