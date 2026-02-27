@@ -70,6 +70,13 @@
                 "icon": "image",
                 "pages": [
                   {
+                    "group": "Gemini-3.1-Flash-Image-preview (Nano banana2)",
+                    "icon": "image",
+                    "pages": [
+                      "en/api-reference/images/gemini-3.1-flash/generation"
+                    ]
+                  },
+                  {
                     "group": "Gemini-3-Pro-Image-preview (Nano banana Pro)",
                     "icon": "image",
                     "pages": [
@@ -312,6 +319,13 @@
                 "group": "图像系列",
                 "icon": "image",
                 "pages": [
+                  {
+                    "group": "Gemini-3.1-Flash-Image-preview（Nano banana2）",
+                    "icon": "image",
+                    "pages": [
+                      "cn/api-reference/images/gemini-3.1-flash/generation"
+                    ]
+                  },
                   {
                     "group": "Gemini-3-Pro-Image-preview（Nano banana Pro）",
                     "icon": "image",
@@ -556,6 +570,13 @@
                 "icon": "image",
                 "pages": [
                   {
+                    "group": "Gemini-3.1-Flash-Image-preview (Nano banana2)",
+                    "icon": "image",
+                    "pages": [
+                      "ja/api-reference/images/gemini-3.1-flash/generation"
+                    ]
+                  },
+                  {
                     "group": "Gemini-3-Pro-Image-preview (Nano banana Pro)",
                     "icon": "image",
                     "pages": [
@@ -792,6 +813,13 @@
                 "group": "이미지 시리즈",
                 "icon": "image",
                 "pages": [
+                  {
+                    "group": "Gemini-3.1-Flash-Image-preview (Nano banana2)",
+                    "icon": "image",
+                    "pages": [
+                      "ko/api-reference/images/gemini-3.1-flash/generation"
+                    ]
+                  },
                   {
                     "group": "Gemini-3-Pro-Image-preview (Nano banana Pro)",
                     "icon": "image",

@@ -1,0 +1,338 @@
+---
+title: "Gemini-3.1-Flash-Image-preview (Nano banana2) 画像生成"
+description: "
+- テキストから画像、画像から画像をサポート、最大4K解像度出力
+
+- 最大14枚の参照画像でスタイル/キャラクターの一貫性を維持
+
+- 極端なアスペクト比をサポート（1:4、4:1、1:8、8:1）
+
+- Google検索強化を統合し、より現実に近い画像を生成
+"
+api: "POST https://api.apimart.ai/v1/images/generations"
+
+---
+
+
+
+
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url https://api.apimart.ai/v1/images/generations \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "gemini-3.1-flash-image-preview",
+    "prompt": "サイバーパンクスタイルの夜の都市景観、ネオンライトが輝く",
+    "size": "16:9",
+    "resolution": "2K",
+    "n": 1
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.apimart.ai/v1/images/generations"
+
+payload = {
+    "model": "gemini-3.1-flash-image-preview",
+    "prompt": "サイバーパンクスタイルの夜の都市景観、ネオンライトが輝く",
+    "size": "16:9",
+    "resolution": "2K",
+    "n": 1
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const url = "https://api.apimart.ai/v1/images/generations";
+
+const payload = {
+  model: "gemini-3.1-flash-image-preview",
+  prompt: "サイバーパンクスタイルの夜の都市景観、ネオンライトが輝く",
+  size: "16:9",
+  resolution: "2K",
+  n: 1
+};
+
+const headers = {
+  "Authorization": "Bearer <token>",
+  "Content-Type": "application/json"
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(payload)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://api.apimart.ai/v1/images/generations"
+
+    payload := map[string]interface{}{
+        "model":      "gemini-3.1-flash-image-preview",
+        "prompt":     "サイバーパンクスタイルの夜の都市景観、ネオンライトが輝く",
+        "size":       "16:9",
+        "resolution": "2K",
+        "n":          1,
+    }
+
+    jsonData, _ := json.Marshal(payload)
+
+    req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer <token>")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}
+```
+
+```java Java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.apimart.ai/v1/images/generations";
+
+        String payload = """
+        {
+          "model": "gemini-3.1-flash-image-preview",
+          "prompt": "サイバーパンクスタイルの夜の都市景観、ネオンライトが輝く",
+          "size": "16:9",
+          "resolution": "2K",
+          "n": 1
+        }
+        """;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer <token>")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(payload))
+            .build();
+
+        HttpResponse<String> response = client.send(request,
+            HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "code": 200,
+  "data": [
+    {
+      "status": "submitted",
+      "task_id": "task_01K8SGYNNNVBQTXNR4MM964S7K"
+    }
+  ]
+}
+```
+
+```json 400
+{
+  "error": {
+    "code": 400,
+    "message": "リクエストパラメータが無効です",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": 401,
+    "message": "認証に失敗しました。APIキーを確認してください",
+    "type": "authentication_error"
+  }
+}
+```
+
+```json 402
+{
+  "error": {
+    "code": 402,
+    "message": "残高不足です。チャージしてから再試行してください",
+    "type": "payment_required"
+  }
+}
+```
+
+```json 429
+{
+  "error": {
+    "code": 429,
+    "message": "リクエストが多すぎます。しばらくしてから再試行してください",
+    "type": "rate_limit_error"
+  }
+}
+```
+
+```json 500
+{
+  "error": {
+    "code": 500,
+    "message": "サーバー内部エラー。しばらくしてから再試行してください",
+    "type": "server_error"
+  }
+}
+```
+
+</ResponseExample>
+
+## 認証
+
+<ParamField header="Authorization" type="string" required>
+  すべてのAPIエンドポイントはBearer Token認証が必要です
+
+  APIキーの取得：
+
+  [APIキー管理ページ](https://apimart.ai/console/token)にアクセスしてAPIキーを取得してください
+
+  リクエストヘッダーに追加：
+
+  ```
+  Authorization: Bearer YOUR_API_KEY
+  ```
+</ParamField>
+
+## Body
+
+<ParamField body="model" type="string" default="gemini-3.1-flash-image-preview" required>
+  画像生成モデル名
+
+  Example: `"gemini-3.1-flash-image-preview"`
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  画像生成のテキスト説明
+</ParamField>
+
+<ParamField body="size" type="string">
+  画像のアスペクト比
+
+  サポートされる比率：
+  - `1:1` - 正方形、アバター、SNS
+  - `3:2` / `2:3` - 標準写真
+  - `4:3` / `3:4` - 従来のディスプレイ比率
+  - `16:9` / `9:16` - ワイドスクリーン/縦型動画カバー
+  - `5:4` / `4:5` - Instagram画像
+  - `21:9` - ウルトラワイドバナー
+  - `1:4` / `4:1` - 長尺ポスター/バナー
+  - `1:8` / `8:1` - 極端な長尺画像/バナー広告
+</ParamField>
+
+<ParamField body="resolution" type="string" default="1K">
+  出力画像解像度
+
+  サポートされる値：
+  - `0.5K` - 約512px、低解像度プレビュー
+  - `1K` - 約1024px、標準解像度（デフォルト）
+  - `2K` - 約2048px、高解像度
+  - `4K` - 約4096px、超高解像度
+
+  > **注意：** 解像度によって料金が異なります。4Kは1Kより高額です。
+</ParamField>
+
+<ParamField body="n" type="integer">
+  生成する画像の数
+
+  デフォルト：1
+
+  **⚠️ 注意：** 数値のみ入力してください（例：`1`）。引用符を使用するとエラーが発生します
+</ParamField>
+
+<ParamField body="image_urls" type="array">
+  画像から画像生成用の参照画像URLリスト
+
+  **制限：**
+  - 最大 **14枚** の参照画像（推奨：最大10枚のオブジェクト参照 + 4枚のキャラクター参照）
+  - 1枚あたり10MB以下
+  - 対応形式：jpeg、png、webp
+</ParamField>
+
+<ParamField body="google_search" type="boolean" default="false">
+  Googleテキスト検索強化を有効にする
+
+  - `true`：モデルがウェブテキスト情報を検索して画像生成を支援します
+  - `false`：無効（デフォルト）
+
+  > **注意：** `google_search` は `tools` パラメータと排他的です
+</ParamField>
+
+<ParamField body="google_image_search" type="boolean" default="false">
+  Google画像検索強化を有効にする
+
+  - `true`：テキスト検索に加えて、参照画像も検索して生成を支援します
+  - `false`：無効（デフォルト）
+
+  > **注意：** `google_search: true` と一緒に使用する必要があります
+</ParamField>
+
+## レスポンス
+
+<ResponseField name="code" type="integer">
+  レスポンスステータスコード
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  レスポンスデータ配列
+
+  <Expandable title="プロパティ">
+    <ResponseField name="status" type="string">
+      タスクステータス
+
+      - `submitted` - 送信済み
+    </ResponseField>
+
+    <ResponseField name="task_id" type="string">
+      一意のタスク識別子
+    </ResponseField>
+  </Expandable>
+</ResponseField>
