@@ -70,7 +70,7 @@
                 "icon": "image",
                 "pages": [
                   {
-                    "group": "Gemini-3-Pro-Image-preview (Nano banana2)",
+                    "group": "Gemini-3-Pro-Image-preview (Nano banana Pro)",
                     "icon": "image",
                     "pages": [
                       "en/api-reference/images/gemini-3-pro/generation"
@@ -313,7 +313,7 @@
                 "icon": "image",
                 "pages": [
                   {
-                    "group": "Gemini-3-Pro-Image-preview（Nano banana2）",
+                    "group": "Gemini-3-Pro-Image-preview（Nano banana Pro）",
                     "icon": "image",
                     "pages": [
                       "cn/api-reference/images/gemini-3-pro/generation"
@@ -556,7 +556,7 @@
                 "icon": "image",
                 "pages": [
                   {
-                    "group": "Gemini-3-Pro-Image-preview (Nano banana2)",
+                    "group": "Gemini-3-Pro-Image-preview (Nano banana Pro)",
                     "icon": "image",
                     "pages": [
                       "ja/api-reference/images/gemini-3-pro/generation"
@@ -793,7 +793,7 @@
                 "icon": "image",
                 "pages": [
                   {
-                    "group": "Gemini-3-Pro-Image-preview (Nano banana2)",
+                    "group": "Gemini-3-Pro-Image-preview (Nano banana Pro)",
                     "icon": "image",
                     "pages": [
                       "ko/api-reference/images/gemini-3-pro/generation"
