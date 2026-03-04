@@ -1,0 +1,336 @@
+---
+title: "OpenClaw Manager 배포 가이드"
+description: "OpenClaw AI 봇 게이트웨이를 원클릭으로 배포하고 관리하는 시각화 도구. Telegram, Feishu, Discord 3대 플랫폼을 지원하며, APIMart API를 통해 GPT-5, Claude, Gemini 등 다양한 AI 모델을 이용 가능."
+---
+
+## 소개
+
+OpenClaw Manager는 OpenClaw AI 봇 게이트웨이를 빠르게 배포하고 관리할 수 있는 크로스 플랫폼 시각화 관리 도구입니다.
+
+- **제로 설정 배포** — 단일 실행 파일, 모든 의존성 자동 설치
+- **웹 관리 인터페이스** — 브라우저에서 인스턴스 생성·시작/중지·삭제, 모델 전환
+- **멀티 채널 지원** — Telegram / Feishu / Discord
+- **멀티 모델 지원** — GPT-5 시리즈, Claude 4.5/4.6 시리즈, Gemini 시리즈, 자동 장애 조치 지원
+- **백그라운드 실행** — `--daemon` 모드 지원, SSH 연결 해제 영향 없음
+- **다국어 UI** — 중국어 / English / 일본어
+
+## 사전 준비
+
+시작하기 전에 다음을 확인하세요:
+
+1. **APIMart API Key 획득**
+   [APIMart 콘솔](https://apimart.ai/console/token)에 로그인하여 API 키(`sk-`로 시작)를 획득
+
+2. **메시지 플랫폼 Bot 생성**
+   사용할 플랫폼에 따라 Bot 인증 정보를 사전에 준비(아래 채널 설정 섹션 참조)
+
+<Note>
+**팁:** APIMart 계정이 없다면 먼저 [APIMart](https://apimart.ai)에서 등록하고 API 키를 획득하세요.
+</Note>
+
+## 1단계: 다운로드
+
+[GitHub Releases](https://github.com/zhihong-apimart/OpenClaw-Manager/releases)에서 플랫폼에 맞는 실행 파일을 다운로드:
+
+| 플랫폼 | 파일명 |
+|--------|--------|
+| Windows x64 | `openclaw-manager-win-x64.exe` |
+| macOS ARM (Apple Silicon) | `openclaw-manager-macos-arm64` |
+| macOS Intel | `openclaw-manager-macos-x64` |
+| Linux x64 | `openclaw-manager-linux-x64` |
+| Linux ARM64 | `openclaw-manager-linux-arm64` |
+
+## 2단계: 실행
+
+<Tabs>
+  <Tab title="Windows">
+    ### Windows 배포
+
+    #### 전제 조건
+    - Windows 10/11 (64비트)
+    - **관리자 권한** (Gateway 관리용 Windows 작업 스케줄러 등록에 필요)
+
+    #### 시작 방법
+
+    ```
+    openclaw-manager-win-x64.exe 우클릭 → 관리자 권한으로 실행
+    ```
+
+    첫 실행 시 다음이 자동으로 수행됩니다:
+    - Node.js v22 확인 및 설치 (미설치 시 MSI 자동 다운로드 후 자동 설치)
+    - OpenClaw CLI 설치 (`npm install -g openclaw`)
+    - 브라우저 자동 열기로 관리 인터페이스 접속
+
+    <Warning>
+    **관리자 권한으로 실행해야 합니다**. 그렇지 않으면 Gateway 프로세스 관리를 위한 Windows 작업 스케줄러를 생성할 수 없습니다.
+    </Warning>
+  </Tab>
+
+  <Tab title="Linux">
+    ### Linux 배포
+
+    #### 전제 조건
+    - Ubuntu 20.04+ / Debian 11+ / CentOS 8+ (x64 또는 ARM64)
+    - root 권한 (권장)
+
+    #### 시작 방법
+
+    1. 다운로드 후 실행 권한 부여:
+    ```bash
+    chmod +x ./openclaw-manager-linux-x64
+    ```
+
+    2. **포그라운드 실행** (테스트용):
+    ```bash
+    ./openclaw-manager-linux-x64
+    ```
+
+    3. **백그라운드 실행** (프로덕션 환경 권장):
+    ```bash
+    ./openclaw-manager-linux-x64 --daemon
+    ```
+
+    #### 데몬 관리
+
+    ```bash
+    # 백그라운드 시작
+    ./openclaw-manager-linux-x64 --daemon
+    # 축약형
+    ./openclaw-manager-linux-x64 -d
+
+    # 상태 확인
+    ./openclaw-manager-linux-x64 --status
+
+    # 중지
+    ./openclaw-manager-linux-x64 --stop
+    # 축약형
+    ./openclaw-manager-linux-x64 -s
+    ```
+
+    #### 방화벽 설정
+
+    원격 접속이 필요한 경우 다음 포트를 개방:
+
+    ```bash
+    # Manager Web UI
+    ufw allow 51942/tcp
+
+    # Gateway 포트 (인스턴스당 하나, 18789부터 순차 할당)
+    ufw allow 18789/tcp
+    ```
+
+    <Note>
+    **팁:** Linux에서는 Manager가 자동으로 `0.0.0.0`에 바인딩되어 원격 접속이 가능합니다. 로그 파일은 `~/openclaw-manager.log`에 있습니다.
+    </Note>
+  </Tab>
+
+  <Tab title="macOS">
+    ### macOS 배포
+
+    #### 전제 조건
+    - macOS 12+ (Apple Silicon 또는 Intel)
+
+    #### 시작 방법
+
+    1. 다운로드 후 실행 권한 부여:
+    ```bash
+    chmod +x ./openclaw-manager-macos-arm64
+    ```
+
+    2. 첫 실행 시 보안 설정 허용이 필요:
+    ```
+    시스템 설정 → 개인 정보 보호 및 보안 → 허용
+    ```
+    또는 명령어로 격리 속성 제거:
+    ```bash
+    xattr -d com.apple.quarantine ./openclaw-manager-macos-arm64
+    ```
+
+    3. 실행:
+    ```bash
+    ./openclaw-manager-macos-arm64
+    ```
+
+    4. 백그라운드 실행:
+    ```bash
+    ./openclaw-manager-macos-arm64 --daemon
+    ```
+
+    <Note>
+    **팁:** macOS에서는 Manager가 `127.0.0.1`에 바인딩됩니다 (로컬 접속만 가능). 데몬 명령어는 Linux와 동일합니다.
+    </Note>
+  </Tab>
+</Tabs>
+
+## 3단계: 관리 인터페이스 접속
+
+프로그램 시작 후 웹 관리 인터페이스에 접속:
+
+```
+http://127.0.0.1:51942
+```
+
+<Note>
+**Linux 원격 접속:** `127.0.0.1`을 서버 IP로 대체하세요 (예: `http://your-server-ip:51942`)
+</Note>
+
+## 4단계: 인스턴스 생성
+
+웹 관리 인터페이스에서 **+ 새 인스턴스**를 클릭하여 생성 시작:
+
+### 4.1 인스턴스 이름 설정
+
+인스턴스 이름을 입력 (영문자, 숫자, 밑줄, 하이픈만 가능, 1~64자).
+
+### 4.2 AI 모델 선택
+
+사용할 AI 모델을 선택하고 APIMart API Key (`sk-`로 시작)를 입력.
+
+**지원 모델:**
+
+| 모델 ID | 이름 | 특징 |
+|---------|------|------|
+| `gpt-5` | GPT-5 | 최신·최강 |
+| `gpt-5.1` | GPT-5.1 | 강화 버전 |
+| `gpt-5.2-codex` | GPT-5.2 Codex | 코드 특화 |
+| `gpt-5.2-pro` | GPT-5.2 Pro | 프로페셔널 버전 |
+| `claude-opus-4-6-20260320` | Claude Opus 4.6 | 최강 추론 |
+| `claude-sonnet-4-6-20260320` | Claude Sonnet 4.6 | 균형 잡힌 선택 |
+| `claude-opus-4-5-20251101` | Claude Opus 4.5 | 고급 추론 |
+| `claude-sonnet-4-5-20250929` | Claude Sonnet 4.5 | 코드에 강함 |
+| `claude-haiku-4-5-20251001` | Claude Haiku 4.5 | 빠른 응답 |
+| `gemini-2.5-flash` | Gemini 2.5 Flash | 빠른 멀티모달 |
+| `gemini-3-pro-preview` | Gemini 3 Pro Preview | 고성능 |
+
+<Tip>
+**모델 선택 추천:**
+- 💰 **가성비:** `claude-haiku-4-5-20251001`, `gemini-2.5-flash`
+- 🚀 **고성능:** `gpt-5`, `claude-opus-4-6-20260320`, `gemini-3-pro-preview`
+- ⚡ **빠른 응답:** `gemini-2.5-flash`, `claude-haiku-4-5-20251001`
+</Tip>
+
+**장애 조치 모드**를 선택하여 여러 백업 모델을 추가할 수도 있습니다. 기본 모델을 사용할 수 없는 경우 시스템이 자동으로 백업 모델로 전환합니다.
+
+### 4.3 메시지 채널 설정
+
+사용할 메시지 플랫폼을 선택하고 해당 튜토리얼을 따라 설정:
+
+<CardGroup cols={3}>
+  <Card title="Telegram" icon="telegram" href="/ko/integrations/openclaw-manager-telegram">
+    BotFather로 Telegram 봇 생성
+  </Card>
+  <Card title="Feishu（飞书）" icon="message" href="/ko/integrations/openclaw-manager-feishu">
+    Feishu 기업 맞춤 앱 봇 생성
+  </Card>
+  <Card title="Discord" icon="discord" href="/ko/integrations/openclaw-manager-discord">
+    Discord 서버 봇 생성
+  </Card>
+</CardGroup>
+
+## 5단계: 페어링 코드 연결
+
+인스턴스 생성·시작 후 페어링 코드로 사용자 연결을 완료:
+
+1. 사용자가 메시지 플랫폼에서 봇에게 아무 메시지 전송
+2. 봇이 **8자리 페어링 코드** (예: `DFE62DTD`)로 응답
+3. 관리자가 웹 관리 인터페이스에서 해당 인스턴스의 "**페어링 코드**" 버튼 클릭
+4. 페어링 코드를 입력하고 "**승인**" 클릭
+5. 사용자가 봇을 정상적으로 사용 가능
+
+<Note>
+**팁:** 페어링 코드는 Gateway 메모리에 저장되며 재시작 후 무효화됩니다. 코드가 만료되면 사용자에게 새 메시지를 보내도록 안내하면 새 코드를 받을 수 있습니다.
+</Note>
+
+## 인스턴스 관리
+
+관리 인터페이스에서 다음 작업을 수행할 수 있습니다:
+
+| 작업 | 설명 |
+|------|------|
+| **시작** | Gateway 프로세스 시작, 봇이 메시지 수신 시작 |
+| **중지** | Gateway 프로세스 중지 |
+| **모델 전환** | Gateway 재시작 없이 AI 모델을 실시간 전환 |
+| **페어링 코드** | 새 사용자의 페어링 코드를 승인하여 봇 사용 허가 |
+| **삭제** | 인스턴스를 중지하고 모든 데이터 삭제 (복원 불가) |
+
+## 포트 및 데이터
+
+### 포트
+
+| 용도 | 포트 | 바인드 주소 |
+|------|------|-----------|
+| Manager Web UI | `51942` | Windows/macOS: `127.0.0.1`, Linux: `0.0.0.0` |
+| Gateway 인스턴스 | `18789`부터 순차 할당 | 각 인스턴스에 고유 포트 |
+
+### 데이터 디렉토리
+
+| 내용 | 경로 |
+|------|------|
+| 인스턴스 설정 | `~/.openclaw-<인스턴스명>/openclaw.json` |
+| Gateway 로그 | `~/.openclaw-<인스턴스명>/logs/gateway.log` |
+| Manager 로그 | `~/openclaw-manager.log` (daemon 모드) |
+| Manager PID | `~/.openclaw-manager.pid` |
+
+## 자주 묻는 질문
+
+### Q1: Manager가 시작되지 않나요?
+
+**해결 방법:**
+
+| 플랫폼 | 확인 사항 |
+|--------|---------|
+| Windows | 관리자 권한으로 실행 중인지 확인 |
+| Linux | 포트 51942가 사용 중이 아닌지 확인 (`lsof -i :51942`) |
+| macOS | 보안 설정 허용 또는 격리 속성 제거 확인 |
+| 모든 플랫폼 | 로그 확인 `~/openclaw-manager.log` |
+
+### Q2: openclaw 명령어를 찾을 수 없나요?
+
+**해결 방법:**
+- 프로그램 시작 시 openclaw CLI를 자동 감지·설치합니다
+- 버전이 오래된 경우 (< 0.1.0) 자동 업데이트됩니다
+- 수동 설치: `npm install -g openclaw@latest`
+
+### Q3: 인스턴스 시작 후 "중지됨"으로 표시되나요?
+
+**해결 방법:**
+- Gateway의 포트 바인딩에 몇 초가 소요되어 상태가 일시적으로 불일치할 수 있습니다
+- 페이지를 새로고침하여 최신 상태를 확인하세요
+- Gateway 로그 확인: `~/.openclaw-<인스턴스명>/logs/gateway.log`
+
+### Q4: Feishu 봇이 응답하지 않나요?
+
+**해결 방법:**
+1. 이벤트 구독에 `im.message.receive_v1`이 추가되어 있는지 확인
+2. 구독 방식이 "**롱 커넥션**"인지 확인
+3. 새 버전을 생성하고 게시했는지 확인 (권한/이벤트 변경 후 매번 재게시 필요)
+
+### Q5: 페어링 코드 승인에 실패했나요?
+
+**해결 방법:**
+- Gateway가 실행 중인지 확인
+- 페어링 코드는 Gateway 메모리에 저장되며 재시작 후 무효화됩니다
+- 사용자에게 새 메시지를 보내도록 안내하여 새 페어링 코드를 획득하세요
+
+### Q6: API 사용량과 비용을 확인하려면?
+
+[APIMart 콘솔](https://apimart.ai/console)에 로그인하여 확인:
+- 📊 API 호출 통계
+- 💰 비용 상세
+- 📈 사용 추이 차트
+
+## 지원 및 도움말
+
+문제가 발생하면:
+
+- 📚 [APIMart 문서](https://docs.apimart.ai)
+- 📚 [OpenClaw Manager GitHub](https://github.com/zhihong-apimart/OpenClaw-Manager)
+- 💬 [Discord 커뮤니티](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 기술 지원: zhihong@apimart.ai
+
+---
+
+<Card title="APIMart 시작하기" icon="rocket" href="https://apimart.ai">
+  지금 APIMart에 등록하고 API 키를 획득하여 AI 봇을 배포하세요!
+</Card>

@@ -1,0 +1,336 @@
+---
+title: "OpenClaw Manager Deployment Guide"
+description: "A visual tool for one-click deployment and management of OpenClaw AI bot gateways, supporting Telegram, Feishu, and Discord platforms, powered by GPT-5, Claude, Gemini and more AI models via APIMart API."
+---
+
+## Introduction
+
+OpenClaw Manager is a cross-platform visual management tool that helps you quickly deploy and manage OpenClaw AI bot gateways.
+
+- **Zero-config deployment** — Single executable file, auto-installs all dependencies
+- **Web management UI** — Create, start/stop, delete instances and switch models via browser
+- **Multi-channel support** — Telegram / Feishu / Discord
+- **Multi-model support** — GPT-5 series, Claude 4.5/4.6 series, Gemini series with automatic failover
+- **Background mode** — Supports `--daemon` mode, unaffected by SSH disconnection
+- **Multi-language UI** — Chinese / English / Japanese
+
+## Prerequisites
+
+Before you begin, please ensure:
+
+1. **APIMart API Key obtained**
+   Log in to [APIMart Console](https://apimart.ai/console/token) to get your API key (starts with `sk-`)
+
+2. **Messaging platform Bot created**
+   Prepare your Bot credentials based on the platform you want to use (see channel configuration section below)
+
+<Note>
+**Tip:** If you don't have an APIMart account yet, please register at [APIMart](https://apimart.ai) and obtain an API key first.
+</Note>
+
+## Step 1: Download
+
+Download the executable for your platform from [GitHub Releases](https://github.com/zhihong-apimart/OpenClaw-Manager/releases):
+
+| Platform | Filename |
+|----------|----------|
+| Windows x64 | `openclaw-manager-win-x64.exe` |
+| macOS ARM (Apple Silicon) | `openclaw-manager-macos-arm64` |
+| macOS Intel | `openclaw-manager-macos-x64` |
+| Linux x64 | `openclaw-manager-linux-x64` |
+| Linux ARM64 | `openclaw-manager-linux-arm64` |
+
+## Step 2: Run
+
+<Tabs>
+  <Tab title="Windows">
+    ### Windows Deployment
+
+    #### Prerequisites
+    - Windows 10/11 (64-bit)
+    - **Administrator privileges** (required for creating Windows scheduled tasks to manage Gateway)
+
+    #### Launch
+
+    ```
+    Right-click openclaw-manager-win-x64.exe → Run as administrator
+    ```
+
+    On first launch, the following will be done automatically:
+    - Check and install Node.js v22 (auto-downloads MSI for silent installation if not found)
+    - Install OpenClaw CLI (via `npm install -g openclaw`)
+    - Auto-open browser to the management UI
+
+    <Warning>
+    **Must run as administrator**, otherwise Windows scheduled tasks cannot be created to manage Gateway processes.
+    </Warning>
+  </Tab>
+
+  <Tab title="Linux">
+    ### Linux Deployment
+
+    #### Prerequisites
+    - Ubuntu 20.04+ / Debian 11+ / CentOS 8+ (x64 or ARM64)
+    - root privileges (recommended)
+
+    #### Launch
+
+    1. Download and grant execute permission:
+    ```bash
+    chmod +x ./openclaw-manager-linux-x64
+    ```
+
+    2. **Foreground mode** (for testing):
+    ```bash
+    ./openclaw-manager-linux-x64
+    ```
+
+    3. **Background mode** (recommended for production):
+    ```bash
+    ./openclaw-manager-linux-x64 --daemon
+    ```
+
+    #### Daemon Management
+
+    ```bash
+    # Start in background
+    ./openclaw-manager-linux-x64 --daemon
+    # Or shorthand
+    ./openclaw-manager-linux-x64 -d
+
+    # Check status
+    ./openclaw-manager-linux-x64 --status
+
+    # Stop
+    ./openclaw-manager-linux-x64 --stop
+    # Or shorthand
+    ./openclaw-manager-linux-x64 -s
+    ```
+
+    #### Firewall Configuration
+
+    If remote access is needed, open the following ports:
+
+    ```bash
+    # Manager Web UI
+    ufw allow 51942/tcp
+
+    # Gateway ports (one per instance, starting from 18789)
+    ufw allow 18789/tcp
+    ```
+
+    <Note>
+    **Tip:** On Linux, Manager automatically binds to `0.0.0.0`, allowing remote access. Log file is at `~/openclaw-manager.log`.
+    </Note>
+  </Tab>
+
+  <Tab title="macOS">
+    ### macOS Deployment
+
+    #### Prerequisites
+    - macOS 12+ (Apple Silicon or Intel)
+
+    #### Launch
+
+    1. Download and grant execute permission:
+    ```bash
+    chmod +x ./openclaw-manager-macos-arm64
+    ```
+
+    2. First run may require security settings:
+    ```
+    System Settings → Privacy & Security → Allow Anyway
+    ```
+    Or remove quarantine attribute via command:
+    ```bash
+    xattr -d com.apple.quarantine ./openclaw-manager-macos-arm64
+    ```
+
+    3. Run:
+    ```bash
+    ./openclaw-manager-macos-arm64
+    ```
+
+    4. Background mode:
+    ```bash
+    ./openclaw-manager-macos-arm64 --daemon
+    ```
+
+    <Note>
+    **Tip:** On macOS, Manager binds to `127.0.0.1` (local access only). Daemon commands are the same as Linux.
+    </Note>
+  </Tab>
+</Tabs>
+
+## Step 3: Access Management UI
+
+After the program starts, access the Web management UI:
+
+```
+http://127.0.0.1:51942
+```
+
+<Note>
+**Linux remote access:** Replace `127.0.0.1` with your server IP, e.g. `http://your-server-ip:51942`
+</Note>
+
+## Step 4: Create Instance
+
+In the Web management UI, click **+ New Instance** to start:
+
+### 4.1 Set Instance Name
+
+Enter an instance name (letters, numbers, underscores, hyphens only, 1-64 characters).
+
+### 4.2 Select AI Model
+
+Choose the AI model to use and enter your APIMart API Key (starts with `sk-`).
+
+**Supported Models:**
+
+| Model ID | Name | Features |
+|----------|------|----------|
+| `gpt-5` | GPT-5 | Latest and most powerful |
+| `gpt-5.1` | GPT-5.1 | Enhanced version |
+| `gpt-5.2-codex` | GPT-5.2 Codex | Code specialized |
+| `gpt-5.2-pro` | GPT-5.2 Pro | Professional version |
+| `claude-opus-4-6-20260320` | Claude Opus 4.6 | Strongest reasoning |
+| `claude-sonnet-4-6-20260320` | Claude Sonnet 4.6 | Balanced choice |
+| `claude-opus-4-5-20251101` | Claude Opus 4.5 | Advanced reasoning |
+| `claude-sonnet-4-5-20250929` | Claude Sonnet 4.5 | Excellent for code |
+| `claude-haiku-4-5-20251001` | Claude Haiku 4.5 | Fast response |
+| `gemini-2.5-flash` | Gemini 2.5 Flash | Fast multimodal |
+| `gemini-3-pro-preview` | Gemini 3 Pro Preview | High performance |
+
+<Tip>
+**Model Recommendations:**
+- 💰 **Cost-effective:** `claude-haiku-4-5-20251001`, `gemini-2.5-flash`
+- 🚀 **High-performance:** `gpt-5`, `claude-opus-4-6-20260320`, `gemini-3-pro-preview`
+- ⚡ **Fast response:** `gemini-2.5-flash`, `claude-haiku-4-5-20251001`
+</Tip>
+
+You can also select **failover mode** to add multiple backup models. When the primary model is unavailable, the system automatically switches to backup models.
+
+### 4.3 Configure Messaging Channel
+
+Select your messaging platform and follow the corresponding tutorial:
+
+<CardGroup cols={3}>
+  <Card title="Telegram" icon="telegram" href="/en/integrations/openclaw-manager-telegram">
+    Create a Telegram bot via BotFather
+  </Card>
+  <Card title="Feishu" icon="message" href="/en/integrations/openclaw-manager-feishu">
+    Create a Feishu enterprise bot
+  </Card>
+  <Card title="Discord" icon="discord" href="/en/integrations/openclaw-manager-discord">
+    Create a Discord server bot
+  </Card>
+</CardGroup>
+
+## Step 5: Pairing Code Binding
+
+After the instance is created and started, complete user binding via pairing code:
+
+1. User sends any message to the bot on the messaging platform
+2. Bot replies with an **8-digit pairing code** (e.g. `DFE62DTD`)
+3. Admin clicks the "**Pairing Code**" button for that instance in the Web UI
+4. Enter the pairing code and click "**Approve**"
+5. User can now use the bot normally
+
+<Note>
+**Tip:** Pairing codes are stored in Gateway memory and expire after restart. If a code expires, simply have the user send a new message to get a fresh code.
+</Note>
+
+## Manage Instances
+
+In the management UI, you can perform the following operations:
+
+| Action | Description |
+|--------|-------------|
+| **Start** | Start the Gateway process, bot begins receiving messages |
+| **Stop** | Stop the Gateway process |
+| **Switch Model** | Switch AI model in real-time without restarting Gateway |
+| **Pairing Code** | Approve new users' pairing codes to authorize bot usage |
+| **Delete** | Stop and delete instance with all data (irreversible) |
+
+## Ports & Data
+
+### Ports
+
+| Purpose | Port | Bind Address |
+|---------|------|-------------|
+| Manager Web UI | `51942` | Windows/macOS: `127.0.0.1`, Linux: `0.0.0.0` |
+| Gateway Instance | Starting from `18789` | Each instance gets a unique port |
+
+### Data Directories
+
+| Content | Path |
+|---------|------|
+| Instance config | `~/.openclaw-<instance-name>/openclaw.json` |
+| Gateway logs | `~/.openclaw-<instance-name>/logs/gateway.log` |
+| Manager logs | `~/openclaw-manager.log` (daemon mode) |
+| Manager PID | `~/.openclaw-manager.pid` |
+
+## FAQ
+
+### Q1: Manager won't start?
+
+**Solutions:**
+
+| Platform | Check |
+|----------|-------|
+| Windows | Confirm running as administrator |
+| Linux | Confirm port 51942 is not in use (`lsof -i :51942`) |
+| macOS | Confirm security settings allowed or quarantine removed |
+| All | Check logs at `~/openclaw-manager.log` |
+
+### Q2: openclaw command not found?
+
+**Solutions:**
+- The program automatically detects and installs openclaw CLI on startup
+- If version is too old (< 0.1.0), it will auto-update
+- Manual install: `npm install -g openclaw@latest`
+
+### Q3: Instance shows "stopped" after starting?
+
+**Solutions:**
+- Gateway takes a few seconds to bind the port, status may briefly appear inconsistent
+- Refresh the page to check the latest status
+- Check Gateway logs: `~/.openclaw-<instance-name>/logs/gateway.log`
+
+### Q4: Feishu bot not responding?
+
+**Solutions:**
+1. Confirm event subscription has added `im.message.receive_v1`
+2. Confirm subscription method is "**Long Connection**"
+3. Confirm a new version has been created and published (required after every permission/event change)
+
+### Q5: Pairing code approval failed?
+
+**Solutions:**
+- Confirm Gateway is running
+- Pairing codes are stored in Gateway memory and expire after restart
+- Have the user send a new message to get a fresh pairing code
+
+### Q6: How to view API usage and costs?
+
+Log in to [APIMart Console](https://apimart.ai/console) to view:
+- 📊 API call statistics
+- 💰 Cost details
+- 📈 Usage trend charts
+
+## Support & Help
+
+If you encounter any issues:
+
+- 📚 [APIMart Documentation](https://docs.apimart.ai)
+- 📚 [OpenClaw Manager GitHub](https://github.com/zhihong-apimart/OpenClaw-Manager)
+- 💬 [Discord Community](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 Technical Support: zhihong@apimart.ai
+
+---
+
+<Card title="Get Started with APIMart" icon="rocket" href="https://apimart.ai">
+  Register for APIMart now, get your API key, and deploy your AI bot!
+</Card>

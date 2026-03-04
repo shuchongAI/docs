@@ -1,0 +1,211 @@
+---
+title: "OpenClaw Manager — Discord 渠道配置"
+description: "详细指导如何在 OpenClaw Manager 中创建和配置 Discord 机器人，包括创建 Application、配置 Bot、设置权限、邀请到服务器、对接码绑定等完整流程。"
+---
+
+## 简介
+
+本教程将指导您在 OpenClaw Manager 中完成 Discord 机器人的创建和配置。完成后，您的 Discord Bot 将接入 APIMart 的 AI 模型，可以在 Discord 服务器中与用户进行智能对话。
+
+<Note>
+**前置条件：** 请确保您已完成 [OpenClaw Manager 部署](/cn/integrations/openclaw-manager)，Manager 正在运行且可以访问管理界面。
+</Note>
+
+## 第一步：创建 Discord Application
+
+1. 前往 [Discord 开发者门户](https://discord.com/developers/applications)
+
+2. 点击右上角 **New Application**
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/new-app.png" alt="创建 Application" />
+</Frame>
+
+3. 输入应用名称（如 `My AI Bot`），点击 **Create**
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/app-name.png" alt="输入应用名称" />
+</Frame>
+
+<caption>*创建 Discord Application*</caption>
+
+## 第二步：配置 Bot
+
+1. 在左侧菜单中点击 **Bot**
+
+2. 点击 **Reset Token** 生成 Bot Token
+
+3. 复制生成的 **Bot Token** 并妥善保存
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/bot-token.png" alt="获取 Bot Token" />
+</Frame>
+
+<caption>*生成并复制 Bot Token*</caption>
+
+<Warning>
+**Bot Token 只会显示一次**，请立即复制保存。如果丢失，需要点击 Reset Token 重新生成。
+</Warning>
+
+4. 向下滚动到 **Privileged Gateway Intents** 部分
+
+5. 启用 **Message Content Intent**
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/message-intent.png" alt="启用 Message Content Intent" />
+</Frame>
+
+<caption>*启用 Message Content Intent*</caption>
+
+6. 点击 **Save Changes** 保存
+
+## 第三步：配置 OAuth2 权限并邀请到服务器
+
+1. 在左侧菜单中点击 **OAuth2**
+
+2. 点击 **URL Generator**
+
+3. 在 **Scopes** 中勾选 **bot**
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/oauth-scopes.png" alt="选择 Scopes" />
+</Frame>
+
+4. 在 **Bot Permissions** 中勾选以下权限：
+
+| 权限 | 说明 |
+|------|------|
+| View Channels | 查看频道 |
+| Send Messages | 发送消息 |
+| Embed Links | 嵌入链接 |
+| Attach Files | 附加文件 |
+| Read Message History | 读取消息历史 |
+| Add Reactions | 添加反应 |
+| Manage Messages | 管理消息 |
+| Manage Channels | 管理频道 |
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/bot-permissions.png" alt="配置 Bot Permissions" />
+</Frame>
+
+<caption>*选择 Bot Permissions*</caption>
+
+5. 复制页面底部生成的 **邀请 URL**
+
+6. 在浏览器中打开该 URL，选择要添加机器人的服务器，点击 **Authorize**
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/invite-bot.png" alt="邀请机器人到服务器" />
+</Frame>
+
+<caption>*邀请机器人到 Discord 服务器*</caption>
+
+## 第四步：在 Manager 中创建实例
+
+1. 打开 OpenClaw Manager 管理界面（`http://127.0.0.1:51942`）
+
+2. 点击 **+ 新建实例**
+
+3. **输入实例名称** — 如 `my-discord-bot`
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-name.png" alt="输入实例名称" />
+</Frame>
+
+4. **选择 AI 模型** — 选择您要使用的模型
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-model.png" alt="选择模型" />
+</Frame>
+
+5. **输入 APIMart API Key** — 输入以 `sk-` 开头的 API 密钥
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-key.png" alt="输入 API Key" />
+</Frame>
+
+6. **选择渠道** — 选择 **Discord**
+
+6. **粘贴 Bot Token** — 将第二步获取的 Bot Token 粘贴到输入框中
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/step-channel.png" alt="配置 Discord 渠道" />
+</Frame>
+
+<caption>*粘贴 Discord Bot Token*</caption>
+
+7. 点击 **创建** 完成实例创建
+
+## 第五步：对接码绑定
+
+实例创建并启动后，需要通过对接码完成用户授权：
+
+1. 在 Discord 服务器中找到您的机器人
+
+2. 通过私信或在频道中 @机器人 发送任意消息
+
+3. 机器人会回复一个 **8 位对接码**（如 `DFE62DTD`）
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/pairing-code.png" alt="获取对接码" />
+</Frame>
+
+<caption>*机器人回复的对接码*</caption>
+
+4. 回到 Manager 的新建实例向导，在「**填入对接码**」步骤中输入对接码，点击「**批准**」
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/pairing-input.png" alt="输入对接码" />
+</Frame>
+
+<caption>*在新建实例向导中输入对接码并批准*</caption>
+
+5. 显示对接码已批准后，点击「**完成**」
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/pairing-success.png" alt="对接码审批成功" />
+</Frame>
+
+<caption>*对接码审批成功，点击完成*</caption>
+
+6. 返回 Discord，再次发送消息，机器人将正常回复 AI 生成的内容
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/discord/chat-demo.png" alt="与机器人对话" />
+</Frame>
+
+<caption>*绑定成功后与 AI 机器人正常对话*</caption>
+
+## 常见问题
+
+### Q1: 机器人在服务器中但不回复消息？
+
+**解决方案：**
+1. 确认已启用 **Message Content Intent**（第二步第5项）
+2. 确认 Manager 中该实例状态为「**运行中**」
+3. 确认 Bot Token 填写正确
+4. 确认机器人在目标频道有发送消息权限
+
+### Q2: 邀请链接无效或权限不足？
+
+**解决方案：**
+1. 重新在 OAuth2 → URL Generator 中生成邀请链接
+2. 确认勾选了 `bot` scope 和所有必要权限
+3. 确认您是目标服务器的管理员
+
+### Q3: 对接码审批失败？
+
+**解决方案：**
+- 确认 Gateway 正在运行
+- 对接码区分大小写，请仔细核对
+- 对接码在 Gateway 重启后失效，让用户重新发消息获取新码
+
+### Q4: 如何在多个频道使用机器人？
+
+机器人加入服务器后，默认在所有有权限的频道可用。用户在任意频道 @机器人或私信即可使用，每个用户首次使用需要完成对接码绑定。
+
+---
+
+<Card title="返回 OpenClaw Manager 部署教程" icon="arrow-left" href="/cn/integrations/openclaw-manager">
+  查看 Manager 安装部署和实例管理的完整指南
+</Card>

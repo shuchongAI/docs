@@ -1,0 +1,225 @@
+---
+title: "OpenClaw Manager — Feishu Channel Setup"
+description: "Step-by-step guide on creating and configuring a Feishu bot in OpenClaw Manager, including enterprise app creation, permission setup, event subscription, and pairing code binding."
+---
+
+## Introduction
+
+This tutorial guides you through creating and configuring a Feishu bot in OpenClaw Manager. Once complete, your Feishu Bot will be powered by APIMart's AI models for intelligent conversations within Feishu.
+
+<Note>
+**Prerequisites:** Please ensure you have completed the [OpenClaw Manager deployment](/en/integrations/openclaw-manager) and the Manager is running with the management UI accessible.
+</Note>
+
+## Step 1: Create a Feishu Enterprise App
+
+1. Go to [Feishu Open Platform](https://open.feishu.cn/app), log in and click **Create Custom App**
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/create-app.png" alt="Create Custom App" />
+</Frame>
+
+2. Fill in the app name and description, upload an app icon
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/app-info.png" alt="Fill in app info" />
+</Frame>
+
+<caption>*Fill in app name and description*</caption>
+
+## Step 2: Configure App Permissions
+
+1. Enter the app details page, click **Permission Management** in the left menu
+
+2. Click **Batch Enable**, paste the following JSON configuration:
+
+```json
+{
+  "scopes": {
+    "tenant": [
+      "contact:contact.base:readonly",
+      "contact:user.email:readonly",
+      "im:chat.members:bot_access",
+      "im:message",
+      "im:message.group_at_msg:readonly",
+      "im:message.p2p_msg:readonly",
+      "im:message:readonly",
+      "im:message:send_as_bot"
+    ]
+  }
+}
+```
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/permissions.png" alt="Configure permissions" />
+</Frame>
+
+<caption>*Batch enable required permissions*</caption>
+
+3. Click to confirm
+
+## Step 3: Get Credentials
+
+1. Click **Credentials & Basic Info** in the left menu
+
+2. Copy the **App ID** (format: `cli_xxxxxxxxxx`) and **App Secret**
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/credentials.png" alt="Get credentials" />
+</Frame>
+
+<caption>*Copy App ID and App Secret*</caption>
+
+<Warning>
+**Keep your App Secret secure** and do not share it.
+</Warning>
+
+## Step 4: Create Instance in Manager
+
+1. Open the OpenClaw Manager UI (`http://127.0.0.1:51942`)
+
+2. Click **+ New Instance**
+
+3. **Enter instance name** — e.g. `my-feishu-bot`
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-name.png" alt="Enter instance name" />
+</Frame>
+
+4. **Select AI model** — Choose the model you want to use
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-model.png" alt="Select model" />
+</Frame>
+
+5. **Enter APIMart API Key** — Enter your API key starting with `sk-`
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-key.png" alt="Enter API Key" />
+</Frame>
+
+6. **Select channel** — Choose **Feishu**
+
+7. **Fill in credentials** — Paste the App ID and App Secret into the corresponding fields
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/step-channel.png" alt="Configure Feishu channel" />
+</Frame>
+
+<caption>*Fill in Feishu App ID and App Secret*</caption>
+
+8. Click **Create** to complete instance creation
+
+## Step 5: Configure Event Subscription
+
+After creating the instance, you still need to configure event subscription on the Feishu Open Platform:
+
+1. Return to the Feishu Open Platform, enter the app details
+
+2. Click **Events & Callbacks** in the left menu
+
+3. Set **Subscription Method** to "**Long Connection**"
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/event-method.png" alt="Select subscription method" />
+</Frame>
+
+<caption>*Select Long Connection subscription method*</caption>
+
+4. Click **Add Event**, search and add `im.message.receive_v1` (Receive messages)
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/event-add.png" alt="Add event" />
+</Frame>
+
+<caption>*Add the receive message event*</caption>
+
+## Step 6: Create Version and Publish
+
+1. Click **Version Management & Release** in the left menu
+
+2. Click **Create Version**
+
+3. Fill in the version number and update notes
+
+4. Submit for review and wait for admin approval
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/publish.png" alt="Create version and publish" />
+</Frame>
+
+<caption>*Create version and submit for publication*</caption>
+
+<Warning>
+**Important:** After every permission or event subscription change, you must create a new version and republish for changes to take effect.
+</Warning>
+
+## Step 7: Pairing Code Binding
+
+After the app is approved and published:
+
+1. Search for your bot name in Feishu
+
+2. Send any message (e.g. "Hello")
+
+3. The bot will reply with an **8-digit pairing code** (e.g. `DFE62DTD`)
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/pairing-code.png" alt="Get pairing code" />
+</Frame>
+
+<caption>*Pairing code returned by the bot*</caption>
+
+4. Return to the Manager's new instance wizard, enter the pairing code in the "**Enter Pairing Code**" step and click "**Approve**"
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/pairing-input.png" alt="Enter pairing code" />
+</Frame>
+
+<caption>*Enter pairing code and approve in the wizard*</caption>
+
+5. After the code is approved, click "**Done**"
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/pairing-success.png" alt="Pairing approved" />
+</Frame>
+
+<caption>*Pairing code approved, click Done*</caption>
+
+6. Return to Feishu, send another message, and the bot will respond with AI-generated content
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/chat-demo.png" alt="Chat with bot" />
+</Frame>
+
+<caption>*Chat with the AI bot after successful binding*</caption>
+
+## FAQ
+
+### Q1: Bot not responding to messages?
+
+**Solutions:**
+1. Confirm event subscription has added `im.message.receive_v1`
+2. Confirm subscription method is "**Long Connection**" (not Webhook)
+3. Confirm a new version has been created and published, and approval has passed
+4. Confirm the instance status is "**Running**" in Manager
+
+### Q2: Insufficient permissions error?
+
+**Solutions:**
+1. Check that all permissions are enabled (see Step 2)
+2. After modifying permissions, you must create a new version and republish
+3. Wait for admin approval
+
+### Q3: Pairing code approval failed?
+
+**Solutions:**
+- Confirm Gateway is running
+- Pairing codes are case-sensitive, double check carefully
+- Codes expire after Gateway restart, have the user send a new message
+
+---
+
+<Card title="Back to OpenClaw Manager Deployment Guide" icon="arrow-left" href="/en/integrations/openclaw-manager">
+  View the complete guide for Manager installation, deployment and instance management
+</Card>

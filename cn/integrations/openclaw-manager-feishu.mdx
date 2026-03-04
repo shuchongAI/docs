@@ -1,0 +1,225 @@
+---
+title: "OpenClaw Manager — 飞书渠道配置"
+description: "详细指导如何在 OpenClaw Manager 中创建和配置飞书机器人，包括创建企业自建应用、权限配置、事件订阅、对接码绑定等完整流程。"
+---
+
+## 简介
+
+本教程将指导您在 OpenClaw Manager 中完成飞书机器人的创建和配置。完成后，您的飞书 Bot 将接入 APIMart 的 AI 模型，可以在飞书中与用户进行智能对话。
+
+<Note>
+**前置条件：** 请确保您已完成 [OpenClaw Manager 部署](/cn/integrations/openclaw-manager)，Manager 正在运行且可以访问管理界面。
+</Note>
+
+## 第一步：创建飞书企业自建应用
+
+1. 前往 [飞书开放平台](https://open.feishu.cn/app)，登录后点击 **创建企业自建应用**
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/create-app.png" alt="创建企业自建应用" />
+</Frame>
+
+2. 填写应用名称和描述，上传应用图标
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/app-info.png" alt="填写应用信息" />
+</Frame>
+
+<caption>*填写应用名称和描述*</caption>
+
+## 第二步：配置应用权限
+
+1. 进入应用详情页，点击左侧菜单的 **权限管理**
+
+2. 点击 **批量开通**，粘贴以下 JSON 配置：
+
+```json
+{
+  "scopes": {
+    "tenant": [
+      "contact:contact.base:readonly",
+      "contact:user.email:readonly",
+      "im:chat.members:bot_access",
+      "im:message",
+      "im:message.group_at_msg:readonly",
+      "im:message.p2p_msg:readonly",
+      "im:message:readonly",
+      "im:message:send_as_bot"
+    ]
+  }
+}
+```
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/permissions.png" alt="配置权限" />
+</Frame>
+
+<caption>*批量开通所需权限*</caption>
+
+3. 点击确认开通
+
+## 第三步：获取凭证
+
+1. 在左侧菜单中点击 **凭证与基础信息**
+
+2. 复制 **App ID**（格式：`cli_xxxxxxxxxx`）和 **App Secret**
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/credentials.png" alt="获取凭证" />
+</Frame>
+
+<caption>*复制 App ID 和 App Secret*</caption>
+
+<Warning>
+**请妥善保管 App Secret**，不要泄露给他人。
+</Warning>
+
+## 第四步：在 Manager 中创建实例
+
+1. 打开 OpenClaw Manager 管理界面（`http://127.0.0.1:51942`）
+
+2. 点击 **+ 新建实例**
+
+3. **输入实例名称** — 如 `my-feishu-bot`
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-name.png" alt="输入实例名称" />
+</Frame>
+
+4. **选择 AI 模型** — 选择您要使用的模型
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-model.png" alt="选择模型" />
+</Frame>
+
+5. **输入 APIMart API Key** — 输入以 `sk-` 开头的 API 密钥
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-key.png" alt="输入 API Key" />
+</Frame>
+
+6. **选择渠道** — 选择 **飞书**
+
+7. **填写凭证** — 将 App ID 和 App Secret 粘贴到对应输入框中
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/step-channel.png" alt="配置飞书渠道" />
+</Frame>
+
+<caption>*填写飞书 App ID 和 App Secret*</caption>
+
+8. 点击 **创建** 完成实例创建
+
+## 第五步：配置事件订阅
+
+实例创建后，还需要在飞书开放平台配置事件订阅：
+
+1. 回到飞书开放平台，进入应用详情
+
+2. 点击左侧菜单的 **事件与回调**
+
+3. **订阅方式** 选择「**长连接**」
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/event-method.png" alt="选择订阅方式" />
+</Frame>
+
+<caption>*选择长连接订阅方式*</caption>
+
+4. 点击 **添加事件**，搜索并添加 `im.message.receive_v1`（接收消息）
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/event-add.png" alt="添加事件" />
+</Frame>
+
+<caption>*添加接收消息事件*</caption>
+
+## 第六步：创建版本并发布
+
+1. 点击左侧菜单的 **版本管理与发布**
+
+2. 点击 **创建版本**
+
+3. 填写版本号和更新说明
+
+4. 提交审核，等待管理员审批
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/publish.png" alt="创建版本并发布" />
+</Frame>
+
+<caption>*创建版本并提交发布*</caption>
+
+<Warning>
+**重要：** 每次修改权限或事件订阅后，都必须创建新版本并重新发布才能生效。
+</Warning>
+
+## 第七步：对接码绑定
+
+应用发布审批通过后：
+
+1. 在飞书中搜索您的机器人名称
+
+2. 发送任意消息（如「你好」）
+
+3. 机器人会回复一个 **8 位对接码**（如 `DFE62DTD`）
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/pairing-code.png" alt="获取对接码" />
+</Frame>
+
+<caption>*机器人回复的对接码*</caption>
+
+4. 回到 Manager 的新建实例向导，在「**填入对接码**」步骤中输入对接码，点击「**批准**」
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/pairing-input.png" alt="输入对接码" />
+</Frame>
+
+<caption>*在新建实例向导中输入对接码并批准*</caption>
+
+5. 显示对接码已批准后，点击「**完成**」
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/pairing-success.png" alt="对接码审批成功" />
+</Frame>
+
+<caption>*对接码审批成功，点击完成*</caption>
+
+6. 返回飞书，再次发送消息，机器人将正常回复 AI 生成的内容
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/feishu/chat-demo.png" alt="与机器人对话" />
+</Frame>
+
+<caption>*绑定成功后与 AI 机器人正常对话*</caption>
+
+## 常见问题
+
+### Q1: 机器人不回复消息？
+
+**解决方案：**
+1. 确认事件订阅已添加 `im.message.receive_v1`
+2. 确认订阅方式为「**长连接**」（不是 Webhook）
+3. 确认已创建新版本并发布，且审批已通过
+4. 确认 Manager 中该实例状态为「**运行中**」
+
+### Q2: 提示权限不足？
+
+**解决方案：**
+1. 检查所有权限是否已开通（参见第二步）
+2. 修改权限后，必须创建新版本并重新发布
+3. 等待管理员审批通过
+
+### Q3: 对接码审批失败？
+
+**解决方案：**
+- 确认 Gateway 正在运行
+- 对接码区分大小写，请仔细核对
+- 对接码在 Gateway 重启后失效，让用户重新发消息获取新码
+
+---
+
+<Card title="返回 OpenClaw Manager 部署教程" icon="arrow-left" href="/cn/integrations/openclaw-manager">
+  查看 Manager 安装部署和实例管理的完整指南
+</Card>

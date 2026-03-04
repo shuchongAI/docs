@@ -1,0 +1,162 @@
+---
+title: "OpenClaw Manager — Telegram Channel Setup"
+description: "Step-by-step guide on creating and configuring a Telegram bot in OpenClaw Manager, including BotFather bot creation, credential setup, and pairing code binding."
+---
+
+## Introduction
+
+This tutorial guides you through creating and configuring a Telegram bot in OpenClaw Manager. Once complete, your Telegram Bot will be powered by APIMart's AI models for intelligent conversations.
+
+<Note>
+**Prerequisites:** Please ensure you have completed the [OpenClaw Manager deployment](/en/integrations/openclaw-manager) and the Manager is running with the management UI accessible.
+</Note>
+
+## Step 1: Create a Bot on Telegram
+
+1. Open Telegram, search for [@BotFather](https://t.me/BotFather) and start a conversation
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/botfather-search.png" alt="Search BotFather" />
+</Frame>
+
+2. Send the `/newbot` command
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/botfather-newbot.png" alt="Send /newbot command" />
+</Frame>
+
+<caption>*Send /newbot to start creating a bot*</caption>
+
+3. Enter your bot's **display name** as prompted (e.g. `My AI Bot`)
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/botfather-name.png" alt="Enter bot name" />
+</Frame>
+
+<caption>*Enter the bot's display name*</caption>
+
+4. Enter the bot's **username** (must end with `bot`, e.g. `my_ai_chatbot`)
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/botfather-username.png" alt="Enter bot username" />
+</Frame>
+
+<caption>*Enter the bot's username (must end with bot)*</caption>
+
+5. BotFather will return a **Bot Token** (format: `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`), copy and save it
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/botfather-token.png" alt="Get Bot Token" />
+</Frame>
+
+<caption>*Bot Token returned by BotFather*</caption>
+
+<Warning>
+**Keep your Bot Token secure** and do not share it. If the token is compromised, use the `/revoke` command in BotFather to regenerate it.
+</Warning>
+
+## Step 2: Create Instance in Manager
+
+1. Open the OpenClaw Manager UI (`http://127.0.0.1:51942`)
+
+2. Click **+ New Instance**
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/new-instance.png" alt="New Instance" />
+</Frame>
+
+3. **Enter instance name** — e.g. `my-telegram-bot` (letters, numbers, underscores, hyphens only)
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-name.png" alt="Enter instance name" />
+</Frame>
+
+4. **Select AI model** — Choose the model you want to use
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-model.png" alt="Select model" />
+</Frame>
+
+5. **Enter APIMart API Key** — Enter your API key starting with `sk-`
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-key.png" alt="Enter API Key" />
+</Frame>
+
+6. **Select channel** — Choose **Telegram**
+
+7. **Paste Bot Token** — Paste the Bot Token obtained in Step 1
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/step-channel.png" alt="Configure Telegram channel" />
+</Frame>
+
+<caption>*Paste Telegram Bot Token*</caption>
+
+8. Click **Create** to complete instance creation
+
+## Step 3: Pairing Code Binding
+
+After the instance is created and started, complete user authorization via pairing code:
+
+1. Search for your bot's username in Telegram
+
+2. Send any message (e.g. "Hello")
+
+3. The bot will reply with an **8-digit pairing code** (e.g. `DFE62DTD`)
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/pairing-code.png" alt="Get pairing code" />
+</Frame>
+
+<caption>*Pairing code returned by the bot*</caption>
+
+4. Return to the Manager's new instance wizard, enter the pairing code in the "**Enter Pairing Code**" step and click "**Approve**"
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/pairing-input.png" alt="Enter pairing code" />
+</Frame>
+
+<caption>*Enter pairing code and approve in the wizard*</caption>
+
+5. After the code is approved, click "**Done**"
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/pairing-success.png" alt="Pairing approved" />
+</Frame>
+
+<caption>*Pairing code approved, click Done*</caption>
+
+6. Return to Telegram, send another message, and the bot will respond with AI-generated content
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/chat-demo.png" alt="Chat with bot" />
+</Frame>
+
+<caption>*Chat with the AI bot after successful binding*</caption>
+
+<Note>
+**Tip:** Pairing codes are stored in Gateway memory and expire after Gateway restart. If a code expires, simply have the user send a new message to get a fresh code.
+</Note>
+
+## FAQ
+
+### Q1: Bot created successfully but not responding?
+
+**Solutions:**
+1. Confirm the instance status is "**Running**" in Manager
+2. Confirm Bot Token is entered correctly
+3. Check Gateway logs: `~/.openclaw-<instance-name>/logs/gateway.log`
+
+### Q2: Pairing code approval failed?
+
+**Solutions:**
+- Confirm Gateway is running
+- Pairing codes are case-sensitive, double check carefully
+- Codes expire after Gateway restart, have the user send a new message
+
+---
+
+<Card title="Back to OpenClaw Manager Deployment Guide" icon="arrow-left" href="/en/integrations/openclaw-manager">
+  View the complete guide for Manager installation, deployment and instance management
+</Card>

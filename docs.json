@@ -256,7 +256,16 @@
                 "icon": "grid",
                 "pages": [
                   "en/integrations/dify",
-                  "en/integrations/immersive-translate"
+                  "en/integrations/immersive-translate",
+                  {
+                    "group": "OpenClaw Manager",
+                    "icon": "robot",
+                    "pages": [
+                      "en/integrations/openclaw-manager",
+                      "en/integrations/openclaw-manager-telegram",
+                      "en/integrations/openclaw-manager-feishu"
+                    ]
+                  }
                 ]
               }
             ]
@@ -506,7 +515,16 @@
                 "icon": "grid",
                 "pages": [
                   "cn/integrations/dify",
-                  "cn/integrations/immersive-translate"
+                  "cn/integrations/immersive-translate",
+                  {
+                    "group": "OpenClaw Manager",
+                    "icon": "robot",
+                    "pages": [
+                      "cn/integrations/openclaw-manager",
+                      "cn/integrations/openclaw-manager-telegram",
+                      "cn/integrations/openclaw-manager-feishu"
+                    ]
+                  }
                 ]
               }
             ]
@@ -756,7 +774,16 @@
                 "icon": "grid",
                 "pages": [
                   "ja/integrations/dify",
-                  "ja/integrations/immersive-translate"
+                  "ja/integrations/immersive-translate",
+                  {
+                    "group": "OpenClaw Manager",
+                    "icon": "robot",
+                    "pages": [
+                      "ja/integrations/openclaw-manager",
+                      "ja/integrations/openclaw-manager-telegram",
+                      "ja/integrations/openclaw-manager-feishu"
+                    ]
+                  }
                 ]
               }
             ]
@@ -1000,7 +1027,16 @@
                 "icon": "grid",
                 "pages": [
                   "ko/integrations/dify",
-                  "ko/integrations/immersive-translate"
+                  "ko/integrations/immersive-translate",
+                  {
+                    "group": "OpenClaw Manager",
+                    "icon": "robot",
+                    "pages": [
+                      "ko/integrations/openclaw-manager",
+                      "ko/integrations/openclaw-manager-telegram",
+                      "ko/integrations/openclaw-manager-feishu"
+                    ]
+                  }
                 ]
               }
             ]

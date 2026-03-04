@@ -1,0 +1,162 @@
+---
+title: "OpenClaw Manager — Telegram チャネル設定"
+description: "OpenClaw Manager で Telegram ボットを作成・設定する手順を詳しく解説。BotFather でのボット作成、認証情報の入力、ペアリングコード連携までの完全ガイド。"
+---
+
+## はじめに
+
+このチュートリアルでは、OpenClaw Manager で Telegram ボットを作成・設定する手順を説明します。設定完了後、Telegram Bot が APIMart の AI モデルを使用して、ユーザーとインテリジェントな会話を行えるようになります。
+
+<Note>
+**前提条件：** [OpenClaw Manager のデプロイ](/ja/integrations/openclaw-manager)が完了し、Manager が起動中で管理画面にアクセスできることをご確認ください。
+</Note>
+
+## ステップ 1：Telegram で Bot を作成
+
+1. Telegram を開き、[@BotFather](https://t.me/BotFather) を検索して会話を開始
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/botfather-search.png" alt="BotFather を検索" />
+</Frame>
+
+2. `/newbot` コマンドを送信
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/botfather-newbot.png" alt="/newbot コマンドを送信" />
+</Frame>
+
+<caption>*/newbot を送信してボット作成を開始*</caption>
+
+3. 指示に従ってボットの**表示名**を入力（例：`My AI Bot`）
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/botfather-name.png" alt="ボット名を入力" />
+</Frame>
+
+<caption>*ボットの表示名を入力*</caption>
+
+4. ボットの**ユーザー名**を入力（`bot` で終わる必要あり、例：`my_ai_chatbot`）
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/botfather-username.png" alt="ボットユーザー名を入力" />
+</Frame>
+
+<caption>*ボットのユーザー名を入力（bot で終わる必要あり）*</caption>
+
+5. BotFather が **Bot Token** を返します（形式：`123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`）、コピーして保存
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/botfather-token.png" alt="Bot Token を取得" />
+</Frame>
+
+<caption>*BotFather が返した Bot Token*</caption>
+
+<Warning>
+**Bot Token を安全に保管してください**。漏洩した場合は、BotFather で `/revoke` コマンドを使用して再生成してください。
+</Warning>
+
+## ステップ 2：Manager でインスタンスを作成
+
+1. OpenClaw Manager 管理画面を開く（`http://127.0.0.1:51942`）
+
+2. **+ 新規インスタンス** をクリック
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/new-instance.png" alt="新規インスタンス" />
+</Frame>
+
+3. **インスタンス名を入力** — 例：`my-telegram-bot`（英字、数字、アンダースコア、ハイフンのみ）
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-name.png" alt="インスタンス名を入力" />
+</Frame>
+
+4. **AI モデルを選択** — 使用するモデルを選択
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-model.png" alt="モデルを選択" />
+</Frame>
+
+5. **APIMart API Key を入力** — `sk-` で始まる API キーを入力
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/manager/step-key.png" alt="API Key を入力" />
+</Frame>
+
+6. **チャネルを選択** — **Telegram** を選択
+
+7. **Bot Token を貼り付け** — ステップ 1 で取得した Bot Token を貼り付け
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/step-channel.png" alt="Telegram チャネルを設定" />
+</Frame>
+
+<caption>*Telegram Bot Token を貼り付け*</caption>
+
+8. **作成** をクリックしてインスタンス作成を完了
+
+## ステップ 3：ペアリングコード連携
+
+インスタンス作成・起動後、ペアリングコードでユーザー認証を完了：
+
+1. Telegram で先ほど作成したボットのユーザー名を検索
+
+2. 任意のメッセージを送信（例：「こんにちは」）
+
+3. ボットが **8 桁のペアリングコード**（例：`DFE62DTD`）を返信
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/pairing-code.png" alt="ペアリングコードを取得" />
+</Frame>
+
+<caption>*ボットが返信したペアリングコード*</caption>
+
+4. Manager の新規インスタンスウィザードに戻り、「**ペアリングコードを入力**」ステップでコードを入力し、「**承認**」をクリック
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/pairing-input.png" alt="ペアリングコードを入力" />
+</Frame>
+
+<caption>*ウィザードでペアリングコードを入力して承認*</caption>
+
+5. コードが承認されたら、「**完了**」をクリック
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/pairing-success.png" alt="ペアリング承認成功" />
+</Frame>
+
+<caption>*ペアリングコード承認成功、完了をクリック*</caption>
+
+6. Telegram に戻り、再度メッセージを送信すると、ボットが AI 生成のコンテンツで応答
+
+<Frame>
+  <img src="/images/integrations/openclaw-manager/telegram/chat-demo.png" alt="ボットと会話" />
+</Frame>
+
+<caption>*連携成功後、AI ボットとの通常の会話*</caption>
+
+<Note>
+**ヒント：** ペアリングコードは Gateway のメモリに保存され、Gateway 再起動後に無効になります。コードが期限切れの場合は、ユーザーに新しいメッセージを送信してもらうだけで新しいコードを取得できます。
+</Note>
+
+## よくある質問
+
+### Q1: ボットを作成したがメッセージに応答しない？
+
+**解決方法：**
+1. Manager でインスタンスのステータスが「**実行中**」であることを確認
+2. Bot Token が正しく入力されているか確認
+3. Gateway ログを確認：`~/.openclaw-<インスタンス名>/logs/gateway.log`
+
+### Q2: ペアリングコードの承認に失敗？
+
+**解決方法：**
+- Gateway が実行中であることを確認
+- ペアリングコードは大文字小文字を区別します、慎重に確認してください
+- コードは Gateway 再起動後に無効になります、ユーザーに新しいメッセージを送信してもらってください
+
+---
+
+<Card title="OpenClaw Manager デプロイガイドに戻る" icon="arrow-left" href="/ja/integrations/openclaw-manager">
+  Manager のインストール、デプロイ、インスタンス管理の完全ガイドを確認
+</Card>

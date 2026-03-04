@@ -1,0 +1,336 @@
+---
+title: "OpenClaw Manager 部署教程"
+description: "一键部署和管理 OpenClaw AI 机器人网关的可视化工具，支持 Telegram、飞书、Discord 三大平台，通过 APIMart API 接入 GPT-5、Claude、Gemini 等多种 AI 模型。"
+---
+
+## 简介
+
+OpenClaw Manager 是一个跨平台的可视化管理工具，帮助您快速部署和管理 OpenClaw AI 机器人网关。
+
+- **零配置部署** — 单文件可执行程序，自动安装所有依赖
+- **Web 管理界面** — 通过浏览器创建、启停、删除实例，切换模型
+- **多渠道支持** — Telegram / 飞书 / Discord
+- **多模型支持** — GPT-5 系列、Claude 4.5/4.6 系列、Gemini 系列，支持故障自动切换
+- **后台运行** — 支持 `--daemon` 模式，SSH 断开不受影响
+- **多语言界面** — 中文 / English / 日本語
+
+## 准备工作
+
+在开始之前，请确保：
+
+1. **已获取 APIMart API Key**
+   登录 [APIMart 控制台](https://apimart.ai/console/token) 获取您的 API 密钥（以 `sk-` 开头）
+
+2. **已创建消息平台 Bot**
+   根据您要使用的平台，提前准备好 Bot 凭证（详见下方渠道配置章节）
+
+<Note>
+**提示：** 如果还没有 APIMart 账户，请先在 [APIMart](https://apimart.ai) 注册并获取 API 密钥。
+</Note>
+
+## 第一步：下载
+
+从 [GitHub Releases](https://github.com/zhihong-apimart/OpenClaw-Manager/releases) 下载对应平台的可执行文件：
+
+| 平台 | 文件名 |
+|------|--------|
+| Windows x64 | `openclaw-manager-win-x64.exe` |
+| macOS ARM (Apple Silicon) | `openclaw-manager-macos-arm64` |
+| macOS Intel | `openclaw-manager-macos-x64` |
+| Linux x64 | `openclaw-manager-linux-x64` |
+| Linux ARM64 | `openclaw-manager-linux-arm64` |
+
+## 第二步：运行
+
+<Tabs>
+  <Tab title="Windows">
+    ### Windows 部署
+
+    #### 前提条件
+    - Windows 10/11（64 位）
+    - **管理员权限**（用于注册 Windows 计划任务启停 Gateway）
+
+    #### 启动方式
+
+    ```
+    右键 openclaw-manager-win-x64.exe → 以管理员身份运行
+    ```
+
+    首次启动会自动完成以下操作：
+    - 检查并安装 Node.js v22（如未安装，自动下载 MSI 静默安装）
+    - 安装 OpenClaw CLI（通过 `npm install -g openclaw`）
+    - 自动打开浏览器访问管理界面
+
+    <Warning>
+    **必须以管理员身份运行**，否则无法创建 Windows 计划任务来管理 Gateway 进程。
+    </Warning>
+  </Tab>
+
+  <Tab title="Linux">
+    ### Linux 部署
+
+    #### 前提条件
+    - Ubuntu 20.04+ / Debian 11+ / CentOS 8+（x64 或 ARM64）
+    - root 权限（推荐）
+
+    #### 启动方式
+
+    1. 下载并赋予执行权限：
+    ```bash
+    chmod +x ./openclaw-manager-linux-x64
+    ```
+
+    2. **前台运行**（测试用）：
+    ```bash
+    ./openclaw-manager-linux-x64
+    ```
+
+    3. **后台运行**（推荐，生产环境）：
+    ```bash
+    ./openclaw-manager-linux-x64 --daemon
+    ```
+
+    #### 守护进程管理
+
+    ```bash
+    # 后台启动
+    ./openclaw-manager-linux-x64 --daemon
+    # 或简写
+    ./openclaw-manager-linux-x64 -d
+
+    # 查看运行状态
+    ./openclaw-manager-linux-x64 --status
+
+    # 停止
+    ./openclaw-manager-linux-x64 --stop
+    # 或简写
+    ./openclaw-manager-linux-x64 -s
+    ```
+
+    #### 防火墙配置
+
+    如需远程访问，请开放以下端口：
+
+    ```bash
+    # Manager Web UI
+    ufw allow 51942/tcp
+
+    # Gateway 端口（每个实例一个，从 18789 开始递增）
+    ufw allow 18789/tcp
+    ```
+
+    <Note>
+    **提示：** Linux 上 Manager 自动绑定 `0.0.0.0`，允许远程访问。日志文件位于 `~/openclaw-manager.log`。
+    </Note>
+  </Tab>
+
+  <Tab title="macOS">
+    ### macOS 部署
+
+    #### 前提条件
+    - macOS 12+（Apple Silicon 或 Intel）
+
+    #### 启动方式
+
+    1. 下载并赋予执行权限：
+    ```bash
+    chmod +x ./openclaw-manager-macos-arm64
+    ```
+
+    2. 首次运行需要允许安全性设置：
+    ```
+    系统设置 → 隐私与安全性 → 仍然允许
+    ```
+    或使用命令移除隔离属性：
+    ```bash
+    xattr -d com.apple.quarantine ./openclaw-manager-macos-arm64
+    ```
+
+    3. 运行：
+    ```bash
+    ./openclaw-manager-macos-arm64
+    ```
+
+    4. 后台运行：
+    ```bash
+    ./openclaw-manager-macos-arm64 --daemon
+    ```
+
+    <Note>
+    **提示：** macOS 上 Manager 绑定 `127.0.0.1`（仅本机访问）。守护进程命令与 Linux 相同。
+    </Note>
+  </Tab>
+</Tabs>
+
+## 第三步：访问管理界面
+
+程序启动后，访问 Web 管理界面：
+
+```
+http://127.0.0.1:51942
+```
+
+<Note>
+**Linux 远程访问：** 将 `127.0.0.1` 替换为服务器 IP，如 `http://your-server-ip:51942`
+</Note>
+
+## 第四步：创建实例
+
+在 Web 管理界面中，点击 **+ 新建实例** 开始创建：
+
+### 4.1 设置实例名称
+
+输入实例名称（仅支持英文字母、数字、下划线、连字符，1-64 字符）。
+
+### 4.2 选择 AI 模型
+
+选择要使用的 AI 模型，并输入您的 APIMart API Key（以 `sk-` 开头）。
+
+**支持的模型：**
+
+| 模型 ID | 名称 | 特点 |
+|---------|------|------|
+| `gpt-5` | GPT-5 | 最新最强大 |
+| `gpt-5.1` | GPT-5.1 | 增强版本 |
+| `gpt-5.2-codex` | GPT-5.2 Codex | 代码专精 |
+| `gpt-5.2-pro` | GPT-5.2 Pro | 专业版本 |
+| `claude-opus-4-6-20260320` | Claude Opus 4.6 | 最强推理 |
+| `claude-sonnet-4-6-20260320` | Claude Sonnet 4.6 | 均衡之选 |
+| `claude-opus-4-5-20251101` | Claude Opus 4.5 | 高级推理 |
+| `claude-sonnet-4-5-20250929` | Claude Sonnet 4.5 | 擅长代码 |
+| `claude-haiku-4-5-20251001` | Claude Haiku 4.5 | 快速响应 |
+| `gemini-2.5-flash` | Gemini 2.5 Flash | 快速多模态 |
+| `gemini-3-pro-preview` | Gemini 3 Pro Preview | 高性能 |
+
+<Tip>
+**模型选择建议：**
+- 💰 **高性价比：** `claude-haiku-4-5-20251001`、`gemini-2.5-flash`
+- 🚀 **高性能：** `gpt-5`、`claude-opus-4-6-20260320`、`gemini-3-pro-preview`
+- ⚡ **快速响应：** `gemini-2.5-flash`、`claude-haiku-4-5-20251001`
+</Tip>
+
+您还可以选择 **故障切换模式**，添加多个备用模型。当主模型不可用时，系统会自动切换到备用模型。
+
+### 4.3 配置消息渠道
+
+选择您要使用的消息平台，按照对应教程完成配置：
+
+<CardGroup cols={3}>
+  <Card title="Telegram" icon="telegram" href="/cn/integrations/openclaw-manager-telegram">
+    通过 BotFather 创建 Telegram 机器人
+  </Card>
+  <Card title="飞书" icon="message" href="/cn/integrations/openclaw-manager-feishu">
+    创建飞书企业自建应用机器人
+  </Card>
+  <Card title="Discord" icon="discord" href="/cn/integrations/openclaw-manager-discord">
+    创建 Discord 服务器机器人
+  </Card>
+</CardGroup>
+
+## 第五步：对接码绑定
+
+实例创建并启动后，需要通过对接码完成用户绑定：
+
+1. 用户在对应消息平台中给机器人发送任意消息
+2. 机器人回复一个 **8 位对接码**（如 `DFE62DTD`）
+3. 管理员在 Web 管理界面点击该实例的「**对接码**」按钮
+4. 输入对接码并点击「**批准**」
+5. 用户即可正常使用机器人
+
+<Note>
+**提示：** 对接码存储在 Gateway 内存中，重启后失效。如果对接码过期，让用户重新发送消息获取新的对接码即可。
+</Note>
+
+## 管理实例
+
+在管理界面中，您可以对实例进行以下操作：
+
+| 操作 | 说明 |
+|------|------|
+| **启动** | 启动 Gateway 进程，机器人开始接收消息 |
+| **停止** | 停止 Gateway 进程 |
+| **切换模型** | 实时切换 AI 模型，无需重启 Gateway |
+| **对接码** | 审批新用户的对接码，授权其使用机器人 |
+| **删除** | 停止并删除实例及全部数据（不可恢复） |
+
+## 端口与数据说明
+
+### 端口
+
+| 用途 | 端口 | 绑定地址 |
+|------|------|---------|
+| Manager Web UI | `51942` | Windows/macOS: `127.0.0.1`，Linux: `0.0.0.0` |
+| Gateway 实例 | `18789` 起递增 | 每个实例分配独立端口 |
+
+### 数据目录
+
+| 内容 | 路径 |
+|------|------|
+| 实例配置 | `~/.openclaw-<实例名>/openclaw.json` |
+| Gateway 日志 | `~/.openclaw-<实例名>/logs/gateway.log` |
+| Manager 日志 | `~/openclaw-manager.log`（daemon 模式） |
+| Manager PID | `~/.openclaw-manager.pid` |
+
+## 常见问题
+
+### Q1: Manager 无法启动？
+
+**解决方案：**
+
+| 平台 | 检查项 |
+|------|--------|
+| Windows | 确认以管理员身份运行 |
+| Linux | 确认端口 51942 未被占用（`lsof -i :51942`） |
+| macOS | 确认已允许安全性设置或移除隔离属性 |
+| 所有平台 | 检查日志 `~/openclaw-manager.log` |
+
+### Q2: 找不到 openclaw 命令？
+
+**解决方案：**
+- 程序启动时会自动检测并安装 openclaw CLI
+- 如版本过旧（< 0.1.0），会自动更新
+- 手动安装：`npm install -g openclaw@latest`
+
+### Q3: 实例启动后显示"已停止"？
+
+**解决方案：**
+- Gateway 启动需要几秒钟绑定端口，状态可能短暂显示不一致
+- 刷新页面查看最新状态
+- 检查 Gateway 日志：`~/.openclaw-<实例名>/logs/gateway.log`
+
+### Q4: 飞书机器人不回复？
+
+**解决方案：**
+1. 确认事件订阅已添加 `im.message.receive_v1`
+2. 确认订阅方式为「**长连接**」
+3. 确认已创建新版本并发布（每次改权限/事件后都需要重新发布）
+
+### Q5: 对接码审批失败？
+
+**解决方案：**
+- 确认 Gateway 正在运行
+- 对接码存储在 Gateway 内存中，重启后失效
+- 让用户重新发送消息获取新的对接码
+
+### Q6: 如何查看 API 使用情况和费用？
+
+登录 [APIMart 控制台](https://apimart.ai/console) 查看：
+- 📊 API 调用统计
+- 💰 费用明细
+- 📈 使用趋势图表
+
+## 支持与帮助
+
+如果您在使用过程中遇到任何问题：
+
+- 📚 [APIMart 文档中心](https://docs.apimart.ai)
+- 📚 [OpenClaw Manager GitHub](https://github.com/zhihong-apimart/OpenClaw-Manager)
+- 💬 [Discord 社区](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 技术支持：zhihong@apimart.ai
+
+---
+
+<Card title="开始使用 APIMart" icon="rocket" href="https://apimart.ai">
+  立即注册 APIMart，获取您的 API 密钥，部署您的 AI 机器人！
+</Card>

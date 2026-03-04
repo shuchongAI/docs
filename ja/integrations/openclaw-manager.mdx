@@ -1,0 +1,336 @@
+---
+title: "OpenClaw Manager デプロイガイド"
+description: "OpenClaw AI ボットゲートウェイをワンクリックでデプロイ・管理できるビジュアルツール。Telegram、Feishu、Discord の3大プラットフォームに対応し、APIMart API 経由で GPT-5、Claude、Gemini など多数の AI モデルを利用可能。"
+---
+
+## はじめに
+
+OpenClaw Manager は、OpenClaw AI ボットゲートウェイを素早くデプロイ・管理するためのクロスプラットフォーム対応ビジュアル管理ツールです。
+
+- **ゼロ設定デプロイ** — 単一実行ファイル、依存関係を自動インストール
+- **Web 管理画面** — ブラウザからインスタンスの作成・起動/停止・削除、モデル切り替えが可能
+- **マルチチャネル対応** — Telegram / Feishu / Discord
+- **マルチモデル対応** — GPT-5 シリーズ、Claude 4.5/4.6 シリーズ、Gemini シリーズ、自動フェイルオーバー対応
+- **バックグラウンド実行** — `--daemon` モード対応、SSH 切断の影響なし
+- **多言語 UI** — 中国語 / English / 日本語
+
+## 事前準備
+
+開始前に以下をご確認ください：
+
+1. **APIMart API Key の取得**
+   [APIMart コンソール](https://apimart.ai/console/token)にログインし、API キー（`sk-` で始まる）を取得
+
+2. **メッセージプラットフォームの Bot 作成**
+   使用するプラットフォームに応じて、Bot の認証情報を事前に準備（下記チャネル設定セクションを参照）
+
+<Note>
+**ヒント：** APIMart アカウントをお持ちでない場合は、まず [APIMart](https://apimart.ai) で登録し、API キーを取得してください。
+</Note>
+
+## ステップ 1：ダウンロード
+
+[GitHub Releases](https://github.com/zhihong-apimart/OpenClaw-Manager/releases) からお使いのプラットフォームに対応した実行ファイルをダウンロード：
+
+| プラットフォーム | ファイル名 |
+|-----------------|-----------|
+| Windows x64 | `openclaw-manager-win-x64.exe` |
+| macOS ARM (Apple Silicon) | `openclaw-manager-macos-arm64` |
+| macOS Intel | `openclaw-manager-macos-x64` |
+| Linux x64 | `openclaw-manager-linux-x64` |
+| Linux ARM64 | `openclaw-manager-linux-arm64` |
+
+## ステップ 2：起動
+
+<Tabs>
+  <Tab title="Windows">
+    ### Windows デプロイ
+
+    #### 前提条件
+    - Windows 10/11（64 ビット）
+    - **管理者権限**（Gateway 管理用の Windows タスクスケジューラ登録に必要）
+
+    #### 起動方法
+
+    ```
+    openclaw-manager-win-x64.exe を右クリック → 管理者として実行
+    ```
+
+    初回起動時に以下が自動実行されます：
+    - Node.js v22 のチェックとインストール（未インストールの場合、MSI を自動ダウンロードしてサイレントインストール）
+    - OpenClaw CLI のインストール（`npm install -g openclaw`）
+    - ブラウザを自動で開いて管理画面にアクセス
+
+    <Warning>
+    **管理者として実行する必要があります**。そうしないと、Gateway プロセス管理用の Windows タスクスケジューラを作成できません。
+    </Warning>
+  </Tab>
+
+  <Tab title="Linux">
+    ### Linux デプロイ
+
+    #### 前提条件
+    - Ubuntu 20.04+ / Debian 11+ / CentOS 8+（x64 または ARM64）
+    - root 権限（推奨）
+
+    #### 起動方法
+
+    1. ダウンロードして実行権限を付与：
+    ```bash
+    chmod +x ./openclaw-manager-linux-x64
+    ```
+
+    2. **フォアグラウンド実行**（テスト用）：
+    ```bash
+    ./openclaw-manager-linux-x64
+    ```
+
+    3. **バックグラウンド実行**（本番環境推奨）：
+    ```bash
+    ./openclaw-manager-linux-x64 --daemon
+    ```
+
+    #### デーモン管理
+
+    ```bash
+    # バックグラウンド起動
+    ./openclaw-manager-linux-x64 --daemon
+    # 短縮形
+    ./openclaw-manager-linux-x64 -d
+
+    # ステータス確認
+    ./openclaw-manager-linux-x64 --status
+
+    # 停止
+    ./openclaw-manager-linux-x64 --stop
+    # 短縮形
+    ./openclaw-manager-linux-x64 -s
+    ```
+
+    #### ファイアウォール設定
+
+    リモートアクセスが必要な場合、以下のポートを開放：
+
+    ```bash
+    # Manager Web UI
+    ufw allow 51942/tcp
+
+    # Gateway ポート（インスタンスごとに 1 つ、18789 から順に割り当て）
+    ufw allow 18789/tcp
+    ```
+
+    <Note>
+    **ヒント：** Linux では Manager は自動的に `0.0.0.0` にバインドされ、リモートアクセスが可能です。ログファイルは `~/openclaw-manager.log` にあります。
+    </Note>
+  </Tab>
+
+  <Tab title="macOS">
+    ### macOS デプロイ
+
+    #### 前提条件
+    - macOS 12+（Apple Silicon または Intel）
+
+    #### 起動方法
+
+    1. ダウンロードして実行権限を付与：
+    ```bash
+    chmod +x ./openclaw-manager-macos-arm64
+    ```
+
+    2. 初回実行時にセキュリティ設定の許可が必要：
+    ```
+    システム設定 → プライバシーとセキュリティ → このまま許可
+    ```
+    またはコマンドで検疫属性を削除：
+    ```bash
+    xattr -d com.apple.quarantine ./openclaw-manager-macos-arm64
+    ```
+
+    3. 実行：
+    ```bash
+    ./openclaw-manager-macos-arm64
+    ```
+
+    4. バックグラウンド実行：
+    ```bash
+    ./openclaw-manager-macos-arm64 --daemon
+    ```
+
+    <Note>
+    **ヒント：** macOS では Manager は `127.0.0.1` にバインドされます（ローカルアクセスのみ）。デーモンコマンドは Linux と同じです。
+    </Note>
+  </Tab>
+</Tabs>
+
+## ステップ 3：管理画面にアクセス
+
+プログラム起動後、Web 管理画面にアクセス：
+
+```
+http://127.0.0.1:51942
+```
+
+<Note>
+**Linux リモートアクセス：** `127.0.0.1` をサーバー IP に置き換えてください（例：`http://your-server-ip:51942`）
+</Note>
+
+## ステップ 4：インスタンス作成
+
+Web 管理画面で **+ 新規インスタンス** をクリックして作成開始：
+
+### 4.1 インスタンス名の設定
+
+インスタンス名を入力（英字、数字、アンダースコア、ハイフンのみ、1〜64 文字）。
+
+### 4.2 AI モデルの選択
+
+使用する AI モデルを選択し、APIMart API Key（`sk-` で始まる）を入力。
+
+**対応モデル：**
+
+| モデル ID | 名称 | 特徴 |
+|----------|------|------|
+| `gpt-5` | GPT-5 | 最新・最強 |
+| `gpt-5.1` | GPT-5.1 | 強化版 |
+| `gpt-5.2-codex` | GPT-5.2 Codex | コード特化 |
+| `gpt-5.2-pro` | GPT-5.2 Pro | プロフェッショナル版 |
+| `claude-opus-4-6-20260320` | Claude Opus 4.6 | 最強の推論力 |
+| `claude-sonnet-4-6-20260320` | Claude Sonnet 4.6 | バランス型 |
+| `claude-opus-4-5-20251101` | Claude Opus 4.5 | 高度な推論 |
+| `claude-sonnet-4-5-20250929` | Claude Sonnet 4.5 | コードに強い |
+| `claude-haiku-4-5-20251001` | Claude Haiku 4.5 | 高速レスポンス |
+| `gemini-2.5-flash` | Gemini 2.5 Flash | 高速マルチモーダル |
+| `gemini-3-pro-preview` | Gemini 3 Pro Preview | ハイパフォーマンス |
+
+<Tip>
+**モデル選択のおすすめ：**
+- 💰 **コスパ重視：** `claude-haiku-4-5-20251001`、`gemini-2.5-flash`
+- 🚀 **高性能：** `gpt-5`、`claude-opus-4-6-20260320`、`gemini-3-pro-preview`
+- ⚡ **高速レスポンス：** `gemini-2.5-flash`、`claude-haiku-4-5-20251001`
+</Tip>
+
+**フェイルオーバーモード**を選択して、複数のバックアップモデルを追加することもできます。プライマリモデルが利用不可の場合、システムが自動的にバックアップモデルに切り替えます。
+
+### 4.3 メッセージチャネルの設定
+
+使用するメッセージプラットフォームを選択し、対応するチュートリアルに従って設定：
+
+<CardGroup cols={3}>
+  <Card title="Telegram" icon="telegram" href="/ja/integrations/openclaw-manager-telegram">
+    BotFather で Telegram ボットを作成
+  </Card>
+  <Card title="Feishu（飛書）" icon="message" href="/ja/integrations/openclaw-manager-feishu">
+    Feishu 企業カスタムアプリボットを作成
+  </Card>
+  <Card title="Discord" icon="discord" href="/ja/integrations/openclaw-manager-discord">
+    Discord サーバーボットを作成
+  </Card>
+</CardGroup>
+
+## ステップ 5：ペアリングコード連携
+
+インスタンス作成・起動後、ペアリングコードでユーザー連携を完了：
+
+1. ユーザーがメッセージプラットフォームでボットに任意のメッセージを送信
+2. ボットが **8 桁のペアリングコード**（例：`DFE62DTD`）を返信
+3. 管理者が Web 管理画面でそのインスタンスの「**ペアリングコード**」ボタンをクリック
+4. ペアリングコードを入力し「**承認**」をクリック
+5. ユーザーがボットを正常に使用可能に
+
+<Note>
+**ヒント：** ペアリングコードは Gateway のメモリに保存され、再起動後に無効になります。コードが期限切れの場合は、ユーザーに新しいメッセージを送信してもらうだけで新しいコードを取得できます。
+</Note>
+
+## インスタンス管理
+
+管理画面で以下の操作が可能です：
+
+| 操作 | 説明 |
+|------|------|
+| **起動** | Gateway プロセスを起動、ボットがメッセージの受信を開始 |
+| **停止** | Gateway プロセスを停止 |
+| **モデル切替** | Gateway を再起動せずに AI モデルをリアルタイムで切替 |
+| **ペアリングコード** | 新規ユーザーのペアリングコードを承認し、ボット使用を許可 |
+| **削除** | インスタンスを停止し、全データを削除（復元不可） |
+
+## ポートとデータ
+
+### ポート
+
+| 用途 | ポート | バインドアドレス |
+|------|--------|----------------|
+| Manager Web UI | `51942` | Windows/macOS: `127.0.0.1`、Linux: `0.0.0.0` |
+| Gateway インスタンス | `18789` から順に割り当て | 各インスタンスに固有のポート |
+
+### データディレクトリ
+
+| 内容 | パス |
+|------|------|
+| インスタンス設定 | `~/.openclaw-<インスタンス名>/openclaw.json` |
+| Gateway ログ | `~/.openclaw-<インスタンス名>/logs/gateway.log` |
+| Manager ログ | `~/openclaw-manager.log`（daemon モード） |
+| Manager PID | `~/.openclaw-manager.pid` |
+
+## よくある質問
+
+### Q1: Manager が起動しない？
+
+**解決方法：**
+
+| プラットフォーム | 確認事項 |
+|-----------------|---------|
+| Windows | 管理者として実行しているか確認 |
+| Linux | ポート 51942 が使用されていないか確認（`lsof -i :51942`） |
+| macOS | セキュリティ設定の許可または検疫属性の削除を確認 |
+| 全プラットフォーム | ログを確認 `~/openclaw-manager.log` |
+
+### Q2: openclaw コマンドが見つからない？
+
+**解決方法：**
+- プログラム起動時に openclaw CLI を自動検出・インストールします
+- バージョンが古い場合（< 0.1.0）は自動更新されます
+- 手動インストール：`npm install -g openclaw@latest`
+
+### Q3: インスタンス起動後に「停止」と表示される？
+
+**解決方法：**
+- Gateway のポートバインドに数秒かかるため、ステータスが一時的に不一致になることがあります
+- ページを更新して最新のステータスを確認
+- Gateway ログを確認：`~/.openclaw-<インスタンス名>/logs/gateway.log`
+
+### Q4: Feishu ボットが応答しない？
+
+**解決方法：**
+1. イベントサブスクリプションに `im.message.receive_v1` が追加されているか確認
+2. サブスクリプション方式が「**ロングコネクション**」になっているか確認
+3. 新しいバージョンを作成して公開済みか確認（権限/イベント変更後は毎回再公開が必要）
+
+### Q5: ペアリングコードの承認に失敗？
+
+**解決方法：**
+- Gateway が実行中であることを確認
+- ペアリングコードは Gateway メモリに保存され、再起動後に無効になります
+- ユーザーに新しいメッセージを送信してもらい、新しいペアリングコードを取得
+
+### Q6: API の使用状況と料金を確認するには？
+
+[APIMart コンソール](https://apimart.ai/console)にログインして確認：
+- 📊 API コール統計
+- 💰 料金詳細
+- 📈 使用トレンドチャート
+
+## サポート
+
+問題が発生した場合：
+
+- 📚 [APIMart ドキュメント](https://docs.apimart.ai)
+- 📚 [OpenClaw Manager GitHub](https://github.com/zhihong-apimart/OpenClaw-Manager)
+- 💬 [Discord コミュニティ](https://discord.gg/V8zqssyZ5c)
+- 🐦 [Twitter @APIMart_](https://x.com/APIMart_)
+- 📧 テクニカルサポート：zhihong@apimart.ai
+
+---
+
+<Card title="APIMart を始める" icon="rocket" href="https://apimart.ai">
+  今すぐ APIMart に登録し、API キーを取得して、AI ボットをデプロイしましょう！
+</Card>
