@@ -35,8 +35,8 @@ OpenClaw Manager 是一个跨平台的可视化管理工具，帮助您快速部
 | 平台 | 文件名 |
 |------|--------|
 | Windows x64 | `openclaw-manager-win-x64.exe` |
-| macOS ARM (Apple Silicon) | `openclaw-manager-macos-arm64` |
-| macOS Intel | `openclaw-manager-macos-x64` |
+| macOS ARM (Apple Silicon) | `openclaw-manager-macos-arm64.zip` |
+| macOS Intel | `openclaw-manager-macos-x64.zip` |
 | Linux x64 | `openclaw-manager-linux-x64` |
 | Linux ARM64 | `openclaw-manager-linux-arm64` |
 
@@ -132,28 +132,13 @@ OpenClaw Manager 是一个跨平台的可视化管理工具，帮助您快速部
 
     #### 启动方式
 
-    1. 下载并赋予执行权限：
-    ```bash
-    chmod +x ./openclaw-manager-macos-arm64
-    ```
+    1. 解压下载的 zip 文件，得到 `OpenClaw Manager.app`
 
-    2. 首次运行需要允许安全性设置：
+    2. 双击运行 `OpenClaw Manager.app`
+
+    3. 首次运行需要允许安全性设置：
     ```
     系统设置 → 隐私与安全性 → 仍然允许
-    ```
-    或使用命令移除隔离属性：
-    ```bash
-    xattr -d com.apple.quarantine ./openclaw-manager-macos-arm64
-    ```
-
-    3. 运行：
-    ```bash
-    ./openclaw-manager-macos-arm64
-    ```
-
-    4. 后台运行：
-    ```bash
-    ./openclaw-manager-macos-arm64 --daemon
     ```
 
     <Note>

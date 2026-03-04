@@ -35,8 +35,8 @@ OpenClaw Manager は、OpenClaw AI ボットゲートウェイを素早くデプ
 | プラットフォーム | ファイル名 |
 |-----------------|-----------|
 | Windows x64 | `openclaw-manager-win-x64.exe` |
-| macOS ARM (Apple Silicon) | `openclaw-manager-macos-arm64` |
-| macOS Intel | `openclaw-manager-macos-x64` |
+| macOS ARM (Apple Silicon) | `openclaw-manager-macos-arm64.zip` |
+| macOS Intel | `openclaw-manager-macos-x64.zip` |
 | Linux x64 | `openclaw-manager-linux-x64` |
 | Linux ARM64 | `openclaw-manager-linux-arm64` |
 
@@ -132,28 +132,13 @@ OpenClaw Manager は、OpenClaw AI ボットゲートウェイを素早くデプ
 
     #### 起動方法
 
-    1. ダウンロードして実行権限を付与：
-    ```bash
-    chmod +x ./openclaw-manager-macos-arm64
-    ```
+    1. ダウンロードした zip ファイルを解凍し、`OpenClaw Manager.app` を取得
 
-    2. 初回実行時にセキュリティ設定の許可が必要：
+    2. `OpenClaw Manager.app` をダブルクリックして実行
+
+    3. 初回実行時にセキュリティ設定の許可が必要：
     ```
     システム設定 → プライバシーとセキュリティ → このまま許可
-    ```
-    またはコマンドで検疫属性を削除：
-    ```bash
-    xattr -d com.apple.quarantine ./openclaw-manager-macos-arm64
-    ```
-
-    3. 実行：
-    ```bash
-    ./openclaw-manager-macos-arm64
-    ```
-
-    4. バックグラウンド実行：
-    ```bash
-    ./openclaw-manager-macos-arm64 --daemon
     ```
 
     <Note>
